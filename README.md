@@ -19,3 +19,30 @@ Lernhilfe, keine verbindliche klinische Handlungsanweisung. Inhalte und Rechtsla
 ## Neu: Kompetenzbereich-Trainer
 
 100 zusätzliche Multiple-Choice-Fragen aus den Kompetenzbereichen 1–5. Filter, automatische Wiederholung falscher Antworten bis zur richtigen Lösung, gesondertes Fehlertraining und lokaler Lernstand. Fragen sind Lernmaterial und ersetzen keine Prüfungsvorgaben oder aktuellen Leitlinien.
+
+## Neue Funktionen (Oktober 2026)
+- Übersichtliche, auf Smartphones zweispaltige Navigation in vier Gruppen: Start & Fortschritt, Lernen, Prüfung, Organisation.
+- Lerncockpit mit lokal gespeicherten Lernzahlen, Fehlern und Fall-Selbstbewertungen.
+- 36 Wissensthemen, 35 Grundquizfragen, 35 Lernkarten, 100 Fragen zu Kompetenzbereichen 1–5 und 40 zusätzliche Fallsituationen.
+- Mündliche Übung mit optionaler Browser-Spracherkennung (Deutsch), Stoppuhr, Erwartungshorizont und Selbsteinschätzung.
+- Einstellungen mit JSON-Export und -Import des lokalen Lernstands, Installationshilfe und Teilen-Link.
+- Quellenhinweise auf Gesetzestexte und Fachorganisationen.
+
+## Installation auf Smartphones
+**Android / Chrome:** veröffentlichte GitHub-Pages-URL öffnen, Browsermenü ⋮, „App installieren“ bzw. „Zum Startbildschirm hinzufügen“. Gegebenenfalls wird ein Installationsknopf unter Einstellungen angeboten. HTTPS und eine erfolgreiche Service-Worker-Registrierung sind Voraussetzung für Offline-Nutzung.
+
+**iPhone / Safari:** URL in Safari öffnen, Teilen → „Zum Home-Bildschirm“ → Hinzufügen.
+
+**Wichtig:** GitHub Pages muss in den Repository-Einstellungen aktiviert sein. Eine GitHub-Repositoriumsseite ist nicht die installierbare App.
+
+## Andere Nutzer, Accounts und Datenschutz
+Andere Personen dürfen den öffentlichen App-Link öffnen und die PWA auf ihrem Gerät installieren. **Es gibt derzeit keine Benutzerkonten, Registrierung, Anmeldung, Passwort-Zurücksetzung oder Cloud-Synchronisation.** Jeder Browser führt seinen eigenen lokalen Lernstand. Konten würden einen zusätzlichen Authentifizierungsdienst, Datenbank, Datenschutzkonzept und laufenden Betrieb erfordern.
+
+Die optionale Browser-Spracherkennung benötigt Mikrofonberechtigung. Je nach Browser wird das Gesprochene durch den Browseranbieter oder einen externen Dienst verarbeitet. Keine echten Patientendaten diktieren. Die App zeichnet keine Audiodatei auf; diktierter Text wird nicht als Teil des Lernstands gespeichert. Die Bewertung ist eine Selbsteinschätzung, keine KI-Bewertung.
+
+## Bekannte Grenzen / noch zu prüfen
+- Echter End-to-End-Test auf Android und iPhone, Installierbarkeit und Offline-Verhalten.
+- Fachliche Einzelprüfung aller Fragen, Fälle und Quellverweise mit den aktuell gültigen Originalstandards.
+- Kein automatischer Abgleich gesprochener Antworten mit einer Musterlösung.
+- Sicherung muss aktiv heruntergeladen und beim Gerätewechsel importiert werden.
+- Keine automatische Wiederholung über alle Lernbereiche hinweg.
