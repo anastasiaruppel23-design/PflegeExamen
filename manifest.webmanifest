@@ -1,0 +1,19 @@
+{
+  "name": "PflegeFokus – by ANA Digital",
+  "short_name": "PflegeFokus",
+  "description": "Dein Pflegeexamen im Griff – Quiz, Fallbeispiele, Lernkarten und Prüfungssimulation",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f8fb",
+  "theme_color": "#103f4b",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
