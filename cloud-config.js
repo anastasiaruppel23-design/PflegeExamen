@@ -1,6 +1,6 @@
-// Öffentlich sichtbare Supabase-Projektwerte (KEIN service_role-Schlüssel!).
-// Erst nach Einrichtung der Supabase-Datenbank und RLS ersetzen.
+// Öffentliche Supabase-Projektwerte. Keine geheimen Schlüssel verwenden.
+// anonKey ist der bestehende Konfigurationsname für den öffentlichen Publishable Key.
 window.PFLEGEFOKUS_CLOUD = {
-  url: '',
-  anonKey: ''
+  url: 'https://mmccxsvxaoejihkeuyij.supabase.co',
+  anonKey: 'sb_publishable_7ssMKvSE0YZDjscqiJrIVA_pq3sI4pH'
 };
