@@ -45,3 +45,9 @@ body.menu-open{overflow:hidden}
 .exam-back{margin-bottom:16px}
 .exam-practice .card{box-shadow:none;transform:none}
 @media(max-width:680px){.hero{grid-template-columns:minmax(0,1fr)}.hero h1{font-size:clamp(28px,8.4vw,38px)}.hero-copy{padding:28px clamp(16px,5vw,24px) 25px}.founder-motivation{margin-inline:0}.home-links{grid-template-columns:repeat(2,minmax(0,1fr))}.home-link{overflow-wrap:anywhere}}
+
+/* Keep the approved welcome artwork complete, including its lettering. */
+.hero.hero-welcome{grid-template-columns:minmax(0,1fr)}
+.hero-welcome .hero-art{min-height:0;aspect-ratio:auto}
+.hero-welcome .hero-art img{width:100%;height:auto;object-fit:contain;object-position:center}
+.hero-welcome .hero-copy{padding:clamp(20px,4vw,34px)}
