@@ -17,6 +17,7 @@ jobs:
           node-version: 22
       - run: npm install --no-save playwright@1.62.1
       - run: npx playwright install --with-deps chromium
+      - run: node tests/learning-links.cjs
       - run: node tests/visual.cjs
       - uses: actions/upload-artifact@v4
         if: always()
