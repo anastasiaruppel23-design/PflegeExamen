@@ -1,5 +1,9 @@
 # PflegeFokus – by ANA Digital – kostenlose PWA
 
+## Wissensbibliothek, Oktober 2026
+
+48 Wissensthemen, 47 Lernkarten und 38 Grundquizfragen. Die Bibliothek nutzt beschriftete Lernfarben, einen Bereichsfilter, zwei medizinische Schemata sowie verknüpfte Krankheitsseiten mit drei zusätzlichen Lernfällen und Transferfragen. Quiz und Prüfung bleiben übersichtlich. Umfang, Quellenabgleich, Tests und offene Grenzen stehen in [REVIEW.md](REVIEW.md). Die nachfolgenden älteren Bestandsangaben dokumentieren frühere Ausbaustufen.
+
 ## Inhalt
 Eigenständige statische Web-App mit Wissensbibliothek, Quiz, Lernkarten, sechs Pflegefällen, mündlicher Prüfungssimulation, Lernplan und Timer. Die Lerninhalte wurden anhand des bisherigen Lovable-Projekts „Pflege Exam Compass“ neu zusammengestellt. Dies ist keine vollständige 1:1-Übernahme aller Originaltexte und Fragen.
 
