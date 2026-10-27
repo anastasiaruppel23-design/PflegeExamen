@@ -52,3 +52,10 @@ Die optionale Browser-Spracherkennung benötigt Mikrofonberechtigung. Je nach Br
 - Keine automatische Wiederholung über alle Lernbereiche hinweg.
 
 Die illustrierte Überarbeitung ersetzt die frühere Akkordeonliste durch Themenkarten und gestaltete Lernblätter mit vier eigenen Lernillustrationen. Browserprüfung: `node tests/visual.cjs` (Playwright erforderlich); Screenshots und Ergebnis stehen im GitHub-Workflow „Learning library design checks“.
+
+
+## Prüfungstrainer (27.10.2026)
+
+Zwei Trainer mit insgesamt 260 eigenen Übungsfragen: 100 zu den Kompetenzbereichen I–V und 160 zu 40 Krankheitsbildern. Auswahl einzelner Bereiche, kurze Zufallsrunden oder vollständige Durchläufe, genaue Mehrfachauswahl, Begründung jeder Antwort und gespeichertes Fehlertraining. Quiz und Simulationen bleiben unabhängig. Der Lernstoff enthält 40 neue Krankheitsübersichten und Vertiefungen zu 35 bestehenden Themen.
+
+Inhaltsumfang, Quellen und Grenzen: [TRAINER-REVIEW.md](TRAINER-REVIEW.md). Technische Daten-/Bewertungstests: `node tests/trainer-content.cjs`; Browserprüfung mit installiertem Playwright: `node tests/visual.cjs` und `node tests/trainers.cjs`.
