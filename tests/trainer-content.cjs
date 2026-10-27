@@ -1,0 +1,21 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs'),vm=require('node:vm');
+const {trainerQuestions:all,diseaseLessons,competencyQuestions,trainerSources,trainerExactMatch,nursingProcessSteps}=require('../trainer-data.js');
+assert.equal(all.length,260);assert.equal(diseaseLessons.length,40);assert.equal(competencyQuestions.length,100);assert.equal(new Set(all.map(q=>q.id)).size,all.length);
+for(let n=1;n<=5;n++)assert.equal(competencyQuestions.filter(q=>q.group===String(n)).length,20);
+let single=0,multiple=0;
+for(const q of all){assert.equal(q.options.length,4,q.id);const right=q.options.flatMap((o,i)=>o.correct?[i]:[]);assert.ok(right.length>=1&&right.length<=3,q.id);right.length===1?single++:multiple++;assert.equal(new Set(q.options.map(o=>o.text)).size,4,q.id);for(const o of q.options){assert.ok(o.text.length>2,q.id);assert.ok(o.why?.length>15,q.id);assert.equal(typeof o.correct,'boolean')}
+ assert.ok(q.sources.length,q.id);for(const key of q.sources){assert.ok(trainerSources[key],q.id+': source '+key);assert.match(trainerSources[key][1],/^https:\/\//)}
+ // Exhaust every possible answer combination, including selecting everything.
+ for(let mask=0;mask<16;mask++){const chosen=[0,1,2,3].filter(i=>mask&(1<<i));assert.equal(trainerExactMatch(q,chosen),chosen.length===right.length&&right.every(i=>chosen.includes(i)),q.id+': mask '+mask)}
+}
+assert.ok(single>25&&multiple>25);for(const d of diseaseLessons){assert.equal(d.items.length,4);assert.ok(d.signs.length>=2&&d.care.length>=2);assert.ok(d.warning.length>30);assert.ok(d.definition.length>35)}
+assert.deepEqual(nursingProcessSteps,['Informationen sammeln','Pflegeprobleme und Ressourcen erkennen','Pflegeziele festlegen','Pflegemaßnahmen planen','Pflege durchführen','Pflege evaluieren']);
+const foundation=vm.runInNewContext(fs.readFileSync(require('node:path').join(__dirname,'../foundation-data.js'),'utf8')+';({lessons:detailedCards,sources:cardSources})');assert.equal(new Set(foundation.lessons.map(d=>d.topic)).size,35);for(const d of foundation.lessons){assert.equal(d.points.length,4);for(const key of d.sources)assert.ok(foundation.sources[key])}
+// Render functions can be exercised in a minimal DOM to catch integration errors before browser checks.
+let html='';const node={focus(){},scrollIntoView(){},insertAdjacentHTML(){},classList:{toggle(){}},set innerHTML(v){html=v},get innerHTML(){return html}};
+const context={console,state:{},save(){},$:()=>node,esc:s=>String(s),learnBox:()=>'',topics:Array.from({length:48},()=>['','','',[]]),knowledgeDiagram(){return ''},openLibraryTopic(){},render(){},detailedCards:foundation.lessons,cardSources:foundation.sources,document:{querySelectorAll:()=>[]},window:{scrollTo(){}},go(){},tab:'start'};
+vm.createContext(context);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../trainer-data.js'),'utf8'),context);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../trainer.js'),'utf8'),context);
+vm.runInContext("trainerPref('disease').group='copd';trainerPref('disease').count='all';trainerStart('disease')",context);assert.equal(context.state.trainerV2.sessions.disease.ids.length,4);vm.runInContext("let testQ=trainerCurrent('disease');testQ.a.selected=testQ.q.options.flatMap((o,i)=>o.correct?[i]:[]);trainerCheck('disease');trainerCheck('disease')",context);const p=Object.values(context.state.trainerV2.progress);assert.equal(p.length,1);assert.equal(p[0].attempts,1);assert.equal(p[0].lastCorrect,true);vm.runInContext("trainerNext('disease');trainerSelect('disease',trainerCurrent('disease').q.options.findIndex(o=>!o.correct));trainerCheck('disease');trainerStart('disease','mistakes')",context);assert.equal(context.state.trainerV2.sessions.disease.ids.length,1);vm.runInContext("trainerPref('competency').group='5';trainerPref('competency').count='all';trainerStart('competency')",context);assert.equal(context.state.trainerV2.sessions.competency.ids.length,20);assert.equal(context.state.trainerV2.sessions.disease.ids.length,1);
+console.log(`PASS content: 260 questions, 40 diseases, 5 x 20 competencies; ${single} single / ${multiple} multiple; 4160 answer combinations; 35 expanded topics; finite rounds, double-submit, errors and trainer isolation`);
+

@@ -17,10 +17,13 @@ jobs:
           node-version: 22
       - run: npm install --no-save playwright@1.62.1
       - run: npx playwright install --with-deps chromium
+      - run: node tests/trainer-content.cjs
       - run: node tests/visual.cjs
+      - run: node tests/trainers.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: learning-library-screenshots
           path: test-results/
           retention-days: 7
+
