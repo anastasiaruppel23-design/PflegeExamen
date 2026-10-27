@@ -5,7 +5,7 @@ Stand: 27.10.2026. Der Auftrag wurde auf zwei Prüfungstrainer und erweiterten L
 ## Umfang
 
 - 100 neu verfasste Kompetenzfragen, je 20 pro Bereich I–V. Der alte Pool mit überwiegend schematischen Erklärungen wurde ersetzt.
-- 160 Krankheitsfragen, je vier zu 40 unterschiedlichen Themen. 73 Fragen insgesamt haben eine richtige Antwort, 187 haben mehrere.
+- 160 Krankheitsfragen, je vier zu 40 unterschiedlichen Themen. 72 Fragen insgesamt haben eine richtige Antwort, 188 haben mehrere.
 - Jede der 1040 Antwortoptionen hat eine eigene Begründung. Alle Antworten, auch nicht ausgewählte, werden nach Prüfung erläutert.
 - 40 neue Krankheitsübersichten im Lernstoff; 35 vorhandene Themen durch 36 ausführliche Notizen mit Zusammenhängen, fiktiven Pflegebeispielen und Denkfehlern ergänzt.
 - Quiz, Falltraining, Simulationen und persönliche Startillustration bleiben bestehen.
@@ -68,3 +68,4 @@ Die Quellenlinks stehen an Fragen und Lernseiten. Allgemeine Pflegefälle verlan
 Lokal bestanden: Syntaxprüfung der Skripte und Inline-Skripte; Strukturprüfung aller 260 Fragen und 1040 Optionen; sämtliche 4160 möglichen Auswahlkombinationen; genaues Bewerten von Mehrfachauswahl; Doppelabgabe verhindert; Fehlerstand und getrennte Trainingsrunden. Die automatisierten Tests prüfen technische Konsistenz, keine klinische Richtigkeit.
 
 Browserprüfungen sind in GitHub Actions eingerichtet: 320, 390 und 1280 Pixel; alle 260 Fragen samt Feedback, alle 40 Übersichten, Tastatur, Radio-/Checkbox-Verhalten, Filter, vollständige Runden, Wiederaufnahme, Fehlertraining und Offline-Modus. Zusätzlich laufen die bisherigen Bibliotheks-/Regressionsprüfungen. Veröffentlichung erst nach erfolgreichen Prüfungen.
+
