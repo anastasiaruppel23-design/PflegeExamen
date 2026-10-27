@@ -1,8 +1,9 @@
 name: Learning library design checks
 on:
   pull_request:
-  push:
-    branches: [feature/farbige-wissensbibliothek]
+concurrency:
+  group: library-checks-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:

@@ -50,3 +50,5 @@ Die optionale Browser-Spracherkennung benötigt Mikrofonberechtigung. Je nach Br
 - Kein automatischer Abgleich gesprochener Antworten mit einer Musterlösung.
 - Sicherung muss aktiv heruntergeladen und beim Gerätewechsel importiert werden.
 - Keine automatische Wiederholung über alle Lernbereiche hinweg.
+
+Die illustrierte Überarbeitung ersetzt die frühere Akkordeonliste durch Themenkarten und gestaltete Lernblätter mit vier eigenen Lernillustrationen. Browserprüfung: `node tests/visual.cjs` (Playwright erforderlich); Screenshots und Ergebnis stehen im GitHub-Workflow „Learning library design checks“.

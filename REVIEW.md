@@ -21,3 +21,11 @@ Dies ist keine vollständige fachliche Freigabe des gesamten vorhandenen Bestand
 Automatisierte Browserprüfung mit Microsoft Edge bei 390 × 900 und 1280 × 900: Bibliothek, Suche, keine Treffer, Filter, Lernkarten, Transferfragen, Falllösungen, gespeicherter Lernstand und vorhandene Übungsbereiche. Screenshots zusätzlich visuell geprüft. Kein Test auf physischen Android-/iOS-Geräten; keine Aussage über deren vollständige Installierbarkeit. Cloud-Login und Supabase-Synchronisation werden ohne Zugangsdaten nicht als getestet ausgewiesen.
 
 Optionaler Browser-Smoke-Test: Playwright 1.62.1 bereitstellen und `node tests/smoke.cjs` starten. Standardmäßig wird der installierte Edge verwendet; alternativ `BROWSER_EXECUTABLE` setzen.
+
+## Illustrierte Überarbeitung nach dem Gestaltungsfeedback
+
+Die Bibliothek öffnet jetzt als bebilderte Galerie mit eigener Pflegeillustration, Themenkarten, Suche und Bereichsfiltern. Alle 48 Themen haben eine eigenständige Lernblattansicht mit großer Überschrift, semantischen Lernfarben, illustriertem Kopfbereich, hervorgehobenen Schlüsselwörtern, Prüfungsimpuls und passenden Verknüpfungen. Orem, Peplau und der Pflegeprozess besitzen eigene Ablaufgrafiken; medizinische Wortbausteine werden als große Begriffskarten gezeigt.
+
+Alle 47 Lernkarten verwenden ein gestaltetes Frage-/Antwortformat mit visuellen Elementen und nummerierten Antwortbausteinen. Die Falllösungen erhalten eine passende Pflegeillustration und farbig strukturierte Begründungen. Vier eigens erzeugte transparente Illustrationen wurden als WebP eingebunden (zusammen rund 670 KB); die persönliche Startseitenillustration bleibt erhalten. Herkunft und Promptbeschreibungen stehen in assets/ILLUSTRATIONS.md.
+
+Die neue Browserprüfung in tests/visual.cjs prüft alle 48 Lernansichten bei 320, 390 und 1280 Pixeln, horizontales Überlaufen, Suchfilter, Tastaturbedienung, Verknüpfungen und Offline-Bilder. Der GitHub-Workflow speichert Screenshots als Testartefakt. Der erfolgreiche Teststatus der Vorgängerversion ist keine Freigabe dieser neuen Gestaltung; maßgeblich ist der aktuelle Workflow-Status.
