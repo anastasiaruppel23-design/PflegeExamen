@@ -1,0 +1,1586 @@
+[
+  {
+    "name": "ABCDE",
+    "text": "Priorisierte Beurteilung von Atemweg, Atmung, Kreislauf, neurologischem Zustand und weiterer Untersuchung.",
+    "example": "Lebensbedrohliche Probleme sofort behandeln und wiederholt beurteilen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "ABEDL",
+    "text": "Aktivitäten, Beziehungen und existenzielle Erfahrungen des Lebens nach Krohwinkel.",
+    "example": "Dienen einer ressourcenorientierten Strukturierung des Pflegebedarfs.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Adhärenz",
+    "text": "Umsetzung einer gemeinsam vereinbarten Behandlung.",
+    "example": "Barrieren und persönliche Ziele erfragen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "AEDL",
+    "text": "Aktivitäten und existenzielle Erfahrungen des Lebens.",
+    "example": "Frühere Bezeichnung in Krohwinkels Modell; Beziehungen werden in ABEDL ausdrücklich betont.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Affekt",
+    "text": "Aktuell erlebte und ausgedrückte Gefühlslage.",
+    "example": "Beobachtung und eigene Interpretation unterscheiden.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Aktivierende Pflege",
+    "text": "Pflege, die vorhandene Fähigkeiten einbezieht und Selbstständigkeit unterstützt.",
+    "example": "Nur so viel übernehmen, wie tatsächlich erforderlich ist.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Akut",
+    "text": "Plötzlich auftretend beziehungsweise zeitlich begrenzt verlaufend.",
+    "example": "Akut beschreibt den Verlauf, nicht automatisch die Schwere.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Akute Nierenschädigung (AKI)",
+    "text": "Die Nierenfunktion verschlechtert sich innerhalb kurzer Zeit.",
+    "example": "Verminderte Urinmenge, Ödeme oder wenig spezifische Beschwerden; auch ohne Oligurie möglich.",
+    "category": "Niere & Harnwege",
+    "lesson": "akutes-nierenversagen",
+    "url": "https://gesund.bund.de/akutes-nierenversagen"
+  },
+  {
+    "name": "Akute Pankreatitis",
+    "text": "Akute Entzündung der Bauchspeicheldrüse mit möglicher systemischer Beteiligung.",
+    "example": "Starke Oberbauchschmerzen, oft in den Rücken ausstrahlend, Übelkeit und Erbrechen.",
+    "category": "Magen & Darm",
+    "lesson": "akute-bauchspeicheldruesenentzuendung",
+    "url": "https://www.gesundheitsinformation.de/akute-entzuendung-der-bauchspeicheldruese-pankreatitis.html"
+  },
+  {
+    "name": "Anamnese",
+    "text": "Erhebung der gesundheitlichen Vorgeschichte und aktuellen Situation.",
+    "example": "Eigenangaben, Beobachtungen und erlaubte Fremdauskünfte unterscheiden.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Anhedonie",
+    "text": "Verminderte Fähigkeit, Freude oder Interesse zu erleben.",
+    "example": "Ein mögliches Kernsymptom einer Depression.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Antisepsis",
+    "text": "Keimreduktion an lebendem Gewebe durch geeignete Verfahren.",
+    "example": "Mittel, Einwirkzeit und Einsatzgebiet beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Anurie",
+    "text": "Nahezu fehlende Urinausscheidung.",
+    "example": "Akut auftretend dringend abklären lassen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Anämie",
+    "text": "Verminderte Hämoglobinkonzentration unter den passenden Referenzbereich.",
+    "example": "Müdigkeit, Dyspnoe und Blässe sind mögliche Zeichen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Aphasie",
+    "text": "Erworbene Störung der Sprachverarbeitung, meist nach Hirnschädigung.",
+    "example": "Nicht mit fehlender Intelligenz gleichsetzen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Apnoe",
+    "text": "Aussetzen der Atmung.",
+    "example": "Bewusstlosigkeit mit fehlender normaler Atmung erfordert den Notfallalgorithmus.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Apraxie",
+    "text": "Störung der Ausführung erlernter zielgerichteter Handlungen ohne ausreichende Erklärung durch Lähmung.",
+    "example": "Handlungen schrittweise und alltagsbezogen unterstützen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Arrhythmie",
+    "text": "Störung der Herzrhythmusbildung oder Erregungsleitung.",
+    "example": "Pulsbeobachtung ersetzt kein EKG.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Arterielle Hypertonie",
+    "text": "Dauerhaft erhöhter arterieller Blutdruck belastet Gefäße und Organe.",
+    "example": "Oft beschwerdefrei; Symptome allein eignen sich nicht zur Erkennung.",
+    "category": "Herz & Gefäße",
+    "lesson": "bluthochdruck",
+    "url": "https://gesund.bund.de/bluthochdruck"
+  },
+  {
+    "name": "Arthrose",
+    "text": "Degenerative Gelenkerkrankung mit Veränderungen von Knorpel und weiteren Gelenkstrukturen.",
+    "example": "Anlauf- und Belastungsschmerz, Steifigkeit, eingeschränkte Beweglichkeit.",
+    "category": "Bewegungsapparat",
+    "lesson": "arthrose",
+    "url": "https://gesund.bund.de/arthrose"
+  },
+  {
+    "name": "Asepsis",
+    "text": "Maßnahmen zur Vermeidung mikrobieller Kontamination.",
+    "example": "Sterile Materialien nur unter geeigneten Bedingungen handhaben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Aspiration",
+    "text": "Eindringen von Material in die Atemwege.",
+    "example": "Auch ohne Husten möglich, etwa bei stiller Aspiration.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Assessment",
+    "text": "Strukturierte Erhebung und Einschätzung von Bedürfnissen, Fähigkeiten und Risiken.",
+    "example": "Ein Instrument unterstützt das klinische Urteil, ersetzt es aber nicht.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Asthma bronchiale",
+    "text": "Entzündliche Atemwegserkrankung mit wechselnder, oft reversibler Verengung.",
+    "example": "Anfallsartige Atemnot, Giemen, Husten und Engegefühl, häufig wechselnd.",
+    "category": "Lunge & Atmung",
+    "lesson": "asthma",
+    "url": "https://gesund.bund.de/asthma"
+  },
+  {
+    "name": "Aszites",
+    "text": "Flüssigkeitsansammlung in der freien Bauchhöhle.",
+    "example": "Bauchumfang, Gewicht, Atmung und Beschwerden beobachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ataxie",
+    "text": "Störung der Koordination von Bewegungen.",
+    "example": "Gangunsicherheit erhöht das Sturzrisiko.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Atelektase",
+    "text": "Minder- oder fehlende Belüftung eines Lungenabschnitts.",
+    "example": "Mobilität, Atmung und Schmerzmanagement sind pflegerisch relevant.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "ATL",
+    "text": "Aktivitäten des täglichen Lebens als Strukturierungsansatz.",
+    "example": "Die genaue Einteilung hängt vom verwendeten Modell ab.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Audit",
+    "text": "Systematische Prüfung anhand festgelegter Kriterien.",
+    "example": "Abweichungen dienen als Ausgangspunkt für Verbesserungen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Autonomie",
+    "text": "Recht und Fähigkeit zur Selbstbestimmung.",
+    "example": "Eine informierte Ablehnung ist ernst zu nehmen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "BESD",
+    "text": "Beurteilung von Schmerzen bei Demenz anhand beobachtbaren Verhaltens.",
+    "example": "Beobachtung ergänzt die Suche nach Ursachen; sie beweist Schmerz nicht allein.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Bezugspflege",
+    "text": "Organisation mit kontinuierlicher pflegerischer Zuständigkeit für bestimmte Personen.",
+    "example": "Zuständigkeit und Vertretung müssen klar sein.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "BGA",
+    "text": "Blutgasanalyse zur Beurteilung unter anderem von Sauerstoff, Kohlendioxid und Säure-Basen-Haushalt.",
+    "example": "Arterielle, venöse und kapilläre Werte sind nicht beliebig austauschbar.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Bias",
+    "text": "Systematische Verzerrung von Untersuchung oder Interpretation.",
+    "example": "Nicht mit zufälligem Messfehler gleichsetzen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Bilanzierung",
+    "text": "Gegenüberstellung definierter Flüssigkeitsein- und -ausfuhr über einen Zeitraum.",
+    "example": "Nicht messbare Verluste und Messfehler mitbedenken.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Biografiearbeit",
+    "text": "Einbezug der Lebensgeschichte in Begleitung und Pflege.",
+    "example": "Nur freiwillig geteilte Informationen nutzen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "BMI",
+    "text": "Körpergewicht in Kilogramm geteilt durch Körpergröße in Metern zum Quadrat.",
+    "example": "Kein alleiniger Maßstab für Ernährungszustand oder Muskelmasse.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Bradykardie",
+    "text": "Niedrige Herzfrequenz; bei Erwachsenen meist unter 60 pro Minute.",
+    "example": "Beschwerden und Ausgangswert entscheiden über die Dringlichkeit mit.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Bradykinese",
+    "text": "Verlangsamung von Bewegungen.",
+    "example": "Zeit geben und Alltagshandlungen in Schritte gliedern.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Bradypnoe",
+    "text": "Verlangsamte Atemfrequenz.",
+    "example": "Bewusstseinslage und Wirksamkeit der Atmung prüfen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Case Management",
+    "text": "Koordination komplexer Versorgung über Berufs- und Einrichtungsgrenzen hinweg.",
+    "example": "Bedarf, Zuständigkeiten und Anschlussversorgung abstimmen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Chronisch",
+    "text": "Länger anhaltend beziehungsweise dauerhaft verlaufend.",
+    "example": "Chronische Erkrankungen können akut entgleisen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Chronische Nierenkrankheit",
+    "text": "Über mindestens drei Monate bestehende strukturelle oder funktionelle Nierenschädigung.",
+    "example": "Anfangs oft unauffällig; später Müdigkeit, Ödeme, Juckreiz und Leistungsminderung.",
+    "category": "Niere & Harnwege",
+    "lesson": "chronische-nierenkrankheit",
+    "url": "https://www.nhs.uk/conditions/kidney-disease/"
+  },
+  {
+    "name": "Colitis ulcerosa",
+    "text": "Chronisch-entzündliche Erkrankung der Dickdarmschleimhaut, typischerweise vom Rektum ausgehend.",
+    "example": "Blutige Durchfälle, dringlicher Stuhldrang und Bauchschmerz.",
+    "category": "Magen & Darm",
+    "lesson": "colitis-ulcerosa",
+    "url": "https://gesund.bund.de/colitis-ulcerosa"
+  },
+  {
+    "name": "Compliance",
+    "text": "Befolgen therapeutischer Vorgaben; der Begriff betont stärker die Vorgabe.",
+    "example": "Nicht vorschnell fehlende Motivation unterstellen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "COPD",
+    "text": "Chronische Erkrankung mit anhaltender Atemwegsverengung und begrenztem Luftstrom.",
+    "example": "Husten, Auswurf und zunehmende Belastungsatemnot; Exazerbation bedeutet akute Verschlechterung.",
+    "category": "Lunge & Atmung",
+    "lesson": "copd",
+    "url": "https://gesund.bund.de/chronisch-obstruktive-lungenerkrankung-copd"
+  },
+  {
+    "name": "Coping",
+    "text": "Gedankliche und praktische Anstrengungen zur Bewältigung von Belastungen.",
+    "example": "Problemorientierte und emotionsorientierte Strategien unterscheiden.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Debridement",
+    "text": "Entfernung nicht vitalen Gewebes oder Belägen aus einer Wunde.",
+    "example": "Verfahren, Perfusion, Schmerz und Qualifikation beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Dehydratation",
+    "text": "Wassermangel; je nach Ursache sind auch Elektrolytverschiebungen relevant.",
+    "example": "Durst, trockene Schleimhäute, geringe Urinmenge, Schwindel; bei älteren Menschen oft unspezifisch.",
+    "category": "Infektion & Notfall",
+    "lesson": "dehydration",
+    "url": "https://www.nhs.uk/conditions/dehydration/"
+  },
+  {
+    "name": "Dekubitus",
+    "text": "Lokalisierte Schädigung von Haut oder tieferem Gewebe durch Druck und Scherkräfte.",
+    "example": "Nicht wegdrückbare Rötung, Verfärbung oder Gewebedefekt; intakte Haut schließt tiefen Schaden nicht aus.",
+    "category": "Haut & Wunden",
+    "lesson": "druckgeschwuer-dekubitus",
+    "url": "https://gesund.bund.de/druckgeschwuer-dekubitus"
+  },
+  {
+    "name": "Delegation",
+    "text": "Übertragung einer Aufgabe bei geklärter Zuständigkeit und Eignung.",
+    "example": "Anordnung, Übernahme und Durchführung tragen unterschiedliche Verantwortungen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Delir",
+    "text": "Akut entstandene, fluktuierende Störung von Aufmerksamkeit und Bewusstsein.",
+    "example": "Unruhe oder auffällige Ruhe, wechselnde Wachheit, Desorientierung und Aufmerksamkeitsstörung.",
+    "category": "Neurologie",
+    "lesson": "delir",
+    "url": "https://www.nhs.uk/symptoms/confusion/"
+  },
+  {
+    "name": "Demenz",
+    "text": "Syndrom mit anhaltenden kognitiven Beeinträchtigungen, die den Alltag erschweren.",
+    "example": "Gedächtnis-, Orientierungs-, Sprach- und Alltagsprobleme; Verlauf und Ausprägung variieren.",
+    "category": "Neurologie",
+    "lesson": "demenz",
+    "url": "https://www.nhs.uk/conditions/dementia/about-dementia/what-is-dementia/"
+  },
+  {
+    "name": "Depression",
+    "text": "Psychische Erkrankung mit anhaltend gedrückter Stimmung, Interessenverlust und häufig vermindertem Antrieb.",
+    "example": "Schlaf-/Appetitveränderung, Schuldgefühle, Konzentrationsprobleme und Suizidgedanken können hinzukommen.",
+    "category": "Psychiatrie",
+    "lesson": "depression",
+    "url": "https://gesund.bund.de/depression"
+  },
+  {
+    "name": "Desinfektion",
+    "text": "Reduktion von Krankheitserregern auf ein für den Zweck sicheres Niveau.",
+    "example": "Reinigung und Desinfektion sind unterschiedliche Schritte.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Diabetes mellitus Typ 1",
+    "text": "Stoffwechselerkrankung mit absolutem Insulinmangel.",
+    "example": "Durst, häufiges Wasserlassen, Gewichtsverlust und Müdigkeit; Entgleisung möglich.",
+    "category": "Stoffwechsel",
+    "lesson": "diabetes-typ-1",
+    "url": "https://gesund.bund.de/diabetes-typ-1"
+  },
+  {
+    "name": "Diabetes mellitus Typ 2",
+    "text": "Chronisch erhöhte Blutglukose durch Insulinresistenz und zunehmende Einschränkung der Insulinsekretion.",
+    "example": "Oft lange symptomarm; Durst, häufiges Wasserlassen, Infektneigung oder schlechte Wundheilung möglich.",
+    "category": "Stoffwechsel",
+    "lesson": "diabetes-typ-2",
+    "url": "https://gesund.bund.de/diabetes-typ-2"
+  },
+  {
+    "name": "Dialyse",
+    "text": "Verfahren zum Ersatz bestimmter Ausscheidungs- und Regulationsfunktionen der Niere.",
+    "example": "Zugang, Kreislauf und vereinbarte Flüssigkeitsziele beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Diarrhö",
+    "text": "Vermehrter flüssiger beziehungsweise ungeformter Stuhl.",
+    "example": "Flüssigkeitsverluste, Hygiene und Ursachen berücksichtigen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Diastole",
+    "text": "Entspannungs- und Füllungsphase der Herzkammern.",
+    "example": "Der diastolische Blutdruck beschreibt den unteren Druckwert.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Differenzialdiagnose",
+    "text": "Abgrenzung verschiedener möglicher Erklärungen für Beschwerden.",
+    "example": "Ähnliche Symptome können unterschiedliche Ursachen haben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Diffusion",
+    "text": "Transport von Teilchen entlang eines Konzentrations- beziehungsweise Partialdruckgefälles.",
+    "example": "In Alveolen erfolgt so der Gasaustausch.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Diurese",
+    "text": "Urinproduktion beziehungsweise ausgeschiedene Urinmenge pro Zeit.",
+    "example": "Messzeit, Menge und Bilanzierungsbedingungen angeben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Dysarthrie",
+    "text": "Störung der Sprechmotorik.",
+    "example": "Sprachverständnis kann erhalten sein.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Dysphagie",
+    "text": "Störung des Schluckens.",
+    "example": "Bei akutem Schlaganfall orale Zufuhr erst nach geeignetem Schluckscreening.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Dyspnoe",
+    "text": "Subjektiv empfundene erschwerte Atmung oder Luftnot.",
+    "example": "Die Selbstauskunft und objektive Zeichen gemeinsam beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Dysurie",
+    "text": "Erschwertes beziehungsweise schmerzhaftes Wasserlassen.",
+    "example": "Beschwerden, Fieber und Urinbeobachtungen erheben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Edukation",
+    "text": "Geplante Information, Schulung und Beratung zur Stärkung des Selbstmanagements.",
+    "example": "Wissen und praktische Fähigkeiten werden gemeinsam aufgebaut.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Einwilligung",
+    "text": "Freiwillige Zustimmung nach angemessener Aufklärung.",
+    "example": "Einwilligungsfähigkeit situations- und entscheidungsbezogen beurteilen lassen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Einwilligungsfähigkeit",
+    "text": "Fähigkeit, Bedeutung und Folgen einer konkreten Entscheidung zu verstehen und abzuwägen.",
+    "example": "Eine Diagnose allein entscheidet nicht darüber.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Elektrolyte",
+    "text": "Elektrisch geladene Teilchen wie Natrium und Kalium in Körperflüssigkeiten.",
+    "example": "Störungen können neurologische und kardiale Folgen haben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Embolie",
+    "text": "Gefäßverschluss durch eingeschwemmtes Material.",
+    "example": "Ein Blutgerinnsel ist eine mögliche Ursache.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Emesis",
+    "text": "Erbrechen.",
+    "example": "Menge, Aussehen, Aspirationsrisiko und Flüssigkeitsverlust beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Empathie",
+    "text": "Nachvollziehen der Perspektive und Gefühle eines anderen Menschen.",
+    "example": "Verständnis zeigen, ohne eigene Deutungen als Tatsache darzustellen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Empowerment",
+    "text": "Stärkung von Handlungsmöglichkeiten und Selbstbestimmung.",
+    "example": "Wahlmöglichkeiten und verständliche Informationen anbieten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Enteral",
+    "text": "Über den Magen-Darm-Trakt.",
+    "example": "Enterale Ernährung kann oral oder über eine Sonde erfolgen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Entlassmanagement",
+    "text": "Geplante Sicherung der Versorgung beim Übergang aus einer Einrichtung.",
+    "example": "Nachsorge frühzeitig organisieren und Verständnis prüfen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Entzündung",
+    "text": "Abwehrreaktion auf schädigende Reize.",
+    "example": "Kann infektiöse und nichtinfektiöse Ursachen haben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Epilepsie",
+    "text": "Erkrankung mit erhöhter Neigung zu wiederholten epileptischen Anfällen.",
+    "example": "Anfallsformen reichen von kurzen Bewusstseinsstörungen bis zu tonisch-klonischen Krampfanfällen.",
+    "category": "Neurologie",
+    "lesson": "epilepsie",
+    "url": "https://gesund.bund.de/epilepsie"
+  },
+  {
+    "name": "Epithelisierung",
+    "text": "Neubildung der oberflächlichen Hautbedeckung einer Wunde.",
+    "example": "Den empfindlichen Wundrand nicht traumatisieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ergebnisqualität",
+    "text": "Qualität erreichter patientenbezogener Resultate.",
+    "example": "Ergebnis immer im Kontext von Ausgangslage und Zielen beurteilen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Evaluation",
+    "text": "Geplanter Vergleich zwischen erreichtem Ergebnis und vereinbartem Ziel.",
+    "example": "Bei ausbleibendem Erfolg Ursachen klären und Maßnahmen anpassen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Evidence-based Nursing",
+    "text": "Verbindung wissenschaftlicher Erkenntnisse, klinischer Erfahrung, Präferenzen und Rahmenbedingungen.",
+    "example": "Eine einzelne Studie reicht nicht automatisch für eine Praxisänderung.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Exazerbation",
+    "text": "Akute Verschlechterung einer chronischen Erkrankung.",
+    "example": "Bei COPD nach Atemarbeit, Sputum und Allgemeinzustand fragen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Expertenstandard",
+    "text": "Evidenzgestütztes professionelles Qualitätsniveau für einen pflegerischen Themenbereich.",
+    "example": "Einrichtungsspezifische Abläufe müssen die Ziele konkret umsetzen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Exsikkose",
+    "text": "Austrocknung durch Flüssigkeitsmangel.",
+    "example": "Gewicht, Zufuhr, Verluste und klinischen Verlauf zusammen beurteilen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Exsudat",
+    "text": "Aus einer Wunde austretende Flüssigkeit.",
+    "example": "Menge, Farbe und Geruch im Verlauf beschreiben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Fatigue",
+    "text": "Ausgeprägte krankheitsbezogene Erschöpfung, die sich nicht ausreichend durch Ruhe bessert.",
+    "example": "Belastung dosieren und individuelle Energieplanung unterstützen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Fieber",
+    "text": "Regulierte Erhöhung der Körpertemperatur durch veränderten Sollwert.",
+    "example": "Messort und Verlauf dokumentieren; Ursache beurteilen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Fremdanamnese",
+    "text": "Informationen zur Vorgeschichte durch andere Personen.",
+    "example": "Bei Delir können Angehörige den vorherigen Zustand beschreiben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Gallensteine / Cholezystitis",
+    "text": "Gallensteine können Gallengänge verlegen; eine Gallenblasenentzündung ist eine mögliche Komplikation.",
+    "example": "Kolikartige rechte Oberbauchschmerzen; bei Entzündung oft anhaltender Schmerz und Fieber.",
+    "category": "Leber & Galle",
+    "lesson": "gallensteine",
+    "url": "https://gesund.bund.de/gallensteine"
+  },
+  {
+    "name": "GCS",
+    "text": "Glasgow Coma Scale: Bewertung von Augenöffnung, verbaler und motorischer Reaktion.",
+    "example": "Einzelkomponenten und Einschränkungen wie Intubation dokumentieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Granulation",
+    "text": "Neubildung gefäßreichen Bindegewebes während der Wundheilung.",
+    "example": "Wundgrund schonend schützen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Halluzination",
+    "text": "Wahrnehmung ohne entsprechenden äußeren Reiz.",
+    "example": "Erleben ernst nehmen und Sicherheit beurteilen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Harnverhalt",
+    "text": "Unfähigkeit, die gefüllte Blase ausreichend zu entleeren.",
+    "example": "Überlauf kann trotz Harnverhalt geringe Urinabgänge verursachen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "HbA1c",
+    "text": "Anteil glykierten Hämoglobins als Maß für die mittlere Glukosebelastung der letzten Wochen.",
+    "example": "Anämien und veränderte Lebensdauer roter Blutkörperchen beeinflussen den Wert.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hemiparese",
+    "text": "Unvollständige Lähmung einer Körperhälfte.",
+    "example": "Neue einseitige Schwäche ist ein Schlaganfallwarnzeichen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hemiplegie",
+    "text": "Vollständige Lähmung einer Körperhälfte.",
+    "example": "Sichere Positionierung und Schutz der betroffenen Schulter beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Herpes zoster",
+    "text": "Reaktivierung von Varizella-Zoster-Viren mit oft schmerzhaftem Hautausschlag.",
+    "example": "Einseitige gruppierte Bläschen im Nervenversorgungsgebiet, Brennen und Schmerz.",
+    "category": "Haut & Wunden",
+    "lesson": "guertelrose",
+    "url": "https://gesund.bund.de/guertelrose"
+  },
+  {
+    "name": "Herzinfarkt / akutes Koronarsyndrom",
+    "text": "Akute Schädigung von Herzmuskel durch unzureichende Durchblutung. Ein Verdacht ist zeitkritisch.",
+    "example": "Anhaltender Brustdruck, Ausstrahlung, Atemnot, kalter Schweiß oder Übelkeit. Auch ohne typischen Brustschmerz möglich.",
+    "category": "Herz & Gefäße",
+    "lesson": "herzinfarkt",
+    "url": "https://gesund.bund.de/herzinfarkt"
+  },
+  {
+    "name": "Herzinsuffizienz",
+    "text": "Das Herz kann den Bedarf des Körpers nicht ausreichend decken; Blut und Flüssigkeit können sich zurückstauen.",
+    "example": "Belastungsdyspnoe, Orthopnoe, Ödeme, Gewichtszunahme und Erschöpfung.",
+    "category": "Herz & Gefäße",
+    "lesson": "herzschwaeche",
+    "url": "https://gesund.bund.de/herzschwaeche"
+  },
+  {
+    "name": "Hyperglykämie",
+    "text": "Erhöhter Blutzucker.",
+    "example": "Durst und häufiges Wasserlassen können Hinweise sein.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hyperkaliämie",
+    "text": "Erhöhter Kaliumwert im Blut.",
+    "example": "Kann gefährliche Herzrhythmusstörungen auslösen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hyperkapnie",
+    "text": "Erhöhter Kohlendioxidgehalt im Blut.",
+    "example": "Eine normale SpO₂ schließt sie nicht aus.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hyperthyreose",
+    "text": "Übermäßige Schilddrüsenhormonwirkung steigert viele Stoffwechselprozesse.",
+    "example": "Hitzeintoleranz, Schwitzen, Gewichtsverlust, Tremor und Tachykardie.",
+    "category": "Stoffwechsel",
+    "lesson": "schilddruesenueberfunktion",
+    "url": "https://gesund.bund.de/schilddruesenueberfunktion"
+  },
+  {
+    "name": "Hypoglykämie",
+    "text": "Zu niedrige Blutglukose mit möglicher Unterversorgung des Gehirns.",
+    "example": "Zittern, Schwitzen, Hunger, Unruhe; später Verwirrtheit, Krampf oder Bewusstlosigkeit.",
+    "category": "Stoffwechsel",
+    "lesson": "unterzuckerung",
+    "url": "https://www.nhs.uk/conditions/low-blood-sugar-hypoglycaemia/"
+  },
+  {
+    "name": "Hyponatriämie",
+    "text": "Zu niedriger Natriumwert im Blut.",
+    "example": "Neurologische Symptome können eine akute Gefährdung anzeigen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hypothermie",
+    "text": "Abfall der Körperkerntemperatur unter 35 °C.",
+    "example": "Schonend vor weiterem Wärmeverlust schützen und Hilfe organisieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hypothyreose",
+    "text": "Zu geringe Wirkung von Schilddrüsenhormonen verlangsamt Stoffwechselprozesse.",
+    "example": "Müdigkeit, Kälteempfindlichkeit, Obstipation, trockene Haut und verlangsamter Puls.",
+    "category": "Stoffwechsel",
+    "lesson": "schilddruesenunterfunktion",
+    "url": "https://gesund.bund.de/schilddruesenunterfunktion"
+  },
+  {
+    "name": "Hypotonie",
+    "text": "Erniedrigter Blutdruck im jeweiligen klinischen Kontext.",
+    "example": "Schwindel, Synkope und Zeichen schlechter Durchblutung beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hypoxie",
+    "text": "Unzureichende Sauerstoffversorgung des Gewebes.",
+    "example": "Kann auch bei normaler Sauerstoffsättigung durch Kreislaufprobleme entstehen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hypoxämie",
+    "text": "Zu wenig Sauerstoff im arteriellen Blut.",
+    "example": "Eine Blutgasanalyse kann die Oxygenierung genauer beurteilen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hämatemesis",
+    "text": "Erbrechen von Blut.",
+    "example": "Akute Hilfe veranlassen und Kreislauf beobachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hämatom",
+    "text": "Blutansammlung im Gewebe.",
+    "example": "Entstehung, Ausdehnung und Verlauf dokumentieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hämaturie",
+    "text": "Blut im Urin.",
+    "example": "Sichtbares Blut oder Nachweis im Test bedarf einer Ursachenklärung.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hämoptyse",
+    "text": "Abhusten von Blut aus den Atemwegen.",
+    "example": "Dringlichkeit nach Menge, Atmung und Kreislauf beurteilen; Hilfe hinzuziehen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Hüftnahe Fraktur",
+    "text": "Bruch im Bereich des proximalen Femurs, häufig nach Sturz.",
+    "example": "Hüftschmerz, eingeschränkte Belastbarkeit und eventuell verkürztes außenrotiertes Bein.",
+    "category": "Bewegungsapparat",
+    "lesson": "hueftfraktur",
+    "url": "https://www.nhs.uk/conditions/broken-hip/"
+  },
+  {
+    "name": "IAD",
+    "text": "Inkontinenzassoziierte Dermatitis: Hautentzündung durch Kontakt mit Urin oder Stuhl.",
+    "example": "Von druckbedingten Schäden unterscheiden.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "ICF",
+    "text": "WHO-Klassifikation der Funktionsfähigkeit, Behinderung und Gesundheit.",
+    "example": "Körperfunktionen, Aktivitäten, Teilhabe und Kontext zusammen betrachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ikterus",
+    "text": "Gelbfärbung durch erhöhte Bilirubinkonzentration.",
+    "example": "Ursache kann vor, in oder nach der Leber liegen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ileus",
+    "text": "Störung der Darmpassage durch mechanischen Verschluss oder Lähmung.",
+    "example": "Schmerzen, Erbrechen und geblähter Bauch erfordern dringende Abklärung.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Immunsuppression",
+    "text": "Verminderte Immunabwehr.",
+    "example": "Infektionen können untypisch und rasch schwer verlaufen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Infektion",
+    "text": "Eindringen und Vermehren von Erregern mit Reaktion des Wirts.",
+    "example": "Kann lokal oder systemisch verlaufen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Inkontinenz",
+    "text": "Unwillkürlicher Verlust von Urin oder Stuhl.",
+    "example": "Form, Ursachen und Unterstützungsbedarf individuell erheben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Intertrigo",
+    "text": "Entzündliche Hautveränderung in aufeinanderliegenden Hautfalten.",
+    "example": "Feuchtigkeit und Reibung reduzieren, mögliche Infektion beurteilen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Inzidenz",
+    "text": "Häufigkeit neu auftretender Fälle in einer definierten Bevölkerung und Zeit.",
+    "example": "Den Bezugszeitraum immer nennen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ischämie",
+    "text": "Unzureichende Blutversorgung eines Gewebes.",
+    "example": "Akute Ischämien können zeitkritische Notfälle sein.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Kachexie",
+    "text": "Komplexes krankheitsbedingtes Syndrom mit Verlust von Muskelmasse, oft auch Fett.",
+    "example": "Nicht allein durch vermehrtes Essen zu beheben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Kausalität",
+    "text": "Ursächliche Beziehung zwischen Ereignissen.",
+    "example": "Alternative Erklärungen und Studiendesign kritisch prüfen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ketoazidose",
+    "text": "Metabolische Übersäuerung durch vermehrte Ketonkörper, häufig bei schwerem Insulinmangel.",
+    "example": "Übelkeit, tiefe Atmung und Bewusstseinsveränderung sind Notfallzeichen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Kohärenzgefühl",
+    "text": "Grundhaltung, die Verstehbarkeit, Handhabbarkeit und Bedeutsamkeit verbindet.",
+    "example": "Bei Antonovsky beeinflusst sie den Umgang mit Belastungen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Kolonisation",
+    "text": "Besiedlung mit Mikroorganismen ohne dadurch verursachte Erkrankungszeichen.",
+    "example": "Besiedlung ist nicht gleich Infektion.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Koma",
+    "text": "Nicht erweckbare Bewusstlosigkeit.",
+    "example": "Notfallversorgung und wiederholte neurologische Beurteilung erforderlich.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Komorbidität",
+    "text": "Zusätzliche Erkrankung neben einer betrachteten Haupterkrankung.",
+    "example": "Kann Versorgung und Prognose beeinflussen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Kongruenz",
+    "text": "Echtheit und Stimmigkeit in der professionellen Beziehung.",
+    "example": "Eigene Gefühle reflektieren, ohne die betreute Person damit zu belasten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Kontamination",
+    "text": "Verunreinigung etwa von Händen, Flächen oder Materialien mit Mikroorganismen.",
+    "example": "Aseptische Arbeitsschritte bei Kontamination neu vorbereiten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Kontraktur",
+    "text": "Anhaltende Einschränkung der Gelenkbeweglichkeit durch Veränderungen von Gewebe.",
+    "example": "Aktivität, Positionierung und individuelle Bewegungsangebote unterstützen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Korrelation",
+    "text": "Statistischer Zusammenhang zwischen Merkmalen.",
+    "example": "Beweist keine Ursache-Wirkungs-Beziehung.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Kurativ",
+    "text": "Auf Heilung einer Erkrankung ausgerichtet.",
+    "example": "Behandlungsziel mit der betroffenen Person klären.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Leberzirrhose",
+    "text": "Chronischer Umbau der Leber mit Vernarbung und Funktionsverlust.",
+    "example": "Aszites, Ödeme, Ikterus, Blutungsneigung oder Verwirrtheit bei Enzephalopathie.",
+    "category": "Leber & Galle",
+    "lesson": "leberzirrhose",
+    "url": "https://gesund.bund.de/leberzirrhose"
+  },
+  {
+    "name": "Leitlinie",
+    "text": "Systematisch entwickelte Entscheidungshilfe für definierte Versorgungssituationen.",
+    "example": "Empfehlungsstärke und Aktualität beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Leukämie",
+    "text": "Bösartige Erkrankung blutbildender Zellen mit Verdrängung gesunder Blutbildung.",
+    "example": "Infektanfälligkeit, Blutungsneigung, Blässe, Erschöpfung und weitere unspezifische Beschwerden.",
+    "category": "Onkologie",
+    "lesson": "leukaemie",
+    "url": "https://gesund.bund.de/akute-lymphatische-leukaemie-all"
+  },
+  {
+    "name": "Lungenembolie",
+    "text": "Verschluss einer Lungenarterie, meist durch ein verschlepptes venöses Gerinnsel.",
+    "example": "Plötzliche Atemnot, atemabhängiger Brustschmerz, Tachykardie oder Kollaps.",
+    "category": "Lunge & Atmung",
+    "lesson": "lungenembolie",
+    "url": "https://gesund.bund.de/lungenembolie"
+  },
+  {
+    "name": "Magen- und Zwölffingerdarmgeschwür",
+    "text": "Tiefe Schleimhautverletzung im Magen oder Duodenum.",
+    "example": "Oberbauchbeschwerden; Blutung kann sich durch Teerstuhl, Bluterbrechen oder Kreislaufzeichen zeigen.",
+    "category": "Magen & Darm",
+    "lesson": "magengeschwuer",
+    "url": "https://gesund.bund.de/magengeschwuer"
+  },
+  {
+    "name": "Malnutrition",
+    "text": "Mangelversorgung mit Energie, Eiweiß oder anderen Nährstoffen.",
+    "example": "Kann auch bei hohem Körpergewicht vorkommen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Mammakarzinom",
+    "text": "Bösartige Erkrankung des Brustgewebes mit unterschiedlichen biologischen Eigenschaften.",
+    "example": "Knoten, Einziehung oder Sekret können auffallen; Früherkennung kann symptomlose Veränderungen entdecken.",
+    "category": "Onkologie",
+    "lesson": "brustkrebs",
+    "url": "https://gesund.bund.de/brustkrebs"
+  },
+  {
+    "name": "Mazeration",
+    "text": "Aufweichung der Haut durch anhaltende Feuchtigkeit.",
+    "example": "Feuchtigkeitsursache und Hautschutz gemeinsam bearbeiten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Meläna",
+    "text": "Schwarzer, teerartiger Stuhl durch verdautes Blut.",
+    "example": "Eine mögliche gastrointestinale Blutung dringend abklären lassen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Mobilisation",
+    "text": "Unterstützung beim Bewegen und Wechseln von Positionen.",
+    "example": "Belastbarkeit, Kreislauf und persönliche Ziele berücksichtigen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Morbus Crohn",
+    "text": "Chronisch-entzündliche Darmerkrankung, die verschiedene Abschnitte des Verdauungstrakts betreffen kann.",
+    "example": "Bauchschmerz, Durchfall, Gewichtsverlust; Fisteln und Engstellen sind möglich.",
+    "category": "Magen & Darm",
+    "lesson": "morbus-crohn",
+    "url": "https://gesund.bund.de/morbus-crohn"
+  },
+  {
+    "name": "MRSA",
+    "text": "Methicillin-resistenter Staphylococcus aureus.",
+    "example": "Besiedlung und Infektion unterscheiden; Hygieneplan anwenden.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Multimorbidität",
+    "text": "Gleichzeitiges Vorliegen mehrerer Erkrankungen.",
+    "example": "Behandlungsziele und Wechselwirkungen gemeinsam priorisieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Multiple Sklerose (MS)",
+    "text": "Chronisch-entzündliche Erkrankung des zentralen Nervensystems mit vielfältigen Funktionsstörungen.",
+    "example": "Sehstörungen, Sensibilitätsstörungen, Schwäche, Spastik, Fatigue sowie Blasen-/Darmprobleme.",
+    "category": "Neurologie",
+    "lesson": "multiple-sklerose",
+    "url": "https://gesund.bund.de/multiple-sklerose"
+  },
+  {
+    "name": "Multiresistenz",
+    "text": "Unempfindlichkeit eines Erregers gegenüber mehreren Wirkstoffgruppen.",
+    "example": "Schutzmaßnahmen richten sich nach Erreger, Übertragungsweg und Situation.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Nausea",
+    "text": "Übelkeit.",
+    "example": "Auslöser, Dauer und Begleitsymptome erfragen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Neglect",
+    "text": "Vernachlässigung einer Raum- oder Körperseite durch gestörte Aufmerksamkeit.",
+    "example": "Sicherheit und individuelle Wahrnehmung beim Transfer beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Nekrose",
+    "text": "Absterben von Zellen oder Gewebe.",
+    "example": "Ursache, Ausdehnung und Infektionszeichen beurteilen lassen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Neuropathie",
+    "text": "Schädigung peripherer Nerven.",
+    "example": "Sensibilitätsverlust erhöht etwa das Verletzungsrisiko an Füßen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Neutropenie",
+    "text": "Verminderte Zahl neutrophiler Granulozyten.",
+    "example": "Fieber ist bei ausgeprägter Neutropenie dringend abzuklären.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Nieren- und Harnleitersteine",
+    "text": "Kristallablagerungen können den Harnabfluss behindern.",
+    "example": "Kolikartige Flankenschmerzen, Übelkeit, Unruhe und eventuell Blut im Urin.",
+    "category": "Niere & Harnwege",
+    "lesson": "nierensteine",
+    "url": "https://gesund.bund.de/nierensteine"
+  },
+  {
+    "name": "Nosokomial",
+    "text": "Im Zusammenhang mit einer medizinischen oder pflegerischen Versorgung erworben.",
+    "example": "Hygienemaßnahmen reduzieren vermeidbare Risiken.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "NRS",
+    "text": "Numerische Ratingskala, oft von 0 bis 10 zur Selbsteinschätzung der Schmerzintensität.",
+    "example": "Skalenanker erklären und dieselbe Skala im Verlauf nutzen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Obstipation",
+    "text": "Erschwerte oder seltene Darmentleerung mit individuellen Beschwerden.",
+    "example": "Gewohnheiten, Konsistenz, Schmerzen und Einflussfaktoren erheben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Obstruktion",
+    "text": "Verengung oder Verschluss eines Hohlorgans oder Weges.",
+    "example": "Bei Atemwegen behindert sie den Luftstrom.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Oligurie",
+    "text": "Verminderte Urinausscheidung.",
+    "example": "Bei Erwachsenen ist anhaltend unter 0,5 ml/kg/h ein wichtiges Warnkriterium.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Orientierung",
+    "text": "Einordnung zu Person, Ort, Zeit und Situation.",
+    "example": "Akute Veränderungen können auf Delir hinweisen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Orthopnoe",
+    "text": "Atemnot im Liegen, die sich beim Aufrichten bessert.",
+    "example": "Kann bei Herzinsuffizienz auftreten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Orthostase",
+    "text": "Kreislaufanpassung beim Aufrichten.",
+    "example": "Ein Blutdruckabfall kann Schwindel und Stürze begünstigen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Osteoporose",
+    "text": "Verminderte Knochenfestigkeit erhöht das Frakturrisiko.",
+    "example": "Häufig erst nach Fraktur auffällig; Wirbelbrüche können Schmerzen und Größenverlust verursachen.",
+    "category": "Bewegungsapparat",
+    "lesson": "osteoporose",
+    "url": "https://gesund.bund.de/osteoporose"
+  },
+  {
+    "name": "Palliativ",
+    "text": "Auf Lebensqualität und Linderung belastender Symptome bei schwerer Erkrankung ausgerichtet.",
+    "example": "Kann parallel zu krankheitsgerichteter Behandlung erfolgen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Parenteral",
+    "text": "Unter Umgehung des Magen-Darm-Trakts.",
+    "example": "Parenterale Ernährung erfolgt über einen venösen Zugang.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Parkinson-Krankheit",
+    "text": "Fortschreitende Erkrankung mit Bewegungsverlangsamung und weiteren motorischen sowie nichtmotorischen Beschwerden.",
+    "example": "Bradykinese, Rigor, häufig Ruhetremor; auch Freezing, Dysphagie, Obstipation und autonome Beschwerden.",
+    "category": "Neurologie",
+    "lesson": "parkinson",
+    "url": "https://gesund.bund.de/parkinson-erkrankung"
+  },
+  {
+    "name": "Pathogenese",
+    "text": "Entstehung und Entwicklung einer Erkrankung.",
+    "example": "Verknüpft Ursache mit Funktionsstörung und Symptomen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Patientenverfügung",
+    "text": "Vorausverfügung zu medizinischen Maßnahmen für Situationen fehlender Einwilligungsfähigkeit.",
+    "example": "Konkrete Anwendbarkeit auf die aktuelle Situation prüfen lassen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "PDCA",
+    "text": "Plan, Do, Check, Act: planen, umsetzen, prüfen und anpassen.",
+    "example": "Veränderungen in einem überprüfbaren Zyklus erproben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "PEG",
+    "text": "Perkutane endoskopische Gastrostomie: Zugang durch die Bauchdecke in den Magen.",
+    "example": "Eine PEG verhindert Aspiration nicht automatisch.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Perfusion",
+    "text": "Durchblutung eines Gewebes.",
+    "example": "Hautfarbe, Temperatur, Bewusstsein und Ausscheidung liefern Hinweise.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Periphere arterielle Verschlusskrankheit (pAVK)",
+    "text": "Arterielle Durchblutungsstörung der Extremitäten, meist durch Atherosklerose.",
+    "example": "Belastungsschmerz, kalte Haut, schlechte Wundheilung; fortgeschritten Ruheschmerz.",
+    "category": "Herz & Gefäße",
+    "lesson": "periphere-arterielle-verschlusskrankheit",
+    "url": "https://www.nhs.uk/conditions/peripheral-arterial-disease-pad/"
+  },
+  {
+    "name": "PES",
+    "text": "Struktur für problemfokussierte Pflegediagnosen: Problem, Einflussfaktoren und Symptome.",
+    "example": "Risikodiagnosen haben noch keine Symptome des befürchteten Problems.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Petechien",
+    "text": "Punktförmige Hauteinblutungen, die sich nicht wegdrücken lassen.",
+    "example": "Neu auftretende Petechien im Zusammenhang beurteilen lassen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Pflegediagnose",
+    "text": "Klinische Beurteilung menschlicher Reaktionen auf Gesundheitsprobleme oder Lebensprozesse.",
+    "example": "Sie beschreibt den pflegerischen Unterstützungsbedarf und ergänzt die medizinische Diagnose.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Pflegeprozess",
+    "text": "Systematisches Vorgehen aus Einschätzung, Pflegediagnostik, Zielsetzung, Planung, Durchführung und Evaluation.",
+    "example": "Nach einer Veränderung wird neu eingeschätzt; der Prozess ist kein einmaliges Formular.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Pneumonie",
+    "text": "Entzündung des Lungengewebes, häufig durch Infektion.",
+    "example": "Husten, Fieber, Atemnot und Schwäche; ältere Menschen können vor allem verwirrt oder reduziert wirken.",
+    "category": "Lunge & Atmung",
+    "lesson": "lungenentzuendung",
+    "url": "https://gesund.bund.de/lungenentzuendung"
+  },
+  {
+    "name": "Pneumothorax",
+    "text": "Luft im Pleuraspalt kann die Entfaltung der Lunge beeinträchtigen.",
+    "example": "Plötzlicher einseitiger Brustschmerz und Atemnot; bei Spannungssituation Kreislaufverschlechterung.",
+    "category": "Lunge & Atmung",
+    "lesson": "pneumothorax",
+    "url": "https://www.southtees.nhs.uk/resources/pneumothorax/"
+  },
+  {
+    "name": "Pollakisurie",
+    "text": "Häufiges Wasserlassen kleiner Mengen.",
+    "example": "Kann bei einer Blasenentzündung auftreten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Polyurie",
+    "text": "Übermäßig große Urinmenge.",
+    "example": "Nicht mit häufigem Wasserlassen kleiner Mengen verwechseln.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Prognose",
+    "text": "Einschätzung des wahrscheinlichen weiteren Krankheitsverlaufs.",
+    "example": "Unsicherheit und individuelle Faktoren gehören dazu.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Prophylaxe",
+    "text": "Gezielte Vorbeugung einer Erkrankung oder Komplikation.",
+    "example": "Maßnahmen richten sich nach dem individuellen Risiko.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Proteinurie",
+    "text": "Vermehrte Eiweißausscheidung im Urin.",
+    "example": "Kann auf Nierenschädigung hinweisen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Prozessqualität",
+    "text": "Qualität der tatsächlichen Durchführung von Versorgung.",
+    "example": "Erfolgt eine Risikoeinschätzung rechtzeitig und nachvollziehbar?",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Präeklampsie",
+    "text": "Schwangerschaftsassoziierte Erkrankung mit Hypertonie und möglicher Organbeteiligung, meist nach der 20. Woche.",
+    "example": "Blutdruckanstieg; Kopfschmerz, Sehstörung, Oberbauchschmerz oder rasche Verschlechterung sind Warnzeichen.",
+    "category": "Schwangerschaft",
+    "lesson": "praeeklampsie",
+    "url": "https://www.nhs.uk/conditions/pre-eclampsia/"
+  },
+  {
+    "name": "Prävalenz",
+    "text": "Anteil vorhandener Fälle in einer Bevölkerung zu einem Zeitpunkt oder Zeitraum.",
+    "example": "Nicht mit Neuerkrankungsrate verwechseln.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Prävention",
+    "text": "Vermeidung oder Verminderung gesundheitlicher Risiken und Krankheitsfolgen.",
+    "example": "Primär vorbeugen, sekundär früh erkennen, tertiär Folgen begrenzen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Randomisierung",
+    "text": "Zufällige Zuteilung zu Untersuchungsgruppen.",
+    "example": "Soll systematische Unterschiede zwischen Gruppen verringern.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Refluxkrankheit",
+    "text": "Rückfluss von Mageninhalt in die Speiseröhre verursacht Beschwerden oder Schleimhautschäden.",
+    "example": "Sodbrennen, saures Aufstoßen; gelegentlich Husten oder Schluckbeschwerden.",
+    "category": "Magen & Darm",
+    "lesson": "gastrooesophageale-refluxkrankheit",
+    "url": "https://www.gesundheitsinformation.de/wie-wird-eine-refluxkrankheit-festgestellt.html"
+  },
+  {
+    "name": "Rehabilitation",
+    "text": "Maßnahmen zur Verbesserung von Funktionsfähigkeit und Teilhabe.",
+    "example": "Alltagsziele mit der Person vereinbaren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Remission",
+    "text": "Rückgang von Krankheitszeichen.",
+    "example": "Ist nicht immer gleichbedeutend mit Heilung.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Remonstration",
+    "text": "Begründeter Einwand gegen eine bedenkliche Anordnung.",
+    "example": "Bedenken klar kommunizieren, Klärung verlangen und dokumentieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Resilienz",
+    "text": "Dynamische Fähigkeit, Belastungen mit verfügbaren Ressourcen zu bewältigen.",
+    "example": "Keine unveränderliche Eigenschaft und keine Pflicht, alles auszuhalten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ressource",
+    "text": "Fähigkeit, Stärke oder Unterstützung, die zur Bewältigung beiträgt.",
+    "example": "Auch Motivation, Hilfsmittel und soziale Beziehungen zählen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Restharn",
+    "text": "Nach dem Wasserlassen in der Blase verbleibender Urin.",
+    "example": "Kann beispielsweise per Ultraschall bestimmt werden.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Retinopathie",
+    "text": "Erkrankung der Netzhaut.",
+    "example": "Regelmäßige augenärztliche Kontrollen sind bei Diabetes bedeutsam.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Rezidiv",
+    "text": "Wiederauftreten einer Erkrankung nach Besserung.",
+    "example": "Frühere Verläufe und Warnzeichen erfragen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Rigor",
+    "text": "Erhöhter Muskelwiderstand bei passiver Bewegung, typisch unter anderem für Parkinson.",
+    "example": "Bewegung nicht gewaltsam erzwingen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Salutogenese",
+    "text": "Perspektive auf die Entstehung und Erhaltung von Gesundheit.",
+    "example": "Ressourcen und Bewältigung neben Krankheitsrisiken betrachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "SBAR",
+    "text": "Situation, Background, Assessment, Recommendation: strukturierte Kommunikation.",
+    "example": "Bei Verschlechterung konkrete Befunde und eine klare Bitte übermitteln.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Scherkraft",
+    "text": "Parallel zur Gewebeoberfläche wirkende Kraft.",
+    "example": "Kann tieferes Gewebe schädigen, etwa beim Herabrutschen im Bett.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Schizophrenie",
+    "text": "Psychische Erkrankung mit möglichen Störungen von Wahrnehmung, Denken, Antrieb und sozialer Funktion.",
+    "example": "Wahn, Halluzinationen, desorganisiertes Denken; auch Rückzug und Antriebsarmut.",
+    "category": "Psychiatrie",
+    "lesson": "schizophrenie",
+    "url": "https://gesund.bund.de/schizophrenie"
+  },
+  {
+    "name": "Schlaganfall und TIA",
+    "text": "Akuter neurologischer Ausfall durch Durchblutungsstörung oder Blutung im Gehirn. Auch vorübergehende Ausfälle sind dringlich.",
+    "example": "Plötzliche Lähmung, Sprach-/Sehstörung, Gangunsicherheit oder ungewohnter starker Kopfschmerz.",
+    "category": "Neurologie",
+    "lesson": "schlaganfall",
+    "url": "https://gesund.bund.de/schlaganfall"
+  },
+  {
+    "name": "Schmerzassessment",
+    "text": "Systematische Erfassung von Schmerz und seinen Auswirkungen.",
+    "example": "Intensität, Ort, Qualität, Verlauf und Funktionsbeeinträchtigung erheben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Schweigepflicht",
+    "text": "Pflicht, anvertraute personenbezogene Informationen vertraulich zu behandeln.",
+    "example": "Weitergabe benötigt eine geeignete rechtliche Grundlage.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Selbstwirksamkeit",
+    "text": "Überzeugung, Anforderungen durch eigenes Handeln bewältigen zu können.",
+    "example": "Erreichbare Schritte und Erfolgserfahrungen unterstützen sie.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Sensitivität",
+    "text": "Anteil tatsächlich Erkrankter, die ein Test korrekt als positiv erkennt.",
+    "example": "Ein hochsensitiver Test kann trotzdem falsch positive Ergebnisse liefern.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Sepsis",
+    "text": "Lebensbedrohliche Organdysfunktion infolge einer fehlregulierten Reaktion auf Infektion.",
+    "example": "Akute Verschlechterung, schnelle Atmung, Verwirrtheit, Kreislaufprobleme; Fieber kann fehlen.",
+    "category": "Infektion & Notfall",
+    "lesson": "sepsis",
+    "url": "https://gesund.bund.de/sepsis"
+  },
+  {
+    "name": "SIS",
+    "text": "Strukturierte Informationssammlung im Strukturmodell der Pflegedokumentation.",
+    "example": "Nicht als Ersatz für klinisches Denken oder alle Dokumentationsanforderungen verstehen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "SMART",
+    "text": "Ziele spezifisch, messbar, akzeptiert beziehungsweise attraktiv, realistisch und terminiert formulieren.",
+    "example": "Beispiel: Die Person geht bis Freitag mit vereinbarter Unterstützung zum Bad.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Somnolenz",
+    "text": "Schläfrigkeit mit Weckbarkeit durch Ansprache oder leichte Reize.",
+    "example": "Neue Bewusstseinsminderung dringend beurteilen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Sopor",
+    "text": "Tiefe Bewusstseinsminderung mit Reaktion nur auf starke Reize.",
+    "example": "Atemweg und Atmung priorisieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Spastik",
+    "text": "Geschwindigkeitsabhängig erhöhter Muskeltonus bei zentraler motorischer Schädigung.",
+    "example": "Schmerz und auslösende Reize berücksichtigen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Spezifität",
+    "text": "Anteil tatsächlich Nichterkrankter, die ein Test korrekt als negativ erkennt.",
+    "example": "Für die Interpretation sind auch Vortestwahrscheinlichkeit und Sensitivität wichtig.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "SpO₂",
+    "text": "Pulsoximetrisch geschätzte periphere Sauerstoffsättigung.",
+    "example": "Bewegung, kalte Finger und schlechte Perfusion können die Messung stören.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Sputum",
+    "text": "Aus den Atemwegen abgehustetes Sekret.",
+    "example": "Menge, Farbe, Beimengungen und Veränderung beschreiben.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Sterbephase",
+    "text": "Unmittelbarer Prozess des Sterbens, häufig letzte Stunden oder Tage.",
+    "example": "Zeitliche Prognosen bleiben unsicher.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Sterilisation",
+    "text": "Validiertes Verfahren zur Abtötung beziehungsweise Entfernung vermehrungsfähiger Mikroorganismen einschließlich Sporen.",
+    "example": "Sterilität hängt auch von Verpackung und Lagerung ab.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Stoma",
+    "text": "Operativ angelegte Verbindung eines Hohlorgans zur Körperoberfläche.",
+    "example": "Versorgung richtet sich nach Stomaart, Hautzustand und Ausscheidung.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Stridor",
+    "text": "Auffälliges Atemgeräusch durch verengte größere Atemwege.",
+    "example": "Neu auftretender Stridor kann ein Atemwegsnotfall sein.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Strukturqualität",
+    "text": "Voraussetzungen einer Versorgung, etwa Qualifikation und Ausstattung.",
+    "example": "Ausreichend geeignete Hilfsmittel sind ein Strukturmerkmal.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Suizidalität",
+    "text": "Gedanken, Absichten oder Handlungen, das eigene Leben zu beenden.",
+    "example": "Direkt und respektvoll ansprechen; bei akuter Gefahr Schutz und sofortige Hilfe organisieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Synkope",
+    "text": "Kurzzeitiger Bewusstseinsverlust durch vorübergehend verminderte Hirndurchblutung.",
+    "example": "Ursache klären; nicht jede Bewusstlosigkeit ist eine Synkope.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Systole",
+    "text": "Kontraktionsphase der Herzkammern.",
+    "example": "Der systolische Blutdruck beschreibt den oberen Druckwert.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Tachykardie",
+    "text": "Erhöhte Herzfrequenz; bei Erwachsenen in Ruhe meist über 100 pro Minute.",
+    "example": "Ursachen reichen von Belastung bis Kreislaufversagen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Tachypnoe",
+    "text": "Beschleunigte Atemfrequenz.",
+    "example": "Atemfrequenz tatsächlich zählen und Verlauf beobachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Teach-back",
+    "text": "Die Person erklärt Inhalte in eigenen Worten, um die Verständlichkeit der Erklärung zu prüfen.",
+    "example": "Keine Prüfung der Patientin, sondern Rückmeldung zur eigenen Vermittlung.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Terminalphase",
+    "text": "Letzte Lebensphase bei fortschreitender Erkrankung; zeitliche Abgrenzung ist unscharf.",
+    "example": "Individuelle Bedürfnisse und Symptome bestimmen die Begleitung.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Thrombozytopenie",
+    "text": "Verminderte Blutplättchenzahl.",
+    "example": "Blutungszeichen und Verletzungsrisiken beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Thrombus",
+    "text": "Blutgerinnsel innerhalb eines Gefäßes oder im Herzen.",
+    "example": "Kann den Blutfluss behindern oder embolisieren.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Tiefe Venenthrombose",
+    "text": "Ein Gerinnsel verschließt teilweise oder vollständig eine tiefe Vene, häufig im Bein.",
+    "example": "Einseitige Schwellung, Schmerz, Wärme; eine Thrombose kann auch wenig auffällig sein.",
+    "category": "Herz & Gefäße",
+    "lesson": "tiefe-venenthrombose",
+    "url": "https://www.gesundheitsinformation.de/tiefe-venenthrombose-tvt.html"
+  },
+  {
+    "name": "Transfer",
+    "text": "Wechsel zwischen Flächen oder Positionen, etwa Bett und Stuhl.",
+    "example": "Hilfsmittel, Eigenaktivität und benötigte Unterstützung vorher planen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Tremor",
+    "text": "Unwillkürliche rhythmische Bewegung eines Körperteils.",
+    "example": "Ruhe- und Aktionstremor unterscheiden.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Validierung",
+    "text": "Anerkennen des subjektiven Erlebens und der Gefühle.",
+    "example": "Gefühle bestätigen bedeutet nicht, jede Tatsachenbehauptung zu bestätigen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ventilation",
+    "text": "Belüftung der Lunge.",
+    "example": "Atemfrequenz allein sagt wenig über das Atemzugvolumen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Vitalzeichen",
+    "text": "Messbare grundlegende Körperfunktionen wie Puls, Atmung, Blutdruck und Temperatur.",
+    "example": "Verlauf, Messbedingungen und klinischen Eindruck gemeinsam bewerten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Vorhofflimmern",
+    "text": "Ungeordnete elektrische Aktivität der Vorhöfe mit häufig unregelmäßigem Puls.",
+    "example": "Herzstolpern, Leistungsabfall, Schwindel oder keine spürbaren Beschwerden.",
+    "category": "Herz & Gefäße",
+    "lesson": "vorhofflimmern",
+    "url": "https://gesund.bund.de/vorhofflimmern"
+  },
+  {
+    "name": "Vorsorgevollmacht",
+    "text": "Bevollmächtigung einer Vertrauensperson für festgelegte Angelegenheiten.",
+    "example": "Umfang und Gültigkeit der Vollmacht beachten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Wahn",
+    "text": "Feste, durch Gegenargumente kaum korrigierbare Überzeugung mit beeinträchtigtem Realitätsbezug.",
+    "example": "Nicht streiten, Beziehung und Sicherheit erhalten.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Zyanose",
+    "text": "Bläuliche Verfärbung von Haut oder Schleimhaut.",
+    "example": "Kann auf Oxygenierungs- oder Durchblutungsstörungen hinweisen.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Zystitis und Harnwegsinfektion",
+    "text": "Entzündung der Harnblase, meist bakteriell bedingt.",
+    "example": "Brennen beim Wasserlassen, häufiger Harndrang und Unterbauchbeschwerden.",
+    "category": "Niere & Harnwege",
+    "lesson": "blasenentzuendung",
+    "url": "https://www.gesundheitsinformation.de/akute-blasenentzuendung.html"
+  },
+  {
+    "name": "Ätiologie",
+    "text": "Ursache beziehungsweise Ursachen einer Erkrankung.",
+    "example": "Nicht jede Erkrankung hat eine einzelne klar erkennbare Ursache.",
+    "category": "Pflege & Medizin"
+  },
+  {
+    "name": "Ödem",
+    "text": "Flüssigkeitsansammlung im Gewebe.",
+    "example": "Lokalisation, Symmetrie, Gewicht und Verlauf dokumentieren.",
+    "category": "Pflege & Medizin"
+  }
+]

@@ -1,0 +1,1583 @@
+[
+  {
+    "id": "herzinfarkt",
+    "title": "Herzinfarkt / akutes Koronarsyndrom",
+    "category": "Krankheitsbilder",
+    "system": "Herz & Gefäße",
+    "definition": "Akute Schädigung von Herzmuskel durch unzureichende Durchblutung. Ein Verdacht ist zeitkritisch.",
+    "cause": "Häufig reißt eine Ablagerung im Herzkranzgefäß auf; ein Gerinnsel behindert den Blutfluss.",
+    "signs": "Anhaltender Brustdruck, Ausstrahlung, Atemnot, kalter Schweiß oder Übelkeit. Auch ohne typischen Brustschmerz möglich.",
+    "diagnostics": "Ärztlich: EKG, Troponin im Verlauf und gegebenenfalls Herzkatheter. Ein einzelnes unauffälliges EKG schließt einen Infarkt nicht sicher aus.",
+    "care": [
+      [
+        "Sofort Notfallteam beziehungsweise 112 alarmieren und bei der Person bleiben.",
+        "Eine frühe Wiederherstellung der Durchblutung begrenzt Herzmuskelschaden."
+      ],
+      [
+        "Belastung stoppen, eine verträgliche Position ermöglichen und Bewusstsein, Atmung, Kreislauf überwachen.",
+        "Verschlechterungen und Kreislaufstillstand müssen unmittelbar erkannt werden."
+      ],
+      [
+        "Symptombeginn dokumentieren, EKG und angeordnete Therapie vorbereiten.",
+        "Zeitangaben und Befunde steuern die weitere Behandlung."
+      ]
+    ],
+    "warning": "Bei fehlender normaler Atmung und Bewusstlosigkeit Reanimation/AED nach Notfallalgorithmus. Sauerstoff nicht pauschal, sondern nach Zielbereich und Anordnung.",
+    "goal": "Der Notfallweg ist ohne Verzögerung aktiviert; Beschwerden und Vitalzeichen werden im Verlauf übergeben.",
+    "question": "Eine Person hat neuen Brustdruck und kalten Schweiß. Was hat Vorrang?",
+    "options": [
+      "Notfallteam alarmieren und ABCDE-Beurteilung beginnen",
+      "Zuerst ein längeres Aufnahmegespräch zur Schmerzbiografie führen",
+      "Zunächst eine Gehprobe zur Belastbarkeit durchführen",
+      "Die nächste reguläre Vitalzeichenrunde abwarten"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/herzinfarkt"
+  },
+  {
+    "id": "herzschwaeche",
+    "title": "Herzinsuffizienz",
+    "category": "Krankheitsbilder",
+    "system": "Herz & Gefäße",
+    "definition": "Das Herz kann den Bedarf des Körpers nicht ausreichend decken; Blut und Flüssigkeit können sich zurückstauen.",
+    "cause": "Häufige Ursachen sind KHK, Bluthochdruck oder Klappenerkrankungen.",
+    "signs": "Belastungsdyspnoe, Orthopnoe, Ödeme, Gewichtszunahme und Erschöpfung.",
+    "diagnostics": "Echokardiografie, EKG, Labor und klinischer Verlauf; Gewicht und Bilanz ergänzen die Beurteilung.",
+    "care": [
+      [
+        "Gewicht unter vergleichbaren Bedingungen und vereinbarte Bilanz erfassen.",
+        "Rasche Veränderungen können Flüssigkeitsansammlung anzeigen."
+      ],
+      [
+        "Aktivitäten mit Pausen planen und bei Atemnot eine erleichternde Position anbieten.",
+        "So wird die Belastung an die Leistungsreserve angepasst."
+      ],
+      [
+        "Trinkmenge individuell abstimmen und Warnzeichen per Teach-back besprechen.",
+        "Pauschale Trinkempfehlungen können Überwässerung oder Austrocknung fördern."
+      ]
+    ],
+    "warning": "Neue Ruhedyspnoe, schaumiges Sputum, Zyanose oder Kreislaufprobleme sofort eskalieren.",
+    "goal": "Die Person benennt ihre Warnzeichen und bewältigt vereinbarte Aktivitäten mit tolerierbarer Atemnot.",
+    "question": "Welche Beobachtung spricht bei Herzinsuffizienz besonders für Flüssigkeitseinlagerung?",
+    "options": [
+      "Rasche Gewichtszunahme zusammen mit zunehmenden Ödemen",
+      "Ein einzelner niedriger BMI ohne Gewichtsverlauf",
+      "Stabile Tagesgewichte bei unveränderten Beschwerden",
+      "Vorübergehender Durst nach salzigem Essen"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/herzschwaeche"
+  },
+  {
+    "id": "vorhofflimmern",
+    "title": "Vorhofflimmern",
+    "category": "Krankheitsbilder",
+    "system": "Herz & Gefäße",
+    "definition": "Ungeordnete elektrische Aktivität der Vorhöfe mit häufig unregelmäßigem Puls.",
+    "cause": "Unter anderem Bluthochdruck, Herzklappenfehler oder andere Herzerkrankungen begünstigen es.",
+    "signs": "Herzstolpern, Leistungsabfall, Schwindel oder keine spürbaren Beschwerden.",
+    "diagnostics": "Ein EKG sichert die Rhythmusdiagnose; Pulsbeobachtung allein reicht nicht.",
+    "care": [
+      [
+        "Puls, Blutdruck und Beschwerden gemeinsam beurteilen.",
+        "Ein auffälliger Rhythmus ist vor allem bei Kreislaufbeeinträchtigung dringlich."
+      ],
+      [
+        "Auf neue neurologische Ausfälle achten.",
+        "Vorhofflimmern begünstigt Gerinnsel und embolische Schlaganfälle."
+      ],
+      [
+        "Bei verordneter Antikoagulation Blutungszeichen beobachten und weitergeben.",
+        "Die Schlaganfallvorbeugung erfordert zugleich Aufmerksamkeit für Blutungsrisiken."
+      ]
+    ],
+    "warning": "Synkope, Brustschmerz, akute Atemnot oder Schlaganfallzeichen sind Notfälle.",
+    "goal": "Rhythmusauffälligkeiten und Begleitsymptome werden strukturiert übergeben.",
+    "question": "Warum ist ein neu hängender Mundwinkel bei Vorhofflimmern besonders dringlich?",
+    "options": [
+      "Mögliche Embolie mit Schlaganfall",
+      "Typische harmlose Folge eines unregelmäßigen Pulses",
+      "Sicherer Nachweis einer Unterzuckerung",
+      "Hinweis ausschließlich auf eine lokale Muskelerkrankung"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/vorhofflimmern"
+  },
+  {
+    "id": "bluthochdruck",
+    "title": "Arterielle Hypertonie",
+    "category": "Krankheitsbilder",
+    "system": "Herz & Gefäße",
+    "definition": "Dauerhaft erhöhter arterieller Blutdruck belastet Gefäße und Organe.",
+    "cause": "Meist wirken mehrere Faktoren zusammen; seltener besteht eine spezifische Grunderkrankung.",
+    "signs": "Oft beschwerdefrei; Symptome allein eignen sich nicht zur Erkennung.",
+    "diagnostics": "Wiederholte standardisierte Messungen, oft Langzeitmessung; einzelne Werte im Kontext beurteilen.",
+    "care": [
+      [
+        "Nach Ruhephase mit passender Manschette messen und Messbedingungen dokumentieren.",
+        "Fehlerhafte Bedingungen können erhöhte Werte vortäuschen."
+      ],
+      [
+        "Alltagsnahe Bewegung, Ernährung und Selbstmessung gemeinsam besprechen.",
+        "Umsetzbare Vereinbarungen unterstützen langfristiges Selbstmanagement."
+      ],
+      [
+        "Bei Lagewechsel Schwindel und Sturzgefährdung beachten.",
+        "Auch behandelte Menschen können orthostatische Beschwerden entwickeln."
+      ]
+    ],
+    "warning": "Stark erhöhte Werte mit Brustschmerz, Atemnot oder neurologischen Ausfällen sofort ärztlich/notfallmäßig abklären. Nicht eigenständig abrupt senken.",
+    "goal": "Die Person demonstriert eine korrekte Selbstmessung und kennt ihren vereinbarten Zielbereich.",
+    "question": "Ein hoher Blutdruck wird direkt nach Treppensteigen gemessen. Was ist bei Beschwerdefreiheit sinnvoll?",
+    "options": [
+      "Ruhe ermöglichen und standardisiert nachmessen",
+      "Aus dem Einzelwert eine dauerhafte Hypertonie diagnostizieren",
+      "Eigenständig die verordnete Dosis verdoppeln",
+      "Den Wert ohne Wiederholungsmessung dauerhaft als Zielwert übernehmen"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/bluthochdruck"
+  },
+  {
+    "id": "tiefe-venenthrombose",
+    "title": "Tiefe Venenthrombose",
+    "category": "Krankheitsbilder",
+    "system": "Herz & Gefäße",
+    "definition": "Ein Gerinnsel verschließt teilweise oder vollständig eine tiefe Vene, häufig im Bein.",
+    "cause": "Blutstase, Gefäßwandschäden und erhöhte Gerinnbarkeit bilden die Virchow-Trias.",
+    "signs": "Einseitige Schwellung, Schmerz, Wärme; eine Thrombose kann auch wenig auffällig sein.",
+    "diagnostics": "Ärztliche Risikobewertung und Kompressionssonografie; Labor abhängig von der Situation.",
+    "care": [
+      [
+        "Neue einseitige Beinschwellung zeitnah melden und Umfang/Beschwerden vergleichbar erfassen.",
+        "Der Verlauf unterstützt die Abklärung, ersetzt aber keine Diagnostik."
+      ],
+      [
+        "Mobilisation und Kompression nach geklärter Situation und Behandlungsplan durchführen.",
+        "Pauschale Bettruhe ist ebenso wenig passend wie unkritische Belastung."
+      ],
+      [
+        "Die betroffene Stelle nicht massieren.",
+        "Eine ungezielte Manipulation bietet keinen Nutzen und kann gefährden."
+      ]
+    ],
+    "warning": "Plötzliche Atemnot, Brustschmerz oder Kollaps: mögliche Lungenembolie, Notfallteam/112.",
+    "goal": "Die Person kennt Emboliewarnzeichen und den individuellen Mobilisationsplan.",
+    "question": "Bei vermuteter Thrombose tritt plötzlich Atemnot auf. Wie priorisierst du?",
+    "options": [
+      "Sofort als möglichen Embolienotfall eskalieren",
+      "Zuerst die Schwellung beider Beine vollständig ausmessen",
+      "Zur Kreislaufaktivierung zügig laufen lassen",
+      "Den nächsten geplanten Arztkontakt abwarten"
+    ],
+    "answer": 0,
+    "source": "https://www.gesundheitsinformation.de/tiefe-venenthrombose-tvt.html"
+  },
+  {
+    "id": "periphere-arterielle-verschlusskrankheit",
+    "title": "Periphere arterielle Verschlusskrankheit (pAVK)",
+    "category": "Krankheitsbilder",
+    "system": "Herz & Gefäße",
+    "definition": "Arterielle Durchblutungsstörung der Extremitäten, meist durch Atherosklerose.",
+    "cause": "Gefäßverengung reduziert die Sauerstoffversorgung; Rauchen und Diabetes sind wichtige Risiken.",
+    "signs": "Belastungsschmerz, kalte Haut, schlechte Wundheilung; fortgeschritten Ruheschmerz.",
+    "diagnostics": "Gefäßstatus, Knöchel-Arm-Index und bildgebende Gefäßdiagnostik.",
+    "care": [
+      [
+        "Haut, Wunden, Temperatur und Schmerzverlauf beobachten.",
+        "Minderdurchblutung gefährdet Gewebe und Heilung."
+      ],
+      [
+        "Füße vor Druck und Verletzungen schützen und Selbstkontrolle fördern.",
+        "Kleine Läsionen können bei schlechter Durchblutung schwer heilen."
+      ],
+      [
+        "Bewegungstraining nur passend zum Stadium und Gefäßplan unterstützen.",
+        "Bei stabiler Erkrankung kann Training helfen; akute Ischämie erfordert sofortige Versorgung."
+      ]
+    ],
+    "warning": "Plötzlich schmerzhafte, kalte, blasse Extremität oder neue Sensibilitäts-/Bewegungsstörung: akuter Gefäßnotfall. Keine unkritische Kompression.",
+    "goal": "Druckstellen werden vermieden und neue Ruheschmerzen unverzüglich gemeldet.",
+    "question": "Welche Veränderung verlangt bei pAVK sofortige Eskalation?",
+    "options": [
+      "Plötzlich kalter blasser Fuß mit starkem Schmerz",
+      "Seit Wochen unveränderte Gehstrecke",
+      "Langsam trockener werdende Haut ohne Wunde",
+      "Bekannter Belastungsschmerz mit unverändertem Muster"
+    ],
+    "answer": 0,
+    "source": "https://www.nhs.uk/conditions/peripheral-arterial-disease-pad/"
+  },
+  {
+    "id": "copd",
+    "title": "COPD",
+    "category": "Krankheitsbilder",
+    "system": "Lunge & Atmung",
+    "definition": "Chronische Erkrankung mit anhaltender Atemwegsverengung und begrenztem Luftstrom.",
+    "cause": "Langjährige Schadstoffbelastung, besonders Tabakrauch, verursacht Entzündung und Gewebeschäden.",
+    "signs": "Husten, Auswurf und zunehmende Belastungsatemnot; Exazerbation bedeutet akute Verschlechterung.",
+    "diagnostics": "Spirometrie, Anamnese und bei Verschlechterung unter anderem Blutgasanalyse.",
+    "care": [
+      [
+        "Atemfrequenz, Sprechfähigkeit, Sättigung und Erschöpfung beobachten.",
+        "Ein normal erscheinender Einzelwert schließt gefährliche Atemarbeit nicht aus."
+      ],
+      [
+        "Atemerleichternde Position und dosierte Lippenbremse anbieten, sofern hilfreich.",
+        "Eine gebremste Ausatmung kann den Kollaps kleiner Atemwege mindern."
+      ],
+      [
+        "Inhalationstechnik demonstrieren lassen und Sauerstoff nach individuellem Ziel titrieren lassen.",
+        "Technikfehler vermindern die Wirkung; Über- und Unterversorgung sind zu vermeiden."
+      ]
+    ],
+    "warning": "Somnolenz, Erschöpfung, Zyanose oder schwere Ruhedyspnoe sofort eskalieren. Bei Hyperkapnierisiko häufig Ziel-SpO₂ 88–92 % bis zur Blutgasklärung, nach Anordnung.",
+    "goal": "Die Person demonstriert ihre Inhalation und nennt Veränderungen, bei denen sie Hilfe braucht.",
+    "question": "Warum ist bei COPD neben der Sättigung die Bewusstseinslage wichtig?",
+    "options": [
+      "Eine CO₂-Anreicherung kann mit zunehmender Schläfrigkeit einhergehen",
+      "Eine gute Sättigung schließt jede Ventilationsstörung sicher aus",
+      "Bewusstseinsveränderung beweist eine psychiatrische Ursache",
+      "Der Bewusstseinszustand ersetzt die Blutgasanalyse"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/chronisch-obstruktive-lungenerkrankung-copd",
+    "additionalSources": [
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC5531304/"
+    ]
+  },
+  {
+    "id": "asthma",
+    "title": "Asthma bronchiale",
+    "category": "Krankheitsbilder",
+    "system": "Lunge & Atmung",
+    "definition": "Entzündliche Atemwegserkrankung mit wechselnder, oft reversibler Verengung.",
+    "cause": "Überempfindliche Atemwege reagieren etwa auf Allergene, Infekte oder Anstrengung.",
+    "signs": "Anfallsartige Atemnot, Giemen, Husten und Engegefühl, häufig wechselnd.",
+    "diagnostics": "Anamnese, Lungenfunktion und gegebenenfalls Reversibilitätstest; Peak-Flow kann den Verlauf unterstützen.",
+    "care": [
+      [
+        "Aufrecht begleiten, Ruhe vermitteln und individuellen Notfallplan umsetzen.",
+        "Angst und Anstrengung können die Atemarbeit zusätzlich steigern."
+      ],
+      [
+        "Sprechfähigkeit, Atemfrequenz und Reaktion auf angeordnete Therapie beurteilen.",
+        "Verschlechterung muss trotz möglicher Anfangsbesserung erkannt werden."
+      ],
+      [
+        "Inhalation und Auslösermanagement mit Teach-back üben.",
+        "Sichere Anwendung unterstützt die Krankheitskontrolle."
+      ]
+    ],
+    "warning": "Kaum hörbares Atemgeräusch bei schwerer Atemnot, Erschöpfung oder Zyanose ist hochgefährlich, kein Besserungszeichen.",
+    "goal": "Die Person erklärt ihren Aktionsplan und zeigt die korrekte Inhalationstechnik.",
+    "question": "Im schweren Asthmaanfall wird das Atemgeräusch leiser, die Person wirkt erschöpft. Was bedeutet das?",
+    "options": [
+      "Möglicherweise kritisch verminderter Luftstrom: sofort eskalieren",
+      "Sichere Lösung der Bronchialverengung",
+      "Ausschließlich nachlassende Angst",
+      "Ausreichende Wirkung, weitere Beobachtung ist entbehrlich"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/asthma"
+  },
+  {
+    "id": "lungenentzuendung",
+    "title": "Pneumonie",
+    "category": "Krankheitsbilder",
+    "system": "Lunge & Atmung",
+    "definition": "Entzündung des Lungengewebes, häufig durch Infektion.",
+    "cause": "Erreger oder Aspiration können die Alveolen und den Gasaustausch beeinträchtigen.",
+    "signs": "Husten, Fieber, Atemnot und Schwäche; ältere Menschen können vor allem verwirrt oder reduziert wirken.",
+    "diagnostics": "Klinische Untersuchung, Bildgebung und gegebenenfalls mikrobiologische Diagnostik.",
+    "care": [
+      [
+        "Atmung, Kreislauf, Temperatur und Bewusstsein im Verlauf erfassen.",
+        "Eine Pneumonie kann in respiratorisches Versagen oder Sepsis übergehen."
+      ],
+      [
+        "Schmerzangepasste Mobilisation und atemerleichternde Maßnahmen unterstützen.",
+        "Belüftung und Sekrettransport werden gefördert, ohne zu überfordern."
+      ],
+      [
+        "Mundpflege, Schlucksicherheit und individuell passende Flüssigkeitszufuhr beachten.",
+        "Aspiration und zähes Sekret können den Verlauf verschlechtern."
+      ]
+    ],
+    "warning": "Neu auftretende Verwirrtheit, Hypotonie oder zunehmende Atemnot sofort melden.",
+    "goal": "Atmung und Belastbarkeit stabilisieren sich; die Person kann Sekret möglichst wirksam abhusten.",
+    "question": "Eine ältere Person mit Pneumonie ist plötzlich verwirrt. Was ist die passende Einordnung?",
+    "options": [
+      "Mögliche akute Verschlechterung, etwa Hypoxie oder Sepsis, zeitnah beurteilen",
+      "Altersübliche Veränderung ohne Handlungsbedarf",
+      "Beweis einer fortgeschrittenen Demenz",
+      "Hinweis, die Mobilisation ohne Untersuchung zu steigern"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/lungenentzuendung"
+  },
+  {
+    "id": "lungenembolie",
+    "title": "Lungenembolie",
+    "category": "Krankheitsbilder",
+    "system": "Lunge & Atmung",
+    "definition": "Verschluss einer Lungenarterie, meist durch ein verschlepptes venöses Gerinnsel.",
+    "cause": "Das Gerinnsel stammt häufig aus tiefen Bein- oder Beckenvenen.",
+    "signs": "Plötzliche Atemnot, atemabhängiger Brustschmerz, Tachykardie oder Kollaps.",
+    "diagnostics": "Ärztliche Einschätzung, CT-Angiografie und weitere risikoadaptierte Diagnostik.",
+    "care": [
+      [
+        "Notfallteam/112 alarmieren und körperliche Belastung vermeiden.",
+        "Eine große Embolie kann akut die rechte Herzkammer überlasten."
+      ],
+      [
+        "Atmung, Bewusstsein und Kreislauf eng beobachten.",
+        "Ein Schock kann sich rasch entwickeln."
+      ],
+      [
+        "Zeitverlauf und Thromboserisiken strukturiert übergeben.",
+        "Die Informationen unterstützen schnelle Diagnostik."
+      ]
+    ],
+    "warning": "Synkope, Hypotonie oder schwere Atemnot sind Zeichen besonderer Gefährdung.",
+    "goal": "Die Person wird ohne Verzögerung notfallmedizinisch versorgt.",
+    "question": "Nach Operation treten plötzliche Atemnot und Tachykardie auf. Was ist vorrangig?",
+    "options": [
+      "Notfallbeurteilung und sofortige Eskalation wegen möglicher Embolie",
+      "Zuerst Atemübungen ohne weitere Beurteilung durchführen",
+      "Die Beschwerden ausschließlich als Angst einordnen",
+      "Allein zur Toilette gehen lassen, um die Belastbarkeit zu prüfen"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/lungenembolie"
+  },
+  {
+    "id": "pneumothorax",
+    "title": "Pneumothorax",
+    "category": "Krankheitsbilder",
+    "system": "Lunge & Atmung",
+    "definition": "Luft im Pleuraspalt kann die Entfaltung der Lunge beeinträchtigen.",
+    "cause": "Spontanes Auftreten, Trauma oder medizinische Eingriffe sind mögliche Auslöser.",
+    "signs": "Plötzlicher einseitiger Brustschmerz und Atemnot; bei Spannungssituation Kreislaufverschlechterung.",
+    "diagnostics": "Klinische Untersuchung, Ultraschall oder Röntgen; ein Spannungspneumothorax darf bei Instabilität nicht durch Bildgebung verzögert werden.",
+    "care": [
+      [
+        "Neue Atemnot nach Thoraxverletzung oder Eingriff sofort eskalieren.",
+        "Ein Spannungspneumothorax kann Atmung und Kreislauf akut bedrohen."
+      ],
+      [
+        "Vorhandene Thoraxdrainage und Schlauchverlauf nach Standard beobachten.",
+        "Abknicken oder Diskonnektion kann die Behandlung beeinträchtigen."
+      ],
+      [
+        "Drainagesystem unter Thoraxniveau sichern und Veränderungen melden.",
+        "Ein funktionsfähiges geschlossenes System unterstützt den Abfluss."
+      ]
+    ],
+    "warning": "Drainagen nicht routinemäßig abklemmen oder manipulieren. Bei Kollaps sofort Notfallteam.",
+    "goal": "Atmung bleibt stabil; Drainageverbindungen sind gesichert und Auffälligkeiten dokumentiert.",
+    "question": "Was ist bei einer Thoraxdrainage besonders zu vermeiden?",
+    "options": [
+      "Routinemäßiges Abklemmen ohne begründete Anordnung",
+      "Kontrolle des Schlauchverlaufs",
+      "Beobachtung der Atmung",
+      "Sicherung des Systems unter Thoraxniveau"
+    ],
+    "answer": 0,
+    "source": "https://www.southtees.nhs.uk/resources/pneumothorax/"
+  },
+  {
+    "id": "akutes-nierenversagen",
+    "title": "Akute Nierenschädigung (AKI)",
+    "category": "Krankheitsbilder",
+    "system": "Niere & Harnwege",
+    "definition": "Die Nierenfunktion verschlechtert sich innerhalb kurzer Zeit.",
+    "cause": "Ursachen können vor der Niere liegen, das Nierengewebe betreffen oder den Harnabfluss behindern.",
+    "signs": "Verminderte Urinmenge, Ödeme oder wenig spezifische Beschwerden; auch ohne Oligurie möglich.",
+    "diagnostics": "Kreatininverlauf, Urinausscheidung, Elektrolyte, Urinstatus und Ultraschall.",
+    "care": [
+      [
+        "Ein- und Ausfuhr sowie Gewicht nach Plan nachvollziehbar erfassen.",
+        "Die Behandlung muss Flüssigkeitsmangel und Überwässerung unterscheiden."
+      ],
+      [
+        "Atemnot, Ödeme und neurologische Veränderungen melden.",
+        "Flüssigkeitsüberlastung und zurückgehaltene Stoffwechselprodukte können gefährlich werden."
+      ],
+      [
+        "Auffällige Kaliumwerte und potenziell nierenschädigende Belastungen zeitnah weitergeben.",
+        "Hyperkaliämie kann Rhythmusstörungen auslösen; die Therapie muss angepasst werden."
+      ]
+    ],
+    "warning": "Anurie, schwere Atemnot oder kritische Elektrolytwerte sind dringlich. Nicht pauschal zum Vieltrinken auffordern.",
+    "goal": "Bilanz und klinischer Zustand ermöglichen eine frühzeitige Anpassung des Behandlungsplans.",
+    "question": "Weshalb ist die Empfehlung „viel trinken“ bei AKI nicht pauschal richtig?",
+    "options": [
+      "Je nach Ursache kann auch eine gefährliche Überwässerung bestehen",
+      "Flüssigkeit hat keinen Einfluss auf die Nierenfunktion",
+      "Jede AKI entsteht ausschließlich durch Harnsteine",
+      "Urinmenge und Kreislauf sind für die Entscheidung unwichtig"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/akutes-nierenversagen"
+  },
+  {
+    "id": "chronische-nierenkrankheit",
+    "title": "Chronische Nierenkrankheit",
+    "category": "Krankheitsbilder",
+    "system": "Niere & Harnwege",
+    "definition": "Über mindestens drei Monate bestehende strukturelle oder funktionelle Nierenschädigung.",
+    "cause": "Häufig führen Diabetes und Bluthochdruck langfristig zu Nierenschäden.",
+    "signs": "Anfangs oft unauffällig; später Müdigkeit, Ödeme, Juckreiz und Leistungsminderung.",
+    "diagnostics": "eGFR und Albuminurie dienen der Einordnung; Verlauf und Begleiterkrankungen bestimmen das Risiko.",
+    "care": [
+      [
+        "Gewicht, Blutdruck und vereinbarte Trink-/Bilanzziele beobachten.",
+        "Flüssigkeits- und Blutdruckkontrolle schützen vor Komplikationen."
+      ],
+      [
+        "Ernährungsberatung individuell organisieren.",
+        "Eiweiß-, Kalium- und Flüssigkeitsbedarf unterscheiden sich nach Stadium und Dialyse."
+      ],
+      [
+        "Bei Dialyse Gefäßzugang schützen und Auffälligkeiten melden.",
+        "Ein verlässlicher Zugang ist für die Behandlung wichtig."
+      ]
+    ],
+    "warning": "Atemnot, ausgeprägte Schwäche oder Verwirrtheit können Überwässerung oder Stoffwechselentgleisung anzeigen.",
+    "goal": "Die Person kennt ihre individuellen Kontrollen und beteiligt sich am Therapieplan.",
+    "question": "Welche Ernährungsberatung passt bei chronischer Nierenkrankheit?",
+    "options": [
+      "Individuell nach Stadium, Labor und Dialyseverfahren",
+      "Für alle Erkrankten dieselbe strikte Flüssigkeitsmenge",
+      "Generell unbegrenzte kaliumreiche Kost",
+      "Pauschal vollständiger Verzicht auf Eiweiß"
+    ],
+    "answer": 0,
+    "source": "https://www.nhs.uk/conditions/kidney-disease/"
+  },
+  {
+    "id": "blasenentzuendung",
+    "title": "Zystitis und Harnwegsinfektion",
+    "category": "Krankheitsbilder",
+    "system": "Niere & Harnwege",
+    "definition": "Entzündung der Harnblase, meist bakteriell bedingt.",
+    "cause": "Keime können über die Harnröhre aufsteigen; Katheter begünstigen Infektionen.",
+    "signs": "Brennen beim Wasserlassen, häufiger Harndrang und Unterbauchbeschwerden.",
+    "diagnostics": "Symptombeurteilung, Urindiagnostik nach Indikation; trüber Urin allein beweist keinen behandlungsbedürftigen Infekt.",
+    "care": [
+      [
+        "Beschwerden, Temperatur und Flankenschmerz erfragen.",
+        "Ein aufsteigender Infekt muss von einer lokalen Blasenentzündung unterschieden werden."
+      ],
+      [
+        "Trinken individuell ermöglichen und Toilettenzugang sichern.",
+        "Wohlbefinden und regelmäßige Entleerung werden unterstützt."
+      ],
+      [
+        "Katheterindikation prüfen lassen und geschlossenes System erhalten.",
+        "Jeder unnötige Kathetertag erhöht das Infektionsrisiko."
+      ]
+    ],
+    "warning": "Fieber, Flankenschmerz, Schüttelfrost oder Kreislaufveränderung rasch abklären.",
+    "goal": "Beschwerden und Warnzeichen sind erfasst; vermeidbare Katheterrisiken werden reduziert.",
+    "question": "Was spricht gegen eine rein lokale Blasenentzündung?",
+    "options": [
+      "Fieber mit Flankenschmerz",
+      "Brennen beim Wasserlassen allein",
+      "Häufiger Harndrang ohne Allgemeinsymptome",
+      "Leichter suprapubischer Druck ohne Fieber"
+    ],
+    "answer": 0,
+    "source": "https://www.gesundheitsinformation.de/akute-blasenentzuendung.html"
+  },
+  {
+    "id": "nierensteine",
+    "title": "Nieren- und Harnleitersteine",
+    "category": "Krankheitsbilder",
+    "system": "Niere & Harnwege",
+    "definition": "Kristallablagerungen können den Harnabfluss behindern.",
+    "cause": "Urinzusammensetzung und Flüssigkeitshaushalt beeinflussen die Steinbildung.",
+    "signs": "Kolikartige Flankenschmerzen, Übelkeit, Unruhe und eventuell Blut im Urin.",
+    "diagnostics": "Urin-/Blutuntersuchung und Bildgebung; Abflussstörung und Infektion beurteilen.",
+    "care": [
+      [
+        "Schmerz, Temperatur und Urinausscheidung erfassen.",
+        "Fieber bei Abflussbehinderung kann einen gefährlichen Infekt anzeigen."
+      ],
+      [
+        "Analgetische Behandlung nach Anordnung begleiten und Wirkung evaluieren.",
+        "Wirksame Schmerzlinderung erleichtert Untersuchung und Versorgung."
+      ],
+      [
+        "Urin bei entsprechender Anordnung auf Steinabgang kontrollieren.",
+        "Die Steinanalyse unterstützt gezielte Vorbeugung."
+      ]
+    ],
+    "warning": "Fieber plus Kolik, Anurie oder Kreislaufprobleme dringend eskalieren. Kein erzwungenes Vieltrinken bei Abflussstörung.",
+    "goal": "Schmerzen werden gelindert; Warnzeichen einer infizierten Stauungsniere sind erkannt.",
+    "question": "Welche Kombination ist bei Harnleiterstein besonders dringlich?",
+    "options": [
+      "Fieber und Kolik bei möglicher Abflussstörung",
+      "Schmerzfreiheit nach beobachtetem Steinabgang",
+      "Normale Temperatur bei rückläufigen Beschwerden",
+      "Unveränderte Trinkgewohnheiten ohne Beschwerden"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/nierensteine"
+  },
+  {
+    "id": "schlaganfall",
+    "title": "Schlaganfall und TIA",
+    "category": "Krankheitsbilder",
+    "system": "Neurologie",
+    "definition": "Akuter neurologischer Ausfall durch Durchblutungsstörung oder Blutung im Gehirn. Auch vorübergehende Ausfälle sind dringlich.",
+    "cause": "Gefäßverschluss oder Gefäßruptur schädigt Nervengewebe.",
+    "signs": "Plötzliche Lähmung, Sprach-/Sehstörung, Gangunsicherheit oder ungewohnter starker Kopfschmerz.",
+    "diagnostics": "Sofortige neurologische Untersuchung und Gehirnbildgebung; Ischämie und Blutung müssen unterschieden werden.",
+    "care": [
+      [
+        "Sofort Notfallweg aktivieren; Beginn oder zuletzt symptomfreien Zeitpunkt erheben.",
+        "Zeit und Bildgebung entscheiden über Akuttherapie."
+      ],
+      [
+        "Bis zur Schluckprüfung nichts oral geben.",
+        "Auch unauffälliges Sprechen schließt eine Dysphagie nicht aus."
+      ],
+      [
+        "Kommunikation anpassen, betroffene Seite schützen und Mobilisation abstimmen.",
+        "Aphasie ist kein Beweis mangelnden Verstehens; sichere Förderung vermindert Folgeschäden."
+      ]
+    ],
+    "warning": "Nicht abwarten, wenn Ausfälle wieder verschwinden. Keine eigenständige Blutdrucksenkung.",
+    "goal": "Schnelle Versorgung und sichere Schluck-/Kommunikationsstrategie sind eingeleitet.",
+    "question": "Eine Person spricht plötzlich verwaschen; nach zehn Minuten ist alles wieder normal. Was folgt?",
+    "options": [
+      "Sofortige Abklärung als mögliche TIA/Schlaganfall",
+      "Keine Abklärung, weil die Symptome verschwunden sind",
+      "Nur beim nächsten Routinetermin berichten",
+      "Zur Sicherheit etwas trinken lassen und abwarten"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/schlaganfall",
+    "additionalSources": [
+      "https://www.nice.org.uk/guidance/ng128/chapter/recommendations"
+    ]
+  },
+  {
+    "id": "multiple-sklerose",
+    "title": "Multiple Sklerose (MS)",
+    "category": "Krankheitsbilder",
+    "system": "Neurologie",
+    "definition": "Chronisch-entzündliche Erkrankung des zentralen Nervensystems mit vielfältigen Funktionsstörungen.",
+    "cause": "Immunvermittelte Entzündung schädigt Myelin und Nervenfasern.",
+    "signs": "Sehstörungen, Sensibilitätsstörungen, Schwäche, Spastik, Fatigue sowie Blasen-/Darmprobleme.",
+    "diagnostics": "Neurologische Untersuchung, MRT und gegebenenfalls Liquordiagnostik.",
+    "care": [
+      [
+        "Aktivität und Erholung gemeinsam an die Fatigue anpassen.",
+        "Fatigue ist eine reale Krankheitsfolge und keine fehlende Motivation."
+      ],
+      [
+        "Sturz-, Haut- und Ausscheidungsrisiken individuell erfassen.",
+        "Die betroffenen Nervenbahnen und damit die Pflegebedarfe unterscheiden sich."
+      ],
+      [
+        "Neue Ausfälle und mögliche Infekt-/Wärmeauslöser weitergeben.",
+        "Eine Symptomverstärkung ist nicht automatisch ein neuer entzündlicher Schub."
+      ]
+    ],
+    "warning": "Neue ausgeprägte neurologische Ausfälle ärztlich klären; bei akutem schlaganfalltypischem Beginn Notfallweg.",
+    "goal": "Die Person kann wichtige Alltagsaktivitäten mit passenden Pausen und Hilfen gestalten.",
+    "question": "Wie gehst du bei MS mit ausgeprägter Fatigue um?",
+    "options": [
+      "Aktivitäten priorisieren und Belastung mit Erholungsphasen abstimmen",
+      "Durchgehend zur maximalen Leistung anhalten",
+      "Alle Aktivitäten dauerhaft übernehmen",
+      "Fatigue nur als Motivationsproblem bewerten"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/multiple-sklerose"
+  },
+  {
+    "id": "parkinson",
+    "title": "Parkinson-Krankheit",
+    "category": "Krankheitsbilder",
+    "system": "Neurologie",
+    "definition": "Fortschreitende Erkrankung mit Bewegungsverlangsamung und weiteren motorischen sowie nichtmotorischen Beschwerden.",
+    "cause": "Der Verlust dopaminbildender Nervenzellen stört Bewegungssteuerung und weitere Funktionen.",
+    "signs": "Bradykinese, Rigor, häufig Ruhetremor; auch Freezing, Dysphagie, Obstipation und autonome Beschwerden.",
+    "diagnostics": "Klinisch-neurologische Beurteilung; Verlauf und Therapieansprechen sind wichtig.",
+    "care": [
+      [
+        "Verordnete Einnahmezeiten zuverlässig einhalten und Wirkungsschwankungen dokumentieren.",
+        "Zeitabweichungen können Beweglichkeit und Selbstständigkeit verschlechtern."
+      ],
+      [
+        "Transfers mit Zeit, klaren Impulsen und abgestimmten Hilfen begleiten.",
+        "Hektik verstärkt Unsicherheit; individuell passende Hinweise können Freezing lösen helfen."
+      ],
+      [
+        "Schlucken, Ernährung und Orthostase beobachten.",
+        "Aspiration, Mangelernährung und Stürze sind wesentliche Risiken."
+      ]
+    ],
+    "warning": "Neue schwere Schluckprobleme oder akute Immobilität nach Therapieunterbrechung sofort abklären.",
+    "goal": "Die Person nutzt geeignete Bewegungsstrategien und erhält Unterstützung zur sicheren Nahrungsaufnahme.",
+    "question": "Bei Parkinson tritt Husten beim Trinken auf. Was ist angemessen?",
+    "options": [
+      "Trinken unterbrechen, Atmung beurteilen und Schluckabklärung veranlassen",
+      "Mit größerem Schluck weitermachen",
+      "Pauschal jede Flüssigkeit ohne Abklärung andicken",
+      "Den Kopf immer stark nach hinten überstrecken"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/parkinson-erkrankung"
+  },
+  {
+    "id": "epilepsie",
+    "title": "Epilepsie",
+    "category": "Krankheitsbilder",
+    "system": "Neurologie",
+    "definition": "Erkrankung mit erhöhter Neigung zu wiederholten epileptischen Anfällen.",
+    "cause": "Vorübergehende übermäßige neuronale Aktivität; Ursachen sind vielfältig.",
+    "signs": "Anfallsformen reichen von kurzen Bewusstseinsstörungen bis zu tonisch-klonischen Krampfanfällen.",
+    "diagnostics": "Anfallsbeschreibung, EEG und häufig MRT; Beobachtungen sind diagnostisch wertvoll.",
+    "care": [
+      [
+        "Beginn und Dauer erfassen, Umgebung sichern und Kopf schützen.",
+        "Verletzungen verhindern und Status epilepticus erkennen."
+      ],
+      [
+        "Nichts in den Mund stecken und nicht gewaltsam festhalten.",
+        "Dies kann Verletzungen verursachen."
+      ],
+      [
+        "Nach dem Anfall Atmung prüfen, bei normaler Atmung sichere Seitenlage nach Situation und weiter beobachten.",
+        "Postiktale Bewusstseinsstörung erhöht das Aspirationsrisiko."
+      ]
+    ],
+    "warning": "Anfall ab fünf Minuten, Serien ohne Erholung, Atemstörung oder erster Anfall: Notfallhilfe; Notfallmedikation nur nach Plan und Befugnis.",
+    "goal": "Anfall ist zeitlich dokumentiert; Verletzungen und Atemwegsgefährdung werden reduziert.",
+    "question": "Was ist während eines tonisch-klonischen Anfalls richtig?",
+    "options": [
+      "Umgebung sichern und Anfallsdauer erfassen",
+      "Einen Gegenstand zwischen die Zähne schieben",
+      "Arme und Beine mit Kraft fixieren",
+      "Wasser in den Mund geben"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/epilepsie"
+  },
+  {
+    "id": "demenz",
+    "title": "Demenz",
+    "category": "Krankheitsbilder",
+    "system": "Neurologie",
+    "definition": "Syndrom mit anhaltenden kognitiven Beeinträchtigungen, die den Alltag erschweren.",
+    "cause": "Unterschiedliche Erkrankungen, darunter Alzheimer und vaskuläre Veränderungen, können zugrunde liegen.",
+    "signs": "Gedächtnis-, Orientierungs-, Sprach- und Alltagsprobleme; Verlauf und Ausprägung variieren.",
+    "diagnostics": "Anamnese, kognitive Untersuchung und Ausschluss behandelbarer Ursachen.",
+    "care": [
+      [
+        "Vertraute Abläufe und wertschätzende kurze Kommunikation anbieten.",
+        "Orientierung und Beziehung geben Sicherheit."
+      ],
+      [
+        "Verhalten im Kontext von Schmerz, Bedürfnissen und Umgebung verstehen.",
+        "Unruhe ist nicht automatisch ein Symptom, das unterdrückt werden muss."
+      ],
+      [
+        "Selbstständigkeit unterstützen und Angehörigenwissen mit Zustimmung einbeziehen.",
+        "Erhaltene Fähigkeiten und Biografie helfen bei individuellen Angeboten."
+      ]
+    ],
+    "warning": "Plötzliche Verschlechterung ist nicht einfach „die Demenz“: Delir oder andere akute Ursache prüfen.",
+    "goal": "Die Person erlebt Zugehörigkeit und erhält passende Unterstützung ohne vermeidbare Überforderung.",
+    "question": "Eine Person mit Demenz wird innerhalb weniger Stunden deutlich unaufmerksamer. Was ist wichtig?",
+    "options": [
+      "Akute Ursache und mögliches Delir abklären",
+      "Automatisch eine reguläre Demenzprogression annehmen",
+      "Alle Kommunikationsangebote beenden",
+      "Nur den nächsten kognitiven Routinetest abwarten"
+    ],
+    "answer": 0,
+    "source": "https://www.nhs.uk/conditions/dementia/about-dementia/what-is-dementia/"
+  },
+  {
+    "id": "delir",
+    "title": "Delir",
+    "category": "Krankheitsbilder",
+    "system": "Neurologie",
+    "definition": "Akut entstandene, fluktuierende Störung von Aufmerksamkeit und Bewusstsein.",
+    "cause": "Häufig wirken Infektion, Operation, Stoffwechselstörung, Entzug, Schmerzen oder Arzneimittel zusammen.",
+    "signs": "Unruhe oder auffällige Ruhe, wechselnde Wachheit, Desorientierung und Aufmerksamkeitsstörung.",
+    "diagnostics": "Strukturiertes Screening und ärztliche Ursachensuche; Ausgangszustand erheben.",
+    "care": [
+      [
+        "Akute Veränderung zeitnah eskalieren und Vitalzeichen erfassen.",
+        "Delir kann Ausdruck einer behandelbaren schweren Erkrankung sein."
+      ],
+      [
+        "Brille, Hörgerät, Orientierungshilfen und ruhigen Tag-Nacht-Rhythmus ermöglichen.",
+        "Sensorische Unterstützung vermindert Desorientierung."
+      ],
+      [
+        "Schmerz, Ausscheidung, Flüssigkeit und sichere Mobilisation berücksichtigen.",
+        "Mehrere beeinflussbare Faktoren wirken häufig zusammen."
+      ]
+    ],
+    "warning": "Auch ein stilles, schläfriges Delir ist gefährlich. Fixierung nicht als routinemäßige Lösung.",
+    "goal": "Ursachenklärung ist eingeleitet; Orientierung und Sicherheit werden personbezogen unterstützt.",
+    "question": "Welche Beobachtung passt besonders zu einem hypoaktiven Delir?",
+    "options": [
+      "Akut entstandene Schläfrigkeit mit schwankender Aufmerksamkeit",
+      "Über Jahre unverändert langsames Denken",
+      "Lebenslang zurückhaltendes Verhalten ohne Veränderung",
+      "Isolierter Sehfehler bei klarer Aufmerksamkeit"
+    ],
+    "answer": 0,
+    "source": "https://www.nhs.uk/symptoms/confusion/"
+  },
+  {
+    "id": "diabetes-typ-1",
+    "title": "Diabetes mellitus Typ 1",
+    "category": "Krankheitsbilder",
+    "system": "Stoffwechsel",
+    "definition": "Stoffwechselerkrankung mit absolutem Insulinmangel.",
+    "cause": "Eine Autoimmunreaktion zerstört meist die insulinbildenden Betazellen.",
+    "signs": "Durst, häufiges Wasserlassen, Gewichtsverlust und Müdigkeit; Entgleisung möglich.",
+    "diagnostics": "Blutglukose, HbA1c und je nach Situation weitere Untersuchungen einschließlich Ketonen.",
+    "care": [
+      [
+        "Glukosemessung, Mahlzeiten und verordneten Behandlungsplan abstimmen.",
+        "Insulinbedarf und Kohlenhydratzufuhr müssen zusammenpassen."
+      ],
+      [
+        "Unterzuckerungszeichen und Vorgehen praktisch üben.",
+        "Frühes Erkennen schützt vor Bewusstseinsverlust."
+      ],
+      [
+        "Bei Krankheit den individuellen Sick-Day-Plan nutzen und Ketonkontrollen nach Plan unterstützen.",
+        "Infekte erhöhen das Risiko einer Ketoazidose."
+      ]
+    ],
+    "warning": "Erbrechen, Bauchschmerz, tiefe Atmung oder Bewusstseinsstörung bei Hyperglykämie: möglicher Notfall. Basalinsulin nicht eigenmächtig auslassen.",
+    "goal": "Die Person erklärt Messung, Warnzeichen und Vorgehen bei Krankheit.",
+    "question": "Warum ist Erbrechen bei Typ-1-Diabetes mit hoher Glukose dringlich?",
+    "options": [
+      "Es kann eine Ketoazidose anzeigen",
+      "Es beweist eine harmlose Magenverstimmung",
+      "Es bedeutet immer eine Unterzuckerung",
+      "Es macht weitere Glukosekontrollen überflüssig"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/diabetes-typ-1"
+  },
+  {
+    "id": "diabetes-typ-2",
+    "title": "Diabetes mellitus Typ 2",
+    "category": "Krankheitsbilder",
+    "system": "Stoffwechsel",
+    "definition": "Chronisch erhöhte Blutglukose durch Insulinresistenz und zunehmende Einschränkung der Insulinsekretion.",
+    "cause": "Erbliche Faktoren und Lebensbedingungen wirken zusammen; die Erkrankung ist nicht auf eine einzelne Verhaltensursache reduzierbar.",
+    "signs": "Oft lange symptomarm; Durst, häufiges Wasserlassen, Infektneigung oder schlechte Wundheilung möglich.",
+    "diagnostics": "Glukosewerte und HbA1c nach diagnostischen Kriterien; Folgeerkrankungen regelmäßig prüfen.",
+    "care": [
+      [
+        "Alltagsfähige Ziele zu Ernährung, Bewegung und Kontrollen vereinbaren.",
+        "Mitentscheidung verbessert die Umsetzbarkeit."
+      ],
+      [
+        "Füße und Haut beobachten; druckfreie Schuhe und Selbstkontrolle fördern.",
+        "Neuropathie kann Verletzungen unbemerkt lassen."
+      ],
+      [
+        "Hypoglykämierisiko abhängig von der Behandlung beachten.",
+        "Nicht jede Therapie hat dasselbe Unterzuckerungsrisiko."
+      ]
+    ],
+    "warning": "Ausgeprägte Dehydratation und Bewusstseinsveränderung bei hoher Glukose sind dringlich.",
+    "goal": "Die Person benennt eigene Ziele und zeigt eine sichere Fußkontrolle.",
+    "question": "Warum sind Fußkontrollen bei diabetischer Neuropathie wichtig?",
+    "options": [
+      "Verletzungen können wegen verminderter Sensibilität unbemerkt bleiben",
+      "Schmerzfreiheit beweist immer intakte Haut",
+      "Neuropathie verbessert grundsätzlich die Wundheilung",
+      "Fußkontrolle ersetzt jede Gefäßdiagnostik"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/diabetes-typ-2"
+  },
+  {
+    "id": "unterzuckerung",
+    "title": "Hypoglykämie",
+    "category": "Krankheitsbilder",
+    "system": "Stoffwechsel",
+    "definition": "Zu niedrige Blutglukose mit möglicher Unterversorgung des Gehirns.",
+    "cause": "Etwa ein Missverhältnis zwischen blutzuckersenkender Behandlung, Nahrung und Aktivität.",
+    "signs": "Zittern, Schwitzen, Hunger, Unruhe; später Verwirrtheit, Krampf oder Bewusstlosigkeit.",
+    "diagnostics": "Glukose möglichst sofort messen; bei schwerer Symptomatik Notfallversorgung nicht verzögern.",
+    "care": [
+      [
+        "Bei wacher Person mit sicherem Schlucken rasch wirksame Kohlenhydrate nach Plan geben.",
+        "Schnell verfügbare Glukose kann den Mangel korrigieren."
+      ],
+      [
+        "Nach kurzer Zeit nachmessen und gemäß Plan erneut beurteilen.",
+        "Eine einmalige Gabe garantiert keine anhaltende Stabilisierung."
+      ],
+      [
+        "Auslöser und Rückfallrisiko klären und dokumentieren.",
+        "Die Wirkung mancher Therapien hält länger als die erste Korrektur."
+      ]
+    ],
+    "warning": "Bei unsicherem Schlucken oder Bewusstlosigkeit nichts oral; Notfallteam, Atmung sichern und Behandlung nach Notfallplan.",
+    "goal": "Glukose und Bewusstsein stabilisieren sich; Ursache und weiteres Monitoring sind geklärt.",
+    "question": "Eine unterzuckerte Person ist bewusstlos. Was gilt?",
+    "options": [
+      "Nichts oral geben und Notfallhilfe organisieren",
+      "Traubenzucker in den Mund legen",
+      "Saft langsam einflößen",
+      "Erst auf vollständige Laborwerte warten"
+    ],
+    "answer": 0,
+    "source": "https://www.nhs.uk/conditions/low-blood-sugar-hypoglycaemia/"
+  },
+  {
+    "id": "schilddruesenunterfunktion",
+    "title": "Hypothyreose",
+    "category": "Krankheitsbilder",
+    "system": "Stoffwechsel",
+    "definition": "Zu geringe Wirkung von Schilddrüsenhormonen verlangsamt Stoffwechselprozesse.",
+    "cause": "Häufig autoimmune Schilddrüsenentzündung; auch nach Operation oder Behandlung möglich.",
+    "signs": "Müdigkeit, Kälteempfindlichkeit, Obstipation, trockene Haut und verlangsamter Puls.",
+    "diagnostics": "TSH und freie Schilddrüsenhormone im ärztlichen Kontext.",
+    "care": [
+      [
+        "Aktivität, Ausscheidung und Hautzustand beobachten.",
+        "Unspezifische Beschwerden können den Alltag deutlich beeinträchtigen."
+      ],
+      [
+        "Selbstmanagement und Kontrolltermine unterstützen.",
+        "Verlaufskontrollen helfen, eine passende Behandlung sicherzustellen."
+      ],
+      [
+        "Langsame Veränderungen nicht vorschnell als mangelnden Antrieb bewerten.",
+        "Körperliche Ursachen können depressive Symptome imitieren."
+      ]
+    ],
+    "warning": "Ausgeprägte Unterkühlung, Bewusstseinsstörung und Kreislaufprobleme sind Notfallzeichen.",
+    "goal": "Die Person versteht den Zusammenhang zwischen Beschwerden und Verlaufskontrollen.",
+    "question": "Welche Symptomkombination passt eher zur Hypothyreose?",
+    "options": [
+      "Kälteempfindlichkeit, Obstipation und verlangsamter Puls",
+      "Hitzeintoleranz, Tremor und Tachykardie",
+      "Plötzliche Halbseitenlähmung und Aphasie",
+      "Kolikartige Flankenschmerzen mit Hämaturie"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/schilddruesenunterfunktion"
+  },
+  {
+    "id": "schilddruesenueberfunktion",
+    "title": "Hyperthyreose",
+    "category": "Krankheitsbilder",
+    "system": "Stoffwechsel",
+    "definition": "Übermäßige Schilddrüsenhormonwirkung steigert viele Stoffwechselprozesse.",
+    "cause": "Mögliche Ursachen sind Morbus Basedow oder autonome Schilddrüsenareale.",
+    "signs": "Hitzeintoleranz, Schwitzen, Gewichtsverlust, Tremor und Tachykardie.",
+    "diagnostics": "TSH, freie Hormone und ursachengerichtete Diagnostik.",
+    "care": [
+      [
+        "Puls, Temperatur, Gewicht und Unruhe im Verlauf erfassen.",
+        "Übermäßige Stoffwechselaktivität belastet Kreislauf und Ernährung."
+      ],
+      [
+        "Reizarme Umgebung und angemessene Erholung anbieten.",
+        "Dies kann subjektive Belastung reduzieren."
+      ],
+      [
+        "Neue Rhythmusstörungen oder starke Verschlechterung sofort melden.",
+        "Eine schwere Entgleisung kann lebensbedrohlich sein."
+      ]
+    ],
+    "warning": "Hohes Fieber, ausgeprägte Tachykardie und Bewusstseinsstörung: möglicher thyreotoxischer Notfall.",
+    "goal": "Kreislaufveränderungen werden früh erkannt; Belastung und Ernährung sind angepasst.",
+    "question": "Welche Veränderung ist bei Hyperthyreose besonders alarmierend?",
+    "options": [
+      "Hohes Fieber, starke Tachykardie und Verwirrtheit",
+      "Unverändert leichte Wärmeempfindlichkeit",
+      "Stabiles Gewicht und normale Wachheit",
+      "Bekannter feiner Tremor ohne Verschlechterung"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/schilddruesenueberfunktion"
+  },
+  {
+    "id": "gastrooesophageale-refluxkrankheit",
+    "title": "Refluxkrankheit",
+    "category": "Krankheitsbilder",
+    "system": "Magen & Darm",
+    "definition": "Rückfluss von Mageninhalt in die Speiseröhre verursacht Beschwerden oder Schleimhautschäden.",
+    "cause": "Eine unzureichende Barriere am Mageneingang und weitere Faktoren begünstigen Reflux.",
+    "signs": "Sodbrennen, saures Aufstoßen; gelegentlich Husten oder Schluckbeschwerden.",
+    "diagnostics": "Symptombeurteilung, bei Warnzeichen oder unklarem Verlauf weitere Diagnostik.",
+    "care": [
+      [
+        "Individuelle Auslöser und zeitlichen Zusammenhang mit Mahlzeiten erfassen.",
+        "Nicht jede Person reagiert auf dieselben Nahrungsmittel."
+      ],
+      [
+        "Verträgliche Mahlzeitengrößen und aufrechte Haltung nach dem Essen besprechen.",
+        "Dies kann mechanischen Rückfluss verringern."
+      ],
+      [
+        "Schluckstörung, Blutungszeichen oder Gewichtsverlust melden.",
+        "Diese Zeichen benötigen eine gezielte Abklärung."
+      ]
+    ],
+    "warning": "Neuer Brustschmerz nicht automatisch als Sodbrennen deuten; kardiale Ursachen bedenken.",
+    "goal": "Die Person kennt hilfreiche Alltagsanpassungen und Warnzeichen.",
+    "question": "Welche Aussage zu neuem Brustschmerz bei bekannter Refluxkrankheit stimmt?",
+    "options": [
+      "Auch eine kardiale Ursache muss beurteilt werden",
+      "Reflux schließt Herzinfarkt aus",
+      "Ohne saures Aufstoßen ist eine Abklärung unnötig",
+      "Allein die Wirkung einer Mahlzeit sichert die Diagnose"
+    ],
+    "answer": 0,
+    "source": "https://www.gesundheitsinformation.de/wie-wird-eine-refluxkrankheit-festgestellt.html"
+  },
+  {
+    "id": "magengeschwuer",
+    "title": "Magen- und Zwölffingerdarmgeschwür",
+    "category": "Krankheitsbilder",
+    "system": "Magen & Darm",
+    "definition": "Tiefe Schleimhautverletzung im Magen oder Duodenum.",
+    "cause": "Häufig Helicobacter pylori oder schädigende Arzneimittelwirkungen.",
+    "signs": "Oberbauchbeschwerden; Blutung kann sich durch Teerstuhl, Bluterbrechen oder Kreislaufzeichen zeigen.",
+    "diagnostics": "Endoskopie und gegebenenfalls Erregerdiagnostik.",
+    "care": [
+      [
+        "Schmerzen, Stuhlfarbe, Erbrechen und Kreislauf beobachten.",
+        "Eine Blutung kann sich zuerst durch Schwäche oder Tachykardie zeigen."
+      ],
+      [
+        "Mögliche auslösende Selbstmedikation erfragen und weitergeben.",
+        "Dies unterstützt die Ursachenklärung."
+      ],
+      [
+        "Bei Blutungsverdacht Notfallversorgung und angeordnete Nahrungskarenz vorbereiten.",
+        "Stabilisierung und rasche Diagnostik haben Vorrang."
+      ]
+    ],
+    "warning": "Bluterbrechen, Teerstuhl mit Kreislaufbeschwerden oder plötzlich stärkster Bauchschmerz sofort eskalieren.",
+    "goal": "Blutungszeichen werden früh erkannt und strukturiert übergeben.",
+    "question": "Was ist bei Teerstuhl und Schwindel vorrangig?",
+    "options": [
+      "Mögliche gastrointestinale Blutung und Kreislauf beurteilen",
+      "Nur eine Ernährungsberatung durchführen",
+      "Den nächsten Stuhlgang abwarten",
+      "Ohne Untersuchung als harmlose Verfärbung bewerten"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/magengeschwuer"
+  },
+  {
+    "id": "morbus-crohn",
+    "title": "Morbus Crohn",
+    "category": "Krankheitsbilder",
+    "system": "Magen & Darm",
+    "definition": "Chronisch-entzündliche Darmerkrankung, die verschiedene Abschnitte des Verdauungstrakts betreffen kann.",
+    "cause": "Fehlregulierte Immunreaktionen wirken mit genetischen und Umweltfaktoren zusammen.",
+    "signs": "Bauchschmerz, Durchfall, Gewichtsverlust; Fisteln und Engstellen sind möglich.",
+    "diagnostics": "Endoskopie, Bildgebung, Labor und Stuhluntersuchung.",
+    "care": [
+      [
+        "Stuhlfrequenz, Schmerz, Gewicht und Flüssigkeitsverluste erfassen.",
+        "Entzündung und Verluste gefährden Ernährung und Kreislauf."
+      ],
+      [
+        "Individuell verträgliche Ernährung mit Fachberatung planen.",
+        "Pauschale Verbote können Mangelernährung fördern."
+      ],
+      [
+        "Scham, Erschöpfung und soziale Einschränkungen ansprechen.",
+        "Chronische Beschwerden belasten Teilhabe und Selbstbild."
+      ]
+    ],
+    "warning": "Starke neue Schmerzen, Fieber, geblähter Bauch oder Kreislaufprobleme dringend abklären.",
+    "goal": "Flüssigkeit und Ernährung sind gesichert; die Person kennt ihren Schubplan.",
+    "question": "Was ist bei häufigen Durchfällen im Crohn-Schub besonders zu beobachten?",
+    "options": [
+      "Flüssigkeitsverlust, Gewicht und Kreislauf",
+      "Die Trinkmenge wegen der Durchfälle grundsätzlich begrenzen",
+      "Bei Gewichtsverlust nur das Körpergewicht ohne Essmenge beobachten",
+      "Bauchschmerzen ausschließlich als psychische Belastung einordnen"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/morbus-crohn"
+  },
+  {
+    "id": "colitis-ulcerosa",
+    "title": "Colitis ulcerosa",
+    "category": "Krankheitsbilder",
+    "system": "Magen & Darm",
+    "definition": "Chronisch-entzündliche Erkrankung der Dickdarmschleimhaut, typischerweise vom Rektum ausgehend.",
+    "cause": "Immunregulation, Veranlagung und Umweltfaktoren wirken zusammen.",
+    "signs": "Blutige Durchfälle, dringlicher Stuhldrang und Bauchschmerz.",
+    "diagnostics": "Endoskopie mit Proben und ergänzende Labor-/Stuhldiagnostik.",
+    "care": [
+      [
+        "Blutbeimengung, Stuhlhäufigkeit und Kreislauf dokumentieren.",
+        "Verluste und Entzündungsaktivität können zunehmen."
+      ],
+      [
+        "Diskreten Toilettenzugang und hautschonende Reinigung sichern.",
+        "Drang und häufige Ausscheidung belasten Würde und Haut."
+      ],
+      [
+        "Ernährung und Belastung gemeinsam an den Schub anpassen.",
+        "Bedarf und Verträglichkeit ändern sich im Verlauf."
+      ]
+    ],
+    "warning": "Aufgetriebener schmerzhafter Bauch, Fieber und Kreislaufveränderung sind dringliche Warnzeichen.",
+    "goal": "Ausscheidung und Hautschutz sind bedarfsgerecht unterstützt; Verschlechterung wird erkannt.",
+    "question": "Welcher Befund erfordert bei Colitis ulcerosa rasche Eskalation?",
+    "options": [
+      "Fieber mit zunehmender Bauchaufblähung und Kreislaufproblemen",
+      "Unveränderte Beschwerden bei stabilem Kreislauf",
+      "Einmalig weicher Stuhl ohne Blut",
+      "Vorübergehend fehlender Appetit ohne weitere Änderung"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/colitis-ulcerosa"
+  },
+  {
+    "id": "akute-bauchspeicheldruesenentzuendung",
+    "title": "Akute Pankreatitis",
+    "category": "Krankheitsbilder",
+    "system": "Magen & Darm",
+    "definition": "Akute Entzündung der Bauchspeicheldrüse mit möglicher systemischer Beteiligung.",
+    "cause": "Häufige Auslöser sind Gallensteine oder Alkohol; weitere Ursachen sind möglich.",
+    "signs": "Starke Oberbauchschmerzen, oft in den Rücken ausstrahlend, Übelkeit und Erbrechen.",
+    "diagnostics": "Klinik, Lipase und Bildgebung; Schweregrad und Organfunktion überwachen.",
+    "care": [
+      [
+        "Schmerz, Kreislauf, Atmung und Ausscheidung eng beobachten.",
+        "Schwere Verläufe können Organversagen verursachen."
+      ],
+      [
+        "Flüssigkeitstherapie und Bilanz nach Plan begleiten.",
+        "Sowohl Volumenmangel als auch Überlastung sind relevant."
+      ],
+      [
+        "Ernährungsaufbau nach Verträglichkeit und Behandlungskonzept unterstützen.",
+        "Pauschale lange Nahrungskarenz ist kein allgemeines Pflegeziel."
+      ]
+    ],
+    "warning": "Hypotonie, Atemnot oder Bewusstseinsveränderung sofort eskalieren.",
+    "goal": "Schmerz und Organfunktionen werden überwacht; Ernährung erfolgt nach individuellem Plan.",
+    "question": "Welches Ziel ist bei akuter Pankreatitis fachlich passend?",
+    "options": [
+      "Organfunktionen überwachen und Ernährung individuell planen",
+      "Grundsätzlich wochenlang vollständige Nahrungskarenz",
+      "Nur den Bauchschmerz beurteilen, Kreislauf ist nebensächlich",
+      "Unabhängig von Bilanz möglichst viel Flüssigkeit zuführen"
+    ],
+    "answer": 0,
+    "source": "https://www.gesundheitsinformation.de/akute-entzuendung-der-bauchspeicheldruese-pankreatitis.html"
+  },
+  {
+    "id": "leberzirrhose",
+    "title": "Leberzirrhose",
+    "category": "Krankheitsbilder",
+    "system": "Leber & Galle",
+    "definition": "Chronischer Umbau der Leber mit Vernarbung und Funktionsverlust.",
+    "cause": "Verschiedene chronische Leberschäden können zur Zirrhose führen.",
+    "signs": "Aszites, Ödeme, Ikterus, Blutungsneigung oder Verwirrtheit bei Enzephalopathie.",
+    "diagnostics": "Labor, Bildgebung und Beurteilung von Komplikationen.",
+    "care": [
+      [
+        "Gewicht, Bauchumfang nach Plan und Flüssigkeitsverlauf erfassen.",
+        "Aszites und Ödeme zeigen veränderte Flüssigkeitsverteilung."
+      ],
+      [
+        "Bewusstseinslage und Schlafverhalten beobachten.",
+        "Veränderungen können eine hepatische Enzephalopathie anzeigen."
+      ],
+      [
+        "Ernährung, Hautschutz und Blutungsbeobachtung unterstützen.",
+        "Mangelernährung, Juckreiz und Gerinnungsprobleme belasten zusätzlich."
+      ]
+    ],
+    "warning": "Bluterbrechen, Teerstuhl, neue Verwirrtheit oder Fieber bei Aszites rasch eskalieren.",
+    "goal": "Komplikationen werden früh erkannt und individuelle Ernährung sowie Selbstpflege gefördert.",
+    "question": "Welche Veränderung kann auf hepatische Enzephalopathie hinweisen?",
+    "options": [
+      "Neu auftretende Verwirrtheit und veränderter Schlaf-Wach-Rhythmus",
+      "Nur ein seit Jahren gleichbleibendes Muttermal",
+      "Unveränderte Schuhgröße",
+      "Ein normaler Stuhlgang ohne Beschwerden"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/leberzirrhose"
+  },
+  {
+    "id": "gallensteine",
+    "title": "Gallensteine / Cholezystitis",
+    "category": "Krankheitsbilder",
+    "system": "Leber & Galle",
+    "definition": "Gallensteine können Gallengänge verlegen; eine Gallenblasenentzündung ist eine mögliche Komplikation.",
+    "cause": "Aus Bestandteilen der Galle bilden sich Konkremente.",
+    "signs": "Kolikartige rechte Oberbauchschmerzen; bei Entzündung oft anhaltender Schmerz und Fieber.",
+    "diagnostics": "Ultraschall, Labor und klinische Untersuchung.",
+    "care": [
+      [
+        "Schmerzcharakter, Temperatur und Gelbfärbung beobachten.",
+        "Infektion und Abflussstörung verändern die Dringlichkeit."
+      ],
+      [
+        "Angeordnete Schmerztherapie und diagnostische Vorbereitung begleiten.",
+        "Eine gute Verlaufserfassung unterstützt die Behandlung."
+      ],
+      [
+        "Nach Eingriff Mobilisation und Wundbeobachtung nach Plan unterstützen.",
+        "Komplikationen und Immobilitätsfolgen sollen vermieden werden."
+      ]
+    ],
+    "warning": "Fieber, Ikterus und Oberbauchschmerz zusammen können eine gefährliche Gallengangsentzündung anzeigen.",
+    "goal": "Beschwerden werden gelindert und Warnzeichen einer Infektion rechtzeitig erkannt.",
+    "question": "Welche Kombination ist bei Gallensteinen besonders dringlich?",
+    "options": [
+      "Fieber, Gelbsucht und Oberbauchschmerz",
+      "Beschwerdefreier Zufallsbefund",
+      "Unveränderte leichte Unverträglichkeit fettiger Speisen",
+      "Normale Temperatur bei fehlendem Schmerz"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/gallensteine"
+  },
+  {
+    "id": "depression",
+    "title": "Depression",
+    "category": "Krankheitsbilder",
+    "system": "Psychiatrie",
+    "definition": "Psychische Erkrankung mit anhaltend gedrückter Stimmung, Interessenverlust und häufig vermindertem Antrieb.",
+    "cause": "Biologische, psychische und soziale Faktoren wirken zusammen.",
+    "signs": "Schlaf-/Appetitveränderung, Schuldgefühle, Konzentrationsprobleme und Suizidgedanken können hinzukommen.",
+    "diagnostics": "Fachliche Diagnostik erfasst Schwere, Verlauf, körperliche Ursachen und Gefährdung.",
+    "care": [
+      [
+        "Verlässlich Kontakt anbieten und kleine erreichbare Aktivitäten vereinbaren.",
+        "Überforderung kann Rückzug und Versagensgefühle verstärken."
+      ],
+      [
+        "Suizidgedanken ruhig und direkt ansprechen und bei Gefährdung Hilfe hinzuziehen.",
+        "Direktes Fragen ermöglicht eine realistische Sicherheitsplanung."
+      ],
+      [
+        "Schlaf, Essen, Selbstpflege und Wirkung der Behandlung beobachten.",
+        "Verlauf und Alltagsfunktion sind zentrale Pflegeaspekte."
+      ]
+    ],
+    "warning": "Bei konkreter akuter Selbstgefährdung nicht allein lassen und unverzüglich Krisen-/Notfallversorgung organisieren.",
+    "goal": "Die Person erlebt verlässliche Unterstützung; Sicherheit und kleine Alltagsschritte sind vereinbart.",
+    "question": "Welche Gesprächsführung ist bei möglicher Suizidalität passend?",
+    "options": [
+      "Gedanken und konkrete Gefährdung direkt und respektvoll erfragen",
+      "Das Thema vermeiden, um keine Idee auszulösen",
+      "Verbindlich versprechen, alles geheim zu halten",
+      "Mit Schuldgefühlen gegenüber Angehörigen argumentieren"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/depression"
+  },
+  {
+    "id": "schizophrenie",
+    "title": "Schizophrenie",
+    "category": "Krankheitsbilder",
+    "system": "Psychiatrie",
+    "definition": "Psychische Erkrankung mit möglichen Störungen von Wahrnehmung, Denken, Antrieb und sozialer Funktion.",
+    "cause": "Vulnerabilität und Belastungen wirken zusammen; Verläufe sind sehr unterschiedlich.",
+    "signs": "Wahn, Halluzinationen, desorganisiertes Denken; auch Rückzug und Antriebsarmut.",
+    "diagnostics": "Fachpsychiatrische Diagnostik und Ausschluss anderer Ursachen.",
+    "care": [
+      [
+        "Erleben ernst nehmen, ohne Wahninhalte zu bestätigen.",
+        "Eine respektvolle Beziehung erleichtert Kooperation."
+      ],
+      [
+        "Reizniveau reduzieren und klar, konkret kommunizieren.",
+        "Überforderung kann Angst verstärken."
+      ],
+      [
+        "Belastende oder befehlende Stimmen sowie Selbst-/Fremdgefährdung erfragen.",
+        "Sicherheitsbedarf muss individuell beurteilt werden."
+      ]
+    ],
+    "warning": "Akute Gefährdung oder schwere Selbstvernachlässigung verlangt unmittelbare fachliche Hilfe.",
+    "goal": "Die Person kennt Ansprechpersonen und erhält Unterstützung für selbst gewählte Alltagsziele.",
+    "question": "Wie reagierst du auf einen angstbesetzten Wahninhalt?",
+    "options": [
+      "Angst anerkennen und eigene Wahrnehmung ruhig benennen",
+      "Den Wahninhalt als Tatsache bestätigen",
+      "Die Person vor anderen lächerlich machen",
+      "Eine lange Beweisdebatte erzwingen"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/schizophrenie"
+  },
+  {
+    "id": "osteoporose",
+    "title": "Osteoporose",
+    "category": "Krankheitsbilder",
+    "system": "Bewegungsapparat",
+    "definition": "Verminderte Knochenfestigkeit erhöht das Frakturrisiko.",
+    "cause": "Alter, hormonelle Veränderungen, Immobilität und weitere Faktoren beeinflussen den Knochenstoffwechsel.",
+    "signs": "Häufig erst nach Fraktur auffällig; Wirbelbrüche können Schmerzen und Größenverlust verursachen.",
+    "diagnostics": "Frakturrisiko, Anamnese und gegebenenfalls Knochendichtemessung.",
+    "care": [
+      [
+        "Sturzrisiken und sichere Bewegung gemeinsam angehen.",
+        "Frakturvermeidung braucht Mobilität und Umgebungsanpassung."
+      ],
+      [
+        "Kraft- und Gleichgewichtstraining nach individueller Eignung fördern.",
+        "Gezielte Aktivität erhält Funktion."
+      ],
+      [
+        "Schmerzen und neue Bewegungseinschränkungen ernst nehmen.",
+        "Auch geringe Traumata können Frakturen auslösen."
+      ]
+    ],
+    "warning": "Neue starke Rücken-/Hüftschmerzen nach Bagatelltrauma abklären; keine erzwungene Mobilisation.",
+    "goal": "Die Person bewegt sich möglichst sicher und kennt ihre Frakturrisiken.",
+    "question": "Welche Strategie passt zur Osteoporosepflege?",
+    "options": [
+      "Angepasste Bewegung und Sturzprävention kombinieren",
+      "Dauerhafte Bettruhe als Standard",
+      "Jeden Schmerz unabhängig vom Auslöser ignorieren",
+      "Hilfsmittel grundsätzlich vermeiden"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/osteoporose"
+  },
+  {
+    "id": "arthrose",
+    "title": "Arthrose",
+    "category": "Krankheitsbilder",
+    "system": "Bewegungsapparat",
+    "definition": "Degenerative Gelenkerkrankung mit Veränderungen von Knorpel und weiteren Gelenkstrukturen.",
+    "cause": "Belastung, Alter, Fehlstellungen und Verletzungen können beitragen.",
+    "signs": "Anlauf- und Belastungsschmerz, Steifigkeit, eingeschränkte Beweglichkeit.",
+    "diagnostics": "Klinische Untersuchung und gegebenenfalls Röntgen; Beschwerden und Bildbefund passen nicht immer genau zusammen.",
+    "care": [
+      [
+        "Schmerz und alltagsbezogene Einschränkungen erfassen.",
+        "Pflegeziele sollen sich an Funktion und Teilhabe orientieren."
+      ],
+      [
+        "Gelenkschonende Bewegung und passende Hilfsmittel unterstützen.",
+        "Angepasste Aktivität verhindert zusätzliche Dekonditionierung."
+      ],
+      [
+        "Wärme/Kälte nur nach Verträglichkeit und Situation anwenden.",
+        "Akut entzündete und chronisch steife Gelenke brauchen unterschiedliche Unterstützung."
+      ]
+    ],
+    "warning": "Plötzlich stark gerötetes heißes Gelenk mit Fieber ärztlich abklären.",
+    "goal": "Die Person kann eine relevante Alltagstätigkeit mit weniger Schmerz ausführen.",
+    "question": "Woran sollte sich ein Pflegeziel bei Arthrose orientieren?",
+    "options": [
+      "An einer für die Person wichtigen Alltagstätigkeit",
+      "Nur am Röntgenbild ohne Beschwerden",
+      "An vollständiger Bewegungsvermeidung",
+      "An der identischen Gehstrecke für alle Erkrankten"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/arthrose"
+  },
+  {
+    "id": "hueftfraktur",
+    "title": "Hüftnahe Fraktur",
+    "category": "Krankheitsbilder",
+    "system": "Bewegungsapparat",
+    "definition": "Bruch im Bereich des proximalen Femurs, häufig nach Sturz.",
+    "cause": "Osteoporose und Sturzrisiken erhöhen die Wahrscheinlichkeit.",
+    "signs": "Hüftschmerz, eingeschränkte Belastbarkeit und eventuell verkürztes außenrotiertes Bein.",
+    "diagnostics": "Bildgebung und perioperative Beurteilung.",
+    "care": [
+      [
+        "Schmerz, Durchblutung, Sensibilität und Bewegung beobachten.",
+        "Verlaufskontrollen können Komplikationen anzeigen."
+      ],
+      [
+        "Frühe sichere Mobilisation nach operativem Belastungsplan unterstützen.",
+        "Dies reduziert Immobilitätsfolgen und fördert Selbstständigkeit."
+      ],
+      [
+        "Delir-, Dekubitus- und Thromboserisiken personbezogen berücksichtigen.",
+        "Mehrere Risiken überlagern sich besonders bei älteren Menschen."
+      ]
+    ],
+    "warning": "Neue Atemnot, starke Blutung oder akute Verwirrtheit sofort weitergeben. Belastungsvorgaben sind eingriffsspezifisch.",
+    "goal": "Transfers erfolgen nach Plan; Schmerz und Sicherheitsbedarf sind berücksichtigt.",
+    "question": "Welche Aussage zur Mobilisation nach hüftnaher Fraktur stimmt?",
+    "options": [
+      "Sie richtet sich nach Belastungsfreigabe, Schmerz und individueller Fähigkeit",
+      "Sie ist nach jeder Operation für Wochen verboten",
+      "Alle Operationsverfahren erlauben dieselbe Belastung",
+      "Schmerz und Kreislauf spielen bei der Entscheidung keine Rolle"
+    ],
+    "answer": 0,
+    "source": "https://www.nhs.uk/conditions/broken-hip/"
+  },
+  {
+    "id": "sepsis",
+    "title": "Sepsis",
+    "category": "Krankheitsbilder",
+    "system": "Infektion & Notfall",
+    "definition": "Lebensbedrohliche Organdysfunktion infolge einer fehlregulierten Reaktion auf Infektion.",
+    "cause": "Eine Infektion kann eine systemische Schädigung mit Kreislauf- und Organproblemen auslösen.",
+    "signs": "Akute Verschlechterung, schnelle Atmung, Verwirrtheit, Kreislaufprobleme; Fieber kann fehlen.",
+    "diagnostics": "Sofortige ärztliche Beurteilung, Labor inklusive Laktat nach Situation und Erregersuche.",
+    "care": [
+      [
+        "Bei Infektion plus akuter Organ-/Kreislaufveränderung sofort eskalieren.",
+        "Eine verzögerte Behandlung erhöht die Gefährdung."
+      ],
+      [
+        "ABCDE, Vitalzeichen und Urinausscheidung im Verlauf erfassen.",
+        "Organfunktionen können sich rasch verschlechtern."
+      ],
+      [
+        "Angeordnete Diagnostik und Behandlung zügig koordinieren.",
+        "Kulturen und Therapiebeginn müssen zeitkritisch abgestimmt werden."
+      ]
+    ],
+    "warning": "Sepsis nicht allein wegen normaler Temperatur oder eines unauffälligen Scores ausschließen.",
+    "goal": "Verdacht wird ohne Verzögerung kommuniziert und der Notfallpfad gestartet.",
+    "question": "Welche Aussage zur Sepsis ist richtig?",
+    "options": [
+      "Auch ohne Fieber kann eine schwere Sepsis vorliegen",
+      "Ein normaler Einzelwert schließt sie sicher aus",
+      "Sie ist gleichbedeutend mit einer lokal geröteten Wunde",
+      "Man muss erst einen Erregernachweis abwarten"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/sepsis"
+  },
+  {
+    "id": "dehydration",
+    "title": "Dehydratation",
+    "category": "Krankheitsbilder",
+    "system": "Infektion & Notfall",
+    "definition": "Wassermangel; je nach Ursache sind auch Elektrolytverschiebungen relevant.",
+    "cause": "Zu geringe Zufuhr oder Verluste durch Fieber, Erbrechen, Durchfall oder andere Ursachen.",
+    "signs": "Durst, trockene Schleimhäute, geringe Urinmenge, Schwindel; bei älteren Menschen oft unspezifisch.",
+    "diagnostics": "Klinischer Verlauf, Bilanz, Gewicht und Labor; einzelne Hautzeichen reichen nicht.",
+    "care": [
+      [
+        "Trinkfähigkeit, Zugang zu Getränken und Verluste erfassen.",
+        "Die Ursache entscheidet über geeignete Unterstützung."
+      ],
+      [
+        "Bei sicherem Schlucken Getränke nach Vorlieben und Plan anbieten.",
+        "Erreichbarkeit und Akzeptanz beeinflussen die Aufnahme."
+      ],
+      [
+        "Kreislauf, Wachheit und Ausscheidung kontrollieren.",
+        "Verschlechterung kann eine dringliche Flüssigkeitstherapie erfordern."
+      ]
+    ],
+    "warning": "Bewusstseinsstörung oder Kreislaufinstabilität sofort eskalieren; bei Herz-/Nierenkrankheit Trinkziele individuell.",
+    "goal": "Flüssigkeitsversorgung ist angepasst und der Verlauf nachvollziehbar dokumentiert.",
+    "question": "Was hilft bei der Einschätzung von Dehydratation besonders?",
+    "options": [
+      "Mehrere Befunde wie Bilanz, Verlauf, Kreislauf und Labor zusammen betrachten",
+      "Allein die Hautfalte als sicheren Beweis nutzen",
+      "Durstlosigkeit als sicheren Ausschluss werten",
+      "Allen Menschen dieselbe Trinkmenge verordnen"
+    ],
+    "answer": 0,
+    "source": "https://www.nhs.uk/conditions/dehydration/"
+  },
+  {
+    "id": "druckgeschwuer-dekubitus",
+    "title": "Dekubitus",
+    "category": "Krankheitsbilder",
+    "system": "Haut & Wunden",
+    "definition": "Lokalisierte Schädigung von Haut oder tieferem Gewebe durch Druck und Scherkräfte.",
+    "cause": "Anhaltende mechanische Belastung und individuelle Gewebetoleranz beeinflussen das Risiko.",
+    "signs": "Nicht wegdrückbare Rötung, Verfärbung oder Gewebedefekt; intakte Haut schließt tiefen Schaden nicht aus.",
+    "diagnostics": "Haut-/Gewebebeurteilung, Druckbelastung, Mobilität und Ursachen erfassen.",
+    "care": [
+      [
+        "Druck unverzüglich reduzieren und individuelle Positionswechsel vereinbaren.",
+        "Belastetes Gewebe braucht wirksame Entlastung."
+      ],
+      [
+        "Haut, Schmerz und Hilfsmittelwirkung regelmäßig prüfen.",
+        "Entlastungsmaßnahmen müssen tatsächlich wirksam sein."
+      ],
+      [
+        "Bewegung und Ernährungssituation berücksichtigen.",
+        "Risiken sind mehrdimensional; Lagerung allein reicht nicht."
+      ]
+    ],
+    "warning": "Gefährdete oder gerötete Stellen nicht massieren. Neue Nekrose, Infektzeichen oder schnelle Verschlechterung abklären.",
+    "goal": "Druckbelastung ist reduziert; Hautzustand und Maßnahmenwirkung werden evaluiert.",
+    "question": "Was ist bei nicht wegdrückbarer Rötung über dem Kreuzbein vorrangig?",
+    "options": [
+      "Druckentlastung und differenzierte Hautbeurteilung",
+      "Kräftige Massage der geröteten Stelle",
+      "Abwarten bis ein offener Defekt entsteht",
+      "Nur die Farbe dokumentieren ohne Maßnahme"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/druckgeschwuer-dekubitus"
+  },
+  {
+    "id": "guertelrose",
+    "title": "Herpes zoster",
+    "category": "Krankheitsbilder",
+    "system": "Haut & Wunden",
+    "definition": "Reaktivierung von Varizella-Zoster-Viren mit oft schmerzhaftem Hautausschlag.",
+    "cause": "Nach Windpocken verbleibende Viren können später reaktiviert werden.",
+    "signs": "Einseitige gruppierte Bläschen im Nervenversorgungsgebiet, Brennen und Schmerz.",
+    "diagnostics": "Klinische Beurteilung; bei unklarem oder kompliziertem Verlauf weitere Diagnostik.",
+    "care": [
+      [
+        "Schmerz und Ausbreitung beobachten und ärztliche Behandlung zeitnah unterstützen.",
+        "Frühe Behandlung kann den Verlauf beeinflussen."
+      ],
+      [
+        "Läsionen nach Hygieneplan abdecken und Händehygiene sichern.",
+        "Bläscheninhalt kann empfängliche Personen mit Varizellen infizieren."
+      ],
+      [
+        "Kontakt zu besonders gefährdeten Personen nach Hygienekonzept vermeiden.",
+        "Immunsupprimierte und nicht immune Schwangere benötigen besonderen Schutz."
+      ]
+    ],
+    "warning": "Auge, Ohr, neurologische Beschwerden oder ausgedehnter Befall dringend abklären.",
+    "goal": "Schmerz ist erfasst und Übertragungsrisiken sind reduziert.",
+    "question": "Warum ist bei Zoster am Auge besondere Eile geboten?",
+    "options": [
+      "Es drohen okuläre Komplikationen, die rasch behandelt werden müssen",
+      "Weil jeder Hautausschlag am Auge harmlos verläuft",
+      "Weil Schmerzfreiheit eine Beteiligung sicher ausschließt",
+      "Weil erst nach vollständiger Abheilung untersucht werden darf"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/guertelrose"
+  },
+  {
+    "id": "brustkrebs",
+    "title": "Mammakarzinom",
+    "category": "Krankheitsbilder",
+    "system": "Onkologie",
+    "definition": "Bösartige Erkrankung des Brustgewebes mit unterschiedlichen biologischen Eigenschaften.",
+    "cause": "Entstehung ist multifaktoriell; individuelle Risikofaktoren unterscheiden sich.",
+    "signs": "Knoten, Einziehung oder Sekret können auffallen; Früherkennung kann symptomlose Veränderungen entdecken.",
+    "diagnostics": "Bildgebung und Gewebeuntersuchung bestimmen Diagnose und Therapieplanung.",
+    "care": [
+      [
+        "Wunde, Schmerz und Bewegung nach Operation beobachten.",
+        "Heilung und frühe Funktionsförderung müssen abgestimmt werden."
+      ],
+      [
+        "Körperbild und persönliche Grenzen respektvoll ansprechen.",
+        "Erkrankung und Behandlung können Identität und Sexualität berühren."
+      ],
+      [
+        "Bei Lymphödemrisiko Beratung und geeignete Bewegung vermitteln.",
+        "Frühe Wahrnehmung von Schwellung und Einschränkung unterstützt Behandlung."
+      ]
+    ],
+    "warning": "Fieber unter immunsuppressiver Therapie zeitnah nach onkologischem Notfallplan abklären.",
+    "goal": "Die Person kennt Ansprechstellen und beteiligt sich an individuell bedeutsamen Rehabilitationszielen.",
+    "question": "Welche pflegerische Haltung unterstützt nach Brustoperation das Körperbild?",
+    "options": [
+      "Gespräch anbieten und die persönlichen Grenzen respektieren",
+      "Veränderungen ungefragt als unwichtig darstellen",
+      "Jede emotionale Reaktion vermeiden lassen",
+      "Nur die Wunde betrachten, weil Gefühle nicht zur Pflege gehören"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/brustkrebs"
+  },
+  {
+    "id": "leukaemie",
+    "title": "Leukämie",
+    "category": "Krankheitsbilder",
+    "system": "Onkologie",
+    "definition": "Bösartige Erkrankung blutbildender Zellen mit Verdrängung gesunder Blutbildung.",
+    "cause": "Je nach Form akuter oder chronischer Verlauf; Ursachen sind oft nicht eindeutig bekannt.",
+    "signs": "Infektanfälligkeit, Blutungsneigung, Blässe, Erschöpfung und weitere unspezifische Beschwerden.",
+    "diagnostics": "Blutbild, Knochenmark- und spezialisierte Zellanalysen.",
+    "care": [
+      [
+        "Temperatur und Infektzeichen entsprechend onkologischem Plan beobachten.",
+        "Neutropenie kann schwere Infektionen mit wenigen lokalen Zeichen verursachen."
+      ],
+      [
+        "Schleimhäute schonend pflegen und Blutungszeichen erfassen.",
+        "Mukositis und Thrombozytopenie erhöhen Belastung und Risiken."
+      ],
+      [
+        "Ernährung, Schmerz, kindgerechte Information und Familienbedarf berücksichtigen.",
+        "Krankheit und Therapie betreffen den gesamten Alltag."
+      ]
+    ],
+    "warning": "Fieber bei Neutropenie ist ein dringlicher onkologischer Notfall; nicht auf weitere Symptome warten.",
+    "goal": "Infekt-/Blutungszeichen werden früh gemeldet; Mundpflege und Ernährung sind angepasst.",
+    "question": "Ein Kind mit Neutropenie entwickelt Fieber. Was hat Vorrang?",
+    "options": [
+      "Sofortige onkologische Notfallabklärung nach Plan",
+      "Erst bis zum nächsten Tag auf weitere Symptome warten",
+      "Nur eine zusätzliche Decke anbieten",
+      "Den nächsten Routineblutbildtermin abwarten"
+    ],
+    "answer": 0,
+    "source": "https://gesund.bund.de/akute-lymphatische-leukaemie-all"
+  },
+  {
+    "id": "praeeklampsie",
+    "title": "Präeklampsie",
+    "category": "Krankheitsbilder",
+    "system": "Schwangerschaft",
+    "definition": "Schwangerschaftsassoziierte Erkrankung mit Hypertonie und möglicher Organbeteiligung, meist nach der 20. Woche.",
+    "cause": "Plazentare und mütterliche Gefäßprozesse spielen eine Rolle.",
+    "signs": "Blutdruckanstieg; Kopfschmerz, Sehstörung, Oberbauchschmerz oder rasche Verschlechterung sind Warnzeichen.",
+    "diagnostics": "Blutdruck, Urin-/Laboruntersuchung und fetale Überwachung nach geburtshilflichem Plan.",
+    "care": [
+      [
+        "Blutdruck korrekt und Beschwerden gezielt erfassen.",
+        "Neue Organsymptome können eine schwere Entwicklung anzeigen."
+      ],
+      [
+        "Reizarme Begleitung und engmaschige Überwachung nach Plan sichern.",
+        "Mütterliche und kindliche Situation können sich rasch ändern."
+      ],
+      [
+        "Unverzüglich geburtshilfliches Team bei Warnzeichen hinzuziehen.",
+        "Eine Eskalation bis zur Eklampsie muss früh erkannt werden."
+      ]
+    ],
+    "warning": "Krampfanfall, starke Kopfschmerzen, Sehstörung oder Oberbauchschmerz sind dringlich, auch im Wochenbett.",
+    "goal": "Warnzeichen sind bekannt und erforderliche Überwachung wird zuverlässig durchgeführt.",
+    "question": "Welche Beschwerde verlangt bei Präeklampsie sofortige Rückmeldung?",
+    "options": [
+      "Neu aufgetretener starker Kopfschmerz mit Sehstörung",
+      "Seit Wochen unveränderte leichte Müdigkeit",
+      "Bekannter Appetit auf bestimmte Speisen",
+      "Normale Kindsbewegungen allein"
+    ],
+    "answer": 0,
+    "source": "https://www.nhs.uk/conditions/pre-eclampsia/"
+  }
+]

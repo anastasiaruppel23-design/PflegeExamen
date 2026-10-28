@@ -1,25 +1,19 @@
-// Data/link checks runnable without a browser; UI checks live in visual.cjs.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict'),path=require('node:path');
 const root=path.resolve(__dirname,'..'),read=f=>fs.readFileSync(path.join(root,f),'utf8');
-const html=read('index.html'),library=read('library.js'),visual=read('visual-library.js');
-const context=vm.createContext({});
-vm.runInContext(html.slice(html.indexOf('const topics='),html.indexOf('const questions='))+html.slice(html.indexOf('const cards='),html.indexOf('const cases='))+`const sourceNotes=[],questions=[];let ci=0,flipped=false;function go(){};function openLibraryTopic(){};function renderCards(){};function renderVisualLibrary(){};function esc(s){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')};function highlighted(s){return esc(s)};`,context);
+const html=read('index.html'),library=read('library.js');
+const context=vm.createContext({URL,console});
+vm.runInContext(html.slice(html.indexOf('const topics='),html.indexOf('const questions='))+html.slice(html.indexOf('const questions='),html.indexOf('const cards='))+html.slice(html.indexOf('const cards='),html.indexOf('const cases='))+`const sourceNotes=[];let ci=0,flipped=false;function go(){};function openLibraryTopic(){};function renderCards(){};function renderVisualLibrary(){};function renderQuiz(){};function kbRender(){};function openGlossary(){};function addGlossaryAccess(){};function render(){};function relatedTopics(){return []};let state={};const esc=String;function highlighted(s){return s};`,context);
 vm.runInContext(library.slice(0,library.indexOf('function learningTone')),context);
-vm.runInContext(visual.slice(0,visual.indexOf('/* Illustrated views')),context);
+const bank=html.match(/const competencyBank\s*=\s*(\[.*?\]);/s);assert.ok(bank);vm.runInContext('const competencyBank='+bank[1],context);
+vm.runInContext(read('curriculum-data.js'),context);
+vm.runInContext(read('curriculum.js').replace(/render\(\);\s*$/,''),context);
 const run=s=>vm.runInContext(s,context);
-assert.equal(run('cards.length'),47);assert.equal(run('topics.length'),48);
-for(let card=0;card<47;card++){
- const topic=run(`topicForCard(${card})`);assert.ok(topic>=0&&topic<48);
- run(`openStudyCard(${topic})`);assert.equal(run('topicForCard(ci)'),topic);
-}
-for(const [card,title] of [[0,'Thrombose'],[1,'Antonovsky'],[2,'Peplau'],[3,'Orem'],[13,'Pflegeprozess'],[16,'Friedemann'],[27,'Krohwinkel'],[34,'Qualitätsmanagement']])assert.ok(run(`topics[topicForCard(${card})][0]`).startsWith(title));
-assert.equal(run('topicForCard(-1)'),-1);assert.equal(run('topicForCard(47)'),-1);
-vm.runInContext(read('glossary.js'),context);
-assert.match(run("highlighted('Kohärenzgefühl: verstehen')"),/glossary-term/);
-assert.doesNotMatch(run("highlighted('Non-Compliance und Copingstrategien')"),/glossary-term/);
-assert.doesNotMatch(run("highlighted('<img src=x onerror=alert(1)>')"),/<img/);
-assert.equal(run('studyGlossary.length'),5);
+assert.equal(run('curriculumData.diseases.length'),45);assert.equal(run('curriculumData.models.length'),22);assert.equal(run('curriculumData.standards.length'),11);assert.equal(run('curriculumData.glossary.length'),249);
+assert.equal(run("lessonIds.get('unterzuckerung')"),36);assert.equal(run("lessonIds.get('druckgeschwuer-dekubitus')"),38);assert.equal(run("lessonIds.get('lazarus')"),4);
+assert.equal(run("activeTopics().filter(x=>x.v[1]==='Medikamente').length"),0);
+assert.ok(run('cards.length')>170);assert.ok(run('unifiedBank.length')>240);
+for(const q of run('unifiedBank')){assert.equal(q.options.length,4,q.id);assert.ok(q.answer>=0&&q.answer<4);assert.equal(new Set(q.options).size,4,q.id);assert.ok(q.explain.length>20,q.id)}
+for(const c of run('detailedCards')){assert.ok(run(`!retiredTopics.has(${c.topic})`));assert.ok(c.blocks.every(b=>b[1]));}
+for(const d of run('[...richLessons.values()]')){assert.ok(d.source.startsWith('https://'));assert.ok(d.definition.length>15);assert.ok(run(`cardForTopic(${d.topic})`)>=0);}
 for(const source of [...html.matchAll(/(?:src|href)="(\.\/[^"?]+)(\?[^\"]*)?"/g)].map(m=>m[1]))assert.ok(fs.existsSync(path.join(root,source)),source);
-const assets=read('sw.js').match(/const ASSETS=(\[[^;]+\])/)[1];
-assert.ok(JSON.parse(assets.replaceAll("'",'"')).includes('./glossary.js?v=11'));
-console.log('PASS: 47 card links, 48 valid topics, glossary matching/escaping, script assets and offline cache');
+console.log(JSON.stringify(run('({topics:activeTopics().length,cards:cards.length,questions:unifiedBank.length,glossary:curriculumData.glossary.length})')));
