@@ -37,3 +37,13 @@ Alle 47 Karten haben nun eine explizite Zuordnung zu ihrer Wissensseite; die feh
 Kohärenzgefühl, Salutogenese, Coping, Compliance und Adhärenz lassen sich im kleinen durchsuchbaren Glossar nachschlagen. Vorkommen in Lernboxen sind als beschriftete Schaltflächen direkt antippbar. Das Dialogfenster bietet eine verständliche Erklärung, ein Lernbeispiel, einen Quellenlink und den Sprung zur passenden Wissensseite. Escape und Schließen führen zum vorherigen Bedienelement zurück. Auf Lernkarten liegt der Glossarzugang außerhalb der umdrehbaren Karte; Quiz und Prüfung erhalten keine zusätzlichen Bedienelemente. Definitionen am 27.10.2026 anhand der verlinkten BIÖG-, AOK- und Universität-Hamburg-Seiten geprüft. Das Glossar ist ein erster Bestand von fünf Begriffen, kein vollständiges Fachlexikon.
 
 Browserprüfungen erweitert: alle 47 Kartenverbindungen, Begriffsdialog per Tastatur, Fokusrückgabe, Glossarsuche, Themenwechsel, Breiten 320/390/1280 und Offlinezugriff. Lokale Syntaxprüfung und `node tests/learning-links.cjs` erfolgreich: 47 Kartenverbindungen, 48 gültige Themen, Begriffserkennung, HTML-Escaping, Dateiverweise und Cache-Eintrag. Lokaler Browserdownload nicht verfügbar; die erweiterten Browserprüfungen sind noch nicht ausgeführt. Die Ergänzungen werden in einem separaten Entwicklungszweig geprüft; eine Veröffentlichung in der öffentlichen App ist nicht Bestandteil dieser Änderung.
+
+## Erweiterung vom 28.10.2026
+
+101 aktive Themen, davon 45 Krankheitsbilder, 22 ausführlich überarbeitete Modelle/Konzepte und zehn DNQP-Standards plus Mobilitätsstandard. 179 Lernkarten und ein gemeinsamer Pool mit 261 eindeutigen Fragen. Das Lexikon umfasst 249 Begriffe und eine eigenständig lesbare HTML-Druck-/Downloadfassung. Einzelne bisherige Grundlagenthemen bleiben erhalten. Kein Anspruch auf vollständige Abdeckung eines Thieme-Lehrbuchs.
+
+Eigenständige Zusammenfassungen, keine Kopien von Thieme oder DNQP. Quellen und Publikationsstand stehen an den erweiterten Themen. „Hiort-Modell“ konnte nicht eindeutig identifiziert werden und wurde nicht erfunden. Medizinische Lerninhalte sind keine individuellen Behandlungsanordnungen. Fachliche Nachprüfung durch Lehrende bleibt sinnvoll, besonders bei lokalen Standards.
+
+Die numerischen IDs vorhandener Themen bleiben erhalten; entfernte Medikamententhemen haben reservierte, ausgeblendete Slots. Gespeicherte Quizfehler aus dem bisherigen Kompetenztrainer werden weiterverwendet. Neue Inhalte liegen offline im Service-Worker-Cache.
+
+Automatische Prüfungen: Datenkonsistenz, eindeutige Quizantworten, korrekte Themenverknüpfungen, alle aktiven Lektionen bei 320/390/1280 Pixel, Filter, Glossarsuche, Quiz-Fehlerwiederholung, Persistenz und Offline-Nutzung.

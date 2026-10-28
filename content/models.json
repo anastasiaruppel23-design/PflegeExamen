@@ -1,0 +1,473 @@
+[
+  {
+    "id": "peplau",
+    "title": "Peplau – Interpersonale Beziehungen",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Die professionelle Beziehung ist selbst ein pflegerisches Arbeitsmittel. Pflege begleitet einen gemeinsamen Lern- und Entwicklungsprozess.",
+    "core": [
+      "Orientierung: Anlass, Bedarf und gegenseitige Erwartungen klären.",
+      "Identifikation: die Person erkennt hilfreiche Unterstützung und beteiligt sich.",
+      "Nutzung: Angebote und Ressourcen werden aktiv eingesetzt.",
+      "Ablösung: erreichte Selbstständigkeit sichern und die professionelle Beziehung beenden."
+    ],
+    "example": "Bei einer psychiatrischen Aufnahme klärt die Pflegefachperson zuerst Sicherheit und Anliegen. Später werden Bewältigungsstrategien gemeinsam erprobt; vor Entlassung wird Unterstützung außerhalb der Station organisiert.",
+    "practice": [
+      "Rolle und Auftrag transparent machen; Nähe und Grenzen reflektieren.",
+      "Mit der Person konkrete Ziele vereinbaren und ihre Beteiligung prüfen.",
+      "Entlassung früh vorbereiten, damit Abhängigkeit nicht durch die Pflegebeziehung verstärkt wird."
+    ],
+    "limit": "Phasen sind eine Orientierung und keine starre Zeitplanung. Therapeutische Beziehung ersetzt keine Notfallbehandlung.",
+    "source": "https://openstax.org/books/fundamentals-nursing/pages/1-4-history-and-evolution-of-nursing-theories",
+    "old": 0
+  },
+  {
+    "id": "orem",
+    "title": "Orem – Selbstpflegedefizit",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Pflege wird erforderlich, wenn Selbstpflegebedarf und verfügbare Fähigkeiten nicht zusammenpassen. Ziel ist die größtmögliche angemessene Selbstpflege.",
+    "core": [
+      "Selbstpflegebedarf: Was ist für Gesundheit und Alltag erforderlich?",
+      "Selbstpflegekompetenz: Was kann die Person selbst leisten?",
+      "Vollständig kompensatorisch: Pflege übernimmt erforderliche Handlungen.",
+      "Teilweise kompensatorisch: Pflege und Person teilen Aufgaben. Unterstützend-erziehend: Beratung und Anleitung stehen im Vordergrund."
+    ],
+    "example": "Nach Schlaganfall kann jemand selbst essen, braucht aber Hilfe beim Ankleiden. Für verschiedene Tätigkeiten können unterschiedliche Pflegesysteme passend sein.",
+    "practice": [
+      "Fähigkeiten je Tätigkeit erheben statt pauschal „unselbstständig“ festlegen.",
+      "Nur notwendige Unterstützung übernehmen; Lerngelegenheiten schaffen.",
+      "Hilfen neu abstimmen, wenn sich Fähigkeiten oder Belastung ändern."
+    ],
+    "limit": "Selbstpflege darf nicht als moralische Pflicht missverstanden werden. Erkrankung, Umfeld und verfügbare Hilfe begrenzen Möglichkeiten.",
+    "source": "https://openstax.org/books/fundamentals-nursing/pages/1-4-history-and-evolution-of-nursing-theories",
+    "old": 1
+  },
+  {
+    "id": "lazarus",
+    "title": "Lazarus & Folkman – Transaktionales Stressmodell",
+    "category": "Modelle & Konzepte",
+    "system": "Stress & Bewältigung",
+    "definition": "Stress entsteht aus der Beziehung zwischen einer Situation, ihrer Bewertung und den verfügbaren Bewältigungsmöglichkeiten.",
+    "core": [
+      "Primäre Bewertung: Ist die Situation unwichtig, günstig oder belastend? Belastung kann Verlust, Bedrohung oder Herausforderung bedeuten.",
+      "Sekundäre Bewertung: Welche eigenen und äußeren Ressourcen stehen zur Verfügung?",
+      "Problemorientiertes Coping verändert die Situation; emotionsorientiertes Coping den Umgang mit Gefühlen.",
+      "Neubewertung: Neue Erfahrungen verändern die Einschätzung; der Prozess ist dynamisch."
+    ],
+    "example": "Eine Auszubildende bewertet das Examen als Bedrohung. Ein realistischer Lernplan verändert die Situation; ein entlastendes Gespräch hilft beim Umgang mit Angst. Beides kann sinnvoll zusammenwirken.",
+    "practice": [
+      "Die individuelle Bedeutung erfragen: „Was belastet Sie daran besonders?“",
+      "Ressourcen konkretisieren: Wissen, Zeit, Unterstützung und Handlungsmöglichkeiten.",
+      "Gemeinsam eine Strategie erproben und ihre Wirkung aus Sicht der Person überprüfen."
+    ],
+    "limit": "Nicht allein die Person für Stress verantwortlich machen: Arbeitsbedingungen, Armut oder fehlende Unterstützung können mitwirken.",
+    "source": "https://journals.publisso.de/index.php/de/publisso_gold/publishing/books/overview/54/496",
+    "old": 4
+  },
+  {
+    "id": "antonovsky",
+    "title": "Antonovsky – Salutogenese",
+    "category": "Modelle & Konzepte",
+    "system": "Gesundheitsmodell",
+    "definition": "Der Blick richtet sich darauf, was Gesundheit unter Belastung unterstützt. Gesundheit und Krankheit sind Pole eines Kontinuums.",
+    "core": [
+      "Verstehbarkeit: Ereignisse erscheinen nachvollziehbar.",
+      "Handhabbarkeit: passende Ressourcen sind verfügbar.",
+      "Bedeutsamkeit: Engagement wird als persönlich sinnvoll erlebt.",
+      "Diese Aspekte bilden das Kohärenzgefühl; Widerstandsressourcen unterstützen Bewältigung."
+    ],
+    "example": "Bei neuer Dialysepflicht erklärt das Team den Ablauf verständlich, organisiert erreichbare Hilfe und fragt nach einem persönlichen Alltagsziel.",
+    "practice": [
+      "Informationen verständlich und wiederholbar vermitteln.",
+      "Ressourcen gemeinsam erschließen, etwa Angehörige oder Transporthilfe.",
+      "Persönliche Werte und Ziele in die Planung aufnehmen."
+    ],
+    "limit": "Ein hohes Kohärenzgefühl garantiert keine Gesundheit. Die Theorie darf nicht zur Schuldzuweisung bei Krankheit dienen.",
+    "source": "https://series.publisso.de/de/publisso_gold/publishing/books/overview/54/392",
+    "old": 2
+  },
+  {
+    "id": "trajekt",
+    "title": "Corbin & Strauss – Trajektmodell",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Chronische Krankheit umfasst eine Verlaufskurve und die Arbeit, mit der Betroffene, Angehörige und Fachpersonen diesen Verlauf gestalten.",
+    "core": [
+      "Krankheitsbezogene Arbeit: Symptome, Untersuchungen und Behandlung organisieren.",
+      "Alltagsarbeit: Haushalt, Beruf, Versorgung und Beziehungen aufrechterhalten.",
+      "Biografische Arbeit: Selbstbild, Zukunft und Lebensgeschichte neu einordnen.",
+      "Stabile und instabile Phasen, Krisen und Verschlechterungen verändern den Unterstützungsbedarf."
+    ],
+    "example": "Bei Parkinson ist pünktliche Therapie krankheitsbezogene Arbeit. Ein sicherer Toilettenweg gehört zur Alltagsarbeit; der Umgang mit Berufsverlust zur biografischen Arbeit.",
+    "practice": [
+      "Aktuelle Verlaufsphase und Aufgaben mit der Person beschreiben.",
+      "Belastung der Angehörigen und Aufgabenverteilung sichtbar machen.",
+      "Bei Übergängen den Plan erneut abstimmen."
+    ],
+    "limit": "Phasen sind nicht bei allen Menschen gleich und nicht zwingend linear. Das Modell prognostiziert keinen individuellen Verlauf.",
+    "source": "https://shop.thieme.de/I-care-Pflege/9783132452275",
+    "old": 5
+  },
+  {
+    "id": "friedemann",
+    "title": "Friedemann – Familien- und umweltbezogene Pflege",
+    "category": "Modelle & Konzepte",
+    "system": "Familienpflege",
+    "definition": "Der Mensch wird in Wechselwirkung mit Familie und Umwelt betrachtet. Pflege unterstützt passende Formen von Stabilität und Veränderung.",
+    "core": [
+      "Systemerhaltung: bewährte Abläufe und Sicherheit.",
+      "Systemänderung: Anpassung und neue Lösungen.",
+      "Kohärenz: Verbundenheit und stimmiges Erleben.",
+      "Individuation: persönliche Entwicklung und Eigenständigkeit."
+    ],
+    "example": "Nach dem Einzug eines pflegebedürftigen Elternteils braucht eine Familie vertraute Rituale, neue Aufgabenverteilung, gemeinsame Gespräche und Freiräume für jedes Mitglied.",
+    "practice": [
+      "Familie so erfassen, wie die Person sie selbst beschreibt.",
+      "Stärken und Belastungen aller Beteiligten berücksichtigen.",
+      "Vereinbarungen entwickeln, die Zugehörigkeit und Eigenständigkeit ermöglichen."
+    ],
+    "limit": "Kohärenz bei Friedemann nicht unbesehen mit Antonovskys dreiteiligem Kohärenzgefühl gleichsetzen.",
+    "source": "https://shop.thieme.de/I-care-Pflege/9783132452275",
+    "old": 17
+  },
+  {
+    "id": "krohwinkel",
+    "title": "Krohwinkel – Fördernde Prozesspflege / ABEDL",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Fördernde Prozesspflege verbindet Bedürfnisse, Probleme, Fähigkeiten und Beziehungen mit einem individuellen Pflegeprozess.",
+    "core": [
+      "ABEDL: Aktivitäten, Beziehungen und existenzielle Erfahrungen des Lebens.",
+      "Die 13 Bereiche strukturieren die Erhebung, etwa Kommunikation, Bewegung, Selbstversorgung und soziale Beziehungen.",
+      "Ressourcen, Unabhängigkeit und Wohlbefinden sind zentrale Bezugspunkte.",
+      "Erhebung, Zielsetzung, Durchführung und Evaluation bilden einen zusammenhängenden Prozess."
+    ],
+    "example": "Eine Person kann beim Waschen den Oberkörper selbst übernehmen, braucht aber Sicherheit beim Stehen und möchte ihre gewohnte Reihenfolge beibehalten.",
+    "practice": [
+      "Erhaltene Fähigkeiten ausdrücklich dokumentieren.",
+      "Unterstützung an persönlichen Gewohnheiten und Beziehungen ausrichten.",
+      "Prüfen, ob die Maßnahme Selbstständigkeit fördert oder unnötig ersetzt."
+    ],
+    "limit": "ABEDL sind keine Liste medizinischer Diagnosen. Ein ausgefülltes Raster ersetzt keine individuelle Begründung.",
+    "source": "https://shop.thieme.de/I-care-Pflege/9783132452275",
+    "old": 12
+  },
+  {
+    "id": "roper",
+    "title": "Roper, Logan & Tierney – Lebensaktivitäten",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Lebensaktivitäten werden über die Lebensspanne und auf einem Kontinuum von Abhängigkeit und Unabhängigkeit betrachtet.",
+    "core": [
+      "Zwölf Lebensaktivitäten strukturieren den Blick auf Alltag und Pflege.",
+      "Biologische, psychische, soziokulturelle, umgebungsbezogene und politisch-ökonomische Faktoren beeinflussen sie.",
+      "Abhängigkeit und Unabhängigkeit sind tätigkeits- und situationsbezogen."
+    ],
+    "example": "Nach Hüftfraktur ist selbstständiges Essen möglich, während Mobilität und Ausscheidung Unterstützung erfordern. Eine enge Wohnung verändert den Hilfebedarf zusätzlich.",
+    "practice": [
+      "Nicht nur körperliche Funktion, sondern Wohnumfeld und soziale Bedingungen erheben.",
+      "Ziele pro relevanter Aktivität gemeinsam festlegen.",
+      "Veränderungen im Verlauf erneut beurteilen."
+    ],
+    "limit": "Die Lebensaktivitäten dienen der Strukturierung, nicht der Bewertung des Werts oder der Leistungsbereitschaft einer Person.",
+    "source": "https://www.dip.de/wp-content/uploads/2025/02/bericht-pflegeleistung1.pdf",
+    "old": null
+  },
+  {
+    "id": "juchli",
+    "title": "Juchli – Aktivitäten des täglichen Lebens",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Die ATL ordnen alltägliche Lebensvollzüge und unterstützen einen ganzheitlichen Blick auf den Menschen.",
+    "core": [
+      "Körperliche, psychische, soziale und existenzielle Aspekte gehören zusammen.",
+      "Die zwölf ATL dienen als Gesprächs- und Beobachtungsstruktur.",
+      "Fähigkeiten und Grenzen werden bezogen auf den individuellen Alltag beschrieben."
+    ],
+    "example": "Bei Atemnot fragt die Pflege nicht nur nach Atmung, sondern auch nach Schlaf, Angst, Bewegung und vertrauten Hilfen.",
+    "practice": [
+      "ATL als Leitfaden nutzen, ohne ein Gespräch zum bloßen Abfragen zu machen.",
+      "Zusammenhänge zwischen Bereichen erkennen.",
+      "Wünsche und Selbstpflegefähigkeiten in Maßnahmen übersetzen."
+    ],
+    "limit": "ATL nach Juchli und ABEDL nach Krohwinkel sind verwandte, aber nicht identische Strukturen.",
+    "source": "https://www.dip.de/wp-content/uploads/2025/02/bericht-pflegeleistung1.pdf",
+    "old": null
+  },
+  {
+    "id": "henderson",
+    "title": "Henderson – 14 Grundbedürfnisse",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Pflege unterstützt bei Aktivitäten, die eine Person bei ausreichender Kraft, Wissen oder Willen selbst ausführen würde.",
+    "core": [
+      "Vierzehn Grundbedürfnisse umfassen körperliche, soziale, geistige und sinnbezogene Aspekte.",
+      "Unabhängigkeit und Unterstützung bei einem friedlichen Sterben gehören zum Pflegeverständnis.",
+      "Der Hilfebedarf wird individuell bestimmt."
+    ],
+    "example": "Bei neuer Stomaversorgung fehlt zunächst Wissen, nicht unbedingt körperliche Fähigkeit. Demonstration und gemeinsames Üben können daher wichtiger sein als vollständige Übernahme.",
+    "practice": [
+      "Klären, ob Kraft, Wissen, Handlungsmöglichkeit oder andere Barrieren fehlen.",
+      "Anleitung und praktische Hilfe gezielt dosieren.",
+      "Selbstständigkeit anhand konkreter Tätigkeiten beurteilen."
+    ],
+    "limit": "Fehlende Mitwirkung nicht vorschnell als fehlenden Willen deuten; Schmerzen, Angst oder Verständigungsprobleme prüfen.",
+    "source": "https://openstax.org/books/fundamentals-nursing/pages/1-4-history-and-evolution-of-nursing-theories",
+    "old": null
+  },
+  {
+    "id": "leininger",
+    "title": "Leininger – Kultursensible Pflege",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Pflege soll Lebensweisen, Werte und kulturelle Bedeutungen der einzelnen Person verstehen und mit fachlich sicherer Versorgung verbinden.",
+    "core": [
+      "Hilfreiche Praktiken erhalten.",
+      "Anpassungen und Kompromisse gemeinsam aushandeln.",
+      "Gesundheitlich problematische Praktiken respektvoll neu gestalten."
+    ],
+    "example": "Eine Person möchte aus religiösen Gründen fasten. Pflege klärt Wünsche und Risiken mit ihr und dem Behandlungsteam und sucht eine sichere individuelle Lösung.",
+    "practice": [
+      "Offen nach Bedeutung und Präferenzen fragen statt Herkunftsstereotype verwenden.",
+      "Professionelle Sprachmittlung bei komplexen Entscheidungen organisieren.",
+      "Vereinbarungen und Grenzen nachvollziehbar dokumentieren."
+    ],
+    "limit": "Kultur erklärt nicht jedes Verhalten. Individuelle Biografie, soziale Lage und Selbstbestimmung bleiben zentral.",
+    "source": "https://shop.thieme.de/I-care-Pflege/9783132452275",
+    "old": null
+  },
+  {
+    "id": "roy",
+    "title": "Roy – Adaptationsmodell",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Der Mensch wird als anpassungsfähiges System betrachtet. Pflege unterstützt angemessene Reaktionen auf innere und äußere Reize.",
+    "core": [
+      "Fokale Reize stehen aktuell im Vordergrund; kontextuelle Einflüsse wirken mit.",
+      "Physiologische Funktion, Selbstkonzept, Rollenfunktion und Interdependenz sind wichtige Anpassungsbereiche.",
+      "Pflege erhebt Reaktionen, bearbeitet beeinflussbare Reize und evaluiert Anpassung."
+    ],
+    "example": "Nach Amputation verändern sich Bewegung, Körperbild, berufliche Rolle und Abhängigkeit von Unterstützung. Ein reines Wundziel würde diese Bereiche übersehen.",
+    "practice": [
+      "Mehrere Anpassungsbereiche mit der Person besprechen.",
+      "Erreichbare Ziele und passende Hilfen abstimmen.",
+      "Wirkung anhand körperlicher Funktion und subjektiver Bewältigung beurteilen."
+    ],
+    "limit": "Anpassung bedeutet nicht widerspruchsloses Hinnehmen. Wünsche und Umweltveränderungen gehören dazu.",
+    "source": "https://www.bc.edu/bc-web/schools/cson/faculty-research/faculty-directory/sister-callista-roy.html",
+    "old": null
+  },
+  {
+    "id": "neuman",
+    "title": "Neuman – Systemmodell",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegetheorie",
+    "definition": "Ein offenes System steht unter dem Einfluss verschiedener Stressoren. Pflege unterstützt Stabilität und schützt Ressourcen.",
+    "core": [
+      "Intrapersonale, interpersonale und extrapersonale Stressoren unterscheiden.",
+      "Primärprävention setzt vor einer Reaktion an, Sekundärprävention nach Auftreten und Tertiärprävention bei weiterer Stabilisierung.",
+      "Körperliche, psychische, soziokulturelle, entwicklungsbezogene und spirituelle Aspekte berücksichtigen."
+    ],
+    "example": "Eine überlastete pflegende Angehörige erlebt Schlafmangel, Konflikte und fehlende Entlastungsangebote. Interventionen müssen auf mehreren Ebenen ansetzen.",
+    "practice": [
+      "Belastungen und vorhandene Schutzfaktoren gemeinsam erfassen.",
+      "Prävention und Behandlung passend zur aktuellen Situation planen.",
+      "Erholung und Unterstützungsnetz überprüfen."
+    ],
+    "limit": "Nicht jeder Stressor lässt sich individuell beseitigen; strukturelle Versorgungslücken müssen benannt werden.",
+    "source": "https://www.neumansystemsmodel.org/",
+    "old": null
+  },
+  {
+    "id": "maslow",
+    "title": "Maslow – Bedürfnishierarchie",
+    "category": "Modelle & Konzepte",
+    "system": "Bezugsmodell",
+    "definition": "Bedürfnisse können helfen, Pflegeprioritäten zu reflektieren. Die bekannte Hierarchie ist eine Orientierung, kein starrer Ablauf.",
+    "core": [
+      "Physiologische Bedürfnisse und Sicherheit.",
+      "Soziale Zugehörigkeit, Wertschätzung und Selbstverwirklichung.",
+      "In akuter Gefahr sind lebenswichtige Funktionen vorrangig; persönliche Prioritäten bleiben sonst entscheidend."
+    ],
+    "example": "Bei schwerer Atemnot wird zuerst die Atmung gesichert. Gleichzeitig können ruhige Ansprache und Anwesenheit Sicherheit vermitteln.",
+    "practice": [
+      "Akute Gefährdung erkennen und priorisieren.",
+      "Nach dem subjektiv wichtigsten Bedürfnis fragen.",
+      "Körperliche und psychosoziale Unterstützung sinnvoll verbinden."
+    ],
+    "limit": "Menschen verfolgen häufig mehrere Bedürfnisse gleichzeitig; die Hierarchie darf nicht schematisch aufgezwungen werden.",
+    "source": "https://openstax.org/books/psychology-2e/pages/10-1-motivation",
+    "old": 16
+  },
+  {
+    "id": "rogers",
+    "title": "Carl Rogers – Personzentrierte Gesprächsführung",
+    "category": "Modelle & Konzepte",
+    "system": "Kommunikation",
+    "definition": "Eine tragfähige Beziehung beruht auf empathischem Verstehen, Wertschätzung und Echtheit.",
+    "core": [
+      "Empathie: die Sicht der anderen Person verstehen wollen.",
+      "Bedingungsfreie Wertschätzung: Person respektieren, auch bei schwierigen Verhaltensweisen.",
+      "Kongruenz: authentisch und professionell stimmig handeln."
+    ],
+    "example": "„Sie wirken sehr angespannt. Was macht Ihnen vor dem Eingriff am meisten Sorge?“ eröffnet ein Gespräch, ohne vorschnell zu beruhigen.",
+    "practice": [
+      "Aktiv zuhören und Verstandenes in eigenen Worten spiegeln.",
+      "Offene Fragen stellen und Pausen zulassen.",
+      "Eigene Grenzen transparent benennen."
+    ],
+    "limit": "Empathie bedeutet weder Zustimmung zu allem noch private Freundschaft. Carl Rogers ist nicht die Pflegetheoretikerin Martha Rogers.",
+    "source": "https://www.gwg-ev.org/personzentrierter-ansatz",
+    "old": 20
+  },
+  {
+    "id": "schulz",
+    "title": "Schulz von Thun – Kommunikationsquadrat",
+    "category": "Modelle & Konzepte",
+    "system": "Kommunikation",
+    "definition": "Eine Äußerung kann Sachinformation, Selbstkundgabe, Beziehungshinweis und Appell enthalten. Sender und Empfänger gewichten diese Seiten unterschiedlich.",
+    "core": [
+      "Sache: Welche Information wird vermittelt?",
+      "Selbstkundgabe: Was zeigt die Person von sich?",
+      "Beziehung: Wie wird das Gegenüber angesprochen?",
+      "Appell: Was soll das Gegenüber tun?"
+    ],
+    "example": "„Die Klingel ist weit weg“ kann eine Ortsbeschreibung, Unsicherheit, Kritik oder die Bitte sein, sie näherzulegen. Nachfragen verhindert vorschnelle Deutung.",
+    "practice": [
+      "Aussage und eigene Interpretation unterscheiden.",
+      "Mehrdeutige Botschaften durch eine kurze Rückfrage klären.",
+      "Sicherheitsrelevante Informationen eindeutig formulieren."
+    ],
+    "limit": "Eine vermutete Botschaft ist keine gesicherte Absicht. Nicht jede Äußerung ausführlich analysieren, wenn unmittelbare Hilfe nötig ist.",
+    "source": "https://www.schulz-von-thun.de/die-modelle/das-kommunikationsquadrat",
+    "old": 3
+  },
+  {
+    "id": "icf",
+    "title": "ICF – Funktionsfähigkeit und Teilhabe",
+    "category": "Modelle & Konzepte",
+    "system": "Bezugsmodell",
+    "definition": "Die WHO-Klassifikation beschreibt Funktionsfähigkeit in Wechselwirkung mit Gesundheit und Kontext.",
+    "core": [
+      "Körperfunktionen und Körperstrukturen.",
+      "Aktivitäten: Handlungen ausführen.",
+      "Partizipation: an Lebensbereichen teilhaben.",
+      "Umweltfaktoren können fördern oder behindern; personenbezogene Faktoren werden berücksichtigt, aber nicht als eigene ICF-Kodes klassifiziert."
+    ],
+    "example": "Eine Handparese betrifft Körperfunktion. Ankleiden ist Aktivität. Wieder an Familienfeiern teilnehmen ist Teilhabe; ein barrierefreier Zugang wirkt als Umweltfaktor.",
+    "practice": [
+      "Ziele bis zur Alltagsteilhabe verfolgen.",
+      "Barrieren und Förderfaktoren konkret benennen.",
+      "Mit Therapie und Sozialdienst passende Maßnahmen abstimmen."
+    ],
+    "limit": "Eine Diagnose allein beschreibt weder Fähigkeiten noch Teilhabe. Die ICF ist keine Pflegediagnosenklassifikation.",
+    "source": "https://www.bfarm.de/DE/Kodiersysteme/Klassifikationen/ICF/_node.html",
+    "old": 23
+  },
+  {
+    "id": "biopsychosozial",
+    "title": "Biopsychosoziales Modell",
+    "category": "Modelle & Konzepte",
+    "system": "Gesundheitsmodell",
+    "definition": "Körperliche, psychische und soziale Faktoren beeinflussen Gesundheit und Krankheit wechselseitig.",
+    "core": [
+      "Biologisch: körperliche Prozesse und Funktionen.",
+      "Psychisch: Erleben, Bewertung, Gefühle und Bewältigung.",
+      "Sozial: Beziehungen, Lebensbedingungen und Teilhabe."
+    ],
+    "example": "Chronischer Schmerz kann mit Gewebeschaden, Angst vor Bewegung und Arbeitsplatzverlust zusammenhängen. Jede Ebene kann die anderen verstärken.",
+    "practice": [
+      "Alle drei Ebenen erheben und Wechselwirkungen formulieren.",
+      "Ziele gemeinsam und interprofessionell planen.",
+      "Körperliche Beschwerden ernst nehmen, auch wenn psychische Einflüsse mitwirken."
+    ],
+    "limit": "Das Modell bedeutet nicht, dass Beschwerden „nur psychisch“ seien. Akute organische Gefährdung muss weiterhin erkannt werden.",
+    "source": "https://www.bfarm.de/DE/Kodiersysteme/Klassifikationen/ICF/_node.html",
+    "old": 24
+  },
+  {
+    "id": "erikson",
+    "title": "Erikson – Psychosoziale Entwicklung",
+    "category": "Modelle & Konzepte",
+    "system": "Entwicklungsmodell",
+    "definition": "Entwicklung wird als lebenslanger Prozess mit psychosozialen Spannungsfeldern verstanden.",
+    "core": [
+      "Im Jugendalter ist Identität gegenüber Rollendiffusion ein zentrales Thema.",
+      "Im Erwachsenenalter werden unter anderem Nähe, Verantwortung und Generativität bedeutsam.",
+      "Im höheren Alter steht die Einordnung des eigenen Lebens zwischen Integrität und Verzweiflung im Vordergrund."
+    ],
+    "example": "Ein Jugendlicher mit chronischer Krankheit möchte selbst mitentscheiden und nicht ausschließlich über seine Eltern angesprochen werden.",
+    "practice": [
+      "Information und Beteiligung alters- und entwicklungsangemessen gestalten.",
+      "Biografie und persönliche Bedeutung erfragen.",
+      "Autonomie unterstützen, ohne notwendige Hilfe zu entziehen."
+    ],
+    "limit": "Altersstufen sind keine individuelle Diagnose und verlaufen kulturell sowie biografisch unterschiedlich.",
+    "source": "https://openstax.org/books/psychology-2e/pages/9-2-lifespan-theories",
+    "old": 18
+  },
+  {
+    "id": "kuebler",
+    "title": "Kübler-Ross – Reaktionen auf Sterben und Verlust",
+    "category": "Modelle & Konzepte",
+    "system": "Begleitung",
+    "definition": "Das Modell beschreibt mögliche Reaktionen auf existenzielle Bedrohung. Es ist keine verpflichtende Abfolge von Trauerstufen.",
+    "core": [
+      "Nicht-wahrhaben-Wollen, Zorn, Verhandeln, Depression und Akzeptanz sind bekannte Begriffe.",
+      "Reaktionen können fehlen, wiederkehren oder nebeneinander bestehen.",
+      "Begleitung orientiert sich an aktuellen Bedürfnissen und Wünschen."
+    ],
+    "example": "Eine Person spricht morgens zuversichtlich über die Zukunft und ist abends wütend. Das muss nicht als falscher oder rückläufiger Trauerprozess bewertet werden.",
+    "practice": [
+      "Zuhören und Gefühle aushalten, ohne eine Phase einzufordern.",
+      "Praktische, psychosoziale und spirituelle Unterstützung anbieten.",
+      "Anhaltende schwere Belastung und akute Gefährdung fachlich abklären."
+    ],
+    "limit": "Trauer darf nicht anhand eines Stufenplans bewertet werden; das Modell ist keine universelle Verlaufsregel.",
+    "source": "https://www.ekrfoundation.org/5-stages-of-grief/",
+    "old": 19
+  },
+  {
+    "id": "kitwood",
+    "title": "Kitwood – Personzentrierte Demenzpflege",
+    "category": "Modelle & Konzepte",
+    "system": "Pflegekonzept",
+    "definition": "Die Person mit ihrer Geschichte und ihren Beziehungen steht im Mittelpunkt, nicht allein der kognitive Verlust.",
+    "core": [
+      "Personsein und Würde bleiben auch bei schwerer Demenz bedeutsam.",
+      "Beziehung, Identität, Beschäftigung und Zugehörigkeit können Orientierung geben.",
+      "Verhalten wird im Zusammenhang mit Bedürfnissen, Umwelt und Interaktion betrachtet."
+    ],
+    "example": "Eine Bewohnerin sucht nach ihrer Mutter. Pflege kann das Bedürfnis nach Sicherheit aufgreifen, statt wiederholt korrigierend über den Tod der Mutter zu belehren.",
+    "practice": [
+      "Biografie und Vorlieben in konkrete Angebote übersetzen.",
+      "Wertschätzend ansprechen und individuelle Reaktionen beobachten.",
+      "Schmerz, Delir und andere behandelbare Ursachen bei verändertem Verhalten prüfen."
+    ],
+    "limit": "Personzentrierung bedeutet keine pauschale Bestätigung falscher Inhalte und ersetzt keine medizinische Abklärung.",
+    "source": "https://www.bradford.ac.uk/dementia/",
+    "old": null
+  },
+  {
+    "id": "benner",
+    "title": "Benner – Vom Anfänger zur Expertin",
+    "category": "Modelle & Konzepte",
+    "system": "Kompetenzentwicklung",
+    "definition": "Klinische Kompetenz entwickelt sich durch Erfahrung, reflektiertes Handeln und zunehmendes Verständnis von Situationen.",
+    "core": [
+      "Novizin, fortgeschrittene Anfängerin, kompetent, erfahren und Expertin sind die fünf bekannten Stufen.",
+      "Situationswissen wächst durch begleitete Praxis und Reflexion.",
+      "Kompetenz ist bereichsbezogen; Erfahrung in einem Gebiet überträgt sich nicht automatisch auf jedes andere."
+    ],
+    "example": "Eine erfahrene Pflegefachperson beginnt auf einer Intensivstation. Sie bringt viel Berufswissen mit und benötigt dennoch strukturierte Einarbeitung in neue Aufgaben.",
+    "practice": [
+      "Anleitung an vorhandene Kompetenzen anpassen.",
+      "Entscheidungen und Wahrnehmungen gemeinsam reflektieren.",
+      "Verantwortung nur entsprechend tatsächlicher Befähigung übertragen."
+    ],
+    "limit": "Dienstjahre allein beweisen keine Expertise; sichere Praxis braucht kontinuierliches Lernen.",
+    "source": "https://pubmed.ncbi.nlm.nih.gov/6917683/",
+    "old": null
+  }
+]
