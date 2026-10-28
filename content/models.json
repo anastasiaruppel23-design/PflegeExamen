@@ -119,7 +119,8 @@
       "Systemerhaltung: bewährte Abläufe und Sicherheit.",
       "Systemänderung: Anpassung und neue Lösungen.",
       "Kohärenz: Verbundenheit und stimmiges Erleben.",
-      "Individuation: persönliche Entwicklung und Eigenständigkeit."
+      "Individuation: persönliche Entwicklung und Eigenständigkeit.",
+      "Vier übergeordnete Systemziele: Stabilität, Wachstum, Kontrolle und Spiritualität. Mit Spiritualität ist auch Sinn und Verbundenheit gemeint; sie ist nicht auf Religionszugehörigkeit beschränkt."
     ],
     "example": "Nach dem Einzug eines pflegebedürftigen Elternteils braucht eine Familie vertraute Rituale, neue Aufgabenverteilung, gemeinsame Gespräche und Freiräume für jedes Mitglied.",
     "practice": [
@@ -141,7 +142,8 @@
       "ABEDL: Aktivitäten, Beziehungen und existenzielle Erfahrungen des Lebens.",
       "Die 13 Bereiche strukturieren die Erhebung, etwa Kommunikation, Bewegung, Selbstversorgung und soziale Beziehungen.",
       "Ressourcen, Unabhängigkeit und Wohlbefinden sind zentrale Bezugspunkte.",
-      "Erhebung, Zielsetzung, Durchführung und Evaluation bilden einen zusammenhängenden Prozess."
+      "Erhebung, Zielsetzung, Durchführung und Evaluation bilden einen zusammenhängenden Prozess.",
+      "Die 13 ABEDL-Bereiche: kommunizieren; sich bewegen; vitale Funktionen aufrechterhalten; sich pflegen; essen und trinken; ausscheiden; sich kleiden; ruhen, schlafen und sich entspannen; sich beschäftigen, lernen und entwickeln; sich als Frau oder Mann fühlen und verhalten (historische Modellbezeichnung – geschlechtliche Selbstbestimmung respektieren); für eine sichere und fördernde Umgebung sorgen; soziale Beziehungen und Bereiche sichern und gestalten; mit existenziellen Erfahrungen umgehen."
     ],
     "example": "Eine Person kann beim Waschen den Oberkörper selbst übernehmen, braucht aber Sicherheit beim Stehen und möchte ihre gewohnte Reihenfolge beibehalten.",
     "practice": [
@@ -162,7 +164,8 @@
     "core": [
       "Zwölf Lebensaktivitäten strukturieren den Blick auf Alltag und Pflege.",
       "Biologische, psychische, soziokulturelle, umgebungsbezogene und politisch-ökonomische Faktoren beeinflussen sie.",
-      "Abhängigkeit und Unabhängigkeit sind tätigkeits- und situationsbezogen."
+      "Abhängigkeit und Unabhängigkeit sind tätigkeits- und situationsbezogen.",
+      "Die zwölf Lebensaktivitäten: für Sicherheit sorgen; kommunizieren; atmen; essen und trinken; ausscheiden; sich sauber halten und kleiden; Körpertemperatur regulieren; sich bewegen; arbeiten und spielen; Sexualität ausdrücken; schlafen; sterben. Sie werden im Zusammenhang mit Lebensspanne, Abhängigkeit/Unabhängigkeit und individuellen Einflussfaktoren betrachtet."
     ],
     "example": "Nach Hüftfraktur ist selbstständiges Essen möglich, während Mobilität und Ausscheidung Unterstützung erfordern. Eine enge Wohnung verändert den Hilfebedarf zusätzlich.",
     "practice": [
@@ -204,7 +207,8 @@
     "core": [
       "Vierzehn Grundbedürfnisse umfassen körperliche, soziale, geistige und sinnbezogene Aspekte.",
       "Unabhängigkeit und Unterstützung bei einem friedlichen Sterben gehören zum Pflegeverständnis.",
-      "Der Hilfebedarf wird individuell bestimmt."
+      "Der Hilfebedarf wird individuell bestimmt.",
+      "Die 14 Bereiche: normal atmen; ausreichend essen und trinken; ausscheiden; sich bewegen und eine geeignete Haltung einnehmen; schlafen und ruhen; geeignete Kleidung wählen und sich an-/auskleiden; Körpertemperatur regulieren; Körperpflege und Hautschutz; Gefahren vermeiden und andere nicht gefährden; kommunizieren; den eigenen Glauben leben; sinnvoll arbeiten und Leistung erleben; spielen beziehungsweise sich erholen; lernen, entdecken und Gesundheitsangebote nutzen."
     ],
     "example": "Bei neuer Stomaversorgung fehlt zunächst Wissen, nicht unbedingt körperliche Fähigkeit. Demonstration und gemeinsames Üben können daher wichtiger sein als vollständige Übernahme.",
     "practice": [
@@ -246,7 +250,8 @@
     "core": [
       "Fokale Reize stehen aktuell im Vordergrund; kontextuelle Einflüsse wirken mit.",
       "Physiologische Funktion, Selbstkonzept, Rollenfunktion und Interdependenz sind wichtige Anpassungsbereiche.",
-      "Pflege erhebt Reaktionen, bearbeitet beeinflussbare Reize und evaluiert Anpassung."
+      "Pflege erhebt Reaktionen, bearbeitet beeinflussbare Reize und evaluiert Anpassung.",
+      "Residuale Reize sind weitere Einflüsse, deren aktuelle Wirkung nicht eindeutig feststeht; Annahmen darüber müssen überprüft werden."
     ],
     "example": "Nach Amputation verändern sich Bewegung, Körperbild, berufliche Rolle und Abhängigkeit von Unterstützung. Ein reines Wundziel würde diese Bereiche übersehen.",
     "practice": [
@@ -255,7 +260,7 @@
       "Wirkung anhand körperlicher Funktion und subjektiver Bewältigung beurteilen."
     ],
     "limit": "Anpassung bedeutet nicht widerspruchsloses Hinnehmen. Wünsche und Umweltveränderungen gehören dazu.",
-    "source": "https://www.bc.edu/bc-web/schools/cson/faculty-research/faculty-directory/sister-callista-roy.html",
+    "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5664223/",
     "old": null
   },
   {
@@ -267,7 +272,8 @@
     "core": [
       "Intrapersonale, interpersonale und extrapersonale Stressoren unterscheiden.",
       "Primärprävention setzt vor einer Reaktion an, Sekundärprävention nach Auftreten und Tertiärprävention bei weiterer Stabilisierung.",
-      "Körperliche, psychische, soziokulturelle, entwicklungsbezogene und spirituelle Aspekte berücksichtigen."
+      "Körperliche, psychische, soziokulturelle, entwicklungsbezogene und spirituelle Aspekte berücksichtigen.",
+      "Flexible und normale Verteidigungslinien sowie Widerstandslinien beschreiben Schutz und Reaktionen des Systems. Pflege fragt, welche Belastungen abgefangen werden und wo Stabilisierung nötig ist."
     ],
     "example": "Eine überlastete pflegende Angehörige erlebt Schlafmangel, Konflikte und fehlende Entlastungsangebote. Interventionen müssen auf mehreren Ebenen ansetzen.",
     "practice": [
@@ -318,7 +324,7 @@
       "Eigene Grenzen transparent benennen."
     ],
     "limit": "Empathie bedeutet weder Zustimmung zu allem noch private Freundschaft. Carl Rogers ist nicht die Pflegetheoretikerin Martha Rogers.",
-    "source": "https://www.gwg-ev.org/personzentrierter-ansatz",
+    "source": "https://www.gwg-ev.org/fileadmin/user_upload/Weiterbildung/Flyer-GT_Caro_final.pdf",
     "old": 20
   },
   {

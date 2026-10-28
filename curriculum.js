@@ -11,6 +11,7 @@ for(const d of [...curriculumData.models,...curriculumData.standards,...curricul
 // Retain index slots so existing progress never shifts to another topic.
 for(const i of retiredTopics)topics[i]=['Entfernter Bereich','Archiv','',[],''];
 const activeTopics=()=>topics.map((v,i)=>({v,i})).filter(x=>!retiredTopics.has(x.i));
+const previousRelatedTopics=relatedTopics;relatedTopics=function(i){return previousRelatedTopics(i).filter(n=>!retiredTopics.has(n))};
 const oldOpenLesson=openLibraryTopic;
 const section=(label,value,tone='definition')=>value?learnBox(tone,label,value):'';
 function lessonSections(d){
@@ -53,7 +54,7 @@ topicForCard=i=>detailedCards[i]?.topic??-1;cardForTopic=i=>detailedCards.findIn
 let cardCategory='';
 renderCards=function(){
  let pool=detailedCards.map((c,i)=>i).filter(i=>!cardCategory||topics[detailedCards[i].topic][1]===cardCategory);if(!pool.includes(ci))ci=pool[0];const c=detailedCards[ci];
- $('#content').innerHTML=`<div class="visual-library"><h1>Lernkarten mit Erklärung</h1><label>Bereich<select onchange="cardCategory=this.value;flipped=false;renderCards()"><option value="">Alle Bereiche</option>${[...new Set(activeTopics().map(x=>x.v[1]))].sort().map(v=>`<option ${cardCategory===v?'selected':''}>${esc(v)}</option>`).join('')}</select></label><p>Karte ${pool.indexOf(ci)+1} von ${pool.length} · ${esc(topics[c.topic][0])}</p><article class="panel rich-flash"><h2>${esc(c.q)}</h2><p>Formuliere zuerst deine eigene Antwort. Begründe deine Maßnahmen.</p><button class="btn primary" onclick="flipped=!flipped;renderCards()">${flipped?'Antwort verbergen':'Antwort mit Erklärung anzeigen'}</button>${flipped?c.blocks.map(([h,v])=>section(h,v,'care')).join(''):''}</article><div class="study-links"><button class="btn" onclick="moveRichCard(-1)">← Zurück</button><button class="btn" onclick="moveRichCard(1)">Weiter →</button><button class="btn" onclick="openLibraryTopic(${c.topic})">Vollständiges Thema lesen</button></div></div>`;
+ $('#content').innerHTML=`<div class="visual-library"><h1>Lernkarten mit Erklärung</h1><label>Bereich<select onchange="cardCategory=this.value;flipped=false;renderCards()"><option value="">Alle Bereiche</option>${[...new Set(activeTopics().map(x=>x.v[1]))].sort().map(v=>`<option ${cardCategory===v?'selected':''}>${esc(v)}</option>`).join('')}</select></label><p>Karte ${pool.indexOf(ci)+1} von ${pool.length} · ${esc(topics[c.topic][0])}</p><article class="panel rich-flash"><h2>${esc(c.q)}</h2><p>Formuliere zuerst deine eigene Antwort. Begründe deine Maßnahmen.</p><button class="btn primary" onclick="flipped=!flipped;renderCards()">${flipped?'Antwort verbergen':'Antwort mit Erklärung anzeigen'}</button>${flipped?c.blocks.map(([h,v],n)=>section(h,v,['definition','model','care','memory'][n%4])).join(''):''}</article><div class="study-links"><button class="btn" onclick="moveRichCard(-1)">← Zurück</button><button class="btn" onclick="moveRichCard(1)">Weiter →</button><button class="btn" onclick="openLibraryTopic(${c.topic})">Vollständiges Thema lesen</button></div></div>`;
 };
 function moveRichCard(step){const p=detailedCards.map((c,i)=>i).filter(i=>!cardCategory||topics[detailedCards[i].topic][1]===cardCategory);ci=p[(p.indexOf(ci)+step+p.length)%p.length];flipped=false;renderCards();}
 openStudyCard=function(i){cardCategory='';ci=cardForTopic(i);flipped=false;go('karten');};

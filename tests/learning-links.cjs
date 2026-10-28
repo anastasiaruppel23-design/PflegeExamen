@@ -2,7 +2,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const root=path.resolve(__dirname,'..'),read=f=>fs.readFileSync(path.join(root,f),'utf8');
 const html=read('index.html'),library=read('library.js');
 const context=vm.createContext({URL,console});
-vm.runInContext(html.slice(html.indexOf('const topics='),html.indexOf('const questions='))+html.slice(html.indexOf('const questions='),html.indexOf('const cards='))+html.slice(html.indexOf('const cards='),html.indexOf('const cases='))+`const sourceNotes=[];let ci=0,flipped=false;function go(){};function openLibraryTopic(){};function renderCards(){};function renderVisualLibrary(){};function renderQuiz(){};function kbRender(){};function openGlossary(){};function addGlossaryAccess(){};function render(){};let state={};const esc=String;function highlighted(s){return s};`,context);
+vm.runInContext(html.slice(html.indexOf('const topics='),html.indexOf('const questions='))+html.slice(html.indexOf('const questions='),html.indexOf('const cards='))+html.slice(html.indexOf('const cards='),html.indexOf('const cases='))+`const sourceNotes=[];let ci=0,flipped=false;function go(){};function openLibraryTopic(){};function renderCards(){};function renderVisualLibrary(){};function renderQuiz(){};function kbRender(){};function openGlossary(){};function addGlossaryAccess(){};function render(){};function relatedTopics(){return []};let state={};const esc=String;function highlighted(s){return s};`,context);
 vm.runInContext(library.slice(0,library.indexOf('function learningTone')),context);
 const bank=html.match(/const competencyBank\s*=\s*(\[.*?\]);/s);assert.ok(bank);vm.runInContext('const competencyBank='+bank[1],context);
 vm.runInContext(read('curriculum-data.js'),context);
