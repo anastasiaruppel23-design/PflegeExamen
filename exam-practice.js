@@ -24,7 +24,7 @@ const examFormats = {
   guide:['Kooperation mit Samira und – passend zu ihrem Willen und den rechtlichen Voraussetzungen – ihrer Mutter; Teamabstimmung und bei Bedarf ärztliche, psychologische oder sozialpädagogische Beteiligung mit klaren Aufgaben.','Entwicklungsstand und konkrete Entscheidungsfähigkeit situationsbezogen beachten; Datenschutz/Schweigepflicht, Beteiligung, Kindeswohl und Selbstbestimmung differenziert abwägen; keine pauschale Weitergabe oder Kontrolle ohne Begründung.','Geeignete aktuelle Leitlinien, Evidenz und lokale Standards nennen, deren Übertragbarkeit prüfen, Präferenzen berücksichtigen und Ziele/Ergebnisse gemeinsam evaluieren.','Respektvolle, nicht wertende Kommunikation; Konflikte sachlich ansprechen, Entscheidungen transparent begründen und eigenes Handeln kritisch reflektieren.']
  }
 };
-let examMode='schriftlich', examCaseIndex=0, examTimer=null, examSeconds=0;
+let examMode='schriftlich', examCaseIndex=0, examTimer=null, examFormatSeconds=0;
 function examEsc(x){return esc(x)}
 function examSetMode(mode){if(examTimer){clearInterval(examTimer);examTimer=null}examMode=mode;examCaseIndex=0;examRender()}
 function examRender(){
@@ -45,7 +45,7 @@ function examRender(){
  const answer=document.getElementById('examAnswer');
  if(answer){state.examDrafts??={};answer.value=state.examDrafts[draftKey]||'';answer.addEventListener('input',()=>{state.examDrafts[draftKey]=answer.value;save()})}
 }
-function examStartTimer(seconds){if(examTimer)clearInterval(examTimer);examSeconds=seconds;const clock=document.querySelector('#examClock');if(clock)clock.textContent=examFormatTime(examSeconds);if(seconds<=0)return;examTimer=setInterval(()=>{examSeconds=Math.max(0,examSeconds-1);const node=document.querySelector('#examClock');if(node)node.textContent=examFormatTime(examSeconds);if(examSeconds===0){clearInterval(examTimer);examTimer=null}},1000)}
+function examStartTimer(seconds){if(examTimer)clearInterval(examTimer);examFormatSeconds=seconds;const clock=document.querySelector('#examClock');if(clock)clock.textContent=examFormatTime(examFormatSeconds);if(seconds<=0)return;examTimer=setInterval(()=>{examFormatSeconds=Math.max(0,examFormatSeconds-1);const node=document.querySelector('#examClock');if(node)node.textContent=examFormatTime(examFormatSeconds);if(examFormatSeconds===0){clearInterval(examTimer);examTimer=null}},1000)}
 function examFormatTime(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
 (function(){
  const baseGo=go;
