@@ -1,39 +1,28 @@
-# Wissensbibliothek – Stand 27.10.2026
+# Inhalts- und Quellenprüfung – Stand 7. November 2026
 
-## Umgesetzt
+## Erweiterung
 
-Alle 36 bestehenden Wissensthemen und alle bestehenden Lernkarten verwenden ein gemeinsames, beschriftetes Farbsystem. Definitionen sind rosa, Krankheitslehre türkis, Merksätze grün, Maßnahmen gelb, Modelle lila und Warnhinweise rot. Die Suche wurde um einen Bereichsfilter ergänzt. Vorhandene Themen- und Kartenindizes bleiben stabil, damit gespeicherte Lernstände weiterhin passen.
+Der Bestand umfasst jetzt 76 Wissensthemen, 75 Lernkarten und 70 Fragen im allgemeinen Wissensquiz. Zusätzlich enthält der Kompetenzbereich-Trainer 100 Fragen in den fünf Kompetenzbereichen. Vorhanden sind 40 ältere Fallsituationen, sechs ausführliche Prüfungsfälle und vernetzte Fallübungen.
 
-12 ergänzte Wissensseiten und 12 zugehörige Lernkarten: Hypoglykämie, COPD-Exazerbation, Dekubitus, Pflegediagnosen, Maßnahmenplanung, Arzneimittelsicherheit, Atmung, Fachbegriffe sowie Paracetamol, Ibuprofen, Metformin und Insulin. Die drei Krankheitsseiten enthalten jeweils einen direkt erreichbaren fiktiven Fall mit fünf Aufgaben und begründeten Lösungsansätzen sowie eine Transferfrage. Die Fragen gehören außerdem zum normalen Grundquiz. Einzelfragen verändern dessen laufenden Punktestand nicht.
+Die Krankheits- und Pflegebibliothek enthält 32 ausführliche Profile: 29 Krankheitsbilder (darunter COPD) und drei pflegerische Themen (Tracheostoma/Trachealkanüle/Cuff, Thoraxdrainage, CABCDE). Die Krankheitsseiten enthalten jeweils eine Beschreibung, Entstehung/Formen, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, einen Prüfungsfall, eine Transferfrage mit begründeter Antwort und eine Quellenangabe.
 
-Zwei eigene, vereinfachte medizinische SVG-Schemata erklären Lunge/Gasaustausch und Druckwirkung auf Haut/Gewebe. Keine Instagram-Grafik wurde kopiert. Die bestehende Startseitenillustration wurde beibehalten: Der ausdrücklich ausgewählte persönliche Rosé-Anhang konnte nicht eindeutig verifiziert werden.
+## Quellenabgleich und Korrekturen
 
-Quiz- und Prüfungseingaben behalten ihre ruhige Gestaltung. Bestehende Falllösungen erhalten eine gelbe Hervorhebung, Antwortfeedback grüne beziehungsweise rote Kästen. Offline-Cache und Versionsverweise enthalten die neuen Dateien.
+- COPD: die bisher verlinkte NVL COPD ist abgelaufen. Die Quelle wurde auf die S2k-Leitlinie Fachärztliche Diagnostik und Therapie der COPD, Version 5.1 (Februar 2026), aktualisiert. Die Lernseite betont kontrollierte, individuell angeordnete Sauerstoffgabe und dass die SpO₂ allein eine Hyperkapnie nicht ausschließt.
+- Harnwegsinfektion: direkter Link zur S3-Leitlinie AWMF 043/044, Version 3.0 (2024).
+- Alkoholbezogene Störungen: die verlinkte S3-Leitlinie ist seit 31.12.2025 abgelaufen; eine Aktualisierung ist angemeldet. Der Link und Ablaufstatus werden sichtbar gemacht.
+- Neurogene Dysphagie: die S1-Leitlinie ist seit 28.02.2025 abgelaufen und in Überarbeitung. Das ist auf der Quellebene gekennzeichnet; pflegerische Sicherheitsgrundsätze ersetzen keine aktuelle Fachleitlinie.
+- Pankreatitis: S3-Leitlinie Version 2.0 (2021); eine Aktualisierung wurde 2026 angemeldet.
+- Herzinsuffizienz: die Leitlinienseite weist darauf hin, dass aktuell nur das Medikamentenkapitel der NVL gültig ist.
+- Schizophrenie: Quelle auf die aktuelle S3 Living Guideline Version 5.0 (2026) aktualisiert.
+- Frühere gefundene Sach-/Quellenfehler wurden ebenfalls korrigiert: falscher Link auf § 1831 BGB, Bezeichnung „vier Ebenen“ bei fünf Kompetenzbereichen, Zuordnung von Maslows Grundbedürfnissen, Abgrenzung Pflege- und medizinische Diagnose und zu allgemeiner RKI-Link.
 
-## Fachlicher Abgleich und Grenzen
+## Was damit noch nicht als vollständig fachlich freigegeben gilt
 
-Die neuen klinischen Seiten wurden mit den direkt an den Seiten verlinkten Quellen abgeglichen: diabinfo, NVL COPD 2025, DNQP-Übersicht, EMA, NHS, NIDDK und TGA. Besonders berücksichtigt: keine orale Gabe bei unsicherem Schlucken, kontrollierte Sauerstoffgabe bei COPD, keine Massage gefährdeter Druckstellen, Ranitidin-Zulassungen in der EU ruhend, Arzneimittelrisiken ohne pauschale Dosieranweisungen. Die Überschrift „Vier Ebenen … I–V“ wurde auf fünf Kompetenzbereiche korrigiert.
+Die Ausweitung der Wissensseiten ist keine Einzelprüfung jedes bestehenden Lerninhalts. Die 100 Kompetenzbereich-Fragen, die 40 älteren Fallsituationen, die sechs längeren Musterfälle, die älteren Lernkarten und die übrigen Bestandsseiten müssen weiterhin einzeln gegen die jeweils aktuellen gesetzlichen Vorgaben, Leitlinien und Expertenstandards geprüft werden. Quellenlinks wurden gezielt für die genannten Themen geprüft; das ist keine Vollprüfung sämtlicher Aussagen in jeder alten Datei.
 
-Dies ist keine vollständige fachliche Freigabe des gesamten vorhandenen Bestands: 100 Kompetenzfragen, alle älteren Falltexte und die Vollfassungen kostenpflichtiger Expertenstandards wurden nicht vollständig neu validiert. Die Bibliothek ist auch nach der Ergänzung kein vollständiges Krankheits- oder Arzneimittellexikon. Wirkstoffseiten ersetzen keine aktuelle deutsche Fachinformation. Weitere Krankheitsbilder und deren Vernetzung müssen fachlich einzeln erweitert werden.
+Damit ist der Krankheitsbild-Bestand deutlich erweitert und die Quellenlage transparenter. Eine unbegrenzte „Vollständigkeit“ aller medizinischen Krankheitsbilder kann die App nicht beanspruchen; sie deckt einen breiten prüfungsrelevanten Kern ab.
 
-## Prüfung
+## Technische Prüfung
 
-Automatisierte Browserprüfung mit Microsoft Edge bei 390 × 900 und 1280 × 900: Bibliothek, Suche, keine Treffer, Filter, Lernkarten, Transferfragen, Falllösungen, gespeicherter Lernstand und vorhandene Übungsbereiche. Screenshots zusätzlich visuell geprüft. Kein Test auf physischen Android-/iOS-Geräten; keine Aussage über deren vollständige Installierbarkeit. Cloud-Login und Supabase-Synchronisation werden ohne Zugangsdaten nicht als getestet ausgewiesen.
-
-Optionaler Browser-Smoke-Test: Playwright 1.62.1 bereitstellen und `node tests/smoke.cjs` starten. Standardmäßig wird der installierte Edge verwendet; alternativ `BROWSER_EXECUTABLE` setzen.
-
-## Illustrierte Überarbeitung nach dem Gestaltungsfeedback
-
-Die Bibliothek öffnet jetzt als bebilderte Galerie mit eigener Pflegeillustration, Themenkarten, Suche und Bereichsfiltern. Alle 48 Themen haben eine eigenständige Lernblattansicht mit großer Überschrift, semantischen Lernfarben, illustriertem Kopfbereich, hervorgehobenen Schlüsselwörtern, Prüfungsimpuls und passenden Verknüpfungen. Orem, Peplau und der Pflegeprozess besitzen eigene Ablaufgrafiken; medizinische Wortbausteine werden als große Begriffskarten gezeigt.
-
-Alle 47 Lernkarten verwenden ein gestaltetes Frage-/Antwortformat mit visuellen Elementen und nummerierten Antwortbausteinen. Die Falllösungen erhalten eine passende Pflegeillustration und farbig strukturierte Begründungen. Vier eigens erzeugte transparente Illustrationen wurden als WebP eingebunden (zusammen rund 670 KB); die persönliche Startseitenillustration bleibt erhalten. Herkunft und Promptbeschreibungen stehen in assets/ILLUSTRATIONS.md.
-
-Die neue Browserprüfung in tests/visual.cjs prüft alle 48 Lernansichten bei 320, 390 und 1280 Pixeln, horizontales Überlaufen, Suchfilter, Tastaturbedienung, Verknüpfungen und Offline-Bilder. Der GitHub-Workflow speichert Screenshots als Testartefakt. Der erfolgreiche Teststatus der Vorgängerversion ist keine Freigabe dieser neuen Gestaltung; maßgeblich ist der aktuelle Workflow-Status.
-
-## Fachbegriffe und verlässliche Lernkarten-Verknüpfungen
-
-Alle 47 Karten haben nun eine explizite Zuordnung zu ihrer Wissensseite; die fehleranfällige Suche nach dem vollständigen Fragetext entfällt. Wissensseiten mit zugeordneter Karte bieten den direkten Rückweg. Bestehende Indizes und gespeicherte Lernstände bleiben erhalten.
-
-Kohärenzgefühl, Salutogenese, Coping, Compliance und Adhärenz lassen sich im kleinen durchsuchbaren Glossar nachschlagen. Vorkommen in Lernboxen sind als beschriftete Schaltflächen direkt antippbar. Das Dialogfenster bietet eine verständliche Erklärung, ein Lernbeispiel, einen Quellenlink und den Sprung zur passenden Wissensseite. Escape und Schließen führen zum vorherigen Bedienelement zurück. Auf Lernkarten liegt der Glossarzugang außerhalb der umdrehbaren Karte; Quiz und Prüfung erhalten keine zusätzlichen Bedienelemente. Definitionen am 27.10.2026 anhand der verlinkten BIÖG-, AOK- und Universität-Hamburg-Seiten geprüft. Das Glossar ist ein erster Bestand von fünf Begriffen, kein vollständiges Fachlexikon.
-
-Browserprüfungen erweitert: alle 47 Kartenverbindungen, Begriffsdialog per Tastatur, Fokusrückgabe, Glossarsuche, Themenwechsel, Breiten 320/390/1280 und Offlinezugriff. Lokale Syntaxprüfung und `node tests/learning-links.cjs` erfolgreich: 47 Kartenverbindungen, 48 gültige Themen, Begriffserkennung, HTML-Escaping, Dateiverweise und Cache-Eintrag. Lokaler Browserdownload nicht verfügbar; die erweiterten Browserprüfungen sind noch nicht ausgeführt. Die Ergänzungen werden in einem separaten Entwicklungszweig geprüft; eine Veröffentlichung in der öffentlichen App ist nicht Bestandteil dieser Änderung.
+Die Datenverknüpfungsprüfung ist in `tests/learning-links.cjs` dokumentiert; sie prüft Kartenzuordnungen, Themenanzahl, Krankheitsprofile, Quellenverweise und Offline-Cache. Die öffentliche Bereitstellung muss nach den Commits über den GitHub-Pages-Workflow aktualisiert werden. Geräte- und Offlineverhalten sind dadurch nicht automatisch auf jedem Smartphone nachgewiesen.
