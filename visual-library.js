@@ -6,7 +6,7 @@ function topicForCard(index){
 function cardForTopic(index){return cards.findIndex((_,n)=>topicForCard(n)===index)}
 openStudyCard=function(index){const card=cardForTopic(index);if(card<0)return;ci=card;flipped=false;go('karten')};
 /* Illustrated views: selectable HTML text, original supporting art. */
-const studyArt={care:'./assets/pflege-symbol.svg',heart:'./assets/heart-study.webp',lung:'./assets/lung-study.webp',glucose:'./assets/glucose-study.webp'};
+const studyArt={care:'./assets/anastasia-pflege-illustration.svg',heart:'./assets/heart-study.webp',lung:'./assets/lung-study.webp',glucose:'./assets/glucose-study.webp'};
 const studyIcons={
  model:'<circle cx="50" cy="25" r="13"/><circle cx="25" cy="69" r="13"/><circle cx="75" cy="69" r="13"/><path d="m42 36-11 20m27-20 11 20M38 69h24"/>',
  care:'<path d="M26 23h48v65H26zM39 16h22v14H39zM36 45l5 5 9-11m3 8h12M36 64l5 5 9-11m3 8h12"/>',
