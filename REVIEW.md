@@ -23,6 +23,10 @@ Die Ausweitung der Wissensseiten ist keine Einzelprüfung jedes bestehenden Lern
 
 Damit ist der Krankheitsbild-Bestand deutlich erweitert und die Quellenlage transparenter. Eine unbegrenzte „Vollständigkeit“ aller medizinischen Krankheitsbilder kann die App nicht beanspruchen; sie deckt einen breiten prüfungsrelevanten Kern ab.
 
+## Abgleich mit Hamburgs Prüfungsformat
+
+Die offiziellen Hamburger Handreichungen mit Stand März/April 2026 und die PflAPrV §§ 9, 13–16, 19 wurden gegen die Beschreibung und Übungsfälle abgeglichen. Der Umfang (drei schriftliche Arbeiten à 120 Minuten; praktische Prüfung mindestens 120 bis höchstens 240 Minuten, davon Pflegehandlung max. 200 Minuten; mündlich 30–45 Minuten mit 30 Minuten beaufsichtigter Vorbereitung) ist passend übernommen. Die drei schriftlichen Fälle folgen Tag 1 Beziehung/Autonomie, Tag 2 Gesundheitsproblemlage/Prävention/Beratung, Tag 3 kritische Situation/ärztliche Anordnung/Ethik. Direkte Links zu allen drei Hamburger Handreichungen sind in der Prüfungsübung ergänzt. Die frühere pauschale App-Aussage, ältere Lerninhalte seien einzeln durchgesehen worden, wurde entfernt und durch einen zutreffenden Prüfstatus ersetzt.
+
 ## Technische Prüfung
 
 Die Datenverknüpfungsprüfung ist in `tests/learning-links.cjs` dokumentiert; sie prüft Kartenzuordnungen, Themenanzahl, Krankheitsprofile, Quellenverweise und Offline-Cache. Die öffentliche Bereitstellung muss nach den Commits über den GitHub-Pages-Workflow aktualisiert werden. Geräte- und Offlineverhalten sind dadurch nicht automatisch auf jedem Smartphone nachgewiesen.
