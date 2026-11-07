@@ -47,6 +47,8 @@ function examRender(){
 function examStartTimer(seconds){if(examTimer)clearInterval(examTimer);examSeconds=seconds;const clock=document.querySelector('#examClock');if(clock)clock.textContent=examFormatTime(examSeconds);if(seconds<=0)return;examTimer=setInterval(()=>{examSeconds=Math.max(0,examSeconds-1);const node=document.querySelector('#examClock');if(node)node.textContent=examFormatTime(examSeconds);if(examSeconds===0){clearInterval(examTimer);examTimer=null}},1000)}
 function examFormatTime(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
 (function(){
+ const baseGo=go;
+ go=function(next){if(next!=='pruefungsformat'&&examTimer){clearInterval(examTimer);examTimer=null}baseGo(next)};
  tabs.push(['pruefungsformat','Prüfungsformate']);
  const baseRender=render;
  render=function(){
