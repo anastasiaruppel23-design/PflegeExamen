@@ -4,13 +4,13 @@ PflegeFokus ist eine deutschsprachige Lern-App für die Pflegeausbildung und die
 
 ## Lernbestand (Stand 7. November 2026)
 
-- 76 Wissensthemen: 36 bestehende Themen und 40 ergänzte/vertiefte Lernseiten.
+- 89 Wissensthemen: 36 bestehende Themen und 53 ergänzte/vertiefte Lernseiten.
 - 75 Lernkarten und 70 Fragen im allgemeinen Wissensquiz.
 - 100 Kompetenzbereich-Fragen zu den fünf Kompetenzbereichen.
-- 32 ausführliche Krankheits- und Pflegeprofile: 29 Krankheitsbilder sowie Tracheostoma/Cuff, Thoraxdrainage und CABCDE.
+- 45 ausführliche Krankheits- und Pflegeprofile: 42 Krankheitsbilder sowie Tracheostoma/Cuff, Thoraxdrainage und CABCDE.
 - 40 ältere Fallsituationen, sechs ausführliche Prüfungsfälle und zusätzliche vernetzte Lernfälle.
 
-Die Krankheitsprofile sind nach Organsystemen geordnet. Sie enthalten Definition, Entstehung, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, einen Prüfungsimpuls, eine Transferfrage mit Lösung und einen Quellenlink.
+Die Krankheitsprofile sind in der Wissensbibliothek nach Organsystemen gruppiert (Herz/Kreislauf, Atemwege, Verdauung, Bewegungsapparat, Nieren/Harnwege, Hormone/Stoffwechsel, Nervensystem, Psyche, Krebs/Blut, Pädiatrie/Schwangerschaft, Infektionen, Haut/Wunden). Sie enthalten Definition, Entstehung, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, einen Prüfungsimpuls, eine Transferfrage mit Lösung und einen Quellenlink. Anatomische Lernbilder sind mit Alternativtext, Bildunterschrift, Urheber und Lizenz versehen; externe Commons-Bilder benötigen eine Internetverbindung.
 
 ## Fachliche Einordnung
 
