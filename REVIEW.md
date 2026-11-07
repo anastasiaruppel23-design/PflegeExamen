@@ -6,18 +6,17 @@ Der feste Kalenderplan mit persönlichen Wochen- und Prüfungsterminen wurde aus
 
 Neu hinzugekommen sind ein kombiniertes Themenquiz, Selbsteinschätzung „gewusst/unsicher/nicht gewusst“, zeitversetzte Wiederholungen für Fragen und Lernkarten, ein Wissensstand nach Themen, fiktive verzweigte Notfallszenarien, Praxis-Challenges und ein Offline-Speichern für lokale App-Inhalte.
 
-Der schriftliche Prüfungsbereich enthält drei längere Übungsfälle mit jeweils 18 fallbezogenen Aufgaben, Operatorenerklärungen und fallspezifischen Erwartungshinweisen. Der mündliche Bereich enthält zwei längere Übungsfälle zu den Kompetenzbereichen III, IV und V. Der praktische Prüfungsbereich enthält bewusst kein vorgegebenes Fallbeispiel und keine Abschlussprüfungssimulation; die App verweist auf Übung in der jeweiligen Ausbildungseinrichtung und im Ausbildungsbetrieb.
+Der schriftliche Prüfungsbereich enthält drei Übungsfälle mit je 18 Aufgaben und Antwort-/Erwartungshinweisen. Bei der Inhaltsprüfung ergaben die Fälle jedoch nur 291–321 Wörter pro Falltext; damit erfüllen sie die gewünschte Zwei-Seiten-Fallvorlage noch nicht. Die zwei mündlichen Falltexte umfassen je 201–224 Wörter und sind ebenfalls kürzer als eine ausführliche A4-Prüfungsvorlage. Die Aufgaben sind auf Kompetenzbereiche III–V ausgerichtet. Der praktische Prüfungsbereich enthält bewusst kein vorgegebenes Fallbeispiel und keine Abschlussprüfungssimulation; die App verweist auf Übung in der jeweiligen Ausbildungseinrichtung und im Ausbildungsbetrieb.
 
 Neun ergänzte Krankheitsprofile (Herzklappenerkrankung, Pneumothorax, gastrointestinale Blutung, Cholezystitis, Anaphylaxie, chronischer Schmerz, Dekubitus und Schlafapnoe sowie rheumatoide Arthritis) sind Lernentwürfe. Jedes Profil kennzeichnet, dass fachliche Einzelprüfung und Quellenabgleich noch ausstehen. Sie dürfen nicht als vollständig redaktionell freigegebene Inhalte dargestellt werden.
 
-## Vorheriger Inhalts- und Quellenstand
+## Inhaltsinventar und Strukturprüfung (7. November 2026)
 
-## Erweiterung
+Die Zählung wurde direkt aus den von der App geladenen Datenbeständen ermittelt; die früheren Sammelzahlen im README waren nicht korrekt. Derzeit enthält die zentrale Themenbibliothek 102 Einträge (36 Ausgangsthemen, 12 ergänzende Einträge, 45 quellenverlinkte Krankheits-/Pflegeprofile und 9 Entwürfe). Der Kartenstapel umfasst 117 Karten; das zusammengeführte Themenquiz 116 Fragen. Zusätzlich gibt es 100 Kompetenzfragen.
 
-Der Bestand umfasst laut README 89 Wissensthemen, 75 Lernkarten und 70 Fragen im allgemeinen Wissensquiz. Zusätzlich enthält der Kompetenzbereich-Trainer 100 Fragen in den fünf Kompetenzbereichen. Vorhanden sind 40 ältere Fallsituationen, sechs ausführliche Prüfungsfälle und vernetzte Fallübungen.
+Weitere Bestände: 10 Organsystem-Übersichten, 26 Modelle/Theorien und verwandte Konzepte, 12 Expertenstandard-Übersichten und 69 Glossarbegriffe; 8 Praxis-Challenges mit 12 Entscheidungsschritten; 2 Notfallszenarien mit je 3 Entscheidungen; 40 kurze fallbezogene Aufgaben, 6 ältere Falltexte, 3 schriftliche Übungsfälle und 2 mündliche Übungsfälle.
 
-Der bisher ausgearbeitete, quellenverlinkte Bestand enthält 45 Profile: 42 Krankheitsbilder (darunter COPD) und drei pflegerische Themen (Tracheostoma/Trachealkanüle/Cuff, Thoraxdrainage, CABCDE). Dazu kommen die neun oben genannten, noch nicht fachlich freigegebenen Entwürfe. Die bestehenden Krankheitsseiten enthalten Beschreibung, Entstehung/Formen, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, Prüfungsimpuls, Transferfrage mit begründeter Antwort und Quellenangabe.
-
+Der quellenverlinkte Bestand umfasst 42 Krankheitsprofile und 3 Pflegeverfahren (Tracheostoma/Trachealkanüle/Cuff, Thoraxdrainage, CABCDE). Die 9 ergänzten Krankheitsprofile (Herzklappenerkrankung, Pneumothorax, gastrointestinale Blutung, Cholezystitis, rheumatoide Arthritis, Anaphylaxie, chronischer Schmerz, Dekubitus und Schlafapnoe) sind als Entwürfe markiert und haben noch keine abgeschlossene fachliche Einzelprüfung. Für diese Entwürfe fehlen zudem belastbare, konkret zugeordnete Quellenverweise in der App.
 
 ## Organsystem-Navigation und Abbildungen
 
@@ -38,9 +37,24 @@ Die neuen Kurzprofile verlinken auf zum Thema passende Fachgesellschafts- oder G
 - Schizophrenie: Quelle auf die aktuelle S3 Living Guideline Version 5.0 (2026) aktualisiert.
 - Frühere gefundene Sach-/Quellenfehler wurden ebenfalls korrigiert: falscher Link auf § 1831 BGB, Bezeichnung „vier Ebenen“ bei fünf Kompetenzbereichen, Zuordnung von Maslows Grundbedürfnissen, Abgrenzung Pflege- und medizinische Diagnose und zu allgemeiner RKI-Link.
 
+## Befunde dieses Gesamt-Audits
+
+- Die bisherigen README-Zahlen (89 Themen, 75 Karten, 70 Quizfragen, sechs ausführliche Prüfungsfälle) entsprachen nicht den tatsächlich eingebundenen Daten. README und dieser Prüfbericht wurden deshalb auf nachvollziehbare Einzelbestände umgestellt.
+- Die 3 schriftlichen Falltexte sind zu kurz für die gewünschte Zwei-Seiten-Vorlage, obwohl je 18 Fragen und Antwort-/Erwartungshinweise vorhanden sind.
+- Die 2 mündlichen Falltexte sind mit 201–224 Wörtern knapp. Die sechs dazugehörigen allgemeinen Aufgaben müssen weiterhin einzeln darauf geprüft werden, ob jede Aufgabe die Kompetenzbereiche III, IV und V mit fallbezogener Tiefe abdeckt.
+- Die 2 Notfallsimulatoren geben pro Entscheidung eine fachliche Begründung. Ihre Ausgänge sind jedoch nur grob als sicherer oder verzögerter Verlauf formuliert; sie bilden noch keine detailliert unterschiedlichen Handlungsfolgen je Entscheidungsweg ab.
+- Die 26 Modell-Einträge mischen Pflegetheorien mit Kommunikations-, Stress-, Entwicklungs- und Qualitätsmodellen. Die Lernnavigation sollte diese Typen klar getrennt benennen; sonst kann die Kategorie „Modelle und Theorien“ den Eindruck erwecken, alle Einträge seien Pflegemodelle.
+- Die 12 Expertenstandard-Einträge sind kurze Lernzusammenfassungen, nicht der vollständige Wortlaut oder eine vollständige Kriterienliste der DNQP-Standards.
+
+- Gastrointestinale Blutung: Die inzwischen veröffentlichte AWMF-S2k-Leitlinie Version 2.0 ist vom 18.12.2025 und gültig bis 15.12.2030. Das entsprechende neue Profil bleibt trotzdem ungeprüft, bis diese Quelle im Datensatz konkret verknüpft und sein Inhalt daran abgeglichen ist.
+- Anaphylaxie: Die im AWMF-Register auffindbare S2k-Fassung war bis 30.01.2026 gültig; AWMF führt die Leitlinie aktuell als registriert/überarbeitet. Das Anaphylaxie-Entwurfsprofil darf daher nicht so behandelt werden, als sei sein Leitlinienabgleich abgeschlossen.
+- DNQP: Das DNQP hat 2026 die dritte Aktualisierung der Dekubitusprophylaxe begonnen und plant die Veröffentlichung für 2027. Die Kurzbeschreibung muss sichtbar als Stand der zweiten Aktualisierung von 2017 gekennzeichnet bleiben.
+
 ## Was damit noch nicht als vollständig fachlich freigegeben gilt
 
-Die Ausweitung der Wissensseiten ist keine Einzelprüfung jedes bestehenden Lerninhalts. Die 100 Kompetenzbereich-Fragen, die 40 älteren Fallsituationen, die sechs längeren Musterfälle, die älteren Lernkarten und die übrigen Bestandsseiten müssen weiterhin einzeln gegen die jeweils aktuellen gesetzlichen Vorgaben, Leitlinien und Expertenstandards geprüft werden. Quellenlinks wurden gezielt für die genannten Themen geprüft; das ist keine Vollprüfung sämtlicher Aussagen in jeder alten Datei.
+Die maschinelle Strukturprüfung fand bei den 35 Ausgangsquizfragen, 20 Erweiterungsfragen und 100 Kompetenzfragen keine leeren Antwort-/Erklärungsfelder, ungültigen Antwortindizes oder doppelten Fragetexte. Das prüft die Datenform, nicht die fachliche Richtigkeit jeder Lösung. Auch bei den Fallaufgaben sind 18 Fragen und 18 Antwort-/Erwartungshinweise pro schriftlichem Fall vorhanden.
+
+Eine vollständige fachliche Einzelprüfung jedes medizinischen Satzes, jeder Musterlösung und jeder alten Karte ist damit noch nicht abgeschlossen. Offen sind insbesondere die 9 Krankheitsentwürfe ohne konkrete Quellen, die 100 Kompetenzfragen, die 40 kurzen Fallaufgaben, die 6 älteren Falltexte, die älteren Lernkarten und weitere alte Lernseiten. Für eine Freigabe müssen Aussagen einzeln mit gültigen Leitlinien, Expertenstandards und Rechtsquellen verglichen werden. Die 3 schriftlichen Fälle müssen außerdem auf die gewünschte Länge von etwa zwei DIN-A4-Seiten je Fall erweitert werden.
 
 Damit ist der Krankheitsbild-Bestand deutlich erweitert und die Quellenlage transparenter. Eine unbegrenzte „Vollständigkeit“ aller medizinischen Krankheitsbilder kann die App nicht beanspruchen; sie deckt einen breiten prüfungsrelevanten Kern ab.
 
