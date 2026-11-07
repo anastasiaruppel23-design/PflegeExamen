@@ -237,5 +237,5 @@ function kbRender(){
 }
 
 function formatTime(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}function setTimer(m){pauseTimer();remaining=m*60;if($('#clock'))$('#clock').textContent=formatTime(remaining)}function startTimer(){if(timer)return;timer=setInterval(()=>{remaining=Math.max(0,remaining-1);if($('#clock'))$('#clock').textContent=formatTime(remaining);if(remaining===0){pauseTimer();alert('Die Übungszeit ist um!')}},1000)}function pauseTimer(){clearInterval(timer);timer=null}render();window.addEventListener('load',initCloud);if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
-</script><script src="./library.js?v=9"></script><script src="./visual-library.js?v=11"></script><script src="./glossary.js?v=11"></script></body></html>
+</script><script src="./library.js?v=9"></script><script src="./visual-library.js?v=11"></script><script src="./glossary.js?v=11"></script><script src="./exam-guidelines.js?v=1"></script></body></html>
 

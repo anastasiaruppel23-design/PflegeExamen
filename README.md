@@ -52,3 +52,10 @@ Die optionale Browser-Spracherkennung benötigt Mikrofonberechtigung. Je nach Br
 - Keine automatische Wiederholung über alle Lernbereiche hinweg.
 
 Die illustrierte Überarbeitung ersetzt die frühere Akkordeonliste durch Themenkarten und gestaltete Lernblätter mit vier eigenen Lernillustrationen. Browserprüfung: `node tests/visual.cjs` (Playwright erforderlich); Screenshots und Ergebnis stehen im GitHub-Workflow „Learning library design checks“.
+
+
+## Prüfungsorientiertes Üben (November 2026)
+
+Der Prüfungsbereich enthält nun einen geführten Selbstcheck für schriftliche, mündliche und praktische Abschlussprüfung. Die Übungen folgen dem Ablauf: eine Frage lesen, zuerst selbst antworten, anschließend Orientierungspunkte öffnen und die Antwort selbst vergleichen. Die Texte aus dem Übungsbereich werden nicht gespeichert oder an einen Server übertragen. Die App vergibt keine verbindliche Prüfungsnote und bietet keine automatische KI-Korrektur.
+
+Rechtsgrundlage sind das Pflegeberufegesetz (PflBG) und die Pflegeberufe-Ausbildungs- und -Prüfungsverordnung (PflAPrV), insbesondere §§ 9 und 14–19. Hamburger Prüfungsabläufe folgen den Handreichungen der Sozialbehörde: schriftliche Abschlussprüfung Stand 04/2026, mündliche und praktische Abschlussprüfung Stand 03/2026. Die App verlinkt direkt auf die Originalquellen. Die Rechtslage und behördlichen Handreichungen sind vor künftigen Prüfungen erneut zu prüfen.
