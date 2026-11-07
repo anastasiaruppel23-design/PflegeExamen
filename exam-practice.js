@@ -50,14 +50,9 @@ function examFormatTime(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+S
 (function(){
  const baseGo=go;
  go=function(next){if(next!=='pruefungsformat'&&examTimer){clearInterval(examTimer);examTimer=null}baseGo(next)};
- tabs.push(['pruefungsformat','Prüfungsformate']);
  const baseRender=render;
  render=function(){
   baseRender();
-  const navGroup=document.querySelector('#nav .navgroup:nth-child(3) .navitems');
-  if(navGroup&&!document.querySelector('#nav button[data-exam-format]')){
-   const b=document.createElement('button');b.dataset.examFormat='true';b.textContent='Prüfungsformate';b.setAttribute('aria-current',tab==='pruefungsformat'?'page':'false');if(tab==='pruefungsformat')b.className='active';b.onclick=()=>go('pruefungsformat');navGroup.appendChild(b);
-  }
   if(tab==='pruefungsformat')examRender();
   else if(['themen','quiz','kompetenz','karten','faelle','falltraining','pruefung','wiederholen','muendlich'].includes(tab)){
    const c=document.querySelector('#content');
