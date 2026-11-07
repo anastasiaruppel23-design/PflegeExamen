@@ -71,16 +71,25 @@
  function renderQuiz(c){
   const pool=quizPool(),areas=[...new Set(pool.map(x=>x.area))],filter=state.upgradeArea||'Alle',list=pool.filter(x=>filter==='Alle'||x.area===filter),due=list.filter(x=>state.reviewItems[x.id]&&state.reviewItems[x.id].due<=dateKey());
   if(!qrun.length||qpos>=qrun.length){
-   c.innerHTML='<div class="panel"><span class="tag">Themenquiz · aus Krankheitsbildern und Lerninhalten</span><h2>Gezielt üben</h2><p>Die Quizfragen stammen aus den thematischen Profilen. Nach jeder beantworteten Frage markierst du selbst, ob du sie gewusst hast.</p><label for="upgradeArea">Themenbereich</label><select id="upgradeArea" onchange="state.upgradeArea=this.value"><option>Alle</option>'+areas.map(x=>'<option '+(filter===x?'selected':'')+'>'+esc(x)+'</option>').join('')+'</select><div class="flex"><button class="btn primary" onclick="upgradeQuizStart(false)">Quiz starten ('+list.length+' Fragen)</button><button class="btn" onclick="upgradeQuizStart(true)" '+(due.length?'':'disabled')+'>Fällige Wiederholungen ('+due.length+')</button></div><p class="muted">Fragen in diesem Themenfilter: '+list.length+'. Einheiten sind jederzeit abbrechbar.</p></div>';
-   return
+   c.innerHTML='<div class="panel"><span class="tag">Themenquiz · Krankheitsbilder und Lerninhalte</span><h2>Gezielt üben</h2><p>Die Fragen kommen aus den thematischen Profilen. Nach jeder Antwort bewertest du deine Sicherheit; Fehler werden automatisch früher wiederholt.</p><label for="upgradeArea">Themenbereich</label><select id="upgradeArea" onchange="state.upgradeArea=this.value"><option>Alle</option>'+areas.map(x=>'<option '+(filter===x?'selected':'')+'>'+esc(x)+'</option>').join('')+'</select><div class="flex"><button class="btn primary" onclick="upgradeQuizStart(false)">Quiz starten ('+list.length+' Fragen)</button><button class="btn" onclick="upgradeQuizStart(true)" '+(due.length?'':'disabled')+'>Fällige Wiederholungen ('+due.length+')</button></div></div>';
+   return;
   }
   const q=qrun[qpos],ans=qselected!==null&&qselected===q.answer;
-  c.innerHTML='<div class="panel"><span class="tag">'+esc(q.area)+' · '+(qpos+1)+' / '+qrun.length+'</span><h2>'+esc(q.q)+'</h2>'+q.options.map((x,i)=>'<button class="option '+(qselected===i?'selected':'')+'" '+(qchecked?'disabled':'')+' onclick="upgradeQuizAnswer('+i+')">'+String.fromCharCode(65+i)+' · '+esc(x)+'</button>').join('')+(qchecked?'<p class="'+(ans?'good':'bad')+'"><strong>'+(ans?'Richtig':'Noch nicht richtig')+'</strong> '+esc(q.explain)+'</p><p>Wie sicher warst du?</p><div class="flex"><button class="btn" onclick="upgradeRate(&#39;nicht gewusst&#39;)">Nicht gewusst</button><button class="btn" onclick="upgradeRate(&#39;unsicher&#39;)">Unsicher</button>'+(ans?'<button class="btn primary" onclick="upgradeRate(&#39;gewusst&#39;)">Gewusst</button>':'<p class="muted">Da die Antwort nicht richtig war, wird diese Frage als Wiederholung vorgemerkt.</p>')</div>':'<button class="btn primary" '+(qselected===null?'disabled':'')+' onclick="upgradeQuizCheck()">Antwort prüfen</button>')+'</div>';
+  let feedback='';
+  if(qchecked){
+   feedback='<p class="'+(ans?'good':'bad')+'"><strong>'+(ans?'Richtig':'Noch nicht richtig')+'</strong> '+esc(q.explain)+'</p><p>Wie sicher warst du?</p><div class="flex"><button class="btn" onclick="upgradeRate(0)">Nicht gewusst</button><button class="btn" onclick="upgradeRate(1)">Unsicher</button>';
+   if(ans)feedback+='<button class="btn primary" onclick="upgradeRate(2)">Gewusst</button>';
+   else feedback+='<p class="muted">Die falsche Antwort wird als Wiederholung vorgemerkt.</p>';
+   feedback+='</div>';
+  }else{
+   feedback='<button class="btn primary" '+(qselected===null?'disabled':'')+' onclick="upgradeQuizCheck()">Antwort prüfen</button>';
+  }
+  c.innerHTML='<div class="panel"><span class="tag">'+esc(q.area)+' · '+(qpos+1)+' / '+qrun.length+'</span><h2>'+esc(q.q)+'</h2>'+q.options.map((x,i)=>'<button class="option '+(qselected===i?'selected':'')+'" '+(qchecked?'disabled':'')+' onclick="upgradeQuizAnswer('+i+')">'+String.fromCharCode(65+i)+' · '+esc(x)+'</button>').join('')+feedback+'</div>';
  }
  window.upgradeQuizStart=function(onlyDue){const area=state.upgradeArea||'Alle';qrun=quizPool().filter(q=>(area==='Alle'||q.area===area)&&(!onlyDue||(state.reviewItems[q.id]&&state.reviewItems[q.id].due<=dateKey()))).sort(()=>Math.random()-.5);qpos=0;qselected=null;qchecked=false;renderQuiz($('#content'))};
  window.upgradeQuizAnswer=n=>{if(!qchecked){qselected=n;renderQuiz($('#content'))}};
  window.upgradeQuizCheck=()=>{if(qselected!==null){qchecked=true;renderQuiz($('#content'))}};
- window.upgradeRate=r=>{rateQuestion(qrun[qpos],r);qpos++;qselected=null;qchecked=false;renderQuiz($('#content'))};
+ window.upgradeRate=r=>{const rating=['nicht gewusst','unsicher','gewusst'][r]||r;rateQuestion(qrun[qpos],rating);qpos++;qselected=null;qchecked=false;renderQuiz($('#content'))};
 
  function renderDashboard(c){
   const stats=state.upgradeStats||{},due=dueCount(),areas=Object.entries(stats),all=areas.reduce((a,[,s])=>({attempts:a.attempts+s.attempts,correct:a.correct+s.correct}),{attempts:0,correct:0});
