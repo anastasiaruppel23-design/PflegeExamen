@@ -2,10 +2,13 @@
 
 Erzeugt mit der eingebauten Bildgenerierung am 27.10.2026; als transparente WebP-Dateien mit 850 Pixeln Breite eingebunden. Unterstützende Lernillustrationen, keine diagnostischen Abbildungen. Die persönliche Startseitenillustration wird nicht ersetzt.
 
-- nursing-study.webp: Pflegefachperson in türkiser Kleidung begleitet ältere Frau mit Rollator, warm gezeichnet, Aquarellschattierung, transparent, ohne Text.
+- nursing-study.webp: ältere generische Lernillustration, nicht mehr in der App referenziert.
 - heart-study.webp: einzelnes anatomisches Herz, Rot-/Rosétöne und blaue große Gefäße, Aquarell-/Tusche-Stil, transparent, ohne Beschriftung.
 - lung-study.webp: Lungenpaar mit Trachea und Bronchien, rosa Aquarell-/Tusche-Stil, transparent, ohne Beschriftung.
 - glucose-study.webp: Blutzuckermessgerät mit leerem Display, Blutstropfen und zwei Glukosewürfeln, transparenter Aquarell-/Tusche-Stil, ohne Messwert.
+
+- anastasia-pflege-illustration.svg: Anastasia als Pflegefachkraft im türkisen Kasack im Gespräch mit einer älteren Bewohnerin am Rollator. Erstellt aus den von Anastasia bereitgestellten Referenzfotos am 07.11.2026; Gesichtszüge und hochgesteckte dunkle Locken orientieren sich an den Fotos. Die Originalfotos sind nicht eingebettet.
+- pflege-symbol.svg: personenfreies Ersatzsymbol für Lerninhalte ohne persönliche Pflegeillustration.
 
 Alle fachlichen Beschriftungen und Inhalte stehen als zugänglicher HTML-Text neben den Illustrationen. Die schematischen SVG-Abbildungen mit Gasaustausch und Druckwirkung bleiben für die konkreten Zusammenhänge erhalten.
 
