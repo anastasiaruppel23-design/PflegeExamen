@@ -129,7 +129,7 @@
     }).join("");
     const focus = mode.focus.map(function (item) { return "<li>" + esc(item) + "</li>"; }).join("");
     setContent(
-      '<div class="panel"><button class="btn exam-back" onclick="go(\\'pruefung\\')">← Zurück zum Prüfungstraining</button>' +
+      '<div class="panel"><button class="btn exam-back" onclick="go(&quot;pruefung&quot;)">← Zurück zum Prüfungstraining</button>' +
       '<p class="tag">Prüfungsvorbereitung · Stand 07.11.2026</p><h2>So übst du für alle drei Prüfungsteile</h2>' +
       '<p>Du bekommst jeweils eine Aufgabe. Erst schreibst oder sprichst du deine eigene Antwort. Danach öffnest du den Erwartungshorizont und prüfst selbst, was schon drin war und was noch fehlt.</p>' +
       '<div class="flex">' + tabs + '</div><article class="card"><h3>' + esc(mode.title) + '</h3><p><strong>Rechtsgrundlage:</strong> ' + esc(mode.law) + '</p><p>' + esc(mode.summary) + '</p><ul>' + focus + '</ul>' +
