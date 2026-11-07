@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 650" role="img" aria-labelledby="title desc">
+<title id="title">Pflegewissen gemeinsam erschließen</title><desc id="desc">Ein offenes Buch mit einem rosafarbenen Herz und Verbindungslinien, ohne abgebildete Person.</desc>
+<defs><linearGradient id="paper" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#fffdf8"/><stop offset="1" stop-color="#f8e7ed"/></linearGradient><linearGradient id="cover" x1="0" x2="1"><stop stop-color="#bd5d83"/><stop offset="1" stop-color="#8e4265"/></linearGradient></defs>
+<ellipse cx="425" cy="565" rx="295" ry="28" fill="#344b4214"/>
+<path d="M122 185c109-34 217-17 303 45v292c-92-61-197-74-303-38z" fill="url(#paper)" stroke="#35594e" stroke-width="11" stroke-linejoin="round"/>
+<path d="M728 185c-109-34-217-17-303 45v292c92-61 197-74 303-38z" fill="url(#paper)" stroke="#35594e" stroke-width="11" stroke-linejoin="round"/>
+<path d="M425 231v291" stroke="#35594e" stroke-width="9" stroke-linecap="round"/>
+<path d="M181 252c60-14 116-10 171 8M181 300c58-12 112-7 169 12M181 348c55-8 111 0 163 18M669 252c-60-14-116-10-171 8M669 300c-58-12-112-7-169 12M669 348c-55-8-111 0-163 18" fill="none" stroke="#b5c9b9" stroke-width="12" stroke-linecap="round"/>
+<path d="M425 430c-29-26-71-52-71-92 0-34 44-48 71-10 27-38 71-24 71 10 0 40-42 66-71 92z" fill="url(#cover)"/>
+<path d="M255 111c-25-43 42-73 65-25 23-48 90-18 65 25-18 31-65 58-65 58s-47-27-65-58z" fill="#e6a5bd"/>
+<circle cx="196" cy="135" r="10" fill="#dfb35d"/><circle cx="654" cy="131" r="12" fill="#dfb35d"/><circle cx="710" cy="414" r="9" fill="#e6a5bd"/>
+<path d="M293 113l44 29m219-26 44-17m69 315 31 21" stroke="#9a4a6c" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 13"/>
+</svg>
