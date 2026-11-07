@@ -4,7 +4,16 @@
 
 Der Bestand umfasst jetzt 76 Wissensthemen, 75 Lernkarten und 70 Fragen im allgemeinen Wissensquiz. Zusätzlich enthält der Kompetenzbereich-Trainer 100 Fragen in den fünf Kompetenzbereichen. Vorhanden sind 40 ältere Fallsituationen, sechs ausführliche Prüfungsfälle und vernetzte Fallübungen.
 
-Die Krankheits- und Pflegebibliothek enthält 32 ausführliche Profile: 29 Krankheitsbilder (darunter COPD) und drei pflegerische Themen (Tracheostoma/Trachealkanüle/Cuff, Thoraxdrainage, CABCDE). Die Krankheitsseiten enthalten jeweils eine Beschreibung, Entstehung/Formen, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, einen Prüfungsfall, eine Transferfrage mit begründeter Antwort und eine Quellenangabe.
+Die Krankheits- und Pflegebibliothek enthält 45 ausführliche Profile: 42 Krankheitsbilder (darunter COPD) und drei pflegerische Themen (Tracheostoma/Trachealkanüle/Cuff, Thoraxdrainage, CABCDE). Die Krankheitsseiten enthalten jeweils eine Beschreibung, Entstehung/Formen, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, einen Prüfungsfall, eine Transferfrage mit begründeter Antwort und eine Quellenangabe.
+
+
+## Organsystem-Navigation und Abbildungen
+
+Die 42 Krankheitsbilder sind im visuellen Lernbereich in eigene Gruppen sortiert: Herz und Kreislauf, Lunge und Atemwege, Magen/Darm/Leber, Bewegungsapparat, Nieren/Harnwege, Hormone/Stoffwechsel, Nervensystem, Psyche, Krebs/Blut, Schwangerschaft/Pädiatrie, Infektionen/Immunsystem sowie Haut/Wundheilung. Pflegeverfahren bleiben als eigene Gruppe sichtbar. Hinzugekommen sind 13 ausführliche Profile: Reflux, Ulkus, chronisch-entzündliche Darmerkrankungen, Leberzirrhose, Gallensteine/Cholezystitis, Arthrose, rheumatoide Arthritis, akute Nierenschädigung, Harninkontinenz/Harnverhalt, Schilddrüsenunterfunktion, pAVK, Brustkrebs und Angststörung/Panikattacke.
+
+Die Organsystemgruppen und Detailseiten zeigen erklärende Schemaabbildungen. Wikimedia-Commons-Bilder sind mit Alt-Text, Bildunterschrift, Urheber, Lizenz und Link zur Dateiseite versehen; lokale PflegeFokus-Schemata sind im Illustrationsverzeichnis dokumentiert. Externe Commons-Bilder laden nur mit Internetverbindung und sind nicht Teil des Offline-Caches. Medizinische Aussagen bleiben als Text zugänglich. Die Abbildungen dienen der Orientierung und stellen keine diagnostischen Bilder dar.
+
+Die neuen Kurzprofile verlinken auf zum Thema passende Fachgesellschafts- oder Gesundheitsinformationen. Bei einzelnen Bereichen ist die verwendete Leitlinie bewusst eingeschränkt gekennzeichnet (z. B. Intensivleitlinie für Nierenersatztherapie); das ersetzt keine systematische Quellenprüfung jeder Aussage und jeder älteren Profilseite.
 
 ## Quellenabgleich und Korrekturen
 
