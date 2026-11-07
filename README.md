@@ -1,54 +1,26 @@
-# PflegeFokus – by ANA Digital – kostenlose PWA
+# PflegeFokus – by ANA Digital
 
-## Wissensbibliothek, Oktober 2026
+PflegeFokus ist eine deutschsprachige Lern-App für die Pflegeausbildung und die schriftliche, praktische und mündliche Prüfung. Sie verbindet Wissensseiten, Lernkarten, Quizfragen, Fallarbeit und Prüfungssimulation.
 
-48 Wissensthemen, 47 Lernkarten und 38 Grundquizfragen. Die Bibliothek nutzt beschriftete Lernfarben, einen Bereichsfilter, zwei medizinische Schemata sowie verknüpfte Krankheitsseiten mit drei zusätzlichen Lernfällen und Transferfragen. Quiz und Prüfung bleiben übersichtlich. Umfang, Quellenabgleich, Tests und offene Grenzen stehen in [REVIEW.md](REVIEW.md). Die nachfolgenden älteren Bestandsangaben dokumentieren frühere Ausbaustufen.
+## Lernbestand (Stand 7. November 2026)
 
-## Inhalt
-Eigenständige statische Web-App mit Wissensbibliothek, Quiz, Lernkarten, sechs Pflegefällen, mündlicher Prüfungssimulation, Lernplan und Timer. Die Lerninhalte wurden anhand des bisherigen Lovable-Projekts „Pflege Exam Compass“ neu zusammengestellt. Dies ist keine vollständige 1:1-Übernahme aller Originaltexte und Fragen.
+- 76 Wissensthemen: 36 bestehende Themen und 40 ergänzte/vertiefte Lernseiten.
+- 75 Lernkarten und 70 Fragen im allgemeinen Wissensquiz.
+- 100 Kompetenzbereich-Fragen zu den fünf Kompetenzbereichen.
+- 32 ausführliche Krankheits- und Pflegeprofile: 29 Krankheitsbilder sowie Tracheostoma/Cuff, Thoraxdrainage und CABCDE.
+- 40 ältere Fallsituationen, sechs ausführliche Prüfungsfälle und zusätzliche vernetzte Lernfälle.
 
-## Veröffentlichung über GitHub Pages
-Das bestehende Repository heißt weiterhin `PflegeExamen`. Unter **Settings → Pages** kann die Veröffentlichung über den Branch `main` und den Ordner `/(root)` aktiviert werden. Bei einem öffentlichen Repository lautet die typische Adresse `https://anastasiaruppel23-design.github.io/PflegeExamen/`. Der sichtbare App-Name ist **PflegeFokus – by ANA Digital**.
+Die Krankheitsprofile sind nach Organsystemen geordnet. Sie enthalten Definition, Entstehung, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, einen Prüfungsimpuls, eine Transferfrage mit Lösung und einen Quellenlink.
 
-## Datenschutz / Nutzung
-Die App benötigt kein Konto, keine API und keine Datenbank. Bearbeitete Themen, Quizbestwert und Lernwochen werden lokal im Browser gespeichert; beim Löschen der Browserdaten gehen sie verloren. Eingaben in Fall- und Prüfungstextfeldern werden nicht gespeichert. Die App funktioniert nach dem ersten vollständigen Laden offline, sofern die Service-Worker-Installation erfolgreich war. GitHub Pages erfordert bei kostenlosen Standardkonten üblicherweise ein öffentliches Repository.
+## Fachliche Einordnung
 
-## Aktualisieren
-Dateien im Repository ersetzen und committen. Bei Änderungen am Offline-Cache die CACHE-Version in `sw.js` erhöhen.
+Die App bereitet prüfungsrelevante Pflegekompetenz vor. Sie ist kein vollständiges medizinisches Nachschlagewerk und keine verbindliche klinische Handlungsanweisung. Ärztliche Diagnostik und Therapie, aktuelle Leitlinien, betriebliche Standards und die individuelle Situation bleiben maßgeblich. Quellen mit abgelaufener Gültigkeit oder laufender Aktualisierung sind auf den betroffenen Lernseiten ausdrücklich gekennzeichnet.
 
-## Hinweis
-Lernhilfe, keine verbindliche klinische Handlungsanweisung. Inhalte und Rechtslage mit aktuellen Standards/Leitlinien und Ausbildungsmaterialien abgleichen.
+Der Prüfungsbereich orientiert sich an den Pflegeberufe-Prüfungsregeln. Das bedeutet nicht automatisch, dass jede ältere Karte, jede Frage und jeder Fall bereits einzeln fachlich freigegeben ist. Der Stand und offene Prüfbereiche sind in [REVIEW.md](REVIEW.md) dokumentiert.
 
+## App und Entwicklung
 
-## Neu: Kompetenzbereich-Trainer
+Die Anwendung ist als Progressive Web App aufgebaut und wird über GitHub Pages veröffentlicht. Änderungen am Wissensbestand liegen in `disease-library.js` und `library.js`; die Darstellung liegt in `visual-library.js`. Nach Änderungen an den geladenen JavaScript-Dateien sind die Versionsverweise in `index.html` und der Offline-Cache in `sw.js` zu aktualisieren.
 
-100 zusätzliche Multiple-Choice-Fragen aus den Kompetenzbereichen 1–5. Filter, automatische Wiederholung falscher Antworten bis zur richtigen Lösung, gesondertes Fehlertraining und lokaler Lernstand. Fragen sind Lernmaterial und ersetzen keine Prüfungsvorgaben oder aktuellen Leitlinien.
+Die App enthält lokale Lernstands- und Exportfunktionen. Die genutzten Konto- und Synchronisierungsfunktionen hängen von der aktuellen App-Konfiguration ab.
 
-## Neue Funktionen (Oktober 2026)
-- Übersichtliche, auf Smartphones zweispaltige Navigation in vier Gruppen: Start & Fortschritt, Lernen, Prüfung, Organisation.
-- Lerncockpit mit lokal gespeicherten Lernzahlen, Fehlern und Fall-Selbstbewertungen.
-- 36 Wissensthemen, 35 Grundquizfragen, 35 Lernkarten, 100 Fragen zu Kompetenzbereichen 1–5 und 40 zusätzliche Fallsituationen.
-- Mündliche Übung mit optionaler Browser-Spracherkennung (Deutsch), Stoppuhr, Erwartungshorizont und Selbsteinschätzung.
-- Einstellungen mit JSON-Export und -Import des lokalen Lernstands, Installationshilfe und Teilen-Link.
-- Quellenhinweise auf Gesetzestexte und Fachorganisationen.
-
-## Installation auf Smartphones
-**Android / Chrome:** veröffentlichte GitHub-Pages-URL öffnen, Browsermenü ⋮, „App installieren“ bzw. „Zum Startbildschirm hinzufügen“. Gegebenenfalls wird ein Installationsknopf unter Einstellungen angeboten. HTTPS und eine erfolgreiche Service-Worker-Registrierung sind Voraussetzung für Offline-Nutzung.
-
-**iPhone / Safari:** URL in Safari öffnen, Teilen → „Zum Home-Bildschirm“ → Hinzufügen.
-
-**Wichtig:** GitHub Pages muss in den Repository-Einstellungen aktiviert sein. Eine GitHub-Repositoriumsseite ist nicht die installierbare App.
-
-## Andere Nutzer, Accounts und Datenschutz
-Andere Personen dürfen den öffentlichen App-Link öffnen und die PWA auf ihrem Gerät installieren. **Es gibt derzeit keine Benutzerkonten, Registrierung, Anmeldung, Passwort-Zurücksetzung oder Cloud-Synchronisation.** Jeder Browser führt seinen eigenen lokalen Lernstand. Konten würden einen zusätzlichen Authentifizierungsdienst, Datenbank, Datenschutzkonzept und laufenden Betrieb erfordern.
-
-Die optionale Browser-Spracherkennung benötigt Mikrofonberechtigung. Je nach Browser wird das Gesprochene durch den Browseranbieter oder einen externen Dienst verarbeitet. Keine echten Patientendaten diktieren. Die App zeichnet keine Audiodatei auf; diktierter Text wird nicht als Teil des Lernstands gespeichert. Die Bewertung ist eine Selbsteinschätzung, keine KI-Bewertung.
-
-## Bekannte Grenzen / noch zu prüfen
-- Echter End-to-End-Test auf Android und iPhone, Installierbarkeit und Offline-Verhalten.
-- Fachliche Einzelprüfung aller Fragen, Fälle und Quellverweise mit den aktuell gültigen Originalstandards.
-- Kein automatischer Abgleich gesprochener Antworten mit einer Musterlösung.
-- Sicherung muss aktiv heruntergeladen und beim Gerätewechsel importiert werden.
-- Keine automatische Wiederholung über alle Lernbereiche hinweg.
-
-Die illustrierte Überarbeitung ersetzt die frühere Akkordeonliste durch Themenkarten und gestaltete Lernblätter mit vier eigenen Lernillustrationen. Browserprüfung: `node tests/visual.cjs` (Playwright erforderlich); Screenshots und Ergebnis stehen im GitHub-Workflow „Learning library design checks“.
