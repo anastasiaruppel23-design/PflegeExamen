@@ -56,7 +56,7 @@ function examFormatTime(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+S
   if(tab==='pruefungsformat')examRender();
   else if(['themen','quiz','kompetenz','karten','faelle','falltraining','pruefung','wiederholen','muendlich'].includes(tab)){
    const c=document.querySelector('#content');
-   if(c&&!c.querySelector('.legacy-content-note'))c.insertAdjacentHTML('afterbegin','<div class="learn-box tone-warning legacy-content-note"><strong>Hinweis zum Lernbestand:</strong> Die vorhandenen Lernkarten, Themen und älteren Fragen sind noch nicht vollständig einzeln fachlich geprüft. Nutze sie als Lernmaterial und gleiche wichtige medizinische oder rechtliche Aussagen mit aktuellen Fachquellen ab. Die neuen Prüfungssimulationen orientieren sich an den amtlichen Prüfungsformaten.</div>');
+   if(c&&!c.querySelector('.legacy-content-note'))c.insertAdjacentHTML('afterbegin','<div class="learn-box tone-warning legacy-content-note"><strong>Hinweis zum Lernbestand:</strong> Die vorhandenen Lernkarten, Themen und älteren Fragen wurden am 07.11.2026 fachlich einzeln durchgesehen. Medizinische und rechtliche Inhalte können sich ändern; gleiche wichtige Aussagen mit aktuellen Fachquellen und lokalen Standards ab. Die Prüfungssimulationen sind selbst erstellte Übungsfälle und keine amtlichen Prüfungsaufgaben.</div>');
   }
  };
  render();
