@@ -6,6 +6,7 @@
   const SOURCES = [
     { label: "PflAPrV §§ 9, 14–19 (Gesetze im Internet)", url: "https://www.gesetze-im-internet.de/pflaprv/" },
     { label: "PflBG § 4 und § 5 (Gesetze im Internet)", url: "https://www.gesetze-im-internet.de/pflbg/" },
+    { label: "PflAPrV § 13 Vornoten und § 19 Bestehen/Wiederholung", url: "https://www.gesetze-im-internet.de/pflaprv/" },
     { label: "Hamburg: Handreichungen zu den drei Abschlussprüfungen (Stand 03/2026 bzw. 04/2026)", url: "https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/einrichtungen/lpa/pflegefachkraefte-31534" }
   ];
 
@@ -73,7 +74,7 @@
     practical: {
       title: "Praktische Prüfung",
       law: "PflAPrV § 16",
-      summary: "Geprüft wird der selbstständige, umfassende Pflegeprozess in einer komplexen Pflegesituation. Die Hamburger Handreichung beschreibt einen Vorbereitungsteil und einen Durchführungsteil. Fallvorstellung, geplante und situativ angepasste Pflege sowie Reflexionsgespräch gehören dazu; die Durchführungsprüfung einschließlich Reflexionsgespräch soll 240 Minuten nicht überschreiten.",
+      summary: "Geprüft wird der selbstständige, umfassende Pflegeprozess in realen, komplexen Pflegesituationen mit mindestens zwei zu pflegenden Menschen; mindestens eine Person hat erhöhten Pflegebedarf. Dazu gehören Pflegeplanung, Fallvorstellung (höchstens 20 Minuten), Durchführung und Reflexionsgespräch (höchstens 20 Minuten). Ohne Vorbereitungsteil dauert die Prüfung höchstens 240 Minuten; Hamburgs Handreichung sieht für die Pflegehandlungen mindestens 120 und höchstens 200 Minuten vor.",
       focus: [
         "Vorbereitung: Informationssammlung und individueller Pflegeplan; Hamburg sieht hierfür angemessene Vorbereitungszeit vor, die 240 Minuten nicht überschreiten soll. Für Pflegeplanung und Ablaufplanung sind höchstens 120 Minuten vorgesehen.",
         "Durchführung: Fallvorstellung, fachgerechte Pflegehandlungen, Beobachtung, Kommunikation, Sicherheit und situative Anpassung.",
@@ -134,7 +135,7 @@
       '<p>Du bekommst jeweils eine Aufgabe. Erst schreibst oder sprichst du deine eigene Antwort. Danach öffnest du den Erwartungshorizont und prüfst selbst, was schon drin war und was noch fehlt.</p>' +
       '<div class="flex">' + tabs + '</div><article class="card"><h3>' + esc(mode.title) + '</h3><p><strong>Rechtsgrundlage:</strong> ' + esc(mode.law) + '</p><p>' + esc(mode.summary) + '</p><ul>' + focus + '</ul>' +
       '<button class="btn primary" onclick="startExamGuidancePractice()">Mit einer Fallübung starten →</button></article>' +
-      '<div class="card"><h3>So läuft die Übung ab</h3><ol><li>Ich stelle dir eine Frage nach der anderen.</li><li>Du formulierst erst selbst deine Antwort.</li><li>Mit „Antwort fertig – Erwartungshorizont anzeigen“ öffnest du die Orientierungspunkte.</li><li>Du vergleichst und markierst selbst, was du genannt hast. Die App vergibt keine Prüfungsnote.</li></ol><p>Deine Texte werden nicht gespeichert oder an einen Server gesendet. Für eine persönliche Korrektur kannst du deine Antwort anschließend mit mir besprechen.</p></div>' +
+      '<div class="card"><h3>Noten und Bestehen</h3><p>Die Vornote zählt bei jedem Prüfungsteil 25 Prozent. Bestanden ist die staatliche Prüfung, wenn die Gesamtnote in jedem der drei Teile mindestens „ausreichend“ ist. Zusätzlich muss in der schriftlichen Prüfung jede der drei Aufsichtsarbeiten mindestens ausreichend sein. Die Gesamtnote der staatlichen Prüfung ist das arithmetische Mittel der drei Prüfungsteile (§§ 13, 14 und 19 PflAPrV).</p></div><div class="card"><h3>So läuft die Übung ab</h3><ol><li>Ich stelle dir eine Frage nach der anderen.</li><li>Du formulierst erst selbst deine Antwort.</li><li>Mit „Antwort fertig – Erwartungshorizont anzeigen“ öffnest du die Orientierungspunkte.</li><li>Du vergleichst und markierst selbst, was du genannt hast. Die App vergibt keine Prüfungsnote.</li></ol><p>Deine Texte werden nicht gespeichert oder an einen Server gesendet. Für eine persönliche Korrektur kannst du deine Antwort anschließend mit mir besprechen.</p></div>' +
       '<details class="card"><summary>Offizielle Quellen öffnen</summary><ul>' + sourceLinks() + '</ul><p class="muted">Bundesrecht: konsolidierte Fassungen laut Gesetze im Internet. Hamburger Handreichungen: schriftlich Stand 04/2026, mündlich und praktisch Stand 03/2026. Änderungen und schulinterne Vorgaben können hinzukommen.</p></details>' +
       '<p class="muted">Lernhilfe zur Prüfungsvorbereitung. Sie ersetzt keine verbindlichen Angaben der Pflegeschule oder des Landesprüfungsamts und keine fachliche Anleitung zur Versorgung realer Patientinnen und Patienten.</p></div>'
     );
