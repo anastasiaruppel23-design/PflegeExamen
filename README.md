@@ -2,15 +2,18 @@
 
 PflegeFokus ist eine deutschsprachige Lern-App für die Pflegeausbildung und die schriftliche, praktische und mündliche Prüfung. Sie verbindet Wissensseiten, Lernkarten, Quizfragen, Fallarbeit und Prüfungssimulation.
 
-## Lernbestand (Stand 7. November 2026)
+## Lernbestand (Inhaltsinventar geprüft am 7. November 2026)
 
-- 89 Wissensthemen: 36 bestehende Themen und 53 ergänzte/vertiefte Lernseiten.
-- 75 Lernkarten und 70 Fragen im allgemeinen Wissensquiz.
-- 100 Kompetenzbereich-Fragen zu den fünf Kompetenzbereichen.
-- 54 Krankheits- und Pflegeprofile im visuellen Bereich: 45 bestehende Profile sowie 9 ergänzte Krankheitsbild-Entwürfe. Die 9 neuen Profile sind sichtbar als fachlich noch nicht einzeln geprüft gekennzeichnet.
-- 40 ältere Fallsituationen, sechs ausführliche Prüfungsfälle und zusätzliche vernetzte Lernfälle.
+- 102 Einträge in der zentralen Themenbibliothek: 36 Ausgangsthemen, 12 ergänzende Wissens-/Pflegeeinträge, 45 quellenverlinkte Krankheits- und Pflegethemen sowie 9 Krankheitsentwürfe.
+- 117 Lernkarten und 116 Fragen im zusammengeführten Themenquiz. Zusätzlich gibt es 100 Fragen im Kompetenzbereich-Trainer.
+- Im visuellen Bereich liegen 42 Krankheitsprofile und 3 Pflegeverfahren mit Quellenangaben. Weitere 9 Krankheitsprofile sind Entwürfe, deren fachliche Einzelprüfung und Quellenabgleich noch ausstehen.
+- Weitere Lernbestände: 10 Organsystem-Übersichten, 26 Modelle/Theorien und verwandte Konzepte, 12 kompakte Expertenstandard-Übersichten und 69 Glossarbegriffe.
+- Für die Fallarbeit gibt es 40 kurze fallbezogene Aufgaben, 6 ältere Falltexte, 3 schriftliche Übungsfälle mit je 18 Aufgaben und Antwort-/Erwartungshinweisen sowie 2 mündliche Übungsfälle.
+- Der Notfallsimulator enthält 2 Szenarien mit jeweils 3 Entscheidungen. Die 8 Praxis-Challenges enthalten insgesamt 12 Aufgaben mit fachlichen Rückmeldungen.
 
-Die Krankheitsprofile sind in der Wissensbibliothek nach Organsystemen gruppiert (Herz/Kreislauf, Atemwege, Verdauung, Bewegungsapparat, Nieren/Harnwege, Hormone/Stoffwechsel, Nervensystem, Psyche, Krebs/Blut, Pädiatrie/Schwangerschaft, Infektionen, Haut/Wunden). Sie enthalten Definition, Entstehung, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, einen Prüfungsimpuls, eine Transferfrage mit Lösung und einen Quellenlink. Anatomische Lernbilder sind mit Alternativtext, Bildunterschrift, Urheber und Lizenz versehen; externe Commons-Bilder benötigen eine Internetverbindung. Die Pflegefachkraft-Illustration zeigt Anastasia nach ihren Referenzfotos; die Vorgabe für weitere Abbildungen ist in `VISUAL-STYLE.md` festgehalten.
+Die 42 geprüften Krankheitsprofile und 3 Pflegeverfahren sind nach Organsystemen gruppiert. Sie enthalten Definition, Entstehung, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, Prüfungsimpuls, Transferfrage und Quelle. Die 9 zusätzlichen Profile sind davon getrennt als ungeprüfte Entwürfe markiert. Anatomische Lernbilder sind mit Alternativtext, Bildunterschrift, Urheber und Lizenz versehen; externe Commons-Bilder benötigen eine Internetverbindung. Die Pflegefachkraft-Illustration zeigt Anastasia nach ihren Referenzfotos; die Vorgabe für weitere Abbildungen ist in `VISUAL-STYLE.md` festgehalten.
+
+Die schriftlichen Fälle sind mit je 291–321 Wörtern noch deutlich kürzer als die gewünschte Zwei-Seiten-Fallvorlage. Die mündlichen Falltexte umfassen derzeit je 201–224 Wörter. Sie sind als Übungsentwürfe zu verstehen, nicht als maßstabsgetreue Prüfungsvorlagen. Der praktische Prüfungsbereich stellt bewusst kein erfundenes Fallbeispiel bereit.
 
 
 ## Lernpfad, Wiederholung und Üben
