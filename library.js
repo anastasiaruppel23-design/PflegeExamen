@@ -1,7 +1,7 @@
 /* Additive library extension. Existing topic/card indices and saved progress stay stable. */
 const librarySources={
  diabetes:['diabinfo · Unterzuckerung','https://www.diabinfo.de/leben/behandlung/unterzuckerung.html'],
- copd:['NVL COPD · Exazerbationen 2025','https://register.awmf.org/assets/guidelines/Nationale_Versorgungs-Leitlinie/nvl-003merg_S3_COPD_2025-01.pdf'],
+ copd:['S2k-Leitlinie Fachärztliche Diagnostik und Therapie der COPD · AWMF 020-006, Version 5.1 (Februar 2026)','https://register.awmf.org/assets/guidelines/020-006l_S2k_Fachaerztliche-Diagnostik-Therapie-COPD_2026-03.pdf'],
  standards:['DNQP · Expertenstandards','https://www.dnqp.de/expertenstandards-und-auditinstrumente'],
  medicine:['EMA · Ranitidin','https://www.ema.europa.eu/en/medicines/human/referrals/ranitidine-containing-medicinal-products']
 };
