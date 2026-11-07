@@ -32,7 +32,7 @@
   if(n){
    const groups=n.querySelectorAll('.navgroup');
    const add=(idx,id,label)=>{if(document.querySelector('[data-upgrade="'+id+'"]'))return;const host=groups[idx]?.querySelector('.navitems');if(host){const b=document.createElement('button');b.dataset.upgrade=id;b.textContent=label;b.setAttribute('aria-current',tab===id?'page':'false');b.className=tab===id?'active':'';b.onclick=()=>go(id);host.appendChild(b)}};
-   add(0,'lernweg','Dein Lernweg');add(0,'wissensstand','Wissensstand');add(1,'themenquiz','Themenquiz');add(2,'notfallsimulator','Notfallsimulator');add(2,'praxischallenges','Praxis-Challenges');
+   add(0,'wissensstand','Wissensstand');add(1,'themenquiz','Themenquiz');add(2,'notfallsimulator','Notfallsimulator');add(2,'praxischallenges','Praxis-Challenges');
   }
   const c=$('#content');if(!c)return;
   if(tab==='plan'){renderLearningPlan(c);return}
@@ -51,7 +51,7 @@
   return map
  }
  function dueCount(){return Object.values(state.reviewItems).filter(x=>x.due<=dateKey()).length}
- function renderTodayOnHome(c){const due=dueCount();const box=document.createElement('div');box.className='panel';box.innerHTML='<span class="tag">Dein Lernstand</span><h2>Heute weiterlernen</h2><p>'+ (due?due+' Wiederholungen sind fällig.':'Starte mit einer kurzen Lerneinheit aus deinen Themen.')+'</p><button class="btn primary" onclick="go(&quot;lernweg&quot;)">Zum persönlichen Lernweg</button>';c.appendChild(box)}
+ function renderTodayOnHome(c){const due=dueCount();const box=document.createElement('div');box.className='panel';box.innerHTML='<span class="tag">Dein Lernstand</span><h2>Heute weiterlernen</h2><p>'+ (due?due+' Wiederholungen sind fällig.':'Starte mit einer kurzen Lerneinheit aus deinen Themen.')+'</p><button class="btn primary" onclick="go(&quot;plan&quot;)">Zum persönlichen Lernweg</button>';c.appendChild(box)}
  function renderLearningPlan(c){
   const due=dueCount(),done=Object.keys(state.done||{}).filter(k=>state.done[k]).length,areas=byArea(),weak=Object.keys(state.reviewItems).filter(k=>state.reviewItems[k].rating!=='gewusst');
   const next=due?'<button class="btn primary" onclick="go(&#39;themenquiz&#39;)">Unsichere Fragen wiederholen ('+due+')</button>':
