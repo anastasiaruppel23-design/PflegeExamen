@@ -1,8 +1,20 @@
 # Inhalts- und Quellenprüfung – Stand 7. November 2026
 
+## Aktuelle Änderungen am Lernbereich
+
+Der feste Kalenderplan mit persönlichen Wochen- und Prüfungsterminen wurde aus der App entfernt. Der neue Lernweg ist dynamisch und richtet sich nach Antworten und Fortschritt der jeweiligen lernenden Person.
+
+Neu hinzugekommen sind ein kombiniertes Themenquiz, Selbsteinschätzung „gewusst/unsicher/nicht gewusst“, zeitversetzte Wiederholungen für Fragen und Lernkarten, ein Wissensstand nach Themen, fiktive verzweigte Notfallszenarien, Praxis-Challenges und ein Offline-Speichern für lokale App-Inhalte.
+
+Der schriftliche Prüfungsbereich enthält drei längere Übungsfälle mit jeweils 18 fallbezogenen Aufgaben, Operatorenerklärungen und fallspezifischen Erwartungshinweisen. Der mündliche Bereich enthält zwei längere Übungsfälle zu den Kompetenzbereichen III, IV und V. Der praktische Prüfungsbereich enthält bewusst kein vorgegebenes Fallbeispiel und keine Abschlussprüfungssimulation; die App verweist auf Übung in der jeweiligen Ausbildungseinrichtung und im Ausbildungsbetrieb.
+
+Neun ergänzte Krankheitsprofile (Herzklappenerkrankung, Pneumothorax, gastrointestinale Blutung, Cholezystitis, Anaphylaxie, chronischer Schmerz, Dekubitus und Schlafapnoe sowie rheumatoide Arthritis) sind Lernentwürfe. Jedes Profil kennzeichnet, dass fachliche Einzelprüfung und Quellenabgleich noch ausstehen. Sie dürfen nicht als vollständig redaktionell freigegebene Inhalte dargestellt werden.
+
+## Vorheriger Inhalts- und Quellenstand
+
 ## Erweiterung
 
-Der Bestand umfasst jetzt 76 Wissensthemen, 75 Lernkarten und 70 Fragen im allgemeinen Wissensquiz. Zusätzlich enthält der Kompetenzbereich-Trainer 100 Fragen in den fünf Kompetenzbereichen. Vorhanden sind 40 ältere Fallsituationen, sechs ausführliche Prüfungsfälle und vernetzte Fallübungen.
+Der Bestand umfasst laut README 89 Wissensthemen, 75 Lernkarten und 70 Fragen im allgemeinen Wissensquiz. Zusätzlich enthält der Kompetenzbereich-Trainer 100 Fragen in den fünf Kompetenzbereichen. Vorhanden sind 40 ältere Fallsituationen, sechs ausführliche Prüfungsfälle und vernetzte Fallübungen.
 
 Die Krankheits- und Pflegebibliothek enthält 45 ausführliche Profile: 42 Krankheitsbilder (darunter COPD) und drei pflegerische Themen (Tracheostoma/Trachealkanüle/Cuff, Thoraxdrainage, CABCDE). Die Krankheitsseiten enthalten jeweils eine Beschreibung, Entstehung/Formen, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, einen Prüfungsfall, eine Transferfrage mit begründeter Antwort und eine Quellenangabe.
 
