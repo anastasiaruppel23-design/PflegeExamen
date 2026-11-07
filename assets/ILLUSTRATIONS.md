@@ -20,3 +20,12 @@ Die externen Bilder werden direkt von Wikimedia Commons geladen und in den Krank
 - Kniearthrose: [Knee Osteoarthritis.svg](https://commons.wikimedia.org/wiki/File:Knee_Osteoarthritis.svg) — InjuryMap, CC BY-SA 4.0.
 - Harnwege: [Urinary system.svg](https://commons.wikimedia.org/wiki/File:Urinary_system.svg) — Jordi March i Nogué, CC BY-SA 3.0.
 - Nervensystem: [Nervous system diagram-de.svg](https://commons.wikimedia.org/wiki/File:Nervous_system_diagram-de.svg) — The Emirr; deutsche Überarbeitung durch Jmarchn und XenonX3, CC BY 3.0.
+
+
+## Persönliche Wiedererkennung in Pflegebildern
+
+Verbindliche Vorgabe für alle neu erzeugten oder überarbeiteten Darstellungen: Jede Pflegefachkraft wird als Anastasia Koloncov dargestellt. Gesichtszüge und Frisur werden anhand eines aktuellen, von ihr bereitgestellten Referenzfotos bewahrt und an Körper, Perspektive, Beleuchtung und Illustrationsstil angepasst. Bei mehreren Pflegefachkräften wird nur eine als Anastasia dargestellt; alle anderen Personen bleiben unverändert. Originalfotos werden nicht in die App übernommen.
+
+Bis ein aktuelles Referenzfoto für diese Bearbeitung vorliegt, wird die generische Pflegefachkraft `nursing-study.webp` in der Wissensbibliothek nicht verwendet. An ihrer Stelle steht vorübergehend das personenfreie Symbol `pflege-symbol.svg`. Die persönliche Begrüßungsillustration auf der Startseite bleibt bestehen.
+
+Die ausführliche Arbeitsvorgabe steht in [VISUAL-STYLE.md](../VISUAL-STYLE.md).
