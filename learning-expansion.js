@@ -150,14 +150,14 @@ window.render=function(){
  const nav=document.querySelector('#nav');
  if(nav){
   const groups=nav.querySelectorAll('.navgroup');
-  const add=(group,id,label)=>{if(nav.querySelector('[data-expansion="'+id+'"]'))return;const host=groups[group]?.querySelector('.navitems');if(!host)return;const b=document.createElement('button');b.dataset.expansion=id;b.textContent=label;b.className=window.tab===id?'active':'';b.setAttribute('aria-current',window.tab===id?'page':'false');b.onclick=()=>window.go(id);host.appendChild(b)};
+  const add=(group,id,label)=>{if(nav.querySelector('[data-expansion="'+id+'"]'))return;const host=groups[group]?.querySelector('.navitems');if(!host)return;const b=document.createElement('button');b.dataset.expansion=id;b.textContent=label;b.className=tab===id?'active':'';b.setAttribute('aria-current',tab===id?'page':'false');b.onclick=()=>window.go(id);host.appendChild(b)};
   add(0,'anatomie','Anatomie');add(0,'modelle','Modelle & Theorien');add(0,'standards','Expertenstandards');add(0,'glossar','Fachbegriffe');
  }
  const c=document.querySelector('#content');if(!c)return;
- if(window.tab==='anatomie')renderAnatomy(c);
- if(window.tab==='modelle')renderModels(c);
- if(window.tab==='standards')renderStandards(c);
- if(window.tab==='glossar')renderGlossary(c);
+ if(tab==='anatomie')renderAnatomy(c);
+ if(tab==='modelle')renderModels(c);
+ if(tab==='standards')renderStandards(c);
+ if(tab==='glossar')renderGlossary(c);
 };
 function renderAnatomy(c){
  c.innerHTML='<div class="learning-hero"><span class="tag">Anatomie verständlich</span><h2>Organsysteme und Pflegebezug</h2><p>Vereinfachte, eigens erstellte Lernzeichnungen helfen dir, Lage und Grundfunktion zu verstehen. Sie sind schematisch und ersetzen keinen Anatomieatlas.</p></div><div class="grid">'+systems.map(s=>'<article class="card visual-card">'+svg(s.key)+'<span class="tag">Organsystem</span><h3>'+esc(s.name)+'</h3><p><strong>Dazu gehören:</strong> '+esc(s.organs)+'</p><p>'+esc(s.function)+'</p><div class="standard-flow"><strong>Pflegebezug:</strong> '+esc(s.care)+'</div><p class="muted"><strong>Typische Krankheitsbilder:</strong> '+esc(s.links)+'</p></article>').join('')+'</div><p class="content-note">Die Zeichnungen zeigen vereinfachte Orientierungsschemata. Detailanatomie, Fachbegriffe und klinische Entscheidungen bitte mit Unterrichtsmaterial und aktuellen Fachquellen vertiefen.</p>';
