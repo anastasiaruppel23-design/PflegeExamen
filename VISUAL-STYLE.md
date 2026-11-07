@@ -17,4 +17,4 @@ Sind zwei oder mehr Pflegefachkräfte abgebildet, wird nur eine als Anastasia da
 
 ## Aktueller Stand
 
-Die Begrüßungsillustration ist bereits als persönliche Darstellung von Anastasia gekennzeichnet. Die generische Pflegefachkraft in `nursing-study.webp` wird aus der Wissensbibliothek entfernt. Sie wird nach Erhalt eines aktuellen Referenzfotos durch eine passende persönliche Darstellung ersetzt.
+Die Begrüßungsillustration ist bereits als persönliche Darstellung von Anastasia gekennzeichnet. Die generische Pflegefachkraft in `nursing-study.webp` wurde aus der Wissensbibliothek entfernt. Aus den von Anastasia bereitgestellten Referenzfotos wurde `assets/anastasia-pflege-illustration.svg` erstellt und in der App als Pflegefachkraft-Illustration eingebunden. Erkennbare Merkmale der Referenz: helle Haut, graugrüne Augen, markante dunkle Augenbrauen, weich-ovales Gesicht sowie dunkelbraunes bis schwarzes lockiges Haar, meist locker hochgesteckt. Neue Darstellungen orientieren sich an diesem Referenzbild und der festgehaltenen Regel.
