@@ -16,7 +16,7 @@ Die Zählung wurde direkt aus den von der App geladenen Datenbeständen ermittel
 
 Weitere Bestände: 10 Organsystem-Übersichten, 26 Modelle/Theorien und verwandte Konzepte, 12 Expertenstandard-Übersichten und 69 Glossarbegriffe; 8 Praxis-Challenges mit 12 Entscheidungsschritten; 2 Notfallszenarien mit je 3 Entscheidungen; 40 kurze fallbezogene Aufgaben, 6 ältere Falltexte, 3 schriftliche Übungsfälle und 2 mündliche Übungsfälle.
 
-Der quellenverlinkte Bestand umfasst 42 Krankheitsprofile und 3 Pflegeverfahren (Tracheostoma/Trachealkanüle/Cuff, Thoraxdrainage, CABCDE). Die 9 ergänzten Krankheitsprofile (Herzklappenerkrankung, Pneumothorax, gastrointestinale Blutung, Cholezystitis, rheumatoide Arthritis, Anaphylaxie, chronischer Schmerz, Dekubitus und Schlafapnoe) sind als Entwürfe markiert und haben noch keine abgeschlossene fachliche Einzelprüfung. Für diese Entwürfe fehlen zudem belastbare, konkret zugeordnete Quellenverweise in der App.
+Der quellenverlinkte Bestand umfasst 42 Krankheitsprofile und 3 Pflegeverfahren (Tracheostoma/Trachealkanüle/Cuff, Thoraxdrainage, CABCDE). Die 9 ergänzten Krankheitsprofile (Herzklappenerkrankung, Pneumothorax, gastrointestinale Blutung, Cholezystitis, rheumatoide Arthritis, Anaphylaxie, chronischer Schmerz, Dekubitus und Schlafapnoe) sind als Entwürfe markiert und haben noch keine abgeschlossene fachliche Einzelprüfung. Quellenverweise bzw. Quellenstatus wurden am 8. November 2026 den Entwürfen zugeordnet. Das ist noch keine fachliche Einzelprüfung: Pneumothorax und schlafbezogene Atmungsstörungen verweisen auf abgelaufene Leitlinienfassungen; Anaphylaxie hat derzeit keine nachgewiesene gültige Leitlinienfassung; Gallensteinleiden/Cholezystitis verweist auf die S3-Fassung von 2018, deren Aktualisierung läuft. Bei Herzklappenerkrankungen, gastrointestinaler Blutung, rheumatoider Arthritis und chronischem Schmerz wurden neuere Quellen verknüpft. Dekubitus verweist auf den DNQP-Standard von 2017 samt laufender Aktualisierung.
 
 ## Organsystem-Navigation und Abbildungen
 
@@ -49,6 +49,14 @@ Die neuen Kurzprofile verlinken auf zum Thema passende Fachgesellschafts- oder G
 - Gastrointestinale Blutung: Die inzwischen veröffentlichte AWMF-S2k-Leitlinie Version 2.0 ist vom 18.12.2025 und gültig bis 15.12.2030. Das entsprechende neue Profil bleibt trotzdem ungeprüft, bis diese Quelle im Datensatz konkret verknüpft und sein Inhalt daran abgeglichen ist.
 - Anaphylaxie: Die im AWMF-Register auffindbare S2k-Fassung war bis 30.01.2026 gültig; AWMF führt die Leitlinie aktuell als registriert/überarbeitet. Das Anaphylaxie-Entwurfsprofil darf daher nicht so behandelt werden, als sei sein Leitlinienabgleich abgeschlossen.
 - DNQP: Das DNQP hat 2026 die dritte Aktualisierung der Dekubitusprophylaxe begonnen und plant die Veröffentlichung für 2027. Die Kurzbeschreibung muss sichtbar als Stand der zweiten Aktualisierung von 2017 gekennzeichnet bleiben.
+
+## Fortsetzung der Prüfung (8. November 2026)
+
+In `learning-upgrade.js` sind den neun Entwürfen jetzt konkrete Quellen oder ein klarer Ablauf-/Registrierungsstatus zugeordnet. Die Quelle für gastrointestinale Blutung ist die AWMF-S2k-Leitlinie Version 2.0 vom 18.12.2025, gültig bis 15.12.2030. Für rheumatoide Arthritis ist die AWMF-S3-Leitlinie Version 3.0 vom August 2026 verknüpft. Die chronische Schmerzseite ist auf die DEGAM-S1-Handlungsempfehlung von 2025 verlinkt. Das ersetzt keine Absatz-für-Absatz-Prüfung des Textes; alle neun Profile bleiben daher in der App als redaktionell ungeprüft gekennzeichnet.
+
+Die Quellenprüfung ergab: Die AWMF-S3-Leitlinie zum Pneumothorax (2018, gültig bis 2023) ist abgelaufen; eine neue Version ist angemeldet. Für akute Cholezystitis verweist die DGVS auf das S3-Gallensteinleiden von 2018 und informiert über die laufende Aktualisierung. Die AWMF-Anaphylaxie-Seite zeigt eine Registrierung von 2024, während die vorherige inhaltliche Leitlinienfassung nur bis Januar 2026 gültig war. Die S3-Leitlinie zu schlafbezogenen Atmungsstörungen stammt aus 2017 und ist abgelaufen. Der DNQP plant die dritte Aktualisierung der Dekubitusprophylaxe für 2027. Diese Themen brauchen vor einer fachlichen Freigabe eine gezielte Prüfung der aktuellen Handlungsempfehlungen.
+
+Die schriftlichen und mündlichen Falltexte wurden in diesem Durchgang noch nicht erweitert. Die gemessenen Längen bleiben unter den dokumentierten Zielen; die Erweiterung und anschließende fachliche Prüfung der Aufgaben und Erwartungshorizonte ist offen.
 
 ## Was damit noch nicht als vollständig fachlich freigegeben gilt
 
