@@ -5,7 +5,7 @@ Die Konto-Oberfläche und Cloud-Synchronisierung sind im Quellcode integriert, a
 
 ## Einrichtung
 1. Auf https://supabase.com ein Projekt anlegen. Region passend zu EU/Deutschland wählen; Preise, Limits und Datenschutzbedingungen prüfen.
-2. In Supabase SQL Editor den Inhalt von `supabase-schema.sql` ausführen. Sicherstellen, dass Row Level Security (RLS) aktiv ist und die vier Policies existieren.
+2. In Supabase SQL Editor zuerst `supabase-schema.sql` ausführen. Danach `supabase-metrics.sql` ausführen, damit der öffentliche Besucher- und Registrierungszähler funktioniert. Sicherstellen, dass Row Level Security (RLS) aktiv ist und die Policies existieren.
 3. Unter Authentication → Providers E-Mail-Anmeldung aktivieren und E-Mail-Bestätigung eingeschaltet lassen. SMTP-Versand/Rate-Limits und E-Mail-Vorlagen vor öffentlichem Start prüfen.
 4. Unter Authentication → URL Configuration die tatsächliche GitHub-Pages-Adresse als Site URL bzw. erlaubte Redirect URL konfigurieren. Eine spätere eigene Domain ebenfalls hinzufügen.
 5. Unter Project Settings → API die **Project URL** und den **Publishable/anon Key** kopieren und in `cloud-config.js` einsetzen. Diese beiden Werte dürfen öffentlich sein; **niemals `service_role`/secret Keys in GitHub eintragen**.
@@ -14,6 +14,7 @@ Die Konto-Oberfläche und Cloud-Synchronisierung sind im Quellcode integriert, a
 
 ## Sicherheit und Grenzen
 - Die Tabelle `learning_progress` speichert einen JSON-Lernstand pro Supabase-Auth-User. RLS beschränkt den Zugriff auf die eigene `user_id`.
+- `app_metrics` enthält ausschließlich Gesamtzahlen. Besuche zählen pro Browser-Sitzung (bis zum Schließen des Tabs); das ist keine verlässliche Zahl einzelner Personen. Registrierungen zählen neu angelegte Supabase-Konten. Die Zähler enthalten keine Namen oder E-Mail-Adressen.
 - Das Konto ersetzt nicht die lokale Speicherung; auf gemeinsam genutzten Geräten bleiben lokale Daten nach Abmeldung erhalten. Nicht auf fremden Geräten verwenden.
 - Anmeldung fragt vor dem Überschreiben lokaler Daten durch Cloud-Daten nach. Beim ersten Konto kann ein vorhandener lokaler Lernstand explizit hochgeladen werden.
 - Für sensible Gesundheits- oder Patientendaten ist die App nicht vorgesehen.
