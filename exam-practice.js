@@ -24,7 +24,7 @@ const examFormats = {
 };
 let examMode='schriftlich', examCaseIndex=0, examTimer=null, examFormatSeconds=0;
 function examEsc(x){return esc(x)}
-function examSetMode(mode){if(examTimer){clearInterval(examTimer);examTimer=null}examMode=mode;examCaseIndex=0;examRender()}
+function examSetMode(mode){examStartTimer(0);examMode=mode;examCaseIndex=0;examRender()}
 function examRender(){
  const c=document.querySelector('#content'),f=examFormats[examMode]; if(!c)return;
  let html='<div class="panel knowledge"><span class="tag">Prüfungstraining · Stand 2026</span><h2>Prüfungsformate üben</h2><p>Übe in der Reihenfolge, die sich bewährt: erst selbst denken und begründen, dann mit Kriterien vergleichen und anschließend gezielt nacharbeiten.</p><div class="flex">'+[['schriftlich','Schriftlich'],['praktisch','Praktisch'],['muendlich','Mündlich']].map(([id,label])=>'<button class="btn '+(examMode===id?'primary':'')+'" onclick="examSetMode(\''+id+'\')">'+label+'</button>').join('')+'</div><div class="learn-box tone-warning"><h3>Was dieser Bereich abbildet</h3><p>Die Formate und Zeitrahmen sind nach PflAPrV und den Hamburger Handreichungen aus 03/2026 bzw. 04/2026 gestaltet. Die Fälle sind selbst erstellte Übungsfälle, keine offiziellen Prüfungsaufgaben. Die App kann keine staatliche Note vergeben.</p></div><p class="muted">'+examEsc(f.rule)+'</p>';
@@ -35,7 +35,8 @@ function examRender(){
  } else if(examMode==='praktisch'){
   html+='<div class="card"><span class="tag">Hinweis zur praktischen Prüfung</span><h3>Übe in deiner Ausbildungseinrichtung</h3><p>'+examEsc(f.guidance)+'</p></div>';
  } else {
-  html+='<div class="card"><span class="tag">Komplexer Fall · Jugendalter · anderer Versorgungskontext</span><h3>Fallsituation</h3><p>'+examEsc(f.scenario)+'</p><h3>Vorbereitungs- und Gesprächsfragen</h3><ol>'+f.tasks.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ol><p class="muted">Hamburger Handreichung: 30 Minuten Vorbereitungszeit. Nutze den Timer für eine Übungsrunde.</p><div class="flex"><button class="btn" onclick="examStartTimer(1800)">30-Minuten-Vorbereitung starten</button><button class="btn" onclick="examStartTimer(0)">Timer stoppen</button><strong id="examClock">00:00</strong></div><label for="examAnswer">Deine Stichpunkte für das Prüfungsgespräch</label><textarea id="examAnswer" placeholder="Fall zusammenfassen · Zusammenarbeit · Recht und Ethik · Evidenz und Berufsrolle"></textarea><details><summary>Selbstcheck für die Kompetenzbereiche III–V</summary><ul>'+f.guide.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ul><p class="muted">Das echte Prüfungsgespräch dauert 30–45 Minuten. Beantworte die Leitfragen anschließend laut und frei, als würdest du mit zwei Fachprüfenden sprechen.</p></details></div>';
+  renderOral();
+  return;
  }
  html+='<div class="panel"><h3>Offizielle Grundlagen</h3><ul><li><a href="https://www.gesetze-im-internet.de/pflaprv/__9.html" target="_blank" rel="noopener noreferrer">PflAPrV § 9 – staatliche Prüfung</a></li><li><a href="https://www.gesetze-im-internet.de/pflaprv/__13.html" target="_blank" rel="noopener noreferrer">§ 13 – Vornoten</a></li><li><a href="https://www.gesetze-im-internet.de/pflaprv/__14.html" target="_blank" rel="noopener noreferrer">§ 14 – schriftlicher Teil</a></li><li><a href="https://www.gesetze-im-internet.de/pflaprv/__15.html" target="_blank" rel="noopener noreferrer">§ 15 – mündlicher Teil</a></li><li><a href="https://www.gesetze-im-internet.de/pflaprv/__16.html" target="_blank" rel="noopener noreferrer">§ 16 – praktischer Teil</a></li><li><a href="https://dokumente.hamburg.de/resource/blob/1159706/7c997140ddc553b6ebae9cd99550a6e3/handreichung-schriftliche-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung schriftliche Prüfung (Stand 04/2026)</a></li><li><a href="https://dokumente.hamburg.de/resource/blob/1159722/dd9679bbdc4e389fe7d05f78ff813317/handreichung-muendliche-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung mündliche Prüfung (Stand 03/2026)</a></li><li><a href="https://dokumente.hamburg.de/resource/blob/1159720/dd6190d436e930f6cc8686e68d8ab99b/handreichung-praktische-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung praktische Prüfung (Stand 03/2026)</a></li><li><a href="https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/einrichtungen/lpa/pflegefachkraefte-31534" target="_blank" rel="noopener noreferrer">Hamburgisches Landesprüfungsamt – Prüfungsunterlagen</a></li></ul><p class="muted">Rechtsstand geprüft am 07.11.2026. Verbindlich bleiben die für deinen Prüfungsjahrgang mitgeteilten Vorgaben deiner Pflegeschule und des Landesprüfungsamts.</p></div></div>';
  c.innerHTML=html;
@@ -43,11 +44,115 @@ function examRender(){
  const answer=document.getElementById('examAnswer');
  if(answer){state.examDrafts??={};answer.value=state.examDrafts[draftKey]||'';answer.addEventListener('input',()=>{state.examDrafts[draftKey]=answer.value;save()})}
 }
-function examStartTimer(seconds){if(examTimer)clearInterval(examTimer);examFormatSeconds=seconds;const clock=document.querySelector('#examClock');if(clock)clock.textContent=examFormatTime(examFormatSeconds);if(seconds<=0)return;examTimer=setInterval(()=>{examFormatSeconds=Math.max(0,examFormatSeconds-1);const node=document.querySelector('#examClock');if(node)node.textContent=examFormatTime(examFormatSeconds);if(examFormatSeconds===0){clearInterval(examTimer);examTimer=null}},1000)}
+function examStartTimer(seconds){if(examTimer)clearInterval(examTimer);examTimer=null;examFormatSeconds=seconds;const clock=document.querySelector('#examClock');if(clock)clock.textContent=examFormatTime(examFormatSeconds);if(seconds<=0)return;examTimer=setInterval(()=>{examFormatSeconds=Math.max(0,examFormatSeconds-1);const node=document.querySelector('#examClock');if(node)node.textContent=examFormatTime(examFormatSeconds);if(examFormatSeconds===0){clearInterval(examTimer);examTimer=null}},1000)}
 function examFormatTime(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
+const oralCases = {
+ brandt: {
+  title: 'Frau Brandt · ambulante Pflege · 87 Jahre',
+  scenario: oral.story,
+  tasks: oral.prompts.map(([, question]) => question),
+  guide: oral.prompts.map(([, , answer]) => answer),
+  followups: [
+   'III · Welche Informationen gibst du nach den nächtlichen Stürzen an das Team und die Hausarztpraxis weiter?',
+   'IV · Wie reagierst du auf den Wunsch nach einem Bettgitter? Welche Alternativen besprichst du mit Frau Brandt?',
+   'V · Woran erkennst du nach einer Woche, ob die vereinbarten Maßnahmen ihr Sicherheit geben und ihre Mobilität erhalten?'
+  ],
+  followupGuide: 'Sturzhergang, aktuelle Beschwerden und Veränderungen strukturiert übergeben. Frau Brandts Willen und die konkreten Voraussetzungen einer freiheitsentziehenden Maßnahme prüfen. Gemeinsam Alternativen erproben und Stürze, Beinahe-Stürze, Mobilität und subjektive Sicherheit beurteilen.'
+ },
+ samira: {
+  ...examFormats.muendlich,
+  title: 'Samira · Kinder- und Jugendambulanz · 17 Jahre',
+  followups: [
+   'III · Wie verteilst du die Aufgaben, wenn Samira den nächsten Termin erneut absagt?',
+   'IV · Wie antwortest du der Mutter, wenn sie dich ohne Samira nach den Befunden fragt?',
+   'V · Welches Ergebnis würde Samira selbst als Verbesserung ansehen? Wie erfragst und überprüfst du es?'
+  ],
+  followupGuide: 'Eine klare Ansprechperson und einen vereinbarten Kontaktweg festlegen. Vor Weitergabe von Informationen die Voraussetzungen und Samiras Wünsche für die konkrete Situation prüfen. Mit Samira ein eigenes Ziel festlegen und bei einem vereinbarten Kontakt gemeinsam auswerten.'
+ },
+ sturz: {
+  title: 'Herr Yilmaz · stationäre Akutpflege · 72 Jahre',
+  scenario: 'Herr Yilmaz liegt seit drei Tagen auf einer internistischen Station. Vor der Aufnahme war er in seiner Wohnung selbstständig. Jetzt fühlt er sich beim Aufstehen zeitweise schwindelig. Nachts ist er auf dem Weg zur Toilette gestürzt. Er sagt, er habe die Klingel nicht erreichen können und wollte niemanden wecken. Er erinnert sich daran, beim Aufstehen kurz das Gleichgewicht verloren zu haben. Der Sturz wurde versorgt und dokumentiert. Beim Frühdienst berichtet er, dass er sich seitdem kaum noch aus dem Bett traut. Gleichzeitig möchte er bis zur Entlassung wieder selbstständig zur Toilette gehen. Seine Tochter bittet darum, ihn bis dahin nur im Bett zu versorgen. Herr Yilmaz widerspricht. Bei der Übergabe stellt sich heraus, dass der Nacht- und der Frühdienst unterschiedlich einschätzen, welche Unterstützung beim Aufstehen erforderlich ist. Die Physiotherapie hat einen Termin für heute Nachmittag angeboten. Die Pflegefachperson prüft, ob die Klingel und die geeignete Gehhilfe erreichbar sind. Noch unklar ist, wann der Schwindel auftritt und welche Unterstützung Herr Yilmaz beim Transfer akzeptiert. Die Ärztin bietet an, mögliche Ursachen und die Medikation zu prüfen. Bei einer Teambesprechung zeigt sich, dass auf der Station im letzten Monat mehr Stürze gemeldet wurden, obwohl die Risikoeinschätzungen häufiger dokumentiert wurden. Angaben zur Belegung, zu Mehrfachstürzen und zur tatsächlichen Umsetzung der Maßnahmen fehlen. Die Stationsleitung bittet dich, einen Vorschlag für die Versorgung von Herrn Yilmaz und die Auswertung der Stationsdaten zu machen. Herr Yilmaz ist bereit, zunächst mit einer Pflegefachperson zu üben und gemeinsam zu entscheiden, wann er weniger Unterstützung braucht.',
+  tasks: [
+   'III · Welche Angaben brauchst du für die erneute Risikoeinschätzung? Vereinbare ein überprüfbares Mobilitätsziel und erläutere die Aufgaben von Pflege, Physiotherapie und Ärztin.',
+   'IV · Wie wägest du Selbstbestimmung und Schutz ab, wenn die Tochter Bettruhe fordert? Wie beteiligst du Herrn Yilmaz an der Entscheidung?',
+   'V · Formuliere eine EBN-Frage und nutze die beiden Quellen. Welche Maßnahme passt zu Herrn Yilmaz und welche Unsicherheit bleibt?',
+   'IV und V · Wähle ein Kriterium des DNQP-Standards und formuliere je einen Indikator für Struktur-, Prozess- und Ergebnisqualität. Wie prüfst du die Entwicklung?'
+  ],
+  guide: [
+   'Sturzhergang, Schwindel, Transferfähigkeit, Hilfsmittel und Umgebung klären. Beispielziel: Herr Yilmaz bewältigt bis morgen den Toilettenweg mit der gemeinsam vereinbarten Unterstützung. Pflege vereinbart und überprüft den Plan, Physiotherapie beurteilt und trainiert die Mobilität, die Ärztin klärt mögliche Ursachen und prüft die Medikation. Absprachen im Schichtwechsel übergeben.',
+   'Den Willen von Herrn Yilmaz und seine Einschätzung erfragen. Über Nutzen und Risiken verschiedener Unterstützungsstufen sprechen. Die Sorge der Tochter aufnehmen und sie mit seinem Einverständnis in das Gespräch einbeziehen. Hilfe schrittweise an seine Fähigkeiten und sein Sicherheitsgefühl anpassen.',
+   'Beispielfrage: Senken individuell geplante Maßnahmen im Vergleich zur üblichen Versorgung die Sturzrate älterer Menschen im Krankenhaus? Die Übersicht bündelt Studien mit unterschiedlichen Maßnahmen. Ein sicherer Toilettenweg und begleitete Transfers lassen sich fallbezogen begründen. Die Entscheidung mit Herrn Yilmaz treffen und zeitnah anhand des vereinbarten Mobilitätsziels überprüfen.',
+   'Zum Kriterium der individuellen Maßnahmenplanung: Struktur etwa der Anteil der Dienste mit Zugang zu geeigneten Gehhilfen; Prozess etwa der Anteil gefährdeter Personen mit gemeinsam vereinbartem, bei der Übergabe bekanntem Maßnahmenplan; Ergebnis etwa Stürze je 1.000 Belegungstage und erreichte Mobilitätsziele. Messzeitraum und Datenquelle festlegen und Ergebnisse im Team besprechen.'
+  ],
+  followups: [
+   'III · Was sagst du in der Übergabe, wenn Herr Yilmaz beim zweiten Transfer wieder Schwindel meldet?',
+   'IV · Wie besprichst du das Vorgehen, wenn Herr Yilmaz abends die vereinbarte Hilfe ablehnt?',
+   'V · Die Sturzmeldungen nehmen zu. Welche Rolle könnten Belegung, Mehrfachstürze und Meldepraxis spielen?'
+  ],
+  followupGuide: 'Beobachtungen, Zeitpunkt und Unterstützungsbedarf übergeben und den Plan zeitnah überprüfen. Gründe für die Ablehnung erfragen und eine akzeptable Alternative aushandeln. Stürze auf Belegungstage beziehen und Meldepraxis, Sturzfolgen und wiederholte Stürze bei der Auswertung berücksichtigen.',
+  sources: [
+   ['DNQP · Expertenstandard Sturzprophylaxe, 2. Aktualisierung 2022', 'https://www.dnqp.de/fileadmin/HSOS/Homepages/DNQP/Dateien/Expertenstandards/Sturzprophylaxe_in_der_Pflege/Sturz_2Akt_Auszug.pdf', 'Der Standard sieht vor, individuelle Risiken einzuschätzen, Maßnahmen gemeinsam zu planen und Stürze systematisch zu erfassen. Sichere Mobilität bleibt ein Ziel.'],
+   ['Cochrane · Sturzprävention bei älteren Menschen im Krankenhaus, 2026', 'https://www.cochrane.org/evidence/CD016065_how-effective-are-interventions-designed-reduce-falls-older-people-hospitals', 'Individuell auf Risikofaktoren abgestimmte Maßnahmen können die Sturzrate wahrscheinlich senken. Die Schätzung lässt auch keinen Effekt oder eine leichte Zunahme zu.']
+  ]
+ }
+};
+let oralCaseKey = 'brandt';
+
+function openOralPractice() {
+ examSetMode('muendlich');
+ go('muendlich');
+}
+
+function selectOralCase(key) {
+ if (!Object.hasOwn(oralCases, key)) return;
+ examStartTimer(0);
+ oralCaseKey = key;
+ renderOral();
+}
+
+function renderOral() {
+ const current = oralCases[oralCaseKey];
+ const list = items => items.map(item => '<li>'+examEsc(item)+'</li>').join('');
+ const sources = current.sources?.map(([label, url, summary]) =>
+  '<li><a href="'+examEsc(url)+'" target="_blank" rel="noopener noreferrer">'+examEsc(label)+'</a><p>'+examEsc(summary)+'</p></li>'
+ ).join('');
+ document.querySelector('#content').innerHTML =
+  '<button class="btn exam-back" onclick="go(\'pruefung\')">← Zurück zu Prüfung üben</button>'+
+  '<section class="panel"><h2>Mündliche Prüfung üben</h2><p>'+examEsc(examFormats.muendlich.rule)+'</p>'+
+  '<label for="oralCase">Übungsfall auswählen</label> <select id="oralCase">'+
+  Object.entries(oralCases).map(([key, item]) => '<option value="'+key+'">'+examEsc(item.title)+'</option>').join('')+'</select>'+
+  '<article class="card"><h3>'+examEsc(current.title)+'</h3><p>'+examEsc(current.scenario)+'</p>'+
+  '<div class="flex"><button class="btn" onclick="examStartTimer(1800)">30 Minuten Vorbereitung starten</button>'+
+  '<button class="btn" onclick="examStartTimer(0)">Timer stoppen</button><strong id="examClock">'+examFormatTime(examFormatSeconds)+'</strong></div>'+
+  '<h3>Leitfragen</h3><ol>'+list(current.tasks)+'</ol>'+
+  (sources ? '<h3>Material für die EBN-Aufgabe</h3><p>Die Aussagen sind in eigenen Worten zusammengefasst.</p><ul>'+sources+'</ul>' : '')+
+  '<label for="oralNotes">Stichpunkte für deine mündliche Antwort</label><textarea id="oralNotes"></textarea>'+
+  '<details><summary>Nachfragen für das Prüfungsgespräch</summary><ol>'+list(current.followups)+'</ol></details>'+
+  '<details><summary>Erwartungshorizont öffnen</summary><ol>'+list(current.guide)+'</ol><p>'+examEsc(current.followupGuide)+'</p></details></article>'+
+  '<p><a href="https://www.gesetze-im-internet.de/pflaprv/__15.html" target="_blank" rel="noopener noreferrer">§ 15 PflAPrV</a> · <a href="https://www.hamburg.de/resource/blob/1159722/dd9679bbdc4e389fe7d05f78ff813317/handreichung-muendliche-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung</a></p></section>';
+ const picker = document.getElementById('oralCase');
+ picker.value = oralCaseKey;
+ picker.addEventListener('change', () => {
+  selectOralCase(picker.value);
+  document.getElementById('oralCase').focus();
+ });
+ const notes = document.getElementById('oralNotes');
+ const draftKey = 'muendlich-'+oralCaseKey;
+ state.examDrafts ??= {};
+ notes.value = state.examDrafts[draftKey] ?? (oralCaseKey === 'samira' ? state.examDrafts.muendlich : '') ?? '';
+ notes.addEventListener('input', () => {
+  state.examDrafts[draftKey] = notes.value;
+  save();
+ });
+}
+
+function examPracticeIntro() {
+ return '<section class="panel exam-practice"><h2>Prüfung üben</h2><p>Wähle einen mündlichen Übungsfall oder trainiere mit einem Zufallsfall.</p><button class="btn primary" onclick="openOralPractice()">Mündliche Prüfung üben →</button></section>';
+}
+
 (function(){
  const baseGo=go;
- go=function(next){if(next!=='pruefungsformat'&&examTimer){clearInterval(examTimer);examTimer=null}baseGo(next)};
+ go=function(next){if(next!==tab && (tab==='pruefungsformat'||tab==='muendlich'))examStartTimer(0);baseGo(next)};
  const baseRender=render;
  render=function(){
   baseRender();
