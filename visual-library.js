@@ -1,9 +1,12 @@
 // Explicit original-card links avoid ambiguous text matching and preserve saved indices.
 function topicForCard(index){
  const original=[9,2,0,1,3,4,5,7,10,11,14,13,8,13,15,16,17,18,19,20,21,22,23,24,25,26,27,12,29,30,31,32,33,34,35];
- return index>=0&&index<cards.length?(index<originalCardCount?original[index]:originalTopicCount+index-originalCardCount):-1;
+ if(index<0||index>=cards.length)return -1;
+ if(index<originalCardCount)return original[index];
+ const libraryIndex=index-originalCardCount;
+ return libraryIndex<libraryEntries.length?originalTopicCount+libraryIndex:-1;
 }
-function cardForTopic(index){return cards.findIndex((_,n)=>topicForCard(n)===index)}
+function cardForTopic(index){return index>=0?cards.findIndex((_,n)=>topicForCard(n)===index):-1}
 openStudyCard=function(index){const card=cardForTopic(index);if(card<0)return;ci=card;flipped=false;go('karten')};
 /* Illustrated views: selectable HTML text, original supporting art. */
 const studyArt={care:'./assets/anastasia-pflege-illustration.svg',heart:'./assets/heart-study.webp',lung:'./assets/lung-study.webp',glucose:'./assets/glucose-study.webp'};

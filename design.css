@@ -51,3 +51,21 @@ body.menu-open{overflow:hidden}
 .hero-welcome .hero-art{min-height:0;aspect-ratio:auto}
 .hero-welcome .hero-art img{width:100%;height:auto;object-fit:contain;object-position:center}
 .hero-welcome .hero-copy{padding:clamp(20px,4vw,34px)}
+
+.hero.hero-guest{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.hero-guest .hero-copy{grid-area:1/1}
+.hero-guest .hero-art{grid-area:1/2;align-self:center}
+.public-metrics{margin:18px 0}
+.public-metrics .home-stats{grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:8px}
+.account-panel{max-width:540px;margin:0 auto;overflow-wrap:anywhere}
+.account-panel h1{margin-top:0;font:600 clamp(27px,5vw,36px)/1.15 Georgia,serif}
+.account-panel fieldset{min-width:0;border:0;padding:0;margin:0}
+.account-panel input{font-size:16px}
+.account-panel fieldset .btn{margin-top:8px}
+.account-options{display:flex;flex-wrap:wrap;gap:0 8px;margin-top:12px}
+#accountNotice:empty{margin:0}
+@media(max-width:680px){
+ .hero.hero-guest{grid-template-columns:minmax(0,1fr)}
+ .hero-guest .hero-art{grid-area:2/1}
+ .account-panel fieldset .btn{width:100%}
+}

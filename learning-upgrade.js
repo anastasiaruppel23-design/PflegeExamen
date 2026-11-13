@@ -90,7 +90,7 @@
   }
   const c=$('#content');if(!c)return;
   if(tab==='plan'){renderLearningPlan(c);return}
-  if(tab==='lernweg')renderLearningPlan(c);if(tab==='start')renderTodayOnHome(c)
+  if(tab==='lernweg')renderLearningPlan(c);if(tab==='start'&&hasLearningAccess())renderTodayOnHome(c)
   if(tab==='themenquiz')renderQuiz(c);
   if(tab==='wiederholen')renderReviewQueue(c);
   if(tab==='karten')addFlashcardRatings();
@@ -112,7 +112,7 @@
    '<button class="btn primary" onclick="go(&#39;themenquiz&#39;)">Mit einem kurzen Themenquiz starten</button>';
   c.innerHTML='<div class="panel"><span class="tag">Dein Lernweg · individuell aus deinem Lernstand</span><h2>Heute weiterlernen</h2><p>Dieser Lernweg richtet sich nach deinen eigenen Antworten und deinem Fortschritt. Er enthält keinen persönlichen Prüfungsmonat oder vorgegebenen Kalender.</p><div class="grid"><div class="card"><strong>'+due+'</strong><p>heute fällige Wiederholungen</p></div><div class="card"><strong>'+done+'</strong><p>als gelernt markierte Themen</p></div><div class="card"><strong>'+weak.length+'</strong><p>unsichere oder falsche Themen</p></div></div>'+next+'</div><div class="panel"><h3>Deine Themenstrecken</h3><p>Wähle ein Organsystem oder einen Pflegebereich. Eine Einheit besteht aus Wissen, einer Frage und einer kurzen Wiederholung.</p><div class="grid">'+Object.entries(areas).map(([k,v])=>'<article class="card"><h3>'+esc(k)+'</h3><p>'+v.length+' Lernprofile · '+v.filter(y=>state.reviewItems['disease-'+y.i]?.rating==='gewusst').length+' sicher markiert</p><button class="btn" onclick="upgradeQuizArea(&#39;'+esc(k).replace(/'/g,'&#39;')+'&#39;)">Einheit beginnen</button><button class="btn" onclick="upgradeCacheModule()">Modul offline speichern</button><span id="offlineStatus" class="muted"></span></article>').join('')+'</div></div><div class="panel"><h3>Dein nächster sinnvoller Schritt</h3><ol><li>Fällige Karten und Fragen beantworten.</li><li>Ein Krankheitsbild aus einem noch unsicheren Bereich bearbeiten.</li><li>Eine Prüfungs- oder Praxisübung auswählen und danach die Begründungen vergleichen.</li></ol></div>';
  }
- window.upgradeCacheModule=async function(){const label=document.querySelector('.offlineStatus');try{if(!('caches' in window)){if(label)label.textContent='Offline-Speichern wird von diesem Browser nicht unterstützt.';return}if(label)label.textContent='Lerneinheit wird gespeichert …';const cache=await caches.open('pflegefokus-module-offline-v1');await cache.addAll(['./index.html','./disease-library.js?v=3','./library.js?v=11','./learning-upgrade.js?v=6','./learning-expansion.js?v=2','./visual-library.js?v=16','./assets/heart-study.webp','./assets/lung-study.webp','./assets/glucose-study.webp','./assets/atmung-schema.svg','./assets/haut-schema.svg']);if(label)label.textContent='Texte, Quiz und lokale Abbildungen sind offline verfügbar. Externe Bilder benötigen Internet.'}catch(e){if(label)label.textContent='Speichern nicht möglich – prüfe die Internetverbindung und versuche es erneut.'}};
+ window.upgradeCacheModule=async function(){const label=document.querySelector('.offlineStatus');try{if(!('caches' in window)){if(label)label.textContent='Offline-Speichern wird von diesem Browser nicht unterstützt.';return}if(label)label.textContent='Lerneinheit wird gespeichert …';const cache=await caches.open('pflegefokus-module-offline-v1');await cache.addAll(['./index.html','./disease-library.js?v=3','./library.js?v=12','./learning-upgrade.js?v=7','./learning-expansion.js?v=2','./visual-library.js?v=21','./assets/heart-study.webp','./assets/lung-study.webp','./assets/glucose-study.webp','./assets/atmung-schema.svg','./assets/haut-schema.svg']);if(label)label.textContent='Texte, Quiz und lokale Abbildungen sind offline verfügbar. Externe Bilder benötigen Internet.'}catch(e){if(label)label.textContent='Speichern nicht möglich – prüfe die Internetverbindung und versuche es erneut.'}};
  window.upgradeQuizArea=function(area){state.upgradeArea=area;safeSave();go('themenquiz')};
  let qrun=[],qpos=0,qselected=null,qchecked=false;
  function quizPool(){
@@ -350,7 +350,7 @@
  if(typeof window.examSetMode!=='function')window.examSetMode=m=>{examMode=m;renderExam()};
  const originalExamRender=window.examRender;
  window.examRender=function(){renderExam()};
- if(location.pathname.endsWith('exam-practice.html'))setTimeout(renderExam,0);else setTimeout(()=>render(),0);
+ setTimeout(()=>render(),0);
  // Internal page backstop: the old dated personal calendar is replaced by this adaptive learner path.
  const firstNav=document.querySelector('#nav'); if(firstNav)setTimeout(()=>{if(tab==='plan')render()},0);
 })();

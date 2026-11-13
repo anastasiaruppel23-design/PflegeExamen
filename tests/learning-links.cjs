@@ -8,19 +8,26 @@ vm.runInContext(disease,context);
 vm.runInContext(library.slice(0,library.indexOf('function learningTone')),context);
 vm.runInContext(visual.slice(0,visual.indexOf('/* Illustrated views')),context);
 const run=s=>vm.runInContext(s,context);
-assert.equal(run('cards.length'),75);assert.equal(run('topics.length'),89);assert.equal(run('questions.length'),70);assert.equal(run('window.pfDiseaseEntries.length'),45);assert.ok(run('window.pfDiseaseEntries.every(e=>e.sections.length>=4&&e.quiz&&e.source&&librarySources[e.source]&&e.group&&Number.isInteger(e.quiz[2])&&e.quiz[2]>=0&&e.quiz[2]<e.quiz[1].length)'));
-for(let card=0;card<75;card++){
- const topic=run(`topicForCard(${card})`);assert.ok(topic>=0&&topic<76);
+const cardCount=run('cards.length'),topicCount=run('topics.length');
+assert.equal(cardCount,run('originalCardCount + libraryEntries.length'));
+assert.equal(topicCount,run('originalTopicCount + libraryEntries.length'));
+assert.equal(run('questions.length'),run('libraryEntries.filter(entry=>entry.quiz).length'));
+assert.equal(run('window.pfDiseaseEntries.length'),45);assert.ok(run('window.pfDiseaseEntries.every(e=>e.sections.length>=4&&e.quiz&&e.source&&librarySources[e.source]&&e.group&&Number.isInteger(e.quiz[2])&&e.quiz[2]>=0&&e.quiz[2]<e.quiz[1].length)'));
+for(let card=0;card<cardCount;card++){
+ const topic=run(`topicForCard(${card})`);assert.ok(topic>=0&&topic<topicCount);
  run(`openStudyCard(${topic})`);assert.equal(run('topicForCard(ci)'),topic);
 }
 for(const [card,title] of [[0,'Thrombose'],[1,'Antonovsky'],[2,'Peplau'],[3,'Orem'],[13,'Pflegeprozess'],[16,'Friedemann'],[27,'Krohwinkel'],[34,'Qualitätsmanagement']])assert.ok(run(`topics[topicForCard(${card})][0]`).startsWith(title));
-assert.equal(run('topicForCard(-1)'),-1);assert.equal(run('topicForCard(75)'),-1);
+assert.equal(run('topicForCard(-1)'),-1);assert.equal(run(`topicForCard(${cardCount})`),-1);
 vm.runInContext(read('glossary.js'),context);
 assert.match(run("highlighted('Kohärenzgefühl: verstehen')"),/glossary-term/);
 assert.doesNotMatch(run("highlighted('Non-Compliance und Copingstrategien')"),/glossary-term/);
 assert.doesNotMatch(run("highlighted('<img src=x onerror=alert(1)>')"),/<img/);
 assert.equal(run('studyGlossary.length'),5);
-for(const source of [...html.matchAll(/(?:src|href)="(\.\/[^"?]+)(\?[^\"]*)?"/g)].map(m=>m[1]))assert.ok(fs.existsSync(path.join(root,source)),source);
-const assets=read('sw.js').match(/const ASSETS=(\[[^;]+\])/)[1];
-const cached=JSON.parse(assets.replaceAll("'",'"'));assert.ok(cached.includes('./glossary.js?v=11'));assert.ok(cached.includes('./disease-library.js?v=2')&&cached.includes('./library.js?v=11')&&cached.includes('./exam-practice.js?v=6'));
-console.log('PASS: 75 card links, 76 valid topics, 70 quiz questions, 45 source-linked profiles and valid answer keys, glossary matching/escaping, script assets and offline cache');
+const assets=read('sw.js').match(/const ASSETS\s*=\s*(\[[^;]+\])/)[1];
+const cached=vm.runInNewContext(assets);
+for(const [,source,file] of html.matchAll(/(?:src|href)="((\.\/[^"?]+)(?:\?[^"]*)?)"/g)){
+ assert.ok(fs.existsSync(path.join(root,file)),file);
+ if(/\.(js|css)$/.test(file))assert.ok(cached.includes(source),`Missing from offline cache: ${source}`);
+}
+console.log(`PASS: ${cardCount} card links, ${topicCount} topics, quiz answers, source links, glossary matching and offline script assets`);
