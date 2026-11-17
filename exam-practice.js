@@ -12,7 +12,7 @@ const examFormats = {
  praktisch: {
   title:'Praktischer Teil',
   rule:'Hamburg: praktische Prüfung mit Pflegeplanung, Fallvorstellung, geplanter und situativ erforderlicher Pflege sowie Reflexionsgespräch. Der Durchführungsteil dauert mindestens 120 und höchstens 240 Minuten einschließlich Fallvorstellung und Reflexion.',
-  guidance:'Die praktische Prüfung wird nicht mit einem erfundenen App-Fall simuliert: Krankheitsbild, Pflegebedarf und Situation der zugeteilten Person sind vorher nicht verlässlich absehbar. Übe die praktische Durchführung in deiner Ausbildungseinrichtung und deinen Praxiseinsätzen gemeinsam mit Praxisanleitung und Schule. Richte dich dabei nach der tatsächlichen Versorgungssituation, den geltenden Standards und den Vorgaben deiner Einrichtung.'
+  guidance:'Die echte praktische Prüfung findet an realen Personen statt: Krankheitsbild, Pflegebedarf und Situation der zugeteilten Person sind vorher nicht verlässlich absehbar. Übe die praktische Durchführung in deiner Ausbildungseinrichtung und deinen Praxiseinsätzen gemeinsam mit Praxisanleitung und Schule. Richte dich dabei nach der tatsächlichen Versorgungssituation, den geltenden Standards und den Vorgaben deiner Einrichtung.'
  },
  muendlich: {
   title:'Mündlicher Teil',
@@ -33,13 +33,14 @@ function examRender(){
   const q=f.cases[examCaseIndex];
   html+='<div class="card"><span class="tag">'+examEsc(q.title)+'</span><h3>Schwerpunkt</h3><p>'+examEsc(q.focus)+'</p><h3>Fallsituation</h3><p>'+examEsc(q.story)+'</p><h3>Aufgaben</h3><ol>'+q.tasks.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ol><label for="examAnswer">Deine Antwort – begründe deine Entscheidungen am Fall</label><textarea id="examAnswer" placeholder="Schreibe zunächst ohne Musterlösung. Benenne Fallbezug, Priorität, Handlung und Begründung."></textarea><details><summary>Selbstcheck: wichtige Antwortmerkmale</summary><ul>'+q.guide.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ul><p class="muted">Vergleiche deine Begründungen mit diesen Merkmalen. Das ist keine amtliche Bewertung und ersetzt keinen Erwartungshorizont.</p></details><div class="flex">'+f.cases.map((x,i)=>'<button class="btn '+(i===examCaseIndex?'primary':'')+'" onclick="examCaseIndex='+i+';examRender()">Aufsichtsarbeit '+(i+1)+'</button>').join('')+'</div></div>';
  } else if(examMode==='praktisch'){
-  html+='<div class="card"><span class="tag">Hinweis zur praktischen Prüfung</span><h3>Übe in deiner Ausbildungseinrichtung</h3><p>'+examEsc(f.guidance)+'</p></div>';
+  html+=practicalTrainingHtml();
  } else {
   renderOral();
   return;
  }
  html+='<div class="panel"><h3>Offizielle Grundlagen</h3><ul><li><a href="https://www.gesetze-im-internet.de/pflaprv/__9.html" target="_blank" rel="noopener noreferrer">PflAPrV § 9 – staatliche Prüfung</a></li><li><a href="https://www.gesetze-im-internet.de/pflaprv/__13.html" target="_blank" rel="noopener noreferrer">§ 13 – Vornoten</a></li><li><a href="https://www.gesetze-im-internet.de/pflaprv/__14.html" target="_blank" rel="noopener noreferrer">§ 14 – schriftlicher Teil</a></li><li><a href="https://www.gesetze-im-internet.de/pflaprv/__15.html" target="_blank" rel="noopener noreferrer">§ 15 – mündlicher Teil</a></li><li><a href="https://www.gesetze-im-internet.de/pflaprv/__16.html" target="_blank" rel="noopener noreferrer">§ 16 – praktischer Teil</a></li><li><a href="https://dokumente.hamburg.de/resource/blob/1159706/7c997140ddc553b6ebae9cd99550a6e3/handreichung-schriftliche-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung schriftliche Prüfung (Stand 04/2026)</a></li><li><a href="https://dokumente.hamburg.de/resource/blob/1159722/dd9679bbdc4e389fe7d05f78ff813317/handreichung-muendliche-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung mündliche Prüfung (Stand 03/2026)</a></li><li><a href="https://dokumente.hamburg.de/resource/blob/1159720/dd6190d436e930f6cc8686e68d8ab99b/handreichung-praktische-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung praktische Prüfung (Stand 03/2026)</a></li><li><a href="https://www.hamburg.de/politik-und-verwaltung/behoerden/sozialbehoerde/einrichtungen/lpa/pflegefachkraefte-31534" target="_blank" rel="noopener noreferrer">Hamburgisches Landesprüfungsamt – Prüfungsunterlagen</a></li></ul><p class="muted">Rechtsstand geprüft am 07.11.2026. Verbindlich bleiben die für deinen Prüfungsjahrgang mitgeteilten Vorgaben deiner Pflegeschule und des Landesprüfungsamts.</p></div></div>';
  c.innerHTML=html;
+ if(examMode==='praktisch')careRestore();
  const draftKey=examMode==='schriftlich'?'schriftlich-'+examCaseIndex:examMode;
  const answer=document.getElementById('examAnswer');
  if(answer){state.examDrafts??={};answer.value=state.examDrafts[draftKey]||'';answer.addEventListener('input',()=>{state.examDrafts[draftKey]=answer.value;save()})}
