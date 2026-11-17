@@ -24,13 +24,14 @@ const examFormats = {
 };
 let examMode='schriftlich', examCaseIndex=0, examTimer=null, examFormatSeconds=0;
 function examEsc(x){return esc(x)}
-function examSetMode(mode){examStartTimer(0);examMode=mode;examCaseIndex=0;examRender()}
+function examSetMode(mode){examStartTimer(0);examMode=mode;examCaseIndex=0;if(['schriftlich','praktisch','muendlich'].includes(tab)&&tab!==mode){go(mode);return;}examRender()}
 function examRender(){
  const c=document.querySelector('#content'),f=examFormats[examMode]; if(!c)return;
- let html='<div class="panel knowledge"><span class="tag">Prüfungstraining · Stand 2026</span><h2>'+ (tab==='praktisch'?'Praktische Prüfung':'Prüfungsformate üben') +'</h2><p>Übe in der Reihenfolge, die sich bewährt: erst selbst denken und begründen, dann mit Kriterien vergleichen und anschließend gezielt nacharbeiten.</p><div class="flex">'+[['schriftlich','Schriftlich'],['praktisch','Praktisch'],['muendlich','Mündlich']].map(([id,label])=>'<button class="btn '+(examMode===id?'primary':'')+'" onclick="examSetMode(\''+id+'\')">'+label+'</button>').join('')+'</div><div class="learn-box tone-warning"><h3>Was dieser Bereich abbildet</h3><p>Die Formate und Zeitrahmen sind nach PflAPrV und den Hamburger Handreichungen aus 03/2026 bzw. 04/2026 gestaltet. Die Fälle sind selbst erstellte Übungsfälle, keine offiziellen Prüfungsaufgaben. Die App kann keine staatliche Note vergeben.</p></div><p class="muted">'+examEsc(f.rule)+'</p>';
+ let html='<div class="panel knowledge"><span class="tag">Prüfungstraining · Stand 2026</span><h2>'+ (tab==='praktisch'?'Praktische Prüfung':tab==='schriftlich'?'Schriftliche Prüfung':'Prüfungsformate üben') +'</h2><p>Übe in der Reihenfolge, die sich bewährt: erst selbst denken und begründen, dann mit Kriterien vergleichen und anschließend gezielt nacharbeiten.</p><div class="flex">'+[['schriftlich','Schriftlich'],['praktisch','Praktisch'],['muendlich','Mündlich']].map(([id,label])=>'<button class="btn '+(examMode===id?'primary':'')+'" onclick="examSetMode(\''+id+'\')">'+label+'</button>').join('')+'</div><div class="learn-box tone-warning"><h3>Was dieser Bereich abbildet</h3><p>Die Formate und Zeitrahmen sind nach PflAPrV und den Hamburger Handreichungen aus 03/2026 bzw. 04/2026 gestaltet. Die Fälle sind selbst erstellte Übungsfälle, keine offiziellen Prüfungsaufgaben. Die App kann keine staatliche Note vergeben.</p></div><p class="muted">'+examEsc(f.rule)+'</p>';
  html+='<div class="card"><h3>Bestehen und Benotung</h3><ul><li>Schriftlich: Jede der drei Aufsichtsarbeiten muss mindestens ausreichend sein.</li><li>Die schriftliche, mündliche und praktische Teilnote muss jeweils mindestens ausreichend sein.</li><li>Die Vornote zählt bei jedem Prüfungsteil 25 Prozent; die Gesamtnote der staatlichen Prüfung ist der Mittelwert der drei Teilnoten.</li></ul><p class="muted">Die Hamburger Handreichung ergänzt für den schriftlichen Teil, dass die drei Fälle unterschiedliche Altersstufen, Lebenswelten und Versorgungsbereiche abbilden sollen.</p><a href="https://www.gesetze-im-internet.de/pflaprv/__13.html" target="_blank" rel="noopener noreferrer">§ 13 Vornoten</a> · <a href="https://www.gesetze-im-internet.de/pflaprv/__19.html" target="_blank" rel="noopener noreferrer">§ 19 Bestehen und Wiederholung</a></div>';
  if(examMode==='schriftlich'){
   const q=f.cases[examCaseIndex];
+  html+='<div class="card"><h3>So gehst du schriftliche Aufgaben an</h3><ol><li>Aufgaben und Operatoren zuerst lesen: nennen, erklären, begründen oder beurteilen erfordern unterschiedlich ausführliche Antworten.</li><li>Im Fall Ressourcen, Pflegeprobleme, Risiken und fehlende Informationen markieren.</li><li>Antworten nach Aufgabennummern gliedern und jede Begründung mit konkreten Fallangaben verbinden.</li><li>Ziele und Maßnahmen unterscheiden; bei Planung PESR, SMART und W-Fragen nutzen, wenn die Aufgabe es verlangt.</li><li>Zeit nach Umfang/Punkten verteilen und am Ende Vollständigkeit und Plausibilität kontrollieren.</li></ol><p>Übe zuerst selbst und öffne danach den Selbstcheck. Die drei Übungsarbeiten findest du unterhalb des Falls.</p><button class="btn" onclick="examStartTimer(7200)">120-Minuten-Übung starten</button> <button class="btn" onclick="examStartTimer(0)">Timer stoppen</button> <strong id="examClock">00:00</strong></div>';
   html+='<div class="card"><span class="tag">'+examEsc(q.title)+'</span><h3>Schwerpunkt</h3><p>'+examEsc(q.focus)+'</p><h3>Fallsituation</h3><p>'+examEsc(q.story)+'</p><h3>Aufgaben</h3><ol>'+q.tasks.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ol><label for="examAnswer">Deine Antwort – begründe deine Entscheidungen am Fall</label><textarea id="examAnswer" placeholder="Schreibe zunächst ohne Musterlösung. Benenne Fallbezug, Priorität, Handlung und Begründung."></textarea><details><summary>Selbstcheck: wichtige Antwortmerkmale</summary><ul>'+q.guide.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ul><p class="muted">Vergleiche deine Begründungen mit diesen Merkmalen. Das ist keine amtliche Bewertung und ersetzt keinen Erwartungshorizont.</p></details><div class="flex">'+f.cases.map((x,i)=>'<button class="btn '+(i===examCaseIndex?'primary':'')+'" onclick="examCaseIndex='+i+';examRender()">Aufsichtsarbeit '+(i+1)+'</button>').join('')+'</div></div>';
  } else if(examMode==='praktisch'){
   html+=practicalTrainingHtml();
@@ -120,6 +121,7 @@ function renderOral() {
  document.querySelector('#content').innerHTML =
   '<button class="btn exam-back" onclick="go(\'pruefung\')">← Zurück zu Prüfung üben</button>'+
   '<section class="panel"><h2>Mündliche Prüfung üben</h2><p>'+examEsc(examFormats.muendlich.rule)+'</p>'+
+  '<div class="card"><h3>Das Wichtigste für dein Prüfungsgespräch</h3><ol><li>Fasse den Fall und die zentrale Herausforderung kurz zusammen.</li><li>Erkläre Zusammenarbeit und Zuständigkeiten (Kompetenzbereich III).</li><li>Wäge Recht, Ethik, Selbstbestimmung und Qualität am Fall ab (IV).</li><li>Begründe mit Fachwissen und Evidenz und reflektiere deine Berufsrolle (V).</li><li>Beschreibe Beobachtung, Einschätzung, Handlung und Wirkungskontrolle. Benenne fehlende Informationen.</li></ol><p>Erstelle in der Vorbereitung eine Gliederung. Übe anschließend laut und frei und öffne erst danach den Erwartungshorizont.</p></div>'+
   '<label for="oralCase">Übungsfall auswählen</label> <select id="oralCase">'+
   Object.entries(oralCases).map(([key, item]) => '<option value="'+key+'">'+examEsc(item.title)+'</option>').join('')+'</select>'+
   '<article class="card"><h3>'+examEsc(current.title)+'</h3><p>'+examEsc(current.scenario)+'</p>'+
@@ -153,11 +155,11 @@ function examPracticeIntro() {
 
 (function(){
  const baseGo=go;
- go=function(next){if(next!==tab && (tab==='pruefungsformat'||tab==='muendlich'))examStartTimer(0);baseGo(next)};
+ go=function(next){if(next!==tab && ['pruefungsformat','schriftlich','praktisch','muendlich'].includes(tab))examStartTimer(0);baseGo(next)};
  const baseRender=render;
  render=function(){
   baseRender();
-  if(tab==='praktisch'){examMode='praktisch';examRender();}
+  if(tab==='praktisch'||tab==='schriftlich'){examMode=tab;examRender();}
   else if(tab==='pruefungsformat')examRender();
   else if(['themen','quiz','kompetenz','karten','faelle','falltraining','pruefung','wiederholen','muendlich'].includes(tab)){
    const c=document.querySelector('#content');
