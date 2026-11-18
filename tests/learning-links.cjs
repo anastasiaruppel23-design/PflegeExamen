@@ -31,6 +31,13 @@ assert.deepEqual(Array.from(run('curriculumYears.flat().map(field => field[0])')
  '1a', '1b', '2', '3a', '3b', ...Array.from({length: 21}, (_, i) => String(i + 4))
 ]);
 assert.ok(run('curriculumYears.flat().every(field => topics.some(([title]) => title.startsWith(field[6])))'));
+vm.runInContext(read('anatomy-depth.js'), context);
+assert.equal(run('Object.keys(anatomyDepth).length'), 11);
+assert.ok(run('Object.values(anatomyDepth).every(module => module.build.length >= 3 && module.physiology.length >= 3 && module.answer && module.question)'));
+const missingAnatomy = Array.from(run('Object.values(anatomyDepth).flatMap(module => module.topics).filter(prefix => !topics.some(([title]) => title.startsWith(prefix)))'));
+assert.deepEqual(missingAnatomy, []);
+vm.runInContext(library.slice(library.indexOf("function relatedTopics("), library.indexOf("function openLibraryTopic(")), context);
+assert.ok(run('topics.every((_, i) => relatedTopics(i).length && relatedTopics(i).every(n => n !== i && topics[n]))'));
 const assets=read('sw.js').match(/const ASSETS\s*=\s*(\[[^;]+\])/)[1];
 const cached=vm.runInNewContext(assets);
 for(const [,source,file] of html.matchAll(/(?:src|href)="((\.\/[^"?]+)(?:\?[^"]*)?)"/g)){
