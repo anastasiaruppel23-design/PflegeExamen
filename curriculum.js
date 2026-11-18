@@ -56,7 +56,9 @@ const curriculumSources = [
   ['Kompetenzkatalog (Anlage 2 PflAPrV)', 'https://www.gesetze-im-internet.de/pflaprv/anlage_2.html'],
   ['Stunden der Praxiseinsätze (Anlage 7 PflAPrV)', 'https://www.gesetze-im-internet.de/pflaprv/anlage_7.html'],
   ['Praxisanleitung (§ 4 PflAPrV)', 'https://www.gesetze-im-internet.de/pflaprv/__4.html'],
-  ['Aufbau der Ausbildung (§ 1 PflAPrV)', 'https://www.gesetze-im-internet.de/pflaprv/__1.html']
+  ['Aufbau der Ausbildung (§ 1 PflAPrV)', 'https://www.gesetze-im-internet.de/pflaprv/__1.html'],
+  ['Dauer und Struktur (§ 6 PflBG)', 'https://www.gesetze-im-internet.de/pflbg/__6.html'],
+  ['Zwischenprüfung (§ 7 PflAPrV)', 'https://www.gesetze-im-internet.de/pflaprv/__7.html']
 ];
 
 function renderCurriculum(content) {
@@ -83,8 +85,14 @@ function renderCurriculum(content) {
     </section>
     <section class="panel">
       <h3>Aufbau und Praxiseinsätze</h3>
-      <p>Die generalistische Ausbildung umfasst mindestens 2.100 Stunden Unterricht und 2.500 Stunden praktische Ausbildung. Zu Beginn steht der Orientierungseinsatz beim Träger. Zu den Praxiseinsätzen gehören die stationäre Akut- und Langzeitpflege, die ambulante Pflege, die Pädiatrie und die Psychiatrie sowie der Vertiefungseinsatz und weitere Stunden gemäß Anlage 7.</p>
+      <p>Die Ausbildung dauert in Vollzeit drei Jahre und in Teilzeit höchstens fünf Jahre. Sie umfasst mindestens 2.100 Stunden Unterricht und 2.500 Stunden praktische Ausbildung.</p>
+      <ul>
+        <li><strong>Erstes und zweites Ausbildungsdrittel:</strong> 400 Stunden Orientierung beim Träger, je 400 Stunden in stationärer Akutpflege, stationärer Langzeitpflege und ambulanter Akut- oder Langzeitpflege sowie 120 Stunden Pädiatrie.</li>
+        <li><strong>Letztes Ausbildungsdrittel:</strong> 120 Stunden Psychiatrie, 500 Stunden im Vertiefungseinsatz, 80 Stunden in einem weiteren Einsatz und 80 Stunden zur freien Verteilung nach Anlage 7.</li>
+      </ul>
+      <p>Bis Ende 2024 galt für den pädiatrischen Einsatz eine Übergangsregelung von 60 bis 120 Stunden. Freie Stunden erhöhten den Orientierungseinsatz. Maßgeblich für die persönliche Planung ist der eigene Ausbildungsplan.</p>
       <p>Für jeden Einsatz sind mindestens 10 Prozent geplante und strukturierte Praxisanleitung vorgesehen. Besprich deine Lernziele zu Einsatzbeginn, dokumentiere den Verlauf im Ausbildungsnachweis und reflektiere den Stand mit der Praxisanleitung.</p>
+      <p>Die Zwischenprüfung ermittelt den Ausbildungsstand am Ende des zweiten Ausbildungsdrittels. Die staatliche Abschlussprüfung hat einen schriftlichen, einen mündlichen und einen praktischen Teil.</p>
     </section>
     ${fields}
     <section class="panel">
