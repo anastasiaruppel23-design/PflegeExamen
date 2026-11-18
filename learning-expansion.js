@@ -189,12 +189,6 @@ if(!document.getElementById('learning-expansion-style'))document.head.insertAdja
 const oldRender=window.render;
 window.render=function(){
  if(typeof oldRender==='function')oldRender();
- const nav=document.querySelector('#nav');
- if(nav){
-  const groups=nav.querySelectorAll('.navgroup');
-  const add=(group,id,label)=>{if(nav.querySelector('[data-expansion="'+id+'"]'))return;const host=groups[group]?.querySelector('.navitems');if(!host)return;const b=document.createElement('button');b.dataset.expansion=id;b.textContent=label;b.className=tab===id?'active':'';b.setAttribute('aria-current',tab===id?'page':'false');b.onclick=()=>window.go(id);host.appendChild(b)};
-  add(0,'anatomie','Anatomie');add(0,'modelle','Modelle & Theorien');add(0,'standards','Expertenstandards');add(0,'glossar','Fachbegriffe');
- }
  const c=document.querySelector('#content');if(!c)return;
  if(tab==='anatomie')renderAnatomy(c);
  if(tab==='modelle')renderModels(c);

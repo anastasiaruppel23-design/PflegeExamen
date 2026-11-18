@@ -63,7 +63,41 @@ async function checkLearningAccess(page) {
   assert.equal(await page.locator('#menuToggle').isVisible(), true);
 }
 
-async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
+async function checkCurriculumMenu(page) {
+  await page.evaluate(() => go("start"));
+  const drawer = page.locator('#menuDrawer');
+  const exams = drawer.locator('#menu-pruefungen');
+  await page.locator('#menuToggle').click();
+  assert.equal(await drawer.locator('.navgroup[open]').count(), 0);
+  const group = exams.locator('summary');
+  await group.focus();
+  await page.keyboard.press('Enter');
+  for (const label of ['Schriftliche Prüfung', 'Praktische Prüfung', 'Mündliche Prüfung']) {
+    assert.equal(await exams.getByRole('button', {name: label, exact: true}).isVisible(), true);
+  }
+  await group.click();
+  assert.equal(await exams.getByRole('button', {name: 'Praktische Prüfung', exact: true}).isVisible(), false);
+  await group.click();
+  await exams.getByRole('button', {name: 'Praktische Prüfung', exact: true}).click();
+  assert.equal(await drawer.isVisible(), false);
+  assert.equal(await page.evaluate(() => tab), 'praktisch');
+
+  await page.locator('#menuToggle').click();
+  assert.equal(await exams.locator('[aria-current="page"]').isVisible(), true);
+  await drawer.getByText('Lernen', {exact: true}).click();
+  await drawer.getByRole('button', {name: 'Ausbildungsrahmen', exact: true}).click();
+  await page.getByRole('heading', {name: 'Ausbildungsrahmen Pflegefachkraft'}).waitFor();
+  assert.equal(await page.locator('[id^="handlungsfeld-"]').count(), 26);
+  assert.equal(await page.getByRole('button', {name: /^Vertiefen:/, includeHidden: true}).count(), 26);
+  const field = page.locator('#handlungsfeld-4');
+  await field.locator(':scope > summary').click();
+  await field.getByText('Lösungsimpuls').click();
+  assert.equal(await field.getByText(/Frage nach Verlauf und Beobachtungen/).isVisible(), true);
+  await field.getByRole('button', {name: /Vertiefen: Friedemann/}).click();
+  assert.equal(await page.evaluate(() => tab), 'themen');
+}
+
+async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkCurriculumMenu(page);await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
 // Cards with a knowledge target must link to it. Standalone cards must render and flip.
 const cardCount=await page.evaluate(()=>cards.length);
 for(let card=0;card<cardCount;card++){

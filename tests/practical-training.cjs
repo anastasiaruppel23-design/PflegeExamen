@@ -36,7 +36,9 @@ const target = {tagName:'DETAILS',style:{},open:false,scrollIntoView(){},setAttr
 nodes.set('practice-topic-0',target);
 vm.runInContext(`practicalJump('practice-topic-0')`,context);
 assert.equal(target.open,true);
-for(const asset of ['./practical-training.js?v=2','./learning-upgrade.js?v=8']) {
+const practicalAssets = [...read('index.html').matchAll(/src="(\.\/(?:practical-training|learning-upgrade)\.js\?v=\d+)"/g)];
+assert.equal(practicalAssets.length, 2);
+for(const [, asset] of practicalAssets) {
  assert.ok(read('index.html').includes(asset));assert.ok(read('sw.js').includes(asset));
 }
 console.log('PASS: practical renderer integration, section navigation, feedback, draft restoration and offline asset versions');

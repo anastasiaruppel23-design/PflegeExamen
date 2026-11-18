@@ -24,6 +24,13 @@ assert.match(run("highlighted('Kohärenzgefühl: verstehen')"),/glossary-term/);
 assert.doesNotMatch(run("highlighted('Non-Compliance und Copingstrategien')"),/glossary-term/);
 assert.doesNotMatch(run("highlighted('<img src=x onerror=alert(1)>')"),/<img/);
 assert.equal(run('studyGlossary.length'),5);
+vm.runInContext(read('curriculum.js'), context);
+assert.equal(run('curriculumUnits.length'), 11);
+assert.equal(run('new Set(curriculumYears.flat().flatMap(field => field[2])).size'), 11);
+assert.deepEqual(Array.from(run('curriculumYears.flat().map(field => field[0])')), [
+ '1a', '1b', '2', '3a', '3b', ...Array.from({length: 21}, (_, i) => String(i + 4))
+]);
+assert.ok(run('curriculumYears.flat().every(field => topics.some(([title]) => title.startsWith(field[6])))'));
 const assets=read('sw.js').match(/const ASSETS\s*=\s*(\[[^;]+\])/)[1];
 const cached=vm.runInNewContext(assets);
 for(const [,source,file] of html.matchAll(/(?:src|href)="((\.\/[^"?]+)(?:\?[^"]*)?)"/g)){
