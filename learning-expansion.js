@@ -15,16 +15,17 @@ const svg=(type)=> {
  return '<svg class="organ-svg" viewBox="0 0 100 100" role="img" aria-label="Vereinfachte schematische Darstellung">'+(shapes[type]||'')+'</svg>';
 };
 const systems=[
- {name:'Herz und Kreislauf',key:'heart',organs:'Herz, Gefäße und Blut',function:'Das Herz pumpt Blut durch Lungen- und Körperkreislauf. So werden Gewebe mit Sauerstoff versorgt und Stoffwechselprodukte abtransportiert.',care:'Puls, Blutdruck, Haut, Belastbarkeit, Ödeme und neue Atemnot im Verlauf einordnen; plötzliche Brustschmerzen oder Kreislaufzeichen eskalieren.',links:'Hypertonie · Herzinsuffizienz · KHK · Herzinfarkt · Arrhythmien · pAVK'},
- {name:'Lunge und Atemwege',key:'lungs',organs:'Nase, Rachen, Kehlkopf, Luftröhre, Bronchien und Lunge',function:'Beim Einatmen gelangt Luft bis zu den Alveolen. Dort diffundiert Sauerstoff ins Blut und Kohlendioxid in die Ausatemluft.',care:'Atemfrequenz, Atemarbeit, Sprechfähigkeit, Hautfarbe, Bewusstsein und Sättigung gemeinsam beurteilen.',links:'Asthma · COPD · Pneumonie · Lungenembolie · Pneumothorax'},
- {name:'Magen-Darm-System',key:'gut',organs:'Mund, Speiseröhre, Magen, Dünn- und Dickdarm, Leber, Gallenblase und Pankreas',function:'Verdauung zerlegt Nahrung, nimmt Nährstoffe und Wasser auf und scheidet unverdauliche Reste aus. Leber und Pankreas unterstützen Stoffwechsel und Verdauung.',care:'Ernährungszustand, Schlucken, Übelkeit, Bauch, Ausscheidung, Flüssigkeit und Gewicht beobachten; akute Blutung oder akutes Abdomen melden.',links:'Reflux · Gastritis · Ulkus · chronisch-entzündliche Darmerkrankungen · Ileus · Leberzirrhose · Pankreatitis'},
- {name:'Nieren und Harnwege',key:'kidney',organs:'Nieren, Harnleiter, Harnblase und Harnröhre',function:'Die Nieren filtern Blut, regulieren Wasser, Elektrolyte und Säure-Basen-Haushalt und bilden Hormone. Urin fließt über Harnleiter zur Blase.',care:'Ein-/Ausfuhr nach Auftrag, Urinmenge und -beschaffenheit, Ödeme, Gewicht und Beschwerden erfassen; plötzliche Oligurie zeitnah melden.',links:'Akute Nierenschädigung · chronische Nierenkrankheit · Harnwegsinfekt · Inkontinenz'},
- {name:'Gehirn und Nervensystem',key:'brain',organs:'Gehirn, Rückenmark und periphere Nerven',function:'Das Nervensystem verarbeitet Sinneseindrücke und steuert Bewegung, Sprache, Bewusstsein und viele automatische Körperfunktionen.',care:'Bewusstseinslage, Sprache, Pupillen, Bewegung und Sensibilität mit Ausgangszustand vergleichen; neue fokale Ausfälle sofort eskalieren.',links:'Schlaganfall · Parkinson · Epilepsie · Demenz · Delir · Multiple Sklerose'},
- {name:'Bewegungsapparat',key:'bones',organs:'Knochen, Gelenke, Muskeln, Sehnen und Bänder',function:'Knochen stützen und schützen; Gelenke ermöglichen Bewegung; Muskeln erzeugen Kraft. Zusammenspiel ermöglicht Mobilität und Alltagshandlungen.',care:'Schmerz, Bewegungsumfang, Kraft, Gleichgewicht und Transfers beobachten; individuelle Ressourcen und Sturzrisiko einbeziehen.',links:'Arthrose · Osteoporose · Frakturen · Rheumatoide Arthritis · Rückenschmerz'},
- {name:'Haut und Wundheilung',key:'skin',organs:'Oberhaut, Lederhaut und Unterhaut',function:'Die Haut schützt vor Keimen und Verletzungen, reguliert Temperatur und Flüssigkeit und ermöglicht Wahrnehmung. Wundheilung durchläuft überlappende Phasen.',care:'Hautzustand, Druckstellen, Feuchtigkeit, Schmerz und Wundverlauf strukturiert beobachten; Veränderungen nachvollziehbar dokumentieren.',links:'Dekubitus · chronische Wunden · Intertrigo · Hautschäden durch Inkontinenz'},
- {name:'Hormone und Stoffwechsel',key:'endocrine',organs:'Hypophyse, Schilddrüse, Nebenschilddrüsen, Bauchspeicheldrüse, Nebennieren und Keimdrüsen',function:'Hormone wirken als Botenstoffe. Sie regulieren unter anderem Wachstum, Stressantwort, Blutzucker, Temperatur, Flüssigkeit und Fortpflanzung.',care:'Werte, Symptome, Essen, Trinken und verordnete Behandlung im Kontext beobachten; bei Hypoglykämie Bewusstsein und Schluckfähigkeit zuerst beachten.',links:'Diabetes mellitus · Hypo-/Hyperthyreose · Nebennierenstörungen'},
- {name:'Blut, Immunsystem und Lymphe',key:'blood',organs:'Blutzellen, Knochenmark, Lymphbahnen, Lymphknoten und Milz',function:'Blutzellen transportieren Sauerstoff, unterstützen Gerinnung und Abwehr. Lymphsystem und Immunzellen helfen, Erreger und Zellreste zu erkennen.',care:'Blässe, Blutungszeichen, Fieber, Infektzeichen, Lymphödem und Therapiebelastung beachten; unter Immunsuppression Infektzeichen ernst nehmen.',links:'Anämie · Leukämien · Lymphome · Thrombose · Sepsis'},
- {name:'Sinnesorgane',key:'senses',organs:'Augen, Ohren, Nase, Zunge und Hautrezeptoren',function:'Sinnesorgane nehmen Reize auf und leiten Informationen an das Nervensystem weiter. Einschränkungen beeinflussen Orientierung, Kommunikation und Sicherheit.',care:'Brille und Hörgerät verfügbar machen, Umgebung anpassen und Informationen barrierearm vermitteln.',links:'Seh- und Hörbeeinträchtigungen · Glaukom · Katarakt'}
+ {name:'Herz und Kreislauf',key:'heart',organs:'Herz, Gefäße und Blut',function:'Das Herz pumpt Blut durch Lungen- und Körperkreislauf. So werden Gewebe mit Sauerstoff versorgt und Stoffwechselprodukte abtransportiert.',care:'Puls, Blutdruck, Haut, Belastbarkeit, Ödeme und neue Atemnot im Verlauf einordnen; plötzliche Brustschmerzen oder Kreislaufzeichen eskalieren.'},
+ {name:'Lunge und Atemwege',key:'lungs',organs:'Nase, Rachen, Kehlkopf, Luftröhre, Bronchien und Lunge',function:'Beim Einatmen gelangt Luft bis zu den Alveolen. Dort diffundiert Sauerstoff ins Blut und Kohlendioxid in die Ausatemluft.',care:'Atemfrequenz, Atemarbeit, Sprechfähigkeit, Hautfarbe, Bewusstsein und Sättigung gemeinsam beurteilen.'},
+ {name:'Magen-Darm-System',key:'gut',organs:'Mund, Speiseröhre, Magen, Dünn- und Dickdarm, Leber, Gallenblase und Pankreas',function:'Verdauung zerlegt Nahrung, nimmt Nährstoffe und Wasser auf und scheidet unverdauliche Reste aus. Leber und Pankreas unterstützen Stoffwechsel und Verdauung.',care:'Ernährungszustand, Schlucken, Übelkeit, Bauch, Ausscheidung, Flüssigkeit und Gewicht beobachten; akute Blutung oder akutes Abdomen melden.'},
+ {name:'Nieren und Harnwege',key:'kidney',organs:'Nieren, Harnleiter, Harnblase und Harnröhre',function:'Die Nieren filtern Blut, regulieren Wasser, Elektrolyte und Säure-Basen-Haushalt und bilden Hormone. Urin fließt über Harnleiter zur Blase.',care:'Ein-/Ausfuhr nach Auftrag, Urinmenge und -beschaffenheit, Ödeme, Gewicht und Beschwerden erfassen; plötzliche Oligurie zeitnah melden.'},
+ {name:'Gehirn und Nervensystem',key:'brain',organs:'Gehirn, Rückenmark und periphere Nerven',function:'Das Nervensystem verarbeitet Sinneseindrücke und steuert Bewegung, Sprache, Bewusstsein und viele automatische Körperfunktionen.',care:'Bewusstseinslage, Sprache, Pupillen, Bewegung und Sensibilität mit Ausgangszustand vergleichen; neue fokale Ausfälle sofort eskalieren.'},
+ {name:'Bewegungsapparat',key:'bones',organs:'Knochen, Gelenke, Muskeln, Sehnen und Bänder',function:'Knochen stützen und schützen; Gelenke ermöglichen Bewegung; Muskeln erzeugen Kraft. Zusammenspiel ermöglicht Mobilität und Alltagshandlungen.',care:'Schmerz, Bewegungsumfang, Kraft, Gleichgewicht und Transfers beobachten; individuelle Ressourcen und Sturzrisiko einbeziehen.'},
+ {name:'Haut und Wundheilung',key:'skin',organs:'Oberhaut, Lederhaut und Unterhaut',function:'Die Haut schützt vor Keimen und Verletzungen, reguliert Temperatur und Flüssigkeit und ermöglicht Wahrnehmung. Wundheilung durchläuft überlappende Phasen.',care:'Hautzustand, Druckstellen, Feuchtigkeit, Schmerz und Wundverlauf strukturiert beobachten; Veränderungen nachvollziehbar dokumentieren.'},
+ {name:'Hormone und Stoffwechsel',key:'endocrine',organs:'Hypophyse, Schilddrüse, Nebenschilddrüsen, Bauchspeicheldrüse, Nebennieren und Keimdrüsen',function:'Hormone wirken als Botenstoffe. Sie regulieren unter anderem Wachstum, Stressantwort, Blutzucker, Temperatur, Flüssigkeit und Fortpflanzung.',care:'Werte, Symptome, Essen, Trinken und verordnete Behandlung im Kontext beobachten; bei Hypoglykämie Bewusstsein und Schluckfähigkeit zuerst beachten.'},
+ {name:'Blut, Immunsystem und Lymphe',key:'blood',organs:'Blutzellen, Knochenmark, Lymphbahnen, Lymphknoten und Milz',function:'Blutzellen transportieren Sauerstoff, unterstützen Gerinnung und Abwehr. Lymphsystem und Immunzellen helfen, Erreger und Zellreste zu erkennen.',care:'Blässe, Blutungszeichen, Fieber, Infektzeichen, Lymphödem und Therapiebelastung beachten; unter Immunsuppression Infektzeichen ernst nehmen.'},
+ {name:'Sinnesorgane',key:'senses',organs:'Augen, Ohren, Nase, Zunge und Hautrezeptoren',function:'Sinnesorgane nehmen Reize auf und leiten Informationen an das Nervensystem weiter. Einschränkungen beeinflussen Orientierung, Kommunikation und Sicherheit.',care:'Brille und Hörgerät verfügbar machen, Umgebung anpassen und Informationen barrierearm vermitteln.'},
+ {name:'Fortpflanzung, Schwangerschaft und Stillen',key:'reproductive',organs:'Eierstöcke, Eileiter, Gebärmutter, Hoden, Nebenhoden, Plazenta und Brustdrüsen',function:'Keimdrüsen bilden Keimzellen und Hormone. Fortpflanzung, Schwangerschaft und Stillen werden durch verschiedene Organe und Hormonsysteme ermöglicht.',care:'Beobachtungen und Fragen zu Zyklus, Schwangerschaft oder Stillen sensibel aufnehmen. Intimsphäre wahren und bei Unterstützungsbedarf zuständige Fachpersonen einbeziehen.'}
 ];
 const models=[
  ['Virginia Henderson','Bedürfnismodell','Pflege unterstützt Menschen bei 14 grundlegenden Aktivitäten, wenn Wissen, Kraft oder Wille fehlen.','Selbstständigkeit bei Atmung, Essen, Ausscheidung, Bewegung, Ruhe, Kleidung, Temperatur, Hygiene, Sicherheit, Kommunikation, Glauben, Arbeit, Erholung und Lernen einschätzen.','Eine Pflegeplanung beschreibt, was die Person selbst kann und wo gezielte Unterstützung nötig ist.'],
@@ -182,7 +183,7 @@ if(typeof cards!=='undefined')cards.push(
 );
 
 const styles=`<style id="learning-expansion-style">
-.learning-hero{background:linear-gradient(125deg,#123d51,#187c7e);color:#fff;padding:25px;border-radius:20px;margin-bottom:16px}.learning-hero p{max-width:800px;margin-bottom:0;color:#e4f8f2}.visual-card{overflow:hidden}.visual-card .organ-svg{width:100%;height:130px;background:#eff8f5;border-radius:14px}.mini-flow{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.mini-flow span{background:#e9f5f1;border-radius:999px;padding:7px 11px;font-size:13px;font-weight:650}.theory-graphic{border-radius:12px;background:#eef7f4;padding:12px;margin:10px 0;font-weight:650;color:#176c70}.theory-graphic .arrow{color:#dc8c44;padding:0 5px}.standard-flow{border-left:4px solid #27a88d;padding:9px 12px;margin:12px 0;background:#eef8f4;border-radius:0 12px 12px 0}.exp-search{margin:0 0 14px}.glossary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}.glossary-item{background:#fff;border:1px solid #dbe9e5;border-radius:13px;padding:15px}.glossary-item h3{margin-top:0;color:#146d72}.glossary-item p{margin:7px 0}.glossary-item .example{color:#5c7275;font-size:14px}.content-note{font-size:13px;color:#607578;background:#f3f7f6;padding:12px;border-radius:12px;margin-top:15px}
+.learning-hero{background:linear-gradient(125deg,#123d51,#187c7e);color:#fff;padding:25px;border-radius:20px;margin-bottom:16px}.learning-hero p{max-width:800px;margin-bottom:0;color:#e4f8f2}.anatomy-module,.expansion-entry{scroll-margin-top:100px}.anatomy-module li{margin-bottom:.55em}.anatomy-index{position:static;display:flex;flex-wrap:wrap}.anatomy-detail>summary{padding-block:8px}.expansion-links .btn{min-height:44px}.visual-card{overflow:hidden}.visual-card .organ-svg{width:100%;height:130px;background:#eff8f5;border-radius:14px}.mini-flow{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}.mini-flow span{background:#e9f5f1;border-radius:999px;padding:7px 11px;font-size:13px;font-weight:650}.theory-graphic{border-radius:12px;background:#eef7f4;padding:12px;margin:10px 0;font-weight:650;color:#176c70}.theory-graphic .arrow{color:#dc8c44;padding:0 5px}.standard-flow{border-left:4px solid #27a88d;padding:9px 12px;margin:12px 0;background:#eef8f4;border-radius:0 12px 12px 0}.exp-search{margin:0 0 14px}.glossary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}.glossary-item{background:#fff;border:1px solid #dbe9e5;border-radius:13px;padding:15px}.glossary-item h3{margin-top:0;color:#146d72}.glossary-item p{margin:7px 0}.glossary-item .example{color:#5c7275;font-size:14px}.content-note{font-size:13px;color:#607578;background:#f3f7f6;padding:12px;border-radius:12px;margin-top:15px}
 @media(max-width:600px){.learning-hero{padding:19px}.visual-card .organ-svg{height:110px}}
 </style>`;
 if(!document.getElementById('learning-expansion-style'))document.head.insertAdjacentHTML('beforeend',styles);
@@ -195,9 +196,149 @@ window.render=function(){
  if(tab==='standards')renderStandards(c);
  if(tab==='glossar')renderGlossary(c);
 };
-function renderAnatomy(c){
- c.innerHTML='<div class="learning-hero"><span class="tag">Anatomie verständlich</span><h2>Organsysteme und Pflegebezug</h2><p>Vereinfachte, eigens erstellte Lernzeichnungen helfen dir, Lage und Grundfunktion zu verstehen. Sie sind schematisch und ersetzen keinen Anatomieatlas.</p></div><div class="grid">'+systems.map(s=>'<article class="card visual-card">'+svg(s.key)+'<span class="tag">Organsystem</span><h3>'+esc(s.name)+'</h3><p><strong>Dazu gehören:</strong> '+esc(s.organs)+'</p><p>'+esc(s.function)+'</p><div class="standard-flow"><strong>Pflegebezug:</strong> '+esc(s.care)+'</div><p class="muted"><strong>Typische Krankheitsbilder:</strong> '+esc(s.links)+'</p></article>').join('')+'</div><p class="content-note">Die Zeichnungen zeigen vereinfachte Orientierungsschemata. Detailanatomie, Fachbegriffe und klinische Entscheidungen bitte mit Unterrichtsmaterial und aktuellen Fachquellen vertiefen.</p>';
+function topicIds(prefixes) {
+ return [...new Set(prefixes.map(prefix => topics.findIndex(([name]) => name.startsWith(prefix))))].filter(index => index >= 0);
 }
+
+function expansionTopicLinks(prefixes) {
+ const ids = topicIds(prefixes);
+ if (!ids.length) return '';
+ return `<div class="flex expansion-links" aria-label="Passender Lernstoff">${ids.map(index =>
+  `<button type="button" class="btn" onclick="openLibraryTopic(${index})">${esc(topics[index][0])}</button>`
+ ).join('')}</div>`;
+}
+
+function anatomyDetail(system, data) {
+ const sections = [['Lage und Aufbau', data.build], ['Funktion und Abläufe', data.physiology]];
+ return `<details class="anatomy-detail">
+  <summary>Aufbau, Funktion und Pflegebezug</summary>
+  ${sections.map(([title, notes]) => `<h4>${title}</h4><ul>${notes.map(note => `<li>${esc(note)}</li>`).join('')}</ul>`).join('')}
+  <div class="standard-flow"><strong>Pflegebezug</strong><p>${esc(system.care)}</p></div>
+  <h4>Prüfungsfrage</h4><p>${esc(data.question)}</p>
+  <details><summary>Musterantwort öffnen</summary><p>${esc(data.answer)}</p></details>
+ </details>`;
+}
+
+function renderAnatomy(c) {
+ c.innerHTML = `<section class="learning-hero"><h2>Anatomie und Physiologie</h2><p>Verstehe Aufbau und Funktion des Körpers und wende dein Wissen auf typische Pflegesituationen an.</p></section>
+  <nav class="panel anatomy-index" aria-label="Organsysteme">${systems.map(system =>
+    `<button class="btn" onclick="openAnatomyModule('${system.key}')">${esc(system.name)}</button>`
+  ).join('')}</nav>
+  ${systems.map(system => {
+   const data = anatomyDepth[system.key];
+   return `<article class="panel visual-card anatomy-module" id="organ-${system.key}">
+    ${system.key === 'reproductive' ? '' : svg(system.key)}
+    <h3 tabindex="-1">${esc(system.name)}</h3>
+    <p><strong>Dazu gehören</strong> ${esc(system.organs)}</p><p>${esc(system.function)}</p>
+    ${anatomyDetail(system, data)}
+    <h4>Passender Lernstoff und Krankheitsbilder</h4>
+    ${expansionTopicLinks(data.topics)}
+    ${system.key === 'reproductive' ? '<button class="btn" onclick="go(&quot;ausbildung&quot;);openCurriculumField(event, &quot;4&quot;)">Neugeborene und Eltern im Ausbildungsrahmen</button>' : ''}
+   </article>`;
+  }).join('')}
+  <p class="content-note">Die Lernbilder sind vereinfachte Schemata. Fachliche Grundlage: <a href="https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction" target="_blank" rel="noopener noreferrer">OpenStax Anatomy and Physiology 2e</a>.</p>`;
+}
+
+window.openAnatomyModule = function(key) {
+ if (tab !== 'anatomie') go('anatomie');
+ const module = document.getElementById('organ-' + key);
+ if (!module) return;
+ module.querySelector('.anatomy-detail').open = true;
+ module.querySelector('h3').focus({preventScroll: true});
+ module.scrollIntoView({block: 'start'});
+};
+
+function matchingSystems(index) {
+ return systems.filter(system => topicIds(anatomyDepth[system.key].topics).includes(index));
+}
+
+window.anatomyRelatedTopics = function(index) {
+ return topicIds(matchingSystems(index).flatMap(system => anatomyDepth[system.key].topics));
+};
+
+window.expansionLinksForTopic = function(index) {
+ const anatomy = matchingSystems(index).map(system =>
+  `<button class="btn" onclick="openAnatomyModule('${system.key}')">Anatomie: ${esc(system.name)}</button>`);
+ const modelLinks = models.flatMap((model, i) => topicIds([modelTopicAliases[model[0]] || model[0]]).includes(index)
+  ? [expansionJumpButton('modelle', 'learning-model-' + i, model[0])] : []);
+ const standardLinks = standardTopics.flatMap((prefixes, i) => topicIds(prefixes).includes(index)
+  ? [expansionJumpButton('standards', 'learning-standard-' + i, standards[i][0])] : []);
+ const links = [...anatomy, ...modelLinks, ...standardLinks];
+ return links.length ? `<div class="study-links" aria-label="Passende Übersichten">${links.join('')}</div>` : '';
+};
+
+function expansionJumpButton(route, id, label) {
+ return `<button class="btn" onclick="openExpansionEntry('${route}', '${id}')">${esc(label)}</button>`;
+}
+
+window.openExpansionEntry = function(route, id) {
+ go(route);
+ const entry = document.getElementById(id);
+ if (!entry) return;
+ entry.querySelector('h3').focus({preventScroll: true});
+ entry.scrollIntoView({block: 'start'});
+};
+
+const modelTopicAliases = {
+ 'Hildegard Peplau': 'Peplau –', 'Dorothea Orem': 'Orem –',
+ 'Monika Krohwinkel': 'Krohwinkel –', 'Aaron Antonovsky': 'Antonovsky –',
+ 'Richard Lazarus': 'Lazarus –', 'Abraham Maslow': 'Maslow –',
+ 'Erik Erikson': 'Erikson –', 'Donabedian': 'Qualitätsmanagement',
+ 'Roper–Logan–Tierney': 'ATL, AEDL, ABEDL', 'Virginia Henderson': 'ATL, AEDL, ABEDL',
+ 'Madeleine Leininger': 'Pflegeethik', 'Patricia Benner': 'Assessmentinstrumente'
+};
+const modelTransfer = {
+ 'Pflegetheorien und Pflegekonzepte': 'Beschreibe eine Pflegesituation. Was erfährst du aus Sicht dieses Modells über Bedarf und Ressourcen? Formuliere daraus eine Handlung und ein überprüfbares Ziel.',
+ 'Kommunikationsmodelle': 'Formuliere eine typische Aussage aus einem Pflegegespräch. Erkläre damit ein mögliches Missverständnis und begründe, wie du nachfragen würdest.',
+ 'Gesundheit und Bewältigung': 'Wähle einen Fall mit chronischer Erkrankung. Beschreibe die individuelle Belastung, eine vorhandene Ressource und eine passende Unterstützung.',
+ 'Entwicklung, Sterben und Verlust': 'Wähle eine konkrete Lebenssituation. Erkläre, welche Beobachtung das Modell einordnet und welche Wünsche du bei der Person erfragen würdest.',
+ 'Familienmodelle': 'Beschreibe eine Veränderung im Familienalltag. Benenne, wer betroffen ist und wie die Familie bei der Suche nach Unterstützung beteiligt werden kann.',
+ 'Qualitätsmodell': 'Wähle eine Sicherheitsfrage aus der Pflegepraxis. Benenne je ein Beispiel für Struktur, Prozess und Ergebnis und erkläre, wie du es beurteilst.'
+};
+
+const standardTopics = [
+ ['DNQP – Dekubitusprophylaxe', 'Dekubitus – Haut'],
+ ['Pflegeberatung', 'SBAR –'],
+ ['DNQP – Schmerzmanagement', 'Assessmentinstrumente'],
+ ['DNQP – Sturzprophylaxe', 'Osteoporose', 'Assessmentinstrumente'],
+ ['Harninkontinenz und Harnverhalt', 'Nieren und Harnwege –'],
+ ['Dysphagie', 'Verdauungssystem –'],
+ ['Demenz', 'Carl Rogers', 'Primary Nursing'],
+ ['Dysphagie', 'Hygiene, Infektionsprävention'],
+ ['Haut – Schutzbarriere', 'Dekubitus – Haut'],
+ ['Chronische Wunde', 'Diabetes mellitus', 'DNQP – Schmerzmanagement'],
+ ['Präeklampsie', 'Friedemann'],
+ ['Bewegungsapparat –', 'ICF –', 'DNQP – Sturzprophylaxe']
+];
+
+const standardPractice = [
+ 'Wie stellst du fest, ob eine vereinbarte Druckentlastung wirksam ist?',
+ 'Wer braucht welche Information, bevor die Person nach Hause geht?',
+ 'Wann und womit prüfst du, ob sich der Schmerz nach einer Maßnahme verändert hat?',
+ 'Wie förderst du einen sicheren Toilettenweg, wenn die Person nachts allein aufstehen möchte?',
+ 'Welche Beobachtungen helfen dir, mit der Person einen passenden Toilettenrhythmus zu planen?',
+ 'Was klärst du, wenn eine Person abnimmt und Mahlzeiten häufig stehen lässt?',
+ 'Wie nutzt du Biografie und Vorlieben, um die Kontaktaufnahme zu erleichtern?',
+ 'Woran erkennst du, welche Unterstützung bei der Mundpflege gebraucht wird?',
+ 'Wie unterscheidest du bei der Beobachtung eine feuchte Hautfalte von einer druckgefährdeten Stelle?',
+ 'Welche Angaben brauchst du, um den Wundverlauf und seine Auswirkungen auf den Alltag zu beschreiben?',
+ 'Wie respektierst du Wünsche und Privatsphäre einer gebärenden Person bei Beobachtung und Begleitung?',
+ 'Wie machst du den Wunsch, wieder selbst zum Speiseraum zu gehen, zu einem überprüfbaren Ziel?'
+];
+
+function glossaryTopics(term) {
+ const normalized = term.toLocaleLowerCase('de');
+ const explicit = {
+  'pes-schema': 'Pflegediagnose –', 'smart': 'Pflegemaßnahmen –',
+  'ressource': 'Pflegeprozess &', 'pflegebedarf': 'Assessmentinstrumente',
+  'evaluation': 'Assessmentinstrumente', 'teach-back': 'Pflegeberatung',
+  'dokumentation': 'Pflegeprozess &'
+ };
+ if (explicit[normalized]) return [explicit[normalized]];
+ const matching = topics.filter(([title]) => title.toLocaleLowerCase('de').includes(normalized));
+ return matching.slice(0, 3).map(([title]) => title);
+}
+
 function renderModels(c){
  c.innerHTML='<div class="learning-hero"><span class="tag">Modelle und Theorien</span><h2>Pflege fachlich begründen</h2><p>Die Übersicht unterscheidet Pflegetheorien und Pflegekonzepte von Kommunikations-, Gesundheits-, Entwicklungs-, Familien- und Qualitätsmodellen. Jede Karte erklärt Kerngedanke, zentrale Begriffe und Prüfungsbezug. Modelle geben Orientierung; sie ersetzen keine individuelle Einschätzung.</p></div><input class="exp-search" type="search" id="modelSearch" placeholder="Modell oder Theorie suchen" oninput="filterExpansionModels(this.value)"><div id="modelResults"></div><p class="content-note">Übersicht für Lernen und Prüfung. Für vollständige Modellbegriffe, Ausnahmen und Anwendungsgrenzen die im Unterricht verwendeten Originalquellen nutzen.</p>';
  filterExpansionModels('');
@@ -208,10 +349,10 @@ function filterExpansionModels(query){
  const group=m=>nursing.includes(m[0])?'Pflegetheorien und Pflegekonzepte':m[0]==='Friedemann'?'Familienmodelle':['Corbin & Strauss','Aaron Antonovsky','Richard Lazarus','Abraham Maslow'].includes(m[0])?'Gesundheit und Bewältigung':['Erik Erikson','Kübler-Ross'].includes(m[0])?'Entwicklung, Sterben und Verlust':['Schulz von Thun','Paul Watzlawick','Carl Rogers'].includes(m[0])?'Kommunikationsmodelle':m[0]==='Donabedian'?'Qualitätsmodell':'Weitere Modelle';
  const groups=['Pflegetheorien und Pflegekonzepte','Kommunikationsmodelle','Gesundheit und Bewältigung','Entwicklung, Sterben und Verlust','Familienmodelle','Qualitätsmodell','Weitere Modelle'];
  const selected=models.filter(m=>!q||m.slice(0,5).join(' ').toLocaleLowerCase('de').includes(q));
- document.getElementById('modelResults').innerHTML=groups.map(g=>{const items=selected.filter(m=>group(m)===g);return items.length?'<section class="model-group"><h3>'+esc(g)+' <span class="muted">('+items.length+')</span></h3><div class="grid">'+items.map(m=>'<article class="card"><span class="tag">'+esc(m[1])+'</span><h3>'+esc(m[0])+'</h3><div class="theory-graphic">'+['Person verstehen','Bedarf erkennen','Pflege begründen','Wirkung reflektieren'].map((t,j)=>(j?'<span class="arrow">→</span>':'')+esc(t)).join('')+'</div><p><strong>Grundgedanke:</strong> '+esc(m[2])+'</p><p><strong>Wichtig:</strong> '+esc(m[3])+'</p><p><strong>Prüfungsbezug:</strong> '+esc(m[4])+'</p></article>').join('')+'</div></section>':''}).join('')+'<p role="status">'+selected.length+' von '+models.length+' Einträgen</p>';
+ document.getElementById('modelResults').innerHTML=groups.map(g=>{const items=selected.filter(m=>group(m)===g);return items.length?'<section class="model-group"><h3>'+esc(g)+' <span class="muted">('+items.length+')</span></h3><div class="grid">'+items.map(m=>'<article class="card expansion-entry" id="learning-model-'+models.indexOf(m)+'"><span class="tag">'+esc(m[1])+'</span><h3 tabindex="-1">'+esc(m[0])+'</h3><div class="theory-graphic">'+['Person verstehen','Bedarf erkennen','Pflege begründen','Wirkung reflektieren'].map((t,j)=>(j?'<span class="arrow">→</span>':'')+esc(t)).join('')+'</div><p><strong>Grundgedanke:</strong> '+esc(m[2])+'</p><p><strong>Wichtig:</strong> '+esc(m[3])+'</p><p><strong>Prüfungsbezug:</strong> '+esc(m[4])+'</p><details><summary>Modell am Fall anwenden</summary><p>'+esc(modelTransfer[g] || 'Übertrage die Grundidee auf einen Lernfall und begründe deine Entscheidung.')+'</p><button class="btn" onclick="go(&quot;falltraining&quot;)">Kurzfälle öffnen</button></details>'+expansionTopicLinks([modelTopicAliases[m[0]] || m[0]])+'</article>').join('')+'</div></section>':''}).join('')+'<p role="status">'+selected.length+' von '+models.length+' Einträgen</p>';
 }
 function renderStandards(c){
- c.innerHTML='<div class="learning-hero"><span class="tag">Qualität in der Pflege</span><h2>Expertenstandards verständlich lernen</h2><p>Jede Übersicht zeigt Ziel, Pflegeprozess und Praxisbeispiele. Expertenstandards geben fachliche Qualitätsorientierung; sie ersetzen weder individuellen Pflegeprozess noch lokale Verfahrensanweisungen.</p></div><div class="grid">'+standards.map((s,i)=>'<article class="card"><span class="tag">DNQP / Qualitätsausschuss Pflege</span><h3>'+esc(s[0])+'</h3><div class="standard-flow"><strong>Erkennen</strong> → <strong>individuell planen</strong> → <strong>umsetzen</strong> → <strong>Wirkung prüfen</strong></div><p><strong>Ziel:</strong> '+esc(s[1])+'</p><p><strong>Kern im Pflegeprozess:</strong> '+esc(s[2])+'</p><p><strong>Anschaulich:</strong> '+esc(s[3])+'</p><p class="muted">'+esc(s[4])+'</p></article>').join('')+'</div><div class="panel"><h3>Prüfungsmerker</h3><p>Immer von der konkreten Person ausgehen: Informationen erheben, Risiko und Ressourcen individuell einschätzen, Ziel vereinbaren, Maßnahme begründen, durchführen, Wirkung evaluieren und dokumentieren.</p><a href="https://www.dnqp.de/expertenstandards-und-auditinstrumente/" target="_blank" rel="noopener noreferrer">DNQP: aktuelle Expertenstandards und Auditinstrumente ↗</a><p><a href="https://www.ausschuss-pflege.de/" target="_blank" rel="noopener noreferrer">Qualitätsausschuss Pflege: Expertenstandard Mobilität ↗</a></p></div><p class="content-note">Versionsangaben nach den Veröffentlichungs- und Informationsseiten des DNQP, recherchiert am 7. November 2026. Bei Aktualisierungsverfahren wird der Stand ausdrücklich genannt.</p>';
+ c.innerHTML='<div class="learning-hero"><span class="tag">Qualität in der Pflege</span><h2>Expertenstandards verständlich lernen</h2><p>Jede Übersicht zeigt Ziel, Pflegeprozess und Praxisbeispiele. Expertenstandards geben fachliche Qualitätsorientierung; sie ersetzen weder individuellen Pflegeprozess noch lokale Verfahrensanweisungen.</p></div><div class="grid">'+standards.map((s,i)=>'<article class="card expansion-entry" id="learning-standard-'+i+'"><span class="tag">DNQP / Qualitätsausschuss Pflege</span><h3 tabindex="-1">'+esc(s[0])+'</h3><div class="standard-flow"><strong>Erkennen</strong> → <strong>individuell planen</strong> → <strong>umsetzen</strong> → <strong>Wirkung prüfen</strong></div><p><strong>Ziel:</strong> '+esc(s[1])+'</p><p><strong>Kern im Pflegeprozess:</strong> '+esc(s[2])+'</p><p><strong>Anschaulich:</strong> '+esc(s[3])+'</p><p class="muted">'+esc(s[4])+'</p><details><summary>Prüfungsfrage zum Standard</summary><p>'+esc(standardPractice[i])+'</p><p>Nutze Ziel, Einschätzung, Maßnahme und Evaluation zur Begründung. Beziehe Wünsche und Ressourcen der Person ein.</p><button class="btn" onclick="go(&quot;praktisch&quot;)">Pflegeplanung in der praktischen Prüfung</button></details>'+expansionTopicLinks(standardTopics[i])+'</article>').join('')+'</div><div class="panel"><h3>Prüfungsmerker</h3><p>Immer von der konkreten Person ausgehen: Informationen erheben, Risiko und Ressourcen individuell einschätzen, Ziel vereinbaren, Maßnahme begründen, durchführen, Wirkung evaluieren und dokumentieren.</p><a href="https://www.dnqp.de/expertenstandards-und-auditinstrumente/" target="_blank" rel="noopener noreferrer">DNQP: aktuelle Expertenstandards und Auditinstrumente ↗</a><p><a href="https://www.ausschuss-pflege.de/" target="_blank" rel="noopener noreferrer">Qualitätsausschuss Pflege: Expertenstandard Mobilität ↗</a></p></div><p class="content-note">Versionsangaben nach den Veröffentlichungs- und Informationsseiten des DNQP, recherchiert am 7. November 2026. Bei Aktualisierungsverfahren wird der Stand ausdrücklich genannt.</p>';
 }
 function renderGlossary(c){
  c.innerHTML='<div class="learning-hero"><span class="tag">Glossar · '+glossary.length+' Begriffe</span><h2>Pflegefachbegriffe klar erklärt</h2><p>Kurze Definitionen mit Beispielen aus dem Pflegealltag. Fachbegriffe sind Lernhilfen; für Handlungsentscheidungen gelten aktuelle Fachquellen und lokale Standards.</p></div><input class="exp-search" type="search" id="glossarySearchMain" placeholder="Begriff suchen …" oninput="filterExpansionGlossary(this.value)"><p id="glossaryCount" role="status"></p><div id="glossaryResultsMain"></div>';
@@ -221,7 +362,7 @@ function filterExpansionGlossary(query){
  const q=String(query||'').toLocaleLowerCase('de');
  const list=glossary.filter(g=>!q||g[0].toLocaleLowerCase('de').includes(q)||g[1].toLocaleLowerCase('de').includes(q));
  document.getElementById('glossaryCount').textContent=list.length+' Treffer';
- document.getElementById('glossaryResultsMain').innerHTML='<div class="glossary-grid">'+list.map(g=>'<article class="glossary-item"><h3>'+esc(g[0])+'</h3><p>'+esc(g[1])+'</p><p class="example"><strong>Beispiel:</strong> '+esc(g[2])+'</p></article>').join('')+'</div>';
+ document.getElementById('glossaryResultsMain').innerHTML='<div class="glossary-grid">'+list.map(g=>'<article class="glossary-item"><h3>'+esc(g[0])+'</h3><p>'+esc(g[1])+'</p><p class="example"><strong>Beispiel:</strong> '+esc(g[2])+'</p>'+expansionTopicLinks(glossaryTopics(g[0]))+'</article>').join('')+'</div>';
 }
 
 })();

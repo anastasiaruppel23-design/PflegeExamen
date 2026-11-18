@@ -97,7 +97,28 @@ async function checkCurriculumMenu(page) {
   assert.equal(await page.evaluate(() => tab), 'themen');
 }
 
-async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkCurriculumMenu(page);await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
+async function checkConnectedLearning(page) {
+  await page.evaluate(() => go('anatomie'));
+  const anatomy = page.getByRole('navigation', {name: 'Organsysteme'});
+  assert.equal(await anatomy.getByRole('button').count(), 11);
+  await anatomy.getByRole('button', {name: 'Herz und Kreislauf', exact: true}).click();
+  const heart = page.locator('#organ-heart');
+  assert.equal(await heart.getByText(/Der Sinusknoten gibt/).isVisible(), true);
+  await heart.getByText('Musterantwort öffnen').click();
+  assert.equal(await heart.getByText(/Wenn die linke Kammer/).isVisible(), true);
+  await heart.getByRole('button', {name: 'Herzinsuffizienz', exact: true}).click();
+  await page.getByRole('heading', {name: 'Herzinsuffizienz', exact: true}).waitFor();
+  await page.getByRole('button', {name: 'Anatomie: Herz und Kreislauf', exact: true}).click();
+  assert.equal(await heart.locator('.anatomy-detail').evaluate(node => node.open), true);
+
+  await page.evaluate(() => go('standards'));
+  const firstStandard = page.locator('#learning-standard-0');
+  await firstStandard.getByRole('button', {name: 'DNQP – Dekubitusprophylaxe', exact: true}).click();
+  await page.getByRole('button', {name: 'Dekubitusprophylaxe in der Pflege', exact: true}).click();
+  assert.equal(await firstStandard.getByRole('heading').isVisible(), true);
+}
+
+async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
 // Cards with a knowledge target must link to it. Standalone cards must render and flip.
 const cardCount=await page.evaluate(()=>cards.length);
 for(let card=0;card<cardCount;card++){

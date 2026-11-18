@@ -59,7 +59,21 @@ for(const e of libraryEntries){const i=topics.length;libraryMeta.set(i,e);topics
 topics[22][0]='Fünf Kompetenzbereiche I–V';
 function learningTone(v){return /modell|theorie|Familienpflege|Entwicklungspsychologie/i.test(v[1])?'model':/Krankheit|Geronto|Anatomie/.test(v[1])?'disease':/maßnahm|Prophylax|Expertenstandard/.test(v[1])?'care':'definition'}
 function learnBox(tone,label,body){return `<section class="learn-box tone-${tone}"><h4>${esc(label)}</h4>${Array.isArray(body)?`<ul>${body.map(s=>`<li>${esc(s)}</li>`).join('')}</ul>`:`<p>${esc(body)}</p>`}</section>`}
-function relatedTopics(i){const e=libraryMeta.get(i);if(e?.source==='copd')return [topics.findIndex(v=>v[0].startsWith('Notfallmanagement')),topics.findIndex(v=>v[0].startsWith('SBAR')),topics.findIndex(v=>v[1]==='Anatomie')].filter(n=>n!==i&&n>=0);if(e?.source==='diabetes')return [topics.findIndex(v=>v[1]==='Medikamente'),topics.findIndex(v=>v[0].startsWith('Notfallmanagement'))];return [7,10,13].filter(n=>n!==i)}
+function relatedTopics(index) {
+ const category = topics[index][1];
+ const entry = libraryMeta.get(index);
+ const area = entry?.group || entry?.system;
+ const anatomy = typeof anatomyRelatedTopics === 'function' ? anatomyRelatedTopics(index) : [];
+ const sameArea = area ? topics.flatMap((_, i) => {
+  const candidate = libraryMeta.get(i);
+  return (candidate?.group || candidate?.system) === area ? [i] : [];
+ }) : [];
+ const sameCategory = topics.flatMap((topic, i) => topic[1] === category ? [i] : []);
+ const foundations = ['Pflegeprozess &', 'Assessmentinstrumente', 'Pflegeberatung,'].map(prefix =>
+  topics.findIndex(([title]) => title.startsWith(prefix)));
+ return [...new Set([...anatomy, ...sameArea, ...sameCategory, ...foundations])]
+  .filter(i => i >= 0 && i !== index).slice(0, 4);
+}
 function openLibraryTopic(i){go('themen');const item=document.getElementById('study-'+i);if(item){item.open=true;item.scrollIntoView({block:'start'});item.querySelector('summary').focus()}}
 function openStudyCard(i){ci=originalCardCount+i-originalTopicCount;flipped=false;go('karten')}
 function openStudyQuiz(i){go('quiz');renderTransfer(i)}
