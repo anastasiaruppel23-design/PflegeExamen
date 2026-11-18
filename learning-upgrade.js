@@ -82,12 +82,6 @@
  const oldRender=window.render;
  window.render=function(){
   if(typeof oldRender==='function')oldRender();
-  const n=document.querySelector('#nav');
-  if(n){
-   const groups=n.querySelectorAll('.navgroup');
-   const add=(idx,id,label)=>{if(document.querySelector('[data-upgrade="'+id+'"]'))return;const host=groups[idx]?.querySelector('.navitems');if(host){const b=document.createElement('button');b.dataset.upgrade=id;b.textContent=label;b.setAttribute('aria-current',tab===id?'page':'false');b.className=tab===id?'active':'';b.onclick=()=>go(id);host.appendChild(b)}};
-   add(3,'wissensstand','Wissensstand');add(1,'themenquiz','Themenquiz');add(1,'notfallsimulator','Notfallsimulator');add(1,'praxischallenges','Praxis-Challenges');
-  }
   const c=$('#content');if(!c)return;
   if(tab==='plan'){renderLearningPlan(c);return}
   if(tab==='lernweg')renderLearningPlan(c);if(tab==='start'&&hasLearningAccess())renderTodayOnHome(c)

@@ -13,8 +13,12 @@ PflegeFokus ist eine deutschsprachige Lern-App für die Pflegeausbildung und die
 
 Die 50 Krankheitsprofile und 3 Pflegeverfahren sind nach Organsystemen gruppiert. Sie enthalten Definition, Entstehung, Beschwerden und Warnzeichen, Diagnostik und Therapie im Überblick, pflegerische Einschätzung und Handeln, Prüfungsimpuls, Transferfrage und Quelle. Acht neue Kurzprofile haben einen sichtbaren Prüfstand und benennen abgelaufene oder laufend aktualisierte Leitlinien; das vorhandene RA-Profil wurde mit aktuellem Quellenstatus ergänzt. Anatomische Lernbilder sind mit Alternativtext, Bildunterschrift, Urheber und Lizenz versehen; externe Commons-Bilder benötigen eine Internetverbindung. Die Pflegefachkraft-Illustration zeigt Anastasia nach ihren Referenzfotos; die Vorgabe für weitere Abbildungen ist in `VISUAL-STYLE.md` festgehalten.
 
-Die drei schriftlichen Fallsituationen umfassen derzeit 504–556 Wörter beziehungsweise 3.748–3.997 Zeichen einschließlich Leerzeichen. Damit liegen sie unter der Hamburger Höchstlänge von 5.500 Zeichen; jede Übung enthält 18 fallbezogene Aufgaben und Lösungshinweise. Die zwei mündlichen Fälle umfassen 1.651 beziehungsweise 1.669 Zeichen ohne Leerzeichen und liegen damit innerhalb des Hamburger Richtwerts von 1.500–2.000 Zeichen. Aufgaben und Selbstchecks sind fallbezogen den Kompetenzbereichen III–V zugeordnet. Ein 120-Minuten-Timer für schriftliche Übungen und ein 30-Minuten-Vorbereitungstimer für mündliche Fälle sind integriert. Der praktische Prüfungsbereich verweist weiterhin auf das Üben in der eigenen Ausbildungseinrichtung.
+Die drei schriftlichen Fallsituationen umfassen derzeit 504–556 Wörter beziehungsweise 3.748–3.997 Zeichen einschließlich Leerzeichen. Damit liegen sie unter der Hamburger Höchstlänge von 5.500 Zeichen; jede Übung enthält 18 fallbezogene Aufgaben und Lösungshinweise. Die zwei mündlichen Fälle umfassen 1.651 beziehungsweise 1.669 Zeichen ohne Leerzeichen und liegen damit innerhalb des Hamburger Richtwerts von 1.500–2.000 Zeichen. Aufgaben und Selbstchecks sind fallbezogen den Kompetenzbereichen III–V zugeordnet. Ein 120-Minuten-Timer für schriftliche Übungen und ein 30-Minuten-Vorbereitungstimer für mündliche Fälle sind integriert. Der praktische Prüfungsbereich enthält einen geführten Übungsfall, Pflegeplanung, Sicherheitschecks und Reflexionsübungen.
 
+
+## Ausbildungsrahmen
+
+Unter „Lernen → Ausbildungsrahmen“ sind die 24 Hamburger Handlungsfelder einschließlich der Teilfelder 1a/1b und 3a/3b nach Ausbildungsjahr aufbereitet. Jedes Feld bietet einen Lernimpuls, eine Fallfrage mit Lösungsimpuls und einen Link zur Vertiefung. Die Übersicht verknüpft die Felder mit den 11 curricularen Einheiten des BIBB, erläutert die Praxiseinsätze und führt die fünf Kompetenzbereiche der PflAPrV auf. Die Zuordnung auf Ebene der Handlungsfelder ist ein Wegweiser für die Prüfungsvorbereitung.
 
 ## Lernpfad, Wiederholung und Üben
 
@@ -23,7 +27,7 @@ Die drei schriftlichen Fallsituationen umfassen derzeit 504–556 Wörter bezieh
 - Der Bereich „Wissensstand“ zeigt Antworten und Wiederholungen nach Themenfeldern.
 - Der Notfallsimulator bietet fiktive Entscheidungen mit fallbezogener Rückmeldung, Vergleich mit der priorisierten Handlung und einer Auswertung der übersprungenen Sicherheitsprioritäten.
 - Praxis-Challenges üben unter anderem Hygiene, Injektion, Transfer, Wundversorgung, Vitalzeichen und weitere Abläufe mit Begründungen. Sie ersetzen keine angeleitete praktische Übung.
-- Schriftliche Übungsprüfungen enthalten drei ausführliche Fälle mit jeweils 18 fallbezogenen Aufgaben, Aufgabenoperatoren und fallspezifischen Erwartungshinweisen. Mündliche Übungsfälle behandeln die Kompetenzbereiche III–V. Für die praktische Abschlussprüfung stellt die App ausdrücklich kein erfundenes Fallbeispiel bereit; geübt werden soll in der jeweiligen Ausbildungseinrichtung.
+- Schriftliche Übungsprüfungen enthalten drei ausführliche Fälle mit jeweils 18 fallbezogenen Aufgaben, Aufgabenoperatoren und fallspezifischen Erwartungshinweisen. Mündliche Übungsfälle behandeln die Kompetenzbereiche III–V. Der praktische Prüfungsbereich zeigt an einem fiktiven Fall, wie Pflegeplanung, Pflegehandlung und Reflexion zusammenhängen.
 - Lernmodule können lokal gespeichert werden. Lokale Text- und Bilddateien sind offline verfügbar; externe Wikimedia-Bilder benötigen weiterhin Internet.
 
 ## Fachliche Einordnung
