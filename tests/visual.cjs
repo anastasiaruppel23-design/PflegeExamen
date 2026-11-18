@@ -64,6 +64,7 @@ async function checkLearningAccess(page) {
 }
 
 async function checkCurriculumMenu(page) {
+  await page.evaluate(() => go("start"));
   const drawer = page.locator('#menuDrawer');
   const exams = drawer.locator('#menu-pruefungen');
   await page.locator('#menuToggle').click();
