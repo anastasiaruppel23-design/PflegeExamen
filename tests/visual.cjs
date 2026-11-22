@@ -152,7 +152,12 @@ async function checkTrainingRefresh(page) {
   assert.equal(await firstTask.getByRole('button', {name: 'Aufnehmen & diktieren'}).isVisible(), true);
   await page.context().grantPermissions(['microphone']);
   await firstTask.getByRole('button', {name: 'Nur aufnehmen', exact: true}).click();
-  await firstTask.getByText('Aufnahme läuft. Sprich jetzt.', {exact: true}).waitFor();
+  try {
+    await firstTask.getByText('Aufnahme läuft. Sprich jetzt.', {exact: true}).waitFor({timeout:10000});
+  } catch (error) {
+    const status = await firstTask.locator('.answer-status').innerText();
+    throw new Error('Mikrofonstatus im Browsertest: '+status, {cause:error});
+  }
   await firstTask.getByRole('button', {name: 'Beenden', exact: true}).click();
   const playback = firstTask.getByRole('button', {name: 'Meine Antwort anhören', exact: true});
   await playback.waitFor();
@@ -179,7 +184,7 @@ async function checkTrainingRefresh(page) {
   assert.ok(await page.locator('.quiz-explanations li').count() >= 3);
 }
 
-async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--use-fake-device-for-media-stream'],...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);if(width===390)await checkTrainingRefresh(page);await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
+async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream'],...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);if(width===390)await checkTrainingRefresh(page);await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
 // Cards with a knowledge target must link to it. Standalone cards must render and flip.
 const cardCount=await page.evaluate(()=>cards.length);
 for(let card=0;card<cardCount;card++){
