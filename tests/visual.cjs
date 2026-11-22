@@ -66,24 +66,21 @@ async function checkLearningAccess(page) {
 async function checkCurriculumMenu(page) {
   await page.evaluate(() => go("start"));
   const drawer = page.locator('#menuDrawer');
-  const exams = drawer.locator('#menu-pruefungen');
-  await page.locator('#menuToggle').click();
-  assert.equal(await drawer.locator('.navgroup[open]').count(), 0);
-  const group = exams.locator('summary');
-  await group.focus();
-  await page.keyboard.press('Enter');
-  for (const label of ['Schriftliche Prüfung', 'Praktische Prüfung', 'Mündliche Prüfung']) {
-    assert.equal(await exams.getByRole('button', {name: label, exact: true}).isVisible(), true);
+  const exams = drawer.locator('#menu-exam-links');
+  for (const [label, route] of [
+    ['Schriftliche Prüfung', 'schriftlich'],
+    ['Praktische Prüfung', 'praktisch'],
+    ['Mündliche Prüfung', 'muendlich']
+  ]) {
+    await page.locator('#menuToggle').click();
+    assert.equal(await drawer.getByText('Prüfungen', {exact: true}).count(), 0);
+    assert.equal(await exams.getByRole('button').count(), 3);
+    await exams.getByRole('button', {name: label, exact: true}).click();
+    assert.equal(await drawer.isVisible(), false);
+    assert.equal(await page.evaluate(() => tab), route);
   }
-  await group.click();
-  assert.equal(await exams.getByRole('button', {name: 'Praktische Prüfung', exact: true}).isVisible(), false);
-  await group.click();
-  await exams.getByRole('button', {name: 'Praktische Prüfung', exact: true}).click();
-  assert.equal(await drawer.isVisible(), false);
-  assert.equal(await page.evaluate(() => tab), 'praktisch');
-
   await page.locator('#menuToggle').click();
-  assert.equal(await exams.locator('[aria-current="page"]').isVisible(), true);
+  assert.equal(await exams.locator('[aria-current="page"]').innerText(), 'Mündliche Prüfung');
   await drawer.getByText('Lernen', {exact: true}).click();
   await drawer.getByRole('button', {name: 'Ausbildungsrahmen', exact: true}).click();
   await page.getByRole('heading', {name: 'Ausbildungsrahmen Pflegefachkraft'}).waitFor();
@@ -108,7 +105,23 @@ async function checkConnectedLearning(page) {
   assert.equal(await heart.getByText(/Wenn die linke Kammer/).isVisible(), true);
   await heart.getByRole('button', {name: 'Herzinsuffizienz', exact: true}).click();
   await page.getByRole('heading', {name: 'Herzinsuffizienz', exact: true}).waitFor();
-  await page.getByRole('button', {name: 'Anatomie: Herz und Kreislauf', exact: true}).click();
+  await page.getByRole('button', {name: '← Zurück zu Herz und Kreislauf', exact: true}).click();
+  assert.equal(await heart.getByText(/Wenn die linke Kammer/).isVisible(), true);
+
+  await page.evaluate(() => go('themen'));
+  await page.locator('#libraryCategory').selectOption('Anatomie');
+  assert.equal(await page.getByRole('button', {name: 'Zu den 11 Anatomie-Modulen'}).isVisible(), true);
+  await page.locator('#libraryCategory').selectOption('Krankheitsbilder');
+  await page.locator('#search').fill('Herzinsuffizienz');
+  await page.locator('.topic-tile').filter({hasText: 'Herzinsuffizienz'}).first().click();
+  await page.getByRole('button', {name: '← Zurück zur Wissensbibliothek', exact: true}).click();
+  assert.equal(await page.locator('#libraryCategory').inputValue(), 'Krankheitsbilder');
+  assert.equal(await page.locator('#search').inputValue(), 'Herzinsuffizienz');
+
+  await page.evaluate(() => openLibraryTopic(topics.findIndex(([name]) => name === 'DNQP – Sturzprophylaxe')));
+  await page.getByRole('button', {name: /Mündlichen Sturzfall bearbeiten/}).click();
+  assert.equal(await page.evaluate(() => oralCaseKey), 'sturz');
+  await page.evaluate(() => openAnatomyModule('heart'));
   assert.equal(await heart.locator('.anatomy-detail').evaluate(node => node.open), true);
 
   await page.evaluate(() => go('standards'));

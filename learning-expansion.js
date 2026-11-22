@@ -200,11 +200,11 @@ function topicIds(prefixes) {
  return [...new Set(prefixes.map(prefix => topics.findIndex(([name]) => name.startsWith(prefix))))].filter(index => index >= 0);
 }
 
-function expansionTopicLinks(prefixes) {
+function expansionTopicLinks(prefixes, organKey) {
  const ids = topicIds(prefixes);
  if (!ids.length) return '';
  return `<div class="flex expansion-links" aria-label="Passender Lernstoff">${ids.map(index =>
-  `<button type="button" class="btn" onclick="openLibraryTopic(${index})">${esc(topics[index][0])}</button>`
+  `<button type="button" class="btn" onclick="${organKey ? `openTopicFromAnatomy('${organKey}', ${index})` : `openLibraryTopic(${index})`}">${esc(topics[index][0])}</button>`
  ).join('')}</div>`;
 }
 
@@ -232,12 +232,25 @@ function renderAnatomy(c) {
     <p><strong>Dazu gehören</strong> ${esc(system.organs)}</p><p>${esc(system.function)}</p>
     ${anatomyDetail(system, data)}
     <h4>Passender Lernstoff und Krankheitsbilder</h4>
-    ${expansionTopicLinks(data.topics)}
+    ${expansionTopicLinks(data.topics, system.key)}
     ${system.key === 'reproductive' ? '<button class="btn" onclick="go(&quot;ausbildung&quot;);openCurriculumField(event, &quot;4&quot;)">Neugeborene und Eltern im Ausbildungsrahmen</button>' : ''}
    </article>`;
   }).join('')}
   <p class="content-note">Die Lernbilder sind vereinfachte Schemata. Fachliche Grundlage: <a href="https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction" target="_blank" rel="noopener noreferrer">OpenStax Anatomy and Physiology 2e</a>.</p>`;
 }
+
+window.openTopicFromAnatomy = function(key, index) {
+ const scroll = window.scrollY;
+ const details = [...document.querySelectorAll('.anatomy-module details')].map(element => element.open);
+ const system = systems.find(item => item.key === key);
+ openLibraryTopic(index, {label: 'Zurück zu ' + system.name, restore() {
+  tab = 'anatomie';
+  render();
+  document.querySelectorAll('.anatomy-module details').forEach((element, i) => { element.open = details[i]; });
+  document.querySelector('#organ-' + key + ' h3').focus({preventScroll: true});
+  window.scrollTo({top: scroll, behavior: 'instant'});
+ }});
+};
 
 window.openAnatomyModule = function(key) {
  if (tab !== 'anatomie') go('anatomie');
