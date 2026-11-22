@@ -131,7 +131,42 @@ async function checkConnectedLearning(page) {
   assert.equal(await firstStandard.getByRole('heading').isVisible(), true);
 }
 
-async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
+async function checkTrainingRefresh(page) {
+  await page.evaluate(() => go('praktisch'));
+  const medication = page.locator('.practice-tile').filter({hasText: 'Medikamentensicherheit'});
+  assert.equal(await medication.locator('.study-mini').count(), 1);
+  assert.equal(await medication.evaluate(tile => tile.scrollWidth > tile.clientWidth), false);
+
+  await page.evaluate(() => go('praxischallenges'));
+  assert.equal(await page.locator('.challenge-tile svg').count(), 8);
+  await page.getByRole('button', {name: 'Transfer vom Bett in den Rollstuhl', exact: true}).click();
+  assert.match(await page.locator('#activeChallenge').innerText(), /Transfer vom Bett in den Rollstuhl/);
+
+  await page.evaluate(() => go('schriftlich'));
+  await page.locator('[data-case]').first().click();
+  const field = page.locator('.exam-task textarea').first();
+  const draft = 'Eigene Einschätzung zum Lernfall.';
+  await field.fill(draft);
+  assert.match(await page.locator('.exam-task').first().innerText(), /Punkte/);
+  assert.equal(await page.getByRole('button', {name: 'Aufnehmen & diktieren'}).first().isVisible(), true);
+  await page.reload();
+  await page.waitForFunction(() => hasLearningAccess());
+  assert.equal(await field.inputValue(), draft);
+
+  await page.evaluate(() => go('notfallsimulator'));
+  await page.locator('#emergencyCase').selectOption({label: 'Plötzliche Sprachstörung beim Frühstück'});
+  await page.getByRole('button', {name: /Erst den Blutzucker messen/}).click();
+  assert.match(await page.locator('.learn-box').innerText(), /verzögert sich/);
+
+  await page.evaluate(() => go('themenquiz'));
+  await page.getByRole('button', {name: 'Prüfungstraining', exact: true}).click();
+  await page.getByRole('button', {name: /Quiz starten/}).click();
+  await page.locator('.option').first().click();
+  await page.getByRole('button', {name: 'Antwort prüfen', exact: true}).click();
+  assert.ok(await page.locator('.quiz-explanations li').count() >= 3);
+}
+
+async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);if(width===390)await checkTrainingRefresh(page);await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
 // Cards with a knowledge target must link to it. Standalone cards must render and flip.
 const cardCount=await page.evaluate(()=>cards.length);
 for(let card=0;card<cardCount;card++){
@@ -162,7 +197,7 @@ await page.getByRole('button',{name:'Passendes Wissen öffnen ↗',exact:true}).
 assert.match(await page.locator('.poster-header h1').innerText(),/Pflegeberatung/);
 await page.evaluate(()=>go('quiz'));assert.equal(await page.locator('.glossary-term,.glossary-access').count(),0);
 for(let i=0;i<topicCount;i++){await page.evaluate(i=>openLibraryTopic(i),i);assert.equal(await page.locator('.learning-poster').count(),1);assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`overflow ${width} topic ${i}`)}
-await page.evaluate(()=>openLibraryTopic(36));await page.locator('.poster-illustration img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`lesson-${width}.png`),fullPage:true});await page.evaluate(()=>openLibraryTopic(1));await page.screenshot({path:path.join(out,`model-${width}.png`),fullPage:true});await page.evaluate(()=>openLibraryTopic(36));await page.getByRole('button',{name:'Transferfrage lösen →',exact:true}).click();await page.getByRole('button',{name:/Hilfe alarmieren/}).click();await page.getByRole('button',{name:'Antwort prüfen',exact:true}).click();assert.equal(await page.locator('.good').count(),1);await page.getByRole('button',{name:'Zum Wissen',exact:true}).click();await page.getByRole('button',{name:'Passenden Pflegefall bearbeiten →',exact:true}).click();await page.locator('#caseDetail summary').click();assert.equal(await page.locator('#caseDetail .poster-box').count(),6);await page.locator('#caseDetail').getByRole('button',{name:'Lernkarte →',exact:true}).click();await page.locator('.illustrated-flash').focus();await page.keyboard.press('Space');assert.equal(await page.locator('.illustrated-flash.answer').count(),1);await page.screenshot({path:path.join(out,`card-${width}.png`),fullPage:true});await page.getByRole('button',{name:'Zusammenhänge verstehen ↗',exact:true}).click();await page.getByRole('button',{name:'✓ Als gelernt markieren',exact:true}).click();assert.equal(await page.evaluate(()=>state.done[36]),true);await page.reload();await page.waitForFunction(()=>hasLearningAccess());assert.equal(await page.evaluate(()=>state.done[36]),true);
+await page.evaluate(()=>openLibraryTopic(36));await page.locator('.poster-illustration img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`lesson-${width}.png`),fullPage:true});await page.evaluate(()=>openLibraryTopic(1));await page.screenshot({path:path.join(out,`model-${width}.png`),fullPage:true});await page.evaluate(()=>openLibraryTopic(36));await page.getByRole('button',{name:'Transferfrage lösen →',exact:true}).click();await page.getByRole('button',{name:/Hilfe alarmieren/}).click();await page.getByRole('button',{name:'Antwort prüfen',exact:true}).click();assert.equal(await page.locator('.good').count(),1);await page.getByRole('button',{name:'Zum Wissen',exact:true}).click();await page.getByRole('button',{name:'Passenden Pflegefall bearbeiten →',exact:true}).click();await page.locator('#caseDetail').getByText('Lösungsansätze und Begründungen', {exact: true}).click();assert.equal(await page.locator('#caseDetail .poster-box').count(),6);await page.locator('#caseDetail').getByRole('button',{name:'Lernkarte →',exact:true}).click();await page.locator('.illustrated-flash').focus();await page.keyboard.press('Space');assert.equal(await page.locator('.illustrated-flash.answer').count(),1);await page.screenshot({path:path.join(out,`card-${width}.png`),fullPage:true});await page.getByRole('button',{name:'Zusammenhänge verstehen ↗',exact:true}).click();await page.getByRole('button',{name:'✓ Als gelernt markieren',exact:true}).click();assert.equal(await page.evaluate(()=>state.done[36]),true);await page.reload();await page.waitForFunction(()=>hasLearningAccess());assert.equal(await page.evaluate(()=>state.done[36]),true);
 for(const area of ['quiz','kompetenz','faelle','falltraining','pruefung','cockpit','plan','timer','quellen','einstellungen','konto']){await page.evaluate(area=>go(area),area);assert.ok((await page.locator('#content').innerText()).length>30,area)}
 await page.evaluate(async()=>{await navigator.serviceWorker.ready});await page.reload();await page.waitForFunction(()=>Boolean(navigator.serviceWorker.controller));await context.setOffline(true);await page.reload();await page.waitForFunction(()=>hasLearningAccess());await page.evaluate(()=>openLibraryTopic(36));await page.locator('.poster-illustration img').evaluate(img=>img.decode());await page.getByRole('button',{name:'Fachbegriffe nachschlagen',exact:true}).click();await page.locator('.glossary-entry').first().click();assert.match(await page.locator('#studyGlossaryDialog').innerText(),/Antonovsky/);await page.keyboard.press('Escape');await page.getByRole('button',{name:'Mein Konto',exact:true}).click();await page.getByRole('button',{name:'Abmelden',exact:true}).click();await page.getByRole('button',{name:'Registrieren',exact:true}).waitFor();assert.equal(await page.locator('#menuToggle').isVisible(),false);assert.deepEqual(errors,[]);console.log(`PASS ${width}px: sign-up, sign-in, sign-out, ${topicCount} lessons, filters, keyboard, persistence and offline art`);await context.close()}}finally{await browser.close()}}
 run().catch(e=>{console.error(e);process.exitCode=1}).finally(()=>server.close());

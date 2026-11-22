@@ -101,7 +101,10 @@ const oralCases = {
 let oralCaseKey = 'brandt';
 
 function openOralPractice(key) {
- if (Object.hasOwn(oralCases, key)) oralCaseKey = key;
+ if (Object.hasOwn(oralCases, key)) {
+  oralCaseKey = key;
+  if (hasLearningAccess()) {state.activeOralKey = key;save();}
+ }
  examStartTimer(0);
  go('muendlich');
 }
