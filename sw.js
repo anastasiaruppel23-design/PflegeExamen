@@ -1,4 +1,4 @@
-const CACHE = 'pflegefokus-v55-study-practice';
+const CACHE = 'pflegefokus-v56-study-practice-voice';
 const SUPABASE_SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
@@ -8,7 +8,7 @@ const ASSETS = [
   './assets/haut-schema.svg', './glossary.js?v=12', './exam-practice.html',
   './practical-training.css?v=1', './practical-training.js?v=3', './model-application.js?v=2', './oral-guided.js?v=1', './exam-practice.js?v=18', './written-settings.js?v=1', './learning-upgrade.js?v=11', './anatomy-depth.js?v=1', './learning-expansion.js?v=7', './curriculum.js?v=1',
   './visual-library.js?v=25', './visual-library.css?v=13',
-  './study-layout.css', './study-icons.js', './advanced-training.js', './exam-answers.js', './voice-answers.js',
+  './study-layout.css', './study-icons.js', './advanced-training.js', './exam-answers.js', './voice-answers.js?v=2',
   './assets/anastasia-pflege-illustration.svg', './assets/heart-study.webp',
   './assets/lung-study.webp', './assets/glucose-study.webp'
 ];

@@ -5,6 +5,8 @@
   const content = document.querySelector('#content');
   const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
   const canRecord = Boolean(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+  const android = /Android/i.test(navigator.userAgent);
+  const micPolicy = document.permissionsPolicy || document.featurePolicy;
   const fields = new Map();
   const localAudio = new Map();
   const remoteAudio = new Set();
@@ -41,7 +43,7 @@
     const hasAudio = local?.pending ? Boolean(local.blob) : remoteAudio.has(ui.key) || Boolean(local?.blob);
     ui.play.hidden = !hasAudio;
     ui.remove.hidden = !hasAudio;
-    ui.record.textContent = hasAudio ? 'Neu aufnehmen' : 'Aufnehmen & diktieren';
+    ui.record.textContent = hasAudio ? 'Neu aufnehmen & diktieren' : 'Aufnehmen & diktieren';
   }
 
   function detachPlayback(ui) {
@@ -85,6 +87,7 @@
 
   async function setOwner(user) {
     if (owner === user) return;
+    if (active) active.discard = true;
     stopCapture();
     generation++;
     const session = generation;
@@ -192,7 +195,7 @@
   }
 
   function appendSpeech(capture, text) {
-    if (!text || capture.session !== generation) return;
+    if (!text || capture.session !== generation || capture.discard) return;
     if (capture.ui.field.dataset.answerSearch !== undefined) {
       capture.ui.field.value = text;
       capture.ui.field.dispatchEvent(new Event('input', {bubbles:true}));
@@ -203,94 +206,211 @@
     writeAnswer(key, [previous.trimEnd(),text.trim()].filter(Boolean).join(' ').slice(0, 16000), capture.user, capture.route);
   }
 
+  function microphoneError(error) {
+    if (micPolicy?.allowsFeature('microphone') === false) {
+      return 'Diese Ansicht blockiert das Mikrofon. Öffne die Seite in einem eigenen Chrome-Tab.';
+    }
+    switch (error) {
+      case 'NotAllowedError':
+      case 'not-allowed':
+        return 'Mikrofonzugriff verweigert. Erlaube ihn in den Chrome-Website-Einstellungen und in den Android-App-Berechtigungen.';
+      case 'NotReadableError':
+      case 'audio-capture':
+        return 'Das Mikrofon ist gerade nicht erreichbar. Schließe andere Apps mit Mikrofonzugriff und versuche es erneut.';
+      case 'NotFoundError':
+        return 'Der Browser hat kein Mikrofon gefunden.';
+      case 'network':
+        return 'Der Spracherkennungsdienst ist nicht erreichbar. Prüfe die Internetverbindung.';
+      case 'service-not-allowed':
+        return 'Chrome hat den Spracherkennungsdienst in dieser Sitzung abgelehnt.';
+      case 'no-speech':
+        return 'Es wurde keine Sprache erkannt. Warte auf „Sprich jetzt“ und versuche es erneut.';
+      case 'language-not-supported':
+        return 'Die Spracherkennung für Deutsch ist in diesem Browser gerade nicht verfügbar.';
+      default:
+        return 'Mikrofon oder Spracherkennung konnte nicht gestartet werden.';
+    }
+  }
+
   function startRecognition(capture, track) {
     if (!Speech) return;
-    const recognizer = new Speech();
-    capture.recognition = recognizer;
-    recognizer.lang = 'de-DE';
-    recognizer.continuous = true;
-    recognizer.interimResults = false;
-    recognizer.onresult = event => {
-      const parts = [];
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        if (event.results[i].isFinal) parts.push(event.results[i][0].transcript);
-      }
-      appendSpeech(capture, parts.join(' '));
-    };
-    recognizer.onerror = event => {
-      capture.speechFailed = true;
-      if (event.error !== 'aborted') note(capture.ui, capture.recorder ?
-        'Diktat gerade nicht verfügbar. Die Audioaufnahme läuft weiter.' : 'Diktat gerade nicht verfügbar. Du kannst deine Antwort eintippen.');
-    };
-    recognizer.onend = () => {
-      if (active !== capture) return;
-      if (!capture.recorder) {stopCapture();return;}
-      if (!capture.speechFailed) setTimeout(() => {
-        if (active === capture) startRecognition(capture, track);
-      }, 350);
-    };
+    let recognizer;
     try {
+      recognizer = new Speech();
+      capture.recognition = recognizer;
+      recognizer.lang = 'de-DE';
+      recognizer.continuous = !android;
+      recognizer.interimResults = true;
+
+      recognizer.onstart = () => {
+        clearTimeout(capture.startNotice);
+        if (active === capture) note(capture.ui, capture.recorder ?
+          'Aufnahme und Diktat laufen. Sprich jetzt.' : 'Diktat läuft. Sprich jetzt.');
+      };
+      recognizer.onresult = event => {
+        const final = [], interim = [];
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const result = event.results[i];
+          (result.isFinal ? final : interim).push(result[0].transcript);
+        }
+        capture.interim = interim.join(' ').trim();
+        if (final.length) {
+          const text = final.join(' ').trim();
+          if (text) capture.speechReceived = true;
+          appendSpeech(capture, text);
+        }
+      };
+      recognizer.onerror = event => {
+        capture.speechFailed = true;
+        clearTimeout(capture.startNotice);
+        if (event.error !== 'aborted') note(capture.ui,
+          microphoneError(event.error)+(capture.recorder?' Die Audioaufnahme läuft weiter.':''));
+      };
+      recognizer.onend = () => {
+        clearTimeout(capture.startNotice);
+        if (capture.discard) return;
+        if (capture.interim && !capture.speechFailed) {
+          appendSpeech(capture, capture.interim);
+          capture.speechReceived = true;
+        }
+        capture.interim = '';
+        if (capture.ending) {
+          if (!capture.speechFailed && !capture.speechReceived && !capture.recorder) {
+            note(capture.ui, 'Diktat beendet. Es wurde noch kein Text erkannt.');
+          }
+          return;
+        }
+        if (active !== capture) return;
+        if (!capture.recorder) {
+          if (!capture.speechFailed) note(capture.ui, capture.speechReceived ?
+            'Diktat gespeichert.' : 'Das Diktat endete ohne erkannten Text. Tippe auf „Diktieren“, um es erneut zu versuchen.');
+          releaseCapture(capture);
+        } else if (!capture.speechFailed && capture.speechReceived) {
+          // Android ends a recognition session after one utterance. Keep recording
+          // and reopen recognition for the next utterance when the track supports it.
+          setTimeout(() => {
+            if (active === capture) startRecognition(capture, track);
+          }, 350);
+        }
+      };
       if (track) recognizer.start(track);
       else recognizer.start();
-    } catch {
+    } catch (error) {
       capture.recognition = null;
-      note(capture.ui, capture.recorder ? 'Diktat gerade nicht verfügbar. Audioaufnahme läuft.' : 'Diktat konnte nicht gestartet werden.');
-      if (!capture.recorder) stopCapture();
+      capture.speechFailed = true;
+      clearTimeout(capture.startNotice);
+      note(capture.ui, microphoneError(error.name)+(capture.recorder?' Die Audioaufnahme läuft weiter.':''));
+      if (!capture.recorder) releaseCapture(capture);
     }
+  }
+
+  function releaseCapture(capture) {
+    if (active === capture) active = null;
+    clearTimeout(capture.timer);
+    clearTimeout(capture.startNotice);
+    capture.ui.stop.hidden = true;
+    if (capture.ui.record) capture.ui.record.disabled = !canRecord;
+    if (capture.ui.recordOnly) capture.ui.recordOnly.disabled = !canRecord;
+    capture.ui.dictate.disabled = !Speech;
   }
 
   function stopCapture() {
     const capture = active;
     if (!capture) return;
-    active = null;
-    clearTimeout(capture.timer);
-    try {capture.recognition?.stop();} catch {}
-    if (capture.recorder?.state === 'recording') capture.recorder.stop();
-    else capture.stream?.getTracks().forEach(track => track.stop());
-    capture.ui.stop.hidden = true;
-    if (capture.ui.record) capture.ui.record.disabled = !canRecord;
-    capture.ui.dictate.disabled = !Speech;
+    capture.ending = true;
+    releaseCapture(capture);
+    if (capture.recorder && capture.recorder.state !== 'inactive') {
+      note(capture.ui, 'Aufnahme wird gespeichert …');
+      try {capture.recorder.stop();}
+      catch {
+        capture.stream?.getTracks().forEach(track => track.stop());
+        note(capture.ui, 'Die Aufnahme konnte nicht abgeschlossen werden.');
+      }
+    } else if (capture.stream) {
+      capture.stream.getTracks().forEach(track => track.stop());
+    } else if (capture.mode !== 'dictate') {
+      note(capture.ui, 'Aufnahme abgebrochen, bevor das Mikrofon bereit war.');
+    } else if (!capture.speechFailed) {
+      note(capture.ui, 'Diktat wird abgeschlossen …');
+    }
+    try {capture.recognition?.stop();}
+    catch {
+      if (capture.interim && !capture.speechFailed) appendSpeech(capture, capture.interim);
+    }
   }
 
-  async function startCapture(ui, record) {
+  function createRecorder(stream) {
+    const opus = 'audio/webm;codecs=opus';
+    if (window.MediaRecorder.isTypeSupported?.(opus)) {
+      return new MediaRecorder(stream, {mimeType: opus});
+    }
+    return new MediaRecorder(stream);
+  }
+
+  async function startCapture(ui, mode) {
     if (active) {
       note(ui, 'Beende zuerst die laufende Aufnahme oder das Diktat.');
       return;
     }
+    if (!window.isSecureContext && typeof window.isSecureContext === 'boolean') {
+      note(ui, 'Die Sprachfunktion erfordert eine sichere Verbindung. Öffne die HTTPS-Seite in Chrome.');
+      return;
+    }
+    if (micPolicy?.allowsFeature('microphone') === false) {
+      note(ui, microphoneError('NotAllowedError'));
+      return;
+    }
+    const record = mode !== 'dictate';
     if (record && (localAudio.get(ui.key)?.blob || remoteAudio.has(ui.key)) && !confirm('Die gespeicherte Aufnahme ersetzen?')) return;
-    const capture = {ui, user: owner, session: generation, route: tab};
+    const capture = {ui, mode, user: owner, session: generation, route: tab};
     active = capture;
     if (ui.record) ui.record.disabled = true;
+    if (ui.recordOnly) ui.recordOnly.disabled = true;
     ui.dictate.disabled = true;
     ui.stop.hidden = false;
-    note(ui, record ? 'Mikrofon wird geöffnet …' : 'Diktat läuft …');
+    note(ui, record ? 'Mikrofonzugriff wird angefragt …' : 'Spracherkennung wird gestartet …');
     capture.timer = setTimeout(stopCapture, maxRecordingMs);
+    capture.startNotice = setTimeout(() => {
+      if (active === capture) note(ui, 'Der Start dauert länger. Prüfe, ob Chrome gerade nach der Mikrofonberechtigung fragt.');
+    }, 9000);
     if (!record) {startRecognition(capture); return;}
     try {
       const stream = await navigator.mediaDevices.getUserMedia({audio:true});
       if (active !== capture) {stream.getTracks().forEach(track => track.stop()); return;}
+      clearTimeout(capture.startNotice);
       capture.stream = stream;
-      const recorder = new MediaRecorder(stream, {audioBitsPerSecond: 48000});
+      const recorder = createRecorder(stream);
       const chunks = [];
       capture.recorder = recorder;
       recorder.ondataavailable = event => {if (event.data.size) chunks.push(event.data);};
-      recorder.onerror = () => {stopCapture(); note(ui, 'Die Aufnahme wurde unterbrochen.');};
+      recorder.onerror = event => {
+        releaseCapture(capture);
+        stream.getTracks().forEach(track => track.stop());
+        note(ui, 'Die Audioaufnahme wurde unterbrochen'+(event.error?.name ? ' ('+event.error.name+').' : '.'));
+      };
       recorder.onstop = async () => {
         stream.getTracks().forEach(track => track.stop());
         const blob = new Blob(chunks, {type: recorder.mimeType || chunks[0]?.type});
-        if (!blob.size) {note(ui, 'Es wurde kein Audio aufgenommen.'); return;}
+        if (!blob.size) {note(ui, 'Die Aufnahme war leer. Warte beim nächsten Versuch auf „Aufnahme läuft“.'); return;}
         try {
           await updateLocalAudio({user:capture.user, key:ui.key, blob, pending:true, version:crypto.randomUUID()});
         } catch {
-          note(ui, 'Aufnahme konnte auf diesem Gerät nicht gespeichert werden.');
+          if (owner === capture.user && capture.session === generation) {
+            localAudio.set(ui.key, {blob, pending:false});
+            detachPlayback(ui);
+            refreshAudio(ui);
+          }
+          note(ui, 'Aufnahme ist bis zum Neuladen abspielbar. Chrome hat das Speichern auf diesem Gerät abgelehnt.');
         }
       };
       recorder.start(1000);
-      note(ui, Speech ? 'Aufnahme läuft. Diktat wird gestartet …' : 'Aufnahme läuft. Dieser Browser unterstützt kein Diktat.');
-      startRecognition(capture, stream.getAudioTracks()[0]);
-    } catch {
-      stopCapture();
-      note(ui, 'Mikrofon konnte nicht geöffnet werden. Prüfe die Berechtigung oder tippe deine Antwort.');
+      note(ui, 'Aufnahme läuft. Sprich jetzt.');
+      if (mode === 'both' && Speech) startRecognition(capture, stream.getAudioTracks()[0]);
+    } catch (error) {
+      if (active !== capture) return;
+      releaseCapture(capture);
+      capture.stream?.getTracks().forEach(track => track.stop());
+      note(ui, microphoneError(error.name));
     }
   }
 
@@ -301,16 +421,16 @@
     const tools = document.createElement('div');
     const ui = {key, field, tools};
     tools.className = 'answer-tools';
-    tools.innerHTML = (search ? '' : '<button type="button" class="btn" data-voice="record">Aufnehmen &amp; diktieren</button>')+
+    tools.innerHTML = '<p class="answer-status muted" role="status"></p>'+
+      (search ? '' : '<button type="button" class="btn" data-voice="record">Aufnehmen &amp; diktieren</button><button type="button" class="btn" data-voice="recordOnly">Nur aufnehmen</button>')+
       '<button type="button" class="btn" data-voice="dictate">Diktieren</button><button type="button" class="btn primary" data-voice="stop" hidden>Beenden</button>'+
       (search ? '' : '<button type="button" class="btn" data-voice="play" hidden>Meine Antwort anhören</button><button type="button" class="btn" data-voice="remove" hidden>Aufnahme löschen</button><button type="button" class="btn" data-voice="summary">Stichpunkte vorschlagen</button><audio controls preload="none" hidden aria-label="Deine Sprachaufnahme"></audio>')+
-      '<p class="answer-status muted" role="status"></p>'+
       (search ? '' : '<details class="answer-note"><summary>Hinweise zu Mikrofon und Audio</summary><p>Aufnahmen sind bis zu zehn Minuten lang und werden nach dem Beenden automatisch gespeichert. Je nach Browser kann die Spracherkennung einen externen Dienst verwenden. Nutze fiktive Angaben.</p></details>');
     for (const button of tools.querySelectorAll('[data-voice]')) ui[button.dataset.voice] = button;
     ui.status = tools.querySelector('[role="status"]');
     ui.player = tools.querySelector('audio');
     ui.dictate.disabled = !Speech;
-    ui.dictate.onclick = () => startCapture(ui, false);
+    ui.dictate.onclick = () => startCapture(ui, 'dictate');
     ui.stop.onclick = stopCapture;
     field.dataset.answerReady = 'true';
     field.after(tools);
@@ -323,9 +443,10 @@
     if (draft) field.value = draft.text;
     field.maxLength = 16000;
     field.addEventListener('input', () => writeAnswer(key, field.value));
-    ui.record.disabled = !canRecord;
+    ui.record.disabled = ui.recordOnly.disabled = !canRecord;
     if (!canRecord) note(ui, 'Audioaufnahme ist in diesem Browser gerade nicht verfügbar.');
-    ui.record.onclick = () => startCapture(ui, true);
+    ui.record.onclick = () => startCapture(ui, 'both');
+    ui.recordOnly.onclick = () => startCapture(ui, 'record');
     ui.play.onclick = () => playAudio(ui);
     ui.remove.onclick = () => {
       if (!owner || active?.ui === ui || !confirm('Diese Sprachaufnahme löschen?')) return;
@@ -391,5 +512,7 @@
   }).observe(content, {childList:true, subtree:true});
   window.addEventListener('online', syncAudio);
   window.addEventListener('pagehide', stopCapture);
-  document.addEventListener('visibilitychange', () => {if(document.hidden)stopCapture();else syncAudio();});
+  // Android can briefly hide the page while the system microphone prompt is open.
+  // A document exit still stops capture via the pagehide handler above.
+  document.addEventListener('visibilitychange', () => {if(!document.hidden)syncAudio();});
 })();
