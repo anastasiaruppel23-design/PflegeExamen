@@ -2,7 +2,7 @@ const CACHE = 'pflegefokus-v55-study-practice';
 const SUPABASE_SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
-  './cloud-config.js', './account.js?v=2', './design.css?v=12',
+  './cloud-config.js', './account.js?v=3', './design.css?v=12',
   './assets/pflegefokus-willkommen.webp?v=2', './library.css?v=9',
   './disease-library.js?v=3', './library.js?v=14', './assets/atmung-schema.svg',
   './assets/haut-schema.svg', './glossary.js?v=12', './exam-practice.html',

@@ -14,6 +14,7 @@ let cloudStatus = '';
 function studyProgressDefaults(value = {}) {
   return {
     done: {}, best: 0, caseScores: {}, weakTopics: {}, reviewItems: {},
+    kbMistakes: {}, kbMastered: {}, kbAttempts: 0,
     upgradeStats: {}, simResults: {}, challengeResults: {}, ...value
   };
 }
