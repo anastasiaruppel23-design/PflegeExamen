@@ -130,11 +130,13 @@ function renderOral() {
   '<button class="btn" onclick="examStartTimer(0)">Timer stoppen</button><strong id="examClock">'+examFormatTime(examFormatSeconds)+'</strong></div>'+
   '<h3>Leitfragen</h3><ol>'+list(current.tasks)+'</ol>'+
   (sources ? '<h3>Material für die EBN-Aufgabe</h3><p>Die Aussagen sind in eigenen Worten zusammengefasst.</p><ul>'+sources+'</ul>' : '')+
+  guidedOralHtml(oralCaseKey)+
   (typeof caseApplicationHtml === 'function' ? caseApplicationHtml(oralCaseKey) : '')+
   '<label for="oralNotes">Stichpunkte für deine mündliche Antwort</label><textarea id="oralNotes"></textarea>'+
   '<details><summary>Nachfragen für das Prüfungsgespräch</summary><ol>'+list(current.followups)+'</ol></details>'+
   '<details><summary>Erwartungshorizont öffnen</summary><ol>'+list(current.guide)+'</ol><p>'+examEsc(current.followupGuide)+'</p></details></article>'+
   '<p><a href="https://www.gesetze-im-internet.de/pflaprv/__15.html" target="_blank" rel="noopener noreferrer">§ 15 PflAPrV</a> · <a href="https://www.hamburg.de/resource/blob/1159722/dd9679bbdc4e389fe7d05f78ff813317/handreichung-muendliche-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung</a></p></section>';
+ bindGuidedOral(oralCaseKey, document.getElementById('guidedOral'));
  const picker = document.getElementById('oralCase');
  picker.value = oralCaseKey;
  picker.addEventListener('change', () => {
