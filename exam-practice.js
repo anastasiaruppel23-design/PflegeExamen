@@ -130,6 +130,7 @@ function renderOral() {
   '<button class="btn" onclick="examStartTimer(0)">Timer stoppen</button><strong id="examClock">'+examFormatTime(examFormatSeconds)+'</strong></div>'+
   '<h3>Leitfragen</h3><ol>'+list(current.tasks)+'</ol>'+
   (sources ? '<h3>Material für die EBN-Aufgabe</h3><p>Die Aussagen sind in eigenen Worten zusammengefasst.</p><ul>'+sources+'</ul>' : '')+
+  (typeof caseApplicationHtml === 'function' ? caseApplicationHtml(oralCaseKey) : '')+
   '<label for="oralNotes">Stichpunkte für deine mündliche Antwort</label><textarea id="oralNotes"></textarea>'+
   '<details><summary>Nachfragen für das Prüfungsgespräch</summary><ol>'+list(current.followups)+'</ol></details>'+
   '<details><summary>Erwartungshorizont öffnen</summary><ol>'+list(current.guide)+'</ol><p>'+examEsc(current.followupGuide)+'</p></details></article>'+
