@@ -324,6 +324,98 @@
   'Wie sichern Sie bei XX Qualität, Sicherheit und Versorgungskontinuität? Nennen Sie überprüfbare Ziele, passende Dokumentation und Kriterien für die Evaluation.',
   'Reflektieren Sie Ihre Berufsrolle im Fall von XX. Wie gehen Sie mit unterschiedlichen Sichtweisen im Team beziehungsweise mit Angehörigen um und wie prüfen Sie Ihre eigene Haltung?'
  ];
+ const originalWrittenMetadata = [
+  {id: 'reha-schlaganfall', setting: 'reha', ageGroup: 'adult', age: '58 Jahre', course: 'chronic'},
+  {id: 'paed-appendizitis', setting: 'paediatrie', ageGroup: 'child', age: '9 Jahre', course: 'acute'},
+  {id: 'langzeit-zustandsveraenderung', setting: 'langzeit', ageGroup: 'older', age: '79 Jahre', course: 'mixed'}
+ ];
+ const writtenExercises = [
+  ...writtenCases.map((cs, index) => ({
+   ...cs, ...originalWrittenMetadata[index], tasks: writtenTasks[index], answers: writtenAnswers[index]
+  })),
+  ...additionalWrittenCases.map(cs => ({...cs, ...buildAdditionalWrittenExercise(cs)}))
+ ];
+ const writtenFilters = {setting: '', ageGroup: '', course: ''};
+ const writtenDrafts = new Map();
+ let selectedWrittenId = '';
+
+ function matchingWrittenExercises() {
+  return writtenExercises.filter(cs => Object.entries(writtenFilters)
+   .every(([field, value]) => !value || cs[field] === value || (field === 'course' && cs.course === 'mixed')));
+ }
+
+ function writtenFilterOptions(values, selected, allLabel) {
+  return '<option value="">' + allLabel + '</option>' + Object.entries(values).map(([id, label]) =>
+   `<option value="${id}"${id === selected ? ' selected' : ''}>${esc(label)}</option>`
+  ).join('');
+ }
+
+ function renderWritten(c, header) {
+  const matches = matchingWrittenExercises();
+  const cs = matches.find(item => item.id === selectedWrittenId);
+  c.innerHTML = header + `<section class="panel" aria-labelledby="writtenSettingsTitle">
+   <h2 id="writtenSettingsTitle">Schriftliche Prüfung nach Setting</h2>
+   <div class="grid" aria-label="Versorgungssettings">
+    <button type="button" class="btn ${writtenFilters.setting ? '' : 'primary'}" aria-pressed="${!writtenFilters.setting}" data-setting="" onclick="setWrittenFilter('setting', this.dataset.setting)">Alle Settings</button>
+    ${Object.entries(writtenSettings).map(([id, label]) => `<button type="button" class="btn ${id === writtenFilters.setting ? 'primary' : ''}" aria-pressed="${id === writtenFilters.setting}" data-setting="${id}" onclick="setWrittenFilter('setting', this.dataset.setting)">${esc(label)}</button>`).join('')}
+   </div>
+   <div class="flex">
+    <label for="writtenAgeFilter">Altersgruppe <select id="writtenAgeFilter" onchange="setWrittenFilter('ageGroup', this.value)">${writtenFilterOptions(writtenAgeGroups, writtenFilters.ageGroup, 'Alle Altersgruppen')}</select></label>
+    <label for="writtenCourseFilter">Verlauf <select id="writtenCourseFilter" onchange="setWrittenFilter('course', this.value)">${writtenFilterOptions(writtenCourses, writtenFilters.course, 'Alle Verläufe')}</select></label>
+   </div>
+   <p role="status">${matches.length} ${matches.length === 1 ? 'passender Fall' : 'passende Fälle'}</p>
+   <div class="grid">${matches.map(item => `<article class="card">
+    <h3>${esc(item.title)}</h3>
+    <p>${esc(writtenSettings[item.setting])} · ${esc(item.age)} · ${esc(writtenCourses[item.course])}</p>
+    <p>${esc(item.focus)}</p>
+    <button type="button" class="btn ${item.id === selectedWrittenId ? 'primary' : ''}" aria-label="Fall öffnen: ${esc(item.title)}" data-case="${item.id}" onclick="openWrittenExercise(this.dataset.case)">Fall öffnen</button>
+   </article>`).join('')}</div>
+   ${matches.length ? '' : '<p>Für diese Kombination gibt es noch keinen Fall. Ändere das Setting, die Altersgruppe oder den Verlauf.</p>'}
+  </section>`;
+  if (!cs) return;
+  c.insertAdjacentHTML('beforeend', `<section class="panel" aria-labelledby="writtenCaseTitle">
+   <h2 id="writtenCaseTitle" tabindex="-1">${esc(cs.title)}</h2>
+   <p>${esc(cs.focus)} · ${cs.tasks.length} Aufgaben</p>
+   <p>Übungszeit <span id="examClock">${examFormatTime(examFormatSeconds)}</span>
+    <button type="button" class="btn" onclick="examStartTimer(7200)">120-Minuten-Übung starten</button>
+    <button type="button" class="btn" onclick="examStartTimer(0)">Timer stoppen</button>
+   </p>
+   <h3>Fallsituation</h3>${cs.story.split('\n\n').map(text => '<p>' + esc(text) + '</p>').join('')}
+   <h3>Aufgaben zum Fall</h3>
+   <ol>${cs.tasks.map(([operator, task]) => `<li><strong>${esc(operator)}</strong> · ${esc(task)}</li>`).join('')}</ol>
+   <details><summary>Operatoren kurz erklärt</summary><ul>${operators.map(([operator, description]) => `<li><strong>${esc(operator)}</strong> · ${esc(description)}</li>`).join('')}</ul></details>
+   <label for="writtenAnswer">Deine Antworten. Nummeriere sie passend zu den Aufgaben.</label>
+   <textarea id="writtenAnswer"></textarea>
+   <details><summary>Erwartungshorizont und Lösungshinweise anzeigen</summary>
+    <p>Vergleiche deine Antwort mit den Hinweisen. Weitere fachlich begründete Lösungen sind möglich.</p>
+    <ol>${cs.answers.map(answer => '<li>' + esc(answer) + '</li>').join('')}</ol>
+   </details>
+  </section>`);
+  const answer = $('#writtenAnswer');
+  answer.value = writtenDrafts.get(cs.id) || '';
+  answer.addEventListener('input', () => writtenDrafts.set(cs.id, answer.value));
+ }
+
+ window.setWrittenFilter = (field, value) => {
+  writtenFilters[field] = value;
+  if (!matchingWrittenExercises().some(cs => cs.id === selectedWrittenId)) {
+   selectedWrittenId = '';
+   examStartTimer(0);
+  }
+  renderExam();
+  const control = field === 'setting' ? `[data-setting="${value}"]` : field === 'ageGroup' ? '#writtenAgeFilter' : '#writtenCourseFilter';
+  $(control)?.focus({preventScroll: true});
+ };
+ window.openWrittenExercise = id => {
+  if (!matchingWrittenExercises().some(cs => cs.id === id)) return;
+  if (selectedWrittenId !== id) examStartTimer(0);
+  selectedWrittenId = id;
+  renderExam();
+  const title = $('#writtenCaseTitle');
+  title?.focus({preventScroll: true});
+  title?.scrollIntoView({block: 'start'});
+ };
+
  function renderExam(){
   const c=$('#content');if(!c)return;const mode=examMode||'schriftlich';
   const header='<div class="panel"><span class="tag">Prüfungstraining · prüfungsnahe Übungen</span><h2>Prüfungsformate üben</h2><p>'+(mode==='praktisch'?'Die praktische Prüfung übst du mit deiner tatsächlichen Versorgungssituation in deiner Ausbildungseinrichtung.':'Bearbeite schriftliche und mündliche Fälle erst selbst und vergleiche deine Antworten danach mit den Lösungshinweisen. Das sind Übungsfälle, keine offiziellen Prüfungsaufgaben.')+'</p><div class="flex">'+[['schriftlich','Schriftlich'],['praktisch','Praktisch'],['muendlich','Mündlich']].map(x=>'<button class="btn '+(mode===x[0]?'primary':'')+'" onclick="examSetMode(&#39;'+x[0]+'&#39;)">'+x[1]+'</button>').join('')+'</div></div>';
@@ -332,14 +424,12 @@
    return;
   }
   if(mode==='schriftlich'){
-   const idx=window.upgradeWrittenIndex||0,cs=writtenCases[idx],tasks=writtenTasks[idx];
-   c.innerHTML=header+'<div class="panel"><div class="flex">'+writtenCases.map((x,i)=>'<button class="btn '+(idx===i?'primary':'')+'" onclick="upgradeWritten('+i+')">Übung '+(i+1)+'</button>').join('')+'</div><p class="muted">Langform · drei unterschiedliche Prüfungsbereiche · 18 fallbezogene Aufgaben · Operatorentraining</p><h2>'+esc(cs.title)+'</h2><p><strong>Schwerpunkt:</strong> '+esc(cs.focus)+'</p><p class="muted">Fallsituation: '+cs.story.length+' Zeichen inklusive Leerzeichen · Hamburger Handreichung: höchstens 5.500 Zeichen. Übungszeit: <span id="examClock">00:00</span> <button class="btn" onclick="examStartTimer(7200)">120-Minuten-Übung starten</button> <button class="btn" onclick="examStartTimer(0)">Timer stoppen</button></p><h3>Ausführliche Fallsituation</h3>'+cs.story.split('\n\n').map(x=>'<p>'+esc(x)+'</p>').join('')+'<h3>Aufgaben zum Fall</h3><ol>'+tasks.map(x=>'<li><strong>'+esc(x[0])+':</strong> '+esc(x[1])+'</li>').join('')+'</ol><details><summary>Operatoren kurz erklärt</summary><ul>'+operators.map(x=>'<li><strong>'+x[0]+':</strong> '+x[1]+'</li>').join('')+'</ul></details><label for="writtenAnswer">Deine Antworten – nummeriere sie passend zu den Aufgaben</label><textarea id="writtenAnswer" placeholder="Bearbeite die Aufgaben am Fall. Begründe deine Entscheidungen mit den Informationen aus der Fallsituation."></textarea><details><summary>Erwartungshorizont und Lösungshinweise anzeigen</summary><p>Nutze die Hinweise als Orientierung; fachlich begründete, fallbezogene Alternativen können ebenfalls passend sein.</p><ol>'+tasks.map((x,i)=>'<li><strong>'+esc(x[0])+':</strong> '+esc(writtenAnswers[idx][i])+'</li>').join('')+'</ol></details><p class="muted">Die Fälle sind ausführliche Übungsgrundlagen. Umfang und Bearbeitungszeit können in den Einstellungen an den Prüfungsrahmen angepasst werden.</p></div>';
-   return
+   renderWritten(c, header);
+   return;
   }
   const oi=window.upgradeOralIndex||0,oc=oralCases[oi];
   c.innerHTML=header+'<div class="panel"><div class="flex">'+oralCases.map((x,i)=>'<button class="btn '+(oi===i?'primary':'')+'" onclick="upgradeOral('+i+')">Mündlicher Fall '+(i+1)+'</button>').join('')+'</div><span class="tag">Kompetenzbereiche III, IV und V</span><p class="muted">Hamburger Empfehlung für den Falltext: 1.500–2.000 Zeichen ohne Leerzeichen. Wähle die Altersstufe und den Versorgungskontext, die von deiner praktischen Prüfung abweichen. Vorbereitungszeit: <span id="examClock">00:00</span> <button class="btn" onclick="examStartTimer(1800)">30-Minuten-Vorbereitung starten</button> <button class="btn" onclick="examStartTimer(0)">Timer stoppen</button></p><h2>'+esc(oc.title)+'</h2><h3>Prüfungsfall</h3>'+oc.story.split('\n\n').map(x=>'<p>'+esc(x)+'</p>').join('')+'<h3>Fragen für das Prüfungsgespräch</h3><ol>'+oralTasks.map(x=>'<li>'+esc(x.replaceAll('XX',oi===0?'Samira':'Frau R.'))+'</li>').join('')+'</ol><label for="oralAnswer">Stichpunkte für dein Prüfungsgespräch</label><textarea id="oralAnswer" placeholder="Fallbezug · Zusammenarbeit · Recht/Ethik · Qualität/Evidenz · Berufsrolle"></textarea><details><summary>Erwartungshorizont und Selbstcheck</summary><ul>'+oralTasks.map((x,i)=>'<li><strong>'+esc(x.replaceAll('XX',oi===0?'Samira':'Frau R.'))+'</strong><br>'+esc(oralGuides[oi][i])+'</li>').join('')+'</ul></details></div>';
  }
- window.upgradeWritten=i=>{window.upgradeWrittenIndex=i;renderExam()};
  window.upgradeOral=i=>{window.upgradeOralIndex=i;renderExam()};
  if(typeof window.examSetMode!=='function')window.examSetMode=m=>{examMode=m;renderExam()};
  const originalExamRender=window.examRender;

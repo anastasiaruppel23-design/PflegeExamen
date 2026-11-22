@@ -16,7 +16,7 @@ const exam = read('exam-practice.js');
 vm.runInContext(exam.slice(exam.indexOf('function examRender(){'), exam.indexOf('function examStartTimer(')), context);
 vm.runInContext('const originalExamRender=examRender;', context);
 const upgrade = read('learning-upgrade.js');
-vm.runInContext(upgrade.slice(upgrade.indexOf(' function renderExam(){'), upgrade.indexOf(' window.upgradeWritten=')), context);
+vm.runInContext(upgrade.slice(upgrade.indexOf(' function renderExam(){'), upgrade.indexOf(' window.upgradeOral=')), context);
 // Exercise the later module's actual renderer: this previously hid all practical learning.
 vm.runInContext('renderExam()', context);
 for (const expected of ['Was möchtest du jetzt üben?', 'Sechs ausgearbeitete Planungsbeispiele', 'Entscheidungstraining mit direkter Rückmeldung', 'Fallvorstellung: klar priorisieren', 'Reflexion: begründen']) assert.ok(content.innerHTML.includes(expected), expected);
