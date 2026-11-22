@@ -39,7 +39,11 @@ const studyIcons={
  terminology:'<path d="M16 18h68v64H16zM30 35h39M30 49h27M30 64h33"/><path d="m68 72 7 7 12-15"/>',
  glucose:'<rect x="21" y="15" width="58" height="70" rx="9"/><path d="M32 27h36v25H32zM50 32c-5 7-9 11-9 16a9 9 0 0 0 18 0c0-5-4-9-9-16ZM33 68h34M41 77h18"/>'
 };
-function studyIcon(kind){return `<svg class="study-symbol" viewBox="0 0 100 100" aria-hidden="true">${studyIcons[kind]||studyIcons.definition}</svg>`}
+function studyIcon(kind){
+ const miniByKind={care:'plan',medicine:'med',definition:'book',warning:'shield',memory:'book',disease:'pulse',process:'plan',anatomy:'move',heart:'pulse',lungs:'lungs',joint:'move',brain:'brain',skin:'wound',family:'people',relationship:'people',selfcare:'hands',speech:'speech',shield:'shield',terminology:'book'};
+ if(miniByKind[kind])return studyMini(miniByKind[kind],'study-symbol');
+ return `<svg class="study-symbol study-illustrated" viewBox="0 0 100 100" aria-hidden="true"><rect x="8" y="8" width="84" height="84" rx="25" fill="var(--pf-mint)" stroke="none"/><circle cx="72" cy="69" r="18" fill="var(--pf-pink)" stroke="none"/>${studyIcons[kind]||studyIcons.definition}</svg>`;
+}
 function groupIconFor(group){return ({'Herz und Kreislauf':'heart','Lunge und Atemwege':'lungs','Magen, Darm und Leber':'digestive','Bewegungsapparat':'joint','Nieren und Harnwege':'kidneys','Nervensystem':'brain','Haut und Wundheilung':'skin','Hormone und Stoffwechsel':'hormone','Psyche':'brain','Schwangerschaft und Pädiatrie':'family','Krebs und Blut':'disease','Infektionen und Immunsystem':'shield','Pflegeverfahren':'process'})[group]||'disease'}
 const organIllustrations={
  'Herz und Kreislauf':{url:'https://commons.wikimedia.org/wiki/Special:FilePath/Heart_diagram-de.svg',page:'https://commons.wikimedia.org/wiki/File:Heart_diagram-de.svg',alt:'Deutsches Schema des Herzens mit den Herzhöhlen und großen Gefäßen',caption:'Blau markiert sauerstoffarmes, rot sauerstoffreiches Blut.',credit:'ZooFari; deutsche Bearbeitung Mr.Average · CC BY-SA 3.0'},

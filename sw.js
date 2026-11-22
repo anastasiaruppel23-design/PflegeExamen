@@ -1,13 +1,14 @@
-const CACHE = 'pflegefokus-v54-guided-oral';
+const CACHE = 'pflegefokus-v55-study-practice';
 const SUPABASE_SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
-  './cloud-config.js', './account.js?v=1', './design.css?v=12',
+  './cloud-config.js', './account.js?v=2', './design.css?v=12',
   './assets/pflegefokus-willkommen.webp?v=2', './library.css?v=9',
-  './disease-library.js?v=3', './library.js?v=13', './assets/atmung-schema.svg',
+  './disease-library.js?v=3', './library.js?v=14', './assets/atmung-schema.svg',
   './assets/haut-schema.svg', './glossary.js?v=11', './exam-practice.html',
-  './practical-training.css?v=1', './practical-training.js?v=2', './model-application.js?v=1', './oral-guided.js?v=1', './exam-practice.js?v=16', './written-settings.js?v=1', './learning-upgrade.js?v=10', './anatomy-depth.js?v=1', './learning-expansion.js?v=6', './curriculum.js?v=1',
-  './visual-library.js?v=24', './visual-library.css?v=13',
+  './practical-training.css?v=1', './practical-training.js?v=3', './model-application.js?v=2', './oral-guided.js?v=1', './exam-practice.js?v=17', './written-settings.js?v=1', './learning-upgrade.js?v=11', './anatomy-depth.js?v=1', './learning-expansion.js?v=7', './curriculum.js?v=1',
+  './visual-library.js?v=25', './visual-library.css?v=13',
+  './study-layout.css', './study-icons.js', './advanced-training.js', './exam-answers.js', './voice-answers.js',
   './assets/anastasia-pflege-illustration.svg', './assets/heart-study.webp',
   './assets/lung-study.webp', './assets/glucose-study.webp'
 ];

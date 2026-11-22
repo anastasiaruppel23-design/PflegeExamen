@@ -127,7 +127,7 @@ function caseApplicationHtml(key) {
   <h3 id="caseApplicationTitle">Fallanalyse und Transfer</h3>
   <p>Markiere zuerst Hinweise im Falltext. Begründe danach, was du daraus ableitest. Vermutungen und offene Fragen gehören ausdrücklich in deine Antwort.</p>
   <label for="caseApplicationNotes">Deine Fallanalyse</label>
-  <textarea id="caseApplicationNotes" placeholder="Textstelle → Problem oder Risiko → Ressource → Begründung → Maßnahme → Wirkung prüfen"></textarea>
+  <textarea id="caseApplicationNotes" data-answer="model-application-${key}" placeholder="Textstelle → Problem oder Risiko → Ressource → Begründung → Maßnahme → Wirkung prüfen"></textarea>
   <ol>
    <li><strong>Probleme, Risiken und Ressourcen:</strong> Benenne und belege jeweils ein Beispiel. Welche Angabe fehlt dir?</li>
    <li><strong>Modell oder Theorie:</strong> Wähle einen passenden Begriff und erkläre, wie er deine Einschätzung verändert.</li>
