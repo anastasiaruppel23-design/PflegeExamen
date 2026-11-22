@@ -36,7 +36,7 @@ function filterGlossary(query){
 }
 function addGlossaryAccess(){const root=document.querySelector('#content .visual-library');if(!root||root.querySelector('.glossary-access'))return;root.insertAdjacentHTML('beforeend','<aside class="glossary-access"><div><strong>Ein Begriff ist unklar?</strong><p>Unterstrichene Begriffe antippen oder im kleinen Glossar nachschlagen.</p></div><button class="btn" onclick="openGlossary()">Fachbegriffe nachschlagen</button></aside>')}
 const lessonWithLinks=openLibraryTopic;
-openLibraryTopic=function(index){lessonWithLinks(index);addGlossaryAccess()};
+openLibraryTopic=function(index,returnTarget){lessonWithLinks(index,returnTarget);addGlossaryAccess()};
 const cardWithLinks=renderCards;
 renderCards=function(){cardWithLinks();addGlossaryAccess()};
 const libraryWithLinks=renderVisualLibrary;
