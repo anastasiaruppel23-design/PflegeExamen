@@ -133,7 +133,12 @@ async function checkConnectedLearning(page) {
 
 async function checkModelCardLayout(page) {
   await page.evaluate(() => go('modelle'));
+  const top = page.locator('.models-view .learning-hero');
   const cards = page.locator('.model-grid .model-card');
+  const isWhite = element => getComputedStyle(element).color === 'rgb(255, 255, 255)';
+  assert.equal(await top.getByRole('heading').evaluate(isWhite), true, 'white title in the dark turquoise header');
+  assert.equal(await top.locator('p').evaluate(isWhite), true, 'white introduction in the dark turquoise header');
+  assert.equal(await cards.first().getByRole('heading').evaluate(isWhite), true, 'white model title');
   assert.equal(await cards.count(), 29);
   const first = await cards.nth(0).boundingBox();
   const second = await cards.nth(1).boundingBox();

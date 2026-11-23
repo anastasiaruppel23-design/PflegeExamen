@@ -17,6 +17,7 @@
 .study-mini.mini-small { width: 28px; height: 28px; }
 .study-mini.mini-large { width: 58px; height: 58px; }
 #content > .panel + .panel, .learning-hero + .grid { margin-block-start: 26px; }
+.learning-hero h2 { color: #fff; }
 .study-section-grid, .challenge-grid { gap: 22px; }
 #content :is(.study-section, .challenge-tile, .practice-tile, .practice-accordion, .exam-task) {
   --section-fill: var(--pf-mint);
@@ -110,7 +111,7 @@ textarea[data-answer] { scroll-margin-block: 96px; }
   color: var(--model-cream);
   margin-block-end: 24px;
 }
-.models-view .learning-hero p { color: #f5e9dc; }
+.models-view .learning-hero p { color: #fff; }
 .models-view .model-guide {
   background: var(--model-cream);
   border-inline-start: 5px solid var(--model-rose);
@@ -164,7 +165,7 @@ textarea[data-answer] { scroll-margin-block: 96px; }
   border: 0;
 }
 .models-view .model-heading h3 {
-  color: inherit;
+  color: #fff;
   font-size: clamp(1.22rem, 2vw, 1.48rem);
   line-height: 1.25;
   margin: 9px 0 0;
