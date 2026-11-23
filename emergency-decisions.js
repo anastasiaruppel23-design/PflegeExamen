@@ -23,7 +23,7 @@
         ['Ihre atemerleichternde Position sichern und die weitere Atmung beobachten.','Bei wacher, stabil sitzender Person kann die bevorzugte atemerleichternde Position unterstützt werden. Neue Instabilität erfordert eine erneute Einschätzung.']
       ]),
       d('Verordnung klären','Die Kollegin kann nach der Alarmierung in den Medikamentenplan schauen. Frau B. zeigt auf den Inhalator.','Was ist für die Entscheidung zur Anwendung nötig?',0,[
-        ['Den Inhalator der Person und dem aktuellen Notfallplan zuordnen und Hilfe nach eigener Zuständigkeit organisieren.','Medikament und sichere Anwendung müssen geklärt sein. Der laufende Notfallweg bleibt aktiv.'],
+        ['Zuordnung und Notfallplan prüfen und die Anwendung nach Zuständigkeit klären.','Medikament und sichere Anwendung müssen geklärt sein. Der laufende Notfallweg bleibt aktiv.'],
         ['Das beschriftete Präparat bereitlegen und allein aufgrund der Beschriftung zur Anwendung freigeben.','Die Beschriftung klärt die Zuordnung möglicherweise. Sie ersetzt keine Prüfung der Verordnung und konkreten Anwendung.'],
         ['Die bisher übliche Anwendung aus der Erinnerung übernehmen und die Verordnung danach vergleichen.','Die Erinnerung ist ein Hinweis. Bei unklarer Anordnung ist sie keine verlässliche Grundlage.']
       ]),
@@ -53,7 +53,7 @@
       ]),
       d('Neue Kreislaufzeichen','Herr K. atmet jetzt deutlich schneller, sein Blutdruck sinkt gegenüber dem Ausgangswert.','Was ändert sich an deiner Priorität?',1,[
         ['Die Delirbeurteilung abschließen und den Kreislaufwert in der Befundliste ergänzen.','Der Wert ist mehr als ein Zusatzbefund. Gemeinsam mit schneller Atmung und Infekt verändert er die Dringlichkeit.'],
-        ['Notfallweg auslösen und die Kombination aus Infekt, Verwirrtheit, schneller Atmung und Blutdruckabfall melden.','Die neu hinzugekommenen Warnzeichen erfordern sofortige Beurteilung, unter anderem auf eine mögliche Sepsis.'],
+        ['Notfallweg auslösen und die neuen Atem- und Kreislaufzeichen melden.','Die neu hinzugekommenen Warnzeichen erfordern sofortige Beurteilung, unter anderem auf eine mögliche Sepsis.'],
         ['Die Temperatur erneut kontrollieren und bei weiterem Anstieg ärztliche Hilfe anfragen.','Die neue Kreislauf- und Atemveränderung reicht für die Eskalation. Die Temperatur ist nicht die Voraussetzung.']
       ]),
       d('Kommunikation im Team','Das Team benötigt Beobachtungen, bevor es weitere Entscheidungen trifft. Für die Medikamentenliste hat die Kollegin Zugriff auf die Kurve.','Was meldest du selbst aus erster Hand?',2,[
@@ -107,7 +107,7 @@
         ['Akutes Herzproblem mitdenken, den internen Notfallweg auslösen und bei Frau S. bleiben.','Auch ohne typischen Brustschmerz kann die Kombination auf einen Herzinfarkt hinweisen.']
       ]),
       d('Rollen verteilen','Eine Kollegin ist im Zimmer, das Notfallteam ist informiert. Frau S. wirkt zunehmend erschöpft.','Wie setzt ihr die verfügbare Hilfe am sinnvollsten ein?',0,[
-        ['Eine Person beobachtet Atmung und Kreislauf, die andere bereitet nach Stationsstandard die angeforderte Diagnostik vor.','Die Person bleibt kontinuierlich betreut. Diagnostik und erste Beurteilung laufen abgestimmt parallel.'],
+        ['Bei Frau S. Atmung und Kreislauf beobachten, während die Kollegin die Diagnostik vorbereitet.','Die Person bleibt kontinuierlich betreut. Diagnostik und erste Beurteilung laufen abgestimmt parallel.'],
         ['Beide bereiten die Diagnostik vor und erheben die Vitalzeichen direkt im Anschluss.','Die Vorbereitung ist sinnvoll. Bei erkennbarer Verschlechterung wird eine Person zur fortlaufenden Beurteilung benötigt.'],
         ['Zunächst den gesamten Medikamenten- und Essensverlauf rekonstruieren, um die Diagnose einzugrenzen.','Der Verlauf ist wertvoll. Die akute Verfassung geht vor der vollständigen Recherche.']
       ]),
@@ -148,7 +148,7 @@
       d('Neue Lage','Herr W. ist plötzlich nicht mehr ansprechbar. Nach rascher Prüfung erkennst du keine normale Atmung.','Welche Handlung hat jetzt Vorrang?',2,[
         ['Eine gewünschte Lagerung herstellen und den nächsten Sättigungswert beobachten.','Eine Messung kann einen Kreislaufstillstand nicht zuverlässig ausschließen. Sofortiges Handeln ist nötig.'],
         ['Das Team erneut rufen und mit den Maßnahmen warten, bis es eintrifft.','Die Alarmierung ist wichtig. Die Verzögerung der Wiederbelebung wäre in dieser Lage entscheidend.'],
-        ['Kreislaufstillstand melden, Wiederbelebung beginnen und den AED nach Notfallplan holen lassen.','Fehlende Reaktion und fehlende normale Atmung sind der Anlass, Wiederbelebung unmittelbar einzuleiten.']
+        ['Reanimation starten, Kreislaufstillstand melden und den AED holen lassen.','Fehlende Reaktion und fehlende normale Atmung sind der Anlass, Wiederbelebung unmittelbar einzuleiten.']
       ]),
       d('Übernahme','Das Notfallteam übernimmt die Wiederbelebung. Welche Informationen du bereits hast, ist für die Teamleitung gefragt.','Was gibst du zuerst weiter?',1,[
         ['Zimmernummer, Grunderkrankung und das zuletzt eingeplante Medikament.','Die Zuordnung hilft, aber für die laufende Übernahme fehlen beobachtete Zeiten und Maßnahmen.'],
@@ -189,7 +189,7 @@
       story:'Frau L. sagt im Abenddienst, sie wolle nicht mehr leben und fürchte, sich heute etwas anzutun. Sie bittet dich, es niemandem zu sagen. Eine Kollegin ist in Rufweite.',
       steps:[
       d('Erster Kontakt','Frau L. ist ansprechbar und spricht weiter mit dir.','Welche Reaktion verbindet Beziehung und unmittelbaren Schutz?',0,[
-        ['Ihre Aussage ernst nehmen, ruhig und direkt nach aktueller Gefahr fragen, bei ihr bleiben und Hilfe hinzuziehen.','Direktes Nachfragen, Begleitung und früh organisierte Hilfe gehören bei einer konkreten akuten Äußerung zusammen.'],
+        ['Bei ihr bleiben, direkt nach aktueller Gefahr fragen und Hilfe hinzuziehen.','Direktes Nachfragen, Begleitung und früh organisierte Hilfe gehören bei einer konkreten akuten Äußerung zusammen.'],
         ['Das Gespräch zunächst im Vertrauen führen und Hilfe erst nach ihrem Einverständnis hinzuziehen.','Vertrauen ist wichtig. Bei unmittelbarer Gefahr muss fachliche Hilfe früh organisiert werden.'],
         ['Die Kollegin für ein Gespräch ablösen lassen, während du erst den bisherigen Verlauf recherchierst.','Die Recherche kann parallel erfolgen. Eine direkte Übergabe der akuten Aussage und kontinuierliche Begleitung sind entscheidend.']
       ]),
@@ -200,7 +200,7 @@
       ]),
       d('Scheinbare Entlastung','Sie wirkt nach dem Gespräch ruhiger und sagt, sie wolle dich nicht belasten. Eine zuverlässige Beurteilung durch das zuständige Team steht aus.','Wie reagierst du auf die Veränderung?',1,[
         ['Ein weiteres Gesprächsterminangebot machen und bis dahin zur üblichen Betreuung zurückkehren.','Ein späterer Termin ist ergänzend sinnvoll. Die gerade geschilderte akute Gefahr ist noch nicht fachlich beurteilt.'],
-        ['Ruhigere Wirkung als Beobachtung weitergeben und Begleitung bis zur abgestimmten Übernahme aufrechterhalten.','Entlastung im Gespräch sagt allein wenig über die weitere Gefährdung aus.'],
+        ['Beobachtete Beruhigung melden und bis zur geregelten Übernahme begleiten.','Entlastung im Gespräch sagt allein wenig über die weitere Gefährdung aus.'],
         ['Ihre beruhigende Aussage als Zusage dokumentieren und die regelmäßigen Rundgänge fortsetzen.','Eine einzelne Zusage ersetzt die fachliche Risikoeinschätzung und Schutzabstimmung nicht.']
       ]),
       d('Priorisierte Übergabe','Die verantwortliche Fachperson kommt hinzu. Frau L. ist weiterhin im Gespräch mit dir.','Welche Übergabe ist jetzt nötig?',2,[
@@ -283,14 +283,14 @@
         ['Zunächst alle Werte für das vollständige Screening zusammentragen und dann den Diensthabenden informieren.','Ein Score kann helfen. Die auffällige Kombination reicht bereits, um Hilfe auszulösen.']
       ]),
       d('Parallel handeln','Das Notfallteam ist informiert. Zwei Pflegepersonen sind verfügbar.','Welche Aufteilung passt zur Situation?',0,[
-        ['Bei ihm bleiben und Vitalfunktionen erneut beurteilen, während die zweite Person Material und relevante Daten organisiert.','Die Entwicklung bleibt sichtbar, und die Übernahme wird parallel vorbereitet.'],
+        ['Eine Person prüft seine Vitalfunktionen, die andere bereitet die Übernahme vor.','Die Entwicklung bleibt sichtbar, und die Übernahme wird parallel vorbereitet.'],
         ['Eine Person beendet die Dokumentation, die zweite überprüft zunächst das letzte Antibiotikum.','Beide Aufgaben helfen später. Die kontinuierliche Beobachtung bei Kreislaufzeichen fehlt.'],
         ['Vorrangig zusammen den Umfang der Flüssigkeitsbilanz der letzten Tage zusammentragen.','Die Bilanz kann einen Beitrag leisten. Atmung, Kreislauf und Bewusstsein gehen aktuell vor.']
       ]),
       d('SBAR einsetzen','Du telefonierst mit der zuständigen Ärztin, die vor ihrem Eintreffen eine kurze Einschätzung braucht.','Welche Meldung erklärt den Handlungsbedarf am besten?',2,[
         ['„Er hat einen Infekt, ist heute unruhig und die Temperatur war normal.“','Die akute Atem- und Kreislaufveränderung fehlt und könnte in der Dringlichkeit unterschätzt werden.'],
-        ['„Verdacht auf Sepsis, die Medikation können wir später besprechen.“','Der Verdacht allein enthält keine beobachteten Fakten und keine klare Bitte.'],
-        ['„Bei bekanntem Infekt sind Atmung und Wachheit neu verändert, der Blutdruck fiel. Bitte sofort vor Ort beurteilen.“','Die Aussage verknüpft Verlauf, Befunde und eine klare Anforderung.']
+        ['„Ich vermute eine Sepsis. Soll ich schon etwas vorbereiten? Die Akte und die Medikamentenliste liegen bereit.“','Der Verdacht allein enthält keine beobachteten Fakten und keine klare Bitte.'],
+        ['„Infekt, neue Verwirrtheit, schnelle Atmung und Blutdruckabfall. Bitte sofort kommen.“','Die Aussage verknüpft Verlauf, Befunde und eine klare Anforderung.']
       ]),
       d('Therapie begleiten','Das Team plant Diagnostik und verordnet Maßnahmen. Die Liste der Unverträglichkeiten ist in der Kurve verfügbar.','Welche pflegerische Unterstützung ist jetzt am besten?',1,[
         ['Die verordnete Behandlung nach Abschluss aller Pflegeaufgaben vorbereiten und Vitalwerte danach dokumentieren.','Das gewöhnliche Arbeitsschema kann die zeitkritischen Schritte verzögern.'],

@@ -30,45 +30,45 @@
       d('Durchführung beurteilen','Nach dem Einreiben glänzen die Handflächen, Daumen und Fingerkuppen sind trocken. Die Einwirkzeit läuft noch.','Wie korrigierst du die Durchführung?',2,[
         ['Die verbleibende Zeit nutzen und die bereits feuchten Handflächen weiter verreiben.','Mehr Reiben allein stellt die Benetzung trockener Bereiche für die geforderte Zeit nicht sicher.'],
         ['Die Einwirkzeit abwarten und vor der nächsten Aufgabe Handschuhe anziehen.','Die vergangenen Sekunden gleichen unbenetzte Daumen und Fingerkuppen nicht aus.'],
-        ['Mit ausreichender Menge alle Handbereiche für die Einwirkzeit nach Produktangabe benetzen.','Erst wenn alle Bereiche ausreichend und lange genug benetzt sind, ist die Durchführung vollständig.']
+        ['Alle Handbereiche über die vorgeschriebene Einwirkzeit benetzen.','Erst wenn alle Bereiche ausreichend und lange genug benetzt sind, ist die Durchführung vollständig.']
       ]),
       d('Hygiene bei Unterbrechung','Du hast dich für eine aseptische Tätigkeit vorbereitet. Auf dem Weg zum sterilen Material hast du kurz den Rufknopf der Person berührt.','Was ist unmittelbar vor dem sterilen Arbeitsschritt passend?',1,[
         ['Weiterarbeiten, da der Rufknopf zur gleichen Person gehört.','Auch bei derselben Person kann der Wechsel von der Umgebung zu einer aseptischen Tätigkeit Keime übertragen.'],
-        ['Erneut die Hände desinfizieren und die aseptische Vorbereitung fortsetzen.','Die Unterbrechung hat die Händehygiene vor der aseptischen Handlung unterbrochen. Sie wird direkt davor wiederholt.'],
+        ['Hände vor dem aseptischen Schritt erneut desinfizieren.','Die Unterbrechung hat die Händehygiene vor der aseptischen Handlung unterbrochen. Sie wird direkt davor wiederholt.'],
         ['Erst nach dem sterilen Arbeitsschritt nochmals desinfizieren.','Die Desinfektion danach kann eine Kontamination während des Arbeitsschritts nicht verhindern.']
       ])
     ]},
     {title:'Subkutane Injektion sicher vorbereiten', icon:'shot', source:injections, steps:[
       d('Anordnung prüfen','Für Frau N. liegt eine neue Anordnung zur subkutanen Gabe vor. Der Eintrag und das bereitliegende Präparat haben unterschiedliche Konzentrationen.','Welche Entscheidung ist vor der Vorbereitung am besten begründet?',0,[
-        ['Anordnung und verfügbares Präparat mit der zuständigen Fachperson abgleichen.','Bei einem Konzentrationskonflikt muss geklärt sein, welches Präparat mit welcher Dosierung angeordnet ist.'],
+        ['Präparat und Anordnung mit der zuständigen Person abgleichen.','Bei einem Konzentrationskonflikt muss geklärt sein, welches Präparat mit welcher Dosierung angeordnet ist.'],
         ['Das bisher verwendete Präparat mit dem gewohnten Volumen bereitlegen.','Die bisherige Gabe ist als Vergleich nützlich, löst den Konflikt der neuen Anordnung aber nicht.'],
         ['Die aktuelle Dosis anhand der verfügbaren Packung umrechnen und vorbereiten.','Rechnen allein löst die offene Frage nicht, ob das vorliegende Präparat und seine Konzentration freigegeben sind.']
       ]),
       d('Identität abgleichen','Die Verordnung ist eindeutig. Im Zimmer liegen zwei Personen mit ähnlichen Nachnamen. Eine Person bestätigt auf Nachfrage den Nachnamen.','Wie sicherst du die Zuordnung zusätzlich ab?',2,[
         ['Zimmer und Nachnamen gemeinsam mit dem Plan abgleichen.','Zimmer und Bett können wechseln. Ein Namensbestandteil allein ist in diesem Fall nicht eindeutig.'],
         ['Vornamen von einer Kollegin bestätigen lassen und dann vorbereiten.','Die Einschätzung des Teams kann helfen. Der patientenbezogene Abgleich mit verlässlichen Merkmalen fehlt noch.'],
-        ['Die Person möglichst selbst Name und Geburtsdatum nennen lassen und mit der Anordnung abgleichen.','Zwei verlässliche Identitätsmerkmale senken bei ähnlichen Namen das Verwechslungsrisiko. Bei fehlender Auskunft gilt der lokale Identifikationsstandard.']
+        ['Name und Geburtsdatum aktiv erfragen und mit der Anordnung abgleichen.','Zwei verlässliche Identitätsmerkmale senken bei ähnlichen Namen das Verwechslungsrisiko. Bei fehlender Auskunft gilt der lokale Identifikationsstandard.']
       ]),
       d('Haut und Plan','Die im Rotationsplan aktuell vorgesehene Stelle ist druckempfindlich und deutlich verhärtet. Die Person hat keine weiteren Beschwerden.','Wie entscheidest du über die Einstichstelle?',1,[
         ['Die vorgesehene Stelle verwenden und den Befund anschließend dokumentieren.','Der Rotationsplan ist eine Orientierung. Der aktuelle Hautbefund muss vor der Gabe einbezogen werden.'],
-        ['Die auffällige Stelle aussparen und eine geeignete Stelle nach Präparat und Rotationsplan festlegen.','Die Wahl bezieht Hautzustand und die Vorgaben zum Medikament ein. Die Abweichung lässt sich nachvollziehbar dokumentieren.'],
+        ['Nach Präparat und Plan eine geeignete, unauffällige Stelle wählen.','Die Wahl bezieht Hautzustand und die Vorgaben zum Medikament ein. Die Abweichung lässt sich nachvollziehbar dokumentieren.'],
         ['Eine neue Körperregion unabhängig von den Präparatvorgaben auswählen und notieren.','Ausweichen ist nachvollziehbar. Die Eignung der Region hängt auch vom Präparat und der individuellen Planung ab.']
       ]),
       d('Aseptik nach Zwischenfall','Nach der Hautantiseptik wird die vorbereitete Stelle mit einem nicht sterilen Finger erneut ertastet. Das Präparat und das sterile Material sind unberührt.','Welcher Teil der Vorbereitung muss wiederholt werden?',0,[
-        ['Hautantiseptik an der Stelle wiederholen und die Vorgaben zu Einwirkzeit und Trocknung einhalten.','Das erneute Berühren betrifft die vorbereitete Haut. Diese Stelle muss erneut korrekt vorbereitet werden.'],
+        ['Die Hautantiseptik nach Vorgabe wiederholen und abtrocknen lassen.','Das erneute Berühren betrifft die vorbereitete Haut. Diese Stelle muss erneut korrekt vorbereitet werden.'],
         ['Sterile Injektionsmaterialien austauschen und die vorbereitete Haut unverändert lassen.','Ein Materialwechsel behebt die Berührung der desinfizierten Haut nicht.'],
         ['Handschuhe wechseln und die bereits begonnene Einwirkzeit zu Ende abwarten.','Die Haut ist durch die Berührung erneut potenziell kontaminiert. Das Abwarten ersetzt keine neue Hautantiseptik.']
       ]),
       d('Einwilligung und Übergabe','Die Person bittet kurz vor der Gabe um eine Pause. Das Präparat ist zeitgebunden. Die Person möchte den Grund für die Gabe besser verstehen.','Wie gehst du mit dem offenen Zeitpunkt um?',2,[
         ['Die Gabe auf die nächste reguläre Runde verschieben und die Zeit später nachtragen.','Eine Pause ist möglich. Bei einer zeitgebundenen Anordnung muss der verschobene Zeitpunkt abgestimmt werden.'],
         ['Die übliche Gabe erklären und die Anordnung als Grund für den aktuellen Zeitpunkt nennen.','Eine verständliche Erklärung ist sinnvoll. Die Entscheidung der Person und der Umgang mit der Verzögerung bleiben offen.'],
-        ['Pausenwunsch respektieren, verständlich erklären und den Zeitpunkt mit der zuständigen Fachperson klären.','Damit bleiben Selbstbestimmung und die Sicherheit der zeitgebundenen Behandlung gleichermaßen berücksichtigt.']
+        ['Pause einlegen, die Gabe erklären und den Zeitpunkt fachlich abstimmen.','Damit bleiben Selbstbestimmung und die Sicherheit der zeitgebundenen Behandlung gleichermaßen berücksichtigt.']
       ])
     ]},
     {title:'Transfer vom Bett in den Rollstuhl', icon:'chair', source:['BGW · Menschen bewegen in der Pflege','https://www.bgw-online.de/bgw-online-de/themen/gesund-im-betrieb/gesunder-ruecken/menschen-bewegen-94496'], steps:[
       d('Tagesform erfassen','Frau T. konnte gestern mit einer Pflegeperson stehen. Heute ist sie müde und sagt, ihr linkes Knie gebe nach. Der Rollstuhl steht bereit.','Worauf stützt du die Entscheidung zum geplanten Transfer?',1,[
         ['Den Transfer wie gestern vorbereiten und auf Veränderungen beim Aufstehen achten.','Der Plan vom Vortag ist hilfreich, berücksichtigt aber das neu gemeldete Nachgeben vor der Belastung nicht.'],
-        ['Aktuelle Belastbarkeit und Freigaben prüfen und Hilfe oder Hilfsmittel passend neu festlegen.','Fähigkeiten und Risiken können sich von Tag zu Tag verändern. Das neue Symptom beeinflusst die Wahl der Technik.'],
+        ['Belastbarkeit und Freigaben prüfen, dann die Transferhilfe neu wählen.','Fähigkeiten und Risiken können sich von Tag zu Tag verändern. Das neue Symptom beeinflusst die Wahl der Technik.'],
         ['Eine zweite Person dazuholen und den bisherigen Transfer unverändert wiederholen.','Mehr Personal kann nützlich sein. Die Eignung der Technik muss bei verändertem Zustand zuerst beurteilt werden.']
       ]),
       d('Umgebung vorbereiten','Der Transfer im Stand wurde als geeignet eingeschätzt. Der Rollstuhl ist gebremst, die Fußstützen ragen aber in den geplanten Weg.','Was änderst du, bevor Frau T. aufsteht?',2,[
@@ -96,7 +96,7 @@
       d('Wechsel vorbereiten','Bei einer chronischen Wunde ist der Verbandwechsel geplant. Der Materialwagen wurde bereits genutzt. Ein Teil des benötigten Materials liegt noch im Flur.','Was organisierst du vor dem Freilegen der Wunde?',2,[
         ['Den alten Verband abnehmen, die Wunde ansehen und danach Material gezielt holen.','Die Beobachtung ist sinnvoll. Ein vermeidbarer Materialwechsel während offener Wundversorgung erschwert den aseptischen Ablauf.'],
         ['Sterile Packungen auf den Wagen legen und die Arbeitsfläche später vorbereiten.','Sterile Packungen allein machen die benutzte Arbeitsfläche nicht zur geeigneten Ablage.'],
-        ['Saubere Arbeitsfläche und vollständiges passendes Material vorbereiten sowie den Plan prüfen.','So lassen sich unreine und aseptische Arbeitsschritte trennen und Unterbrechungen vermeiden.']
+        ['Versorgungsplan prüfen und saubere Ablage mit Material vorbereiten.','So lassen sich unreine und aseptische Arbeitsschritte trennen und Unterbrechungen vermeiden.']
       ]),
       d('Übergang nach Altverband','Der Altverband wurde mit unsterilen Einmalhandschuhen entfernt. Jetzt sollen Wunde und sterile Materialien berührungsarm versorgt werden.','Welche nächste Handlung wahrt die aseptische Trennung?',1,[
         ['Mit den benutzten Handschuhen das Material öffnen und erst vor Wundkontakt wechseln.','Beim Öffnen könnte der saubere Arbeitsbereich bereits verunreinigt werden.'],
@@ -111,7 +111,7 @@
       d('Veränderung einordnen','Die Wunde war zuletzt reizarm. Heute beobachtest du mehr Exsudat, zunehmende Rötung und neu stärkere Schmerzen. Die Person ist ansprechbar und kreislaufstabil.','Wie gehst du mit der Veränderung um?',2,[
         ['Den Wechsel nach Plan durchführen und für die nächste Visite einen Vermerk machen.','Der Vergleich ist hilfreich. Die Kombination neu auftretender Zeichen braucht eine zeitnahe fachliche Einschätzung.'],
         ['Die erhöhte Exsudatmenge zum Anlass nehmen, selbst eine neue Wundauflage auszuwählen.','Eine andere Auflage kann später sinnvoll sein. Zuerst geht es um die Ursache der Veränderung und die abgestimmte Entscheidung.'],
-        ['Befund und Verlauf erfassen, fachlich weitergeben und über die weitere Versorgung Rücksprache halten.','Mehrere neue Zeichen zusammen wiegen mehr als ein Einzelbefund. Die Versorgung wird an die neue Beurteilung angepasst.']
+        ['Veränderungen erfassen, zeitnah melden und die Versorgung abstimmen.','Mehrere neue Zeichen zusammen wiegen mehr als ein Einzelbefund. Die Versorgung wird an die neue Beurteilung angepasst.']
       ]),
       d('Verlauf nachvollziehbar halten','Die Fachperson hat den Befund beurteilt. Der Wechsel erfolgte nach abgestimmtem Plan. Beim Wechsel meldete die Person Schmerz, der danach nachließ.','Welche Dokumentation hilft der nächsten Schicht?',1,[
         ['Wundgröße und Produkt dokumentieren, da sich der Schmerz nach dem Wechsel beruhigt hat.','Größe und Produkt sind nützlich. Der neue Befund, die Schmerzreaktion und die Rücksprache fehlen.'],
@@ -149,7 +149,7 @@
     {title:'Mundpflege bei eingeschränkter Schluckfähigkeit', icon:'mouth', source:oral, steps:[
       d('Mundpflege vorbereiten','Frau K. hat nach einem Schlaganfall eine Schluckstörung. Im Plan steht unterstützte Mundpflege ohne Spülen. Heute ist sie deutlich schläfriger als gestern.','Was klärst du, bevor du beginnst?',1,[
         ['Den vorhandenen Mundpflegeplan übernehmen und die Mundpflege im vorgesehenen Ablauf starten.','Der Plan bleibt wichtig. Die veränderte Wachheit kann die Sicherheit heute verändern.'],
-        ['Wachheit, Zustimmung und eine sichere Position jetzt prüfen und den aktuellen Zustand mit dem Plan abgleichen.','Der bisherige Plan ersetzt die Einschätzung der aktuellen Situation nicht. Neu aufgetretene Schläfrigkeit wird weitergegeben.'],
+        ['Wachheit, Zustimmung und sichere Position prüfen und mit dem Plan abgleichen.','Der bisherige Plan ersetzt die Einschätzung der aktuellen Situation nicht. Neu aufgetretene Schläfrigkeit wird weitergegeben.'],
         ['Die Anzahl der benötigten Mundpflegematerialien prüfen und eine Kollegin zur Unterstützung einplanen.','Vorbereitung und Hilfe können nützlich sein. Die entscheidende Frage ist aktuell, ob die Person sicher teilnehmen kann.']
       ]),
       d('Individuell unterstützen','Später ist Frau K. wieder ausreichend wach. Sie kann ihre Zahnbürste halten und vorne selbst putzen. Beim Ausspucken braucht sie Unterstützung. Der Plan sieht keine Spülflüssigkeit vor.','Wie nutzt du ihre Fähigkeiten sicher?',2,[
@@ -169,7 +169,7 @@
       ]),
       d('Übergabe','Eine Kollegin übernimmt abends. Frau K. konnte nach Anpassung selbst vorn putzen. Im Verlauf gab es Husten und eine feuchte Stimme bei einem früheren Versuch.','Welche Übergabe unterstützt die sichere nächste Mundpflege?',1,[
         ['Die gelungene Teilselbstständigkeit und die verwendete Bürste nennen.','Die Ressourcen sind wichtig. Das frühere Warnzeichen und die abgestimmte Unterstützung fehlen.'],
-        ['Wachheit, Eigenanteil, Warnzeichen und die abgestimmte Art der Unterstützung konkret übergeben.','Die nächste Person kann Veränderungen erkennen und auf die sichere, individuelle Vorgehensweise zurückgreifen.'],
+        ['Wachheit, Eigenanteil, Warnzeichen und vereinbarte Hilfe übergeben.','Die nächste Person kann Veränderungen erkennen und auf die sichere, individuelle Vorgehensweise zurückgreifen.'],
         ['Die Diagnose Dysphagie und die ursprüngliche Planung zusammenfassen.','Die Diagnose erklärt das Risiko. Sie enthält weder den heutigen Verlauf noch die hilfreichen Anpassungen.']
       ])
     ]},
@@ -203,13 +203,13 @@
     {title:'Medikamentengabe und Rückfrage', icon:'med', source:medication, steps:[
       d('Widerspruch vor Gabe','Im Entlassbrief wurde ein Medikament reduziert. In der aktuellen Kurve steht unverändert die alte Menge. Die nächste Gabe ist fällig.','Wie gehst du mit dem widersprüchlichen Eintrag um?',1,[
         ['Die Menge aus dem Entlassbrief wählen, weil der Brief den jüngsten Zeitstempel hat.','Der Zeitpunkt hilft bei der Rekonstruktion. Eine verbindlich geklärte Anordnung für diese Gabe fehlt trotzdem.'],
-        ['Die betreffende Gabe bis zur zeitnahen Klärung zurückstellen und die Abweichung gezielt melden.','So werden Über- und Unterdosierung durch zwei widersprüchliche Einträge vermieden. Die Dringlichkeit der Gabe gehört in die Rückfrage.'],
+        ['Gabe zurückstellen und die widersprüchliche Dosis zeitnah klären.','So werden Über- und Unterdosierung durch zwei widersprüchliche Einträge vermieden. Die Dringlichkeit der Gabe gehört in die Rückfrage.'],
         ['Die Menge aus der Kurve geben und bei der nächsten Übergabe um Aktualisierung bitten.','Die Kurve ist ein wichtiger Bezugspunkt. Der erkennbare Konflikt muss vor der Gabe geklärt werden.']
       ]),
       d('Telefonische Rückfrage','Die zuständige Person beantwortet deine Rückfrage am Telefon. Du hast den Medikamentennamen gut verstanden, die genannte Dosis aber akustisch nicht zweifelsfrei erfasst.','Was sichert die Kommunikation jetzt am besten ab?',2,[
         ['Die Dosis aus der Kurve zur Orientierung nutzen und den Telefonkontakt dokumentieren.','Der vorherige Eintrag kann gerade die fragliche Information enthalten. Die Rückmeldung muss eindeutig sein.'],
         ['Einer Kollegin die vermutlich genannte Dosis weitergeben und nach der üblichen Menge fragen.','Die übliche Menge hilft beim Plausibilitätscheck, kann die konkrete Anordnung aber nicht bestätigen.'],
-        ['Die Aussage nochmals erfragen, vollständig zurücklesen und nach Vorgabe verbindlich festhalten lassen.','Eine Rücklesebestätigung prüft den Informationsweg. Die örtlichen Regeln zur Anordnung und Dokumentation bleiben maßgeblich.']
+        ['Dosis erneut erfragen, Anordnung zurücklesen und verbindlich festhalten.','Eine Rücklesebestätigung prüft den Informationsweg. Die örtlichen Regeln zur Anordnung und Dokumentation bleiben maßgeblich.']
       ]),
       d('Schluckproblem','Nach der Klärung steht eine Tablette mit veränderter Wirkstofffreisetzung zur Gabe an. Die Person berichtet plötzlich, Tabletten nicht mehr sicher schlucken zu können.','Welche nächste Handlung ist sicher?',0,[
         ['Gabe in dieser Form zurückstellen und Eignung einer Alternative ärztlich oder pharmazeutisch klären.','Schluckfähigkeit und Darreichungsform müssen zusammen passen. Für manche Präparate verändert Zerkleinern die Freisetzung.'],
