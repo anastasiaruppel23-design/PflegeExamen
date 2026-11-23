@@ -88,8 +88,8 @@
   if(tab==='wiederholen')renderReviewQueue(c);
   if(tab==='karten')addFlashcardRatings();
   if(tab==='wissensstand')renderDashboard(c);
-  if(tab==='notfallsimulator')renderSimulator(c);
-  if(tab==='praxischallenges')renderChallenges(c);
+  if(tab==='notfallsimulator')renderDecisions(c,'emergency');
+  if(tab==='praxischallenges')renderDecisions(c,'practice');
  };
 
  function byArea(){
@@ -110,7 +110,7 @@
   label.textContent='Offline-Verfügbarkeit wird geprüft …';
   try{
    const registration=await navigator.serviceWorker?.getRegistration();
-   if(!registration?.active || !await caches.match('./learning-upgrade.js?v=11'))throw new Error('App-Cache noch nicht bereit');
+   if(!registration?.active || !await caches.match('./learning-upgrade.js?v=12','./practice-decisions.js','./emergency-decisions.js','./advanced-training.js?v=2'))throw new Error('App-Cache noch nicht bereit');
    label.textContent='Die Lerneinheiten sind auf diesem Gerät offline verfügbar.';
   }catch{label.textContent='Offline-Lernen ist noch nicht bereit. Öffne PflegeFokus erneut mit Internetverbindung.';}
  };
@@ -181,88 +181,114 @@
   const stats=state.upgradeStats||{},due=dueCount(),areas=Object.entries(stats),all=areas.reduce((a,[,s])=>({attempts:a.attempts+s.attempts,correct:a.correct+s.correct}),{attempts:0,correct:0});
   c.innerHTML='<div class="panel"><span class="tag">Wissensstand</span><h2>Was sitzt schon – was braucht Wiederholung?</h2><div class="grid study-section-grid"><div class="card study-section">'+studyMini('plan')+'<strong class="stat">'+all.attempts+'</strong><p>beantwortete Fragen</p></div><div class="card study-section">'+studyMini('chart')+'<strong class="stat">'+(all.attempts?Math.round(all.correct/all.attempts*100):0)+'%</strong><p>selbst als gewusst bewertet</p></div><div class="card study-section">'+studyMini('repeat')+'<strong class="stat">'+due+'</strong><p>heute fällige Wiederholungen</p></div></div><p>„Gewusst“ ist deine Selbsteinschätzung, kein offizielles Prüfungsergebnis. Unsichere Inhalte bleiben sichtbar und kommen zeitnah wieder.</p></div><div class="panel"><h3>Nach Themenbereich</h3>'+(areas.length?'<div class="grid study-section-grid">'+areas.map(([k,s])=>'<article class="card"><strong>'+esc(k)+'</strong><p>'+s.correct+' von '+s.attempts+' als gewusst markiert</p><div class="progress"><div style="width:'+(s.attempts?Math.round(s.correct/s.attempts*100):0)+'%"></div></div></article>').join('')+'</div>':'<p>Nach deinen ersten Quizantworten wird hier dein persönlicher Stand angezeigt.</p>')+'<button class="btn primary" onclick="go(&#39;themenquiz&#39;)">Jetzt gezielt üben</button></div>';
  }
- const scenarios=[
-  {title:'Plötzliche Atemnot im Pflegeheim',setting:'Langzeitpflege',story:'Beim Rundgang sitzt Frau B. 81 Jahre plötzlich nach vorn gebeugt auf der Bettkante. Sie ringt nach Luft, kann nur einzelne Worte sprechen und wirkt ängstlich. Die Haut ist blass. Ein Inhalator liegt auf dem Nachttisch; ob er verordnet und korrekt anzuwenden ist, muss geprüft werden. Eine Pflegehilfskraft möchte sie flach hinlegen. Die aktuelle Atemfrequenz, Sauerstoffsättigung und der übliche Zustand sind noch nicht bekannt.',steps:[
-   {q:'Was ist jetzt der erste sichere Schwerpunkt?',opts:['Bei der Person bleiben, Hilfe organisieren und Atmung/Bewusstsein unmittelbar beurteilen','Sie allein lassen und zuerst die vollständige Akte suchen','Sie gegen ihren Willen flach hinlegen','Ohne Prüfung ein fremdes Medikament geben'],a:0,why:'Akute Atemnot kann lebensbedrohlich sein. Unmittelbare Einschätzung und Alarmierung gehen vor Aktenrecherche; Position und Maßnahmen werden an Zustand und Wunsch angepasst.'},
-   {q:'Welche Information erhebst du als Nächstes zügig?',opts:['Atemfrequenz, Atemarbeit, Bewusstsein, Hautfarbe und verfügbare SpO₂ im Verlauf','Nur die Trinkmenge der letzten Woche','Nur den Pflegegrad','Erst die Körpergröße'],a:0,why:'Atemmuster, Bewusstsein und Kreislaufzeichen helfen, die Dringlichkeit einzuschätzen. Messwerte ergänzen die klinische Beobachtung, ersetzen sie aber nicht.'},
-   {q:'Wie reagierst du auf den Wunsch nach dem Inhalator?',opts:['Verordnung, Identität, Anwendung und individuellen Notfallplan prüfen; geeignete Hilfe nach Kompetenz organisieren','Beliebigen Inhalator verwenden','Alle Medikamente absetzen','Warten, bis die nächste Schicht kommt'],a:0,why:'Medikamente werden nicht beliebig gegeben. Verordnung, Identität, sichere Anwendung und Zuständigkeit prüfen und bei Verschlechterung unverzüglich eskalieren.'}
-  ]},
-  {title:'Akute Verwirrtheit und Fieber auf Station',setting:'Krankenhaus',story:'Herr K. 76 Jahre ist seit zwei Tagen wegen einer Harnwegsinfektion stationär. Am Abend erkennt er den Raum nicht, versucht aufzustehen und sagt, fremde Menschen seien im Zimmer. Die Temperatur ist erhöht; aktuelle Vitalwerte, Schmerz, Flüssigkeitsaufnahme und Medikamentenänderungen sind noch nicht systematisch erhoben. Seine Tochter berichtet, dass er morgens zu Hause noch klar wirkte.',steps:[
-   {q:'Welche Einordnung ist am wichtigsten?',opts:['Neue akute Veränderung ernst nehmen und zeitnah strukturiert beurteilen','Die Verwirrtheit sofort als dauerhafte Demenz festlegen','Nur die Tochter beruhigen und Herrn K. ignorieren','Den nächsten Tag abwarten'],a:0,why:'Ein akuter Beginn kann auf Delir oder eine andere behandelbare Verschlechterung hinweisen. Ursachen und Gefährdungen müssen zeitnah im Team geprüft werden.'},
-   {q:'Was folgt für die Sicherheit und Einschätzung?',opts:['Bei ihm bleiben, Sturzgefahr minimieren, Vitalzeichen und mögliche Ursachen erfassen, Hilfe informieren','Sofort ein Bettgitter ohne Prüfung anordnen','Ihn allein zur Toilette gehen lassen','Flüssigkeit und Medikamente pauschal entziehen'],a:0,why:'Sicherheit, Beobachtung und Ursachenklärung sind nötig. Freiheitsbeschränkende Maßnahmen sind keine automatische Standardlösung.'},
-   {q:'Welche Übergabe hilft dem Team?',opts:['Zeitpunkt des Beginns, Abweichung vom Ausgangszustand, Beobachtungen, Vitalwerte, Medikamente und Maßnahmen strukturiert mitteilen','Nur „war komisch“ sagen','Ausschließlich die Diagnose vermuten','Die Dokumentation erst am Folgetag ergänzen'],a:0,why:'Eine präzise strukturierte Übergabe unterstützt rasche Beurteilung und Kontinuität. Vermutungen als solche kennzeichnen.'}
-  ]}
- ];
- scenarios.push(...window.extraEmergencyCases);
- let sim=0,simStep=0,simFeedback=false,simOutcome=false;
- function sourceLink(source){return source?'<p class="muted"><a href="'+esc(source[1])+'" target="_blank" rel="noopener noreferrer">'+esc(source[0])+'</a></p>':''}
- function renderSimulator(c){
-  const stored=state.activeEmergency;
-  if(stored&&scenarios[stored.caseIndex]?.steps[stored.step]){
-   sim=stored.caseIndex;simStep=stored.step;simFeedback=stored.feedback;simOutcome=stored.outcome;
+ const decisionModes = {
+  emergency: {
+   entries:window.emergencyDecisions, stateKey:'activeEmergency', progress:'Entscheidung',
+   title:'Entscheidungen mit Folgen üben', restart:'Szenario erneut üben',
+   intro:'Wähle die Handlung, die in der aktuellen Lage Vorrang hat. Danach bekommst du Rückmeldung und siehst, wie sich der Fall weiterentwickelt. Für reale Notfälle gelten die örtlichen Alarmwege und Standards.'
+  },
+  practice: {
+   entries:window.practiceDecisions, stateKey:'activePracticeChallenge', progress:'Schritt',
+   title:'Fachgerecht handeln und den Grund verstehen', restart:'Challenge erneut üben',
+   intro:'Bearbeite fünf Entscheidungen pro Thema. Oft sind mehrere Handlungen grundsätzlich sinnvoll. Wähle, welche jetzt zur Situation passt. Praktische Handgriffe übst du zusätzlich mit Anleitung in der Ausbildungseinrichtung.'
   }
-  const s=scenarios[sim], step=s.steps[simStep], chosen=state.simChoices?.[sim+'-'+simStep];
-  const picker='<label for="emergencyCase">Notfallübung auswählen</label><select id="emergencyCase" onchange="upgradeSimSelect(Number(this.value))">'+['Langzeitpflege','Krankenhaus'].map(setting=>'<optgroup label="'+setting+'">'+scenarios.map((x,i)=>x.setting===setting?'<option value="'+i+'" '+(i===sim?'selected':'')+'>'+esc(x.title)+'</option>':'').join('')+'</optgroup>').join('')+'</select>';
-  let body;
-  if(simOutcome){
-   const correct=s.steps.filter((x,i)=>state.simChoices?.[sim+'-'+i]===x.a).length;
-   body='<h3>Auswertung</h3><p>'+correct+' von '+s.steps.length+' priorisierten Entscheidungen gewählt.</p><ol>'+s.steps.map((x,i)=>'<li><strong>'+esc(x.q)+'</strong><p>'+esc(x.opts[x.a])+' · '+esc(x.why)+'</p></li>').join('')+'</ol><button class="btn primary" onclick="upgradeSimSelect('+sim+')">Szenario erneut üben</button>';
-  }else{
-   body='<span class="tag">Entscheidung '+(simStep+1)+' von '+s.steps.length+'</span><h3>'+esc(step.q)+'</h3>'+step.opts.map((o,i)=>'<button class="option '+(simFeedback&&i===chosen?'selected':'')+'" '+(simFeedback?'disabled':'')+' onclick="upgradeSimChoose('+i+')">'+esc(o)+'</button>').join('');
-   if(simFeedback)body+='<div class="learn-box" role="status"><strong>'+(chosen===step.a?'Passende Priorität gewählt':'Deine Entscheidung und ihre mögliche Folge')+'</strong><p>'+esc(step.responses?.[chosen]||step.why)+'</p>'+(chosen!==step.a?'<p><strong>Priorität im Fall:</strong> '+esc(step.opts[step.a])+'</p>':'')+'<button class="btn primary" onclick="upgradeSimNext()">'+(simStep+1<s.steps.length?'Nächste Entscheidung':'Auswertung ansehen')+'</button></div>';
-  }
-  c.innerHTML='<div class="panel"><h2>Entscheidungen mit Folgen üben</h2><p>Wähle deine Handlung und vergleiche ihre mögliche Folge mit der Priorität im Fall. Für reale Notfälle gelten die örtlichen Alarmwege und Standards.</p>'+picker+'<article class="card study-section"><span class="tag">'+esc(s.setting)+' · Fiktiver Fall</span><h3 class="section-title">'+studyMini(studyAreaIcon(s.title))+'<span>'+esc(s.title)+'</span></h3><p>'+esc(s.story)+'</p>'+body+sourceLink(s.source)+'</article></div>';
- }
- function saveSimulator(){
-  state.activeEmergency={caseIndex:sim,step:simStep,feedback:simFeedback,outcome:simOutcome};
-  safeSave();
-  renderSimulator($('#content'));
- }
- window.upgradeSimSelect=i=>{
-  sim=i;simStep=0;simFeedback=false;simOutcome=false;
-  state.simChoices??={};
-  scenarios[i].steps.forEach((_,n)=>delete state.simChoices[i+'-'+n]);
-  saveSimulator();
- };
- window.upgradeSimChoose=i=>{
-  if(simFeedback)return;
-  (state.simChoices??={})[sim+'-'+simStep]=i;
-  simFeedback=true;
-  saveSimulator();
- };
- window.upgradeSimNext=()=>{
-  simFeedback=false;
-  if(simStep+1>=scenarios[sim].steps.length)simOutcome=true;
-  else simStep++;
-  saveSimulator();
  };
 
- const challenges=[
-  {title:'Händehygiene im Pflegealltag',steps:[['Wann ist die hygienische Händedesinfektion erforderlich?',['Vor aseptischen Tätigkeiten und nach relevanten Kontaminationssituationen','Nur am Dienstbeginn','Nur bei sichtbarem Schmutz','Nur nach dem Essen'],0,'Die Indikationen richten sich nach den fünf Momenten und dem lokalen Hygieneplan. Sichtbarer Schmutz erfordert zusätzlich Waschen.'],['Was ist bei der Durchführung entscheidend?',['Ausreichende Menge, vollständige Benetzung und Einwirkzeit nach Produktangabe','Sofort abwischen','Nur die Handflächen benetzen','Handschuhe ersetzen die Desinfektion'],0,'Alle Handbereiche müssen für die vorgeschriebene Zeit benetzt sein. Handschuhe ersetzen Händedesinfektion nicht.']]},
-  {title:'Subkutane Injektion sicher vorbereiten',steps:[['Was klärst du vor der Vorbereitung?',['Identität, Verordnung, Medikament, Dosis, Allergien und Einwilligung','Nur den Dienstplan','Nur die Farbe der Verpackung','Die Dosis nach Gefühl'],0,'Sicherheitsprüfungen und gültige Anordnung sind vor jeder Gabe erforderlich.'],['Was ist bei der Einstichstelle wichtig?',['Geeignete Stelle nach Standard wählen, Haut beurteilen und Rotationsplan beachten','Immer in dieselbe Stelle injizieren','Entzündete Stelle bevorzugen','Ohne Händehygiene arbeiten'],0,'Stellenwahl und Rotation richten sich nach Präparat, Körperstelle, Hautzustand und lokalem Standard.']]},
-  {title:'Transfer vom Bett in den Rollstuhl',steps:[['Was planst du zuerst?', ['Wunsch, Fähigkeiten, Schmerzen, Hilfsmittel und erforderliche Unterstützung einschätzen','Sofort an den Armen ziehen','Hilfsmittel grundsätzlich weglassen','Transfer ohne Erklärung beginnen'],0,'Vor dem Transfer werden Ressourcen, Risiken, Einwilligung und geeignete Hilfsmittel geklärt.'],['Welche Ausführung unterstützt Sicherheit?', ['Bremse und Umgebung prüfen, verständlich anleiten und Bewegung passend begleiten','Rollstuhl ungebremst lassen','Person unbeaufsichtigt aufstehen lassen','Bei Schmerz weitermachen'],0,'Sichere Umgebung, klare Kommunikation und Beobachtung der Belastbarkeit sind wesentlich.']]},
-  {title:'Sterile Wundversorgung',steps:[['Was ist vor dem sterilen Arbeiten zentral?', ['Indikation, Material, Hygieneplan und benötigte sterile Arbeitsweise klären','Sterile Materialien auf beliebiger Fläche ablegen','Handschuhe als Ersatz für Händedesinfektion sehen','Wunde ohne Erklärung freilegen'],0,'Vorbereitung, Händehygiene, aseptisches Arbeiten und Wahrung der Intimsphäre gehören zusammen.'],['Was dokumentierst du?', ['Wundbeobachtung, Maßnahme, Verträglichkeit und relevante Veränderungen','Nur „gemacht“','Keine Veränderungen','Nur die verwendete Handschuhgröße'],0,'Dokumentiert werden Befund, Durchführung, Wirkung und notwendige Weitergabe.']]},
-  {title:'Vitalzeichen und Verschlechterung',steps:[['Ein Wert weicht stark vom bisherigen Zustand ab. Was tust du?', ['Messung/Technik prüfen, Person klinisch beurteilen und nach Dringlichkeit eskalieren','Wert löschen','Nur den Durchschnitt der Station vergleichen','Bis zum nächsten Tag warten'],0,'Ein auffälliger Messwert wird im klinischen Kontext geprüft; bei Warnzeichen wird sofort Hilfe organisiert.']]},
-  {title:'Mundpflege bei eingeschränkter Schluckfähigkeit',steps:[['Was ist vor der Mundpflege zu beachten?', ['Wachheit, Schluckrisiko, Lagerung, Wünsche und individuellen Plan beachten','Flüssigkeit zügig einflößen','Person flach lagern','Mundpflege bei Widerstand erzwingen'],0,'Aspirationsrisiko, Einwilligung und sichere Position müssen berücksichtigt werden.']]},
-  {title:'Schutzkleidung im Isolationszimmer',steps:[['Woran orientierst du die Auswahl?', ['Übertragungsweg, Erreger, Tätigkeit und lokalen Hygieneplan','An der Farbe der Tür','Immer dieselbe Schutzkleidung für alle Situationen','Nur am Wunsch der Besuchenden'],0,'Schutzmaßnahmen richten sich nach Erreger, Tätigkeit und betrieblichem Hygieneplan.']]},
-  {title:'Medikamentengabe und Rückfrage',steps:[['Die Verordnung ist unklar. Wie handelst du?', ['Gabe zurückstellen, Rückfrage bei zuständiger Stelle und Klärung dokumentieren','Dosis selbst schätzen','Kolleginnen nach Vermutung fragen und geben','Medikament austauschen'],0,'Unklare Anordnungen werden vor der Gabe geklärt; keine eigenmächtige Dosisänderung.']]}
- ];
- let ch=0,chStep=0,chFeedback=false;
- function saveChallenge(){
-  state.activePracticeChallenge={index:ch,step:chStep,feedback:chFeedback};
-  safeSave();renderChallenges($('#content'));
+ function decisionRun(key) {
+  const mode=decisionModes[key], saved=state[mode.stateKey];
+  const priorIndex=saved?.caseIndex ?? saved?.index;
+  const caseIndex=Number.isInteger(priorIndex) && mode.entries[priorIndex] ? priorIndex : 0;
+  if(saved?.version===2 && saved.caseIndex===caseIndex && Array.isArray(saved.choices) && Number.isInteger(saved.step)
+    && saved.step>=0 && saved.step<=mode.entries[caseIndex].steps.length) return saved;
+  // Old answer indices refer to different questions. Keep the selected topic and start its new sequence.
+  return {version:2,caseIndex,step:0,choices:[]};
  }
- function renderChallenges(c){
-  const active=state.activePracticeChallenge;
-  if(active&&challenges[active.index]?.steps[active.step]){
-   ch=active.index;chStep=active.step;chFeedback=active.feedback;
-  }else {ch=0;chStep=0;chFeedback=false;}
-  const x=challenges[ch],s=x.steps[chStep];
-  c.innerHTML='<div class="panel"><span class="tag">Praxis-Challenges · Schritt für Schritt</span><h2>Fachgerecht handeln und den Grund verstehen</h2><p>Jede Challenge erklärt nach deiner Wahl den fachlichen Grund und mögliche Risiken. Praktische Handgriffe müssen zusätzlich in der Ausbildungseinrichtung angeleitet und geübt werden.</p><div class="grid challenge-grid">'+challenges.map((z,i)=>'<button class="card challenge-tile" aria-pressed="'+(i===ch)+'" onclick="upgradeChallengeSelect('+i+')">'+studyMini(['hands','shot','chair','wound','pulse','mouth','shield','med'][i],'mini-large')+'<span>'+esc(z.title)+'</span>'+(i===ch?'<small>Ausgewählt</small>':'')+'</button>').join('')+'</div><div class="card challenge-active" id="activeChallenge" tabindex="-1"><h3>'+esc(x.title)+'</h3><p>Schritt '+(chStep+1)+' von '+x.steps.length+'</p><h3>'+esc(s[0])+'</h3>'+s[1].map((o,i)=>'<button class="option" '+(chFeedback?'disabled':'')+' onclick="upgradeChallengeChoose('+i+')">'+esc(o)+'</button>').join('')+(chFeedback?'<p class="'+(state.challengeResults[ch+'-'+chStep]?'good':'bad')+'">'+esc(s[3])+'</p><button class="btn primary" onclick="upgradeChallengeNext()">Nächster Schritt</button>':'')+'</div>';
+
+ function decisionPicker(key, selected) {
+  const entries=decisionModes[key].entries;
+  if(key==='emergency'){
+   return `<label for="emergencyCase">Notfallübung auswählen</label><select id="emergencyCase" onchange="upgradeDecisionSelect('emergency',Number(this.value))">
+     ${['Langzeitpflege','Krankenhaus'].map(setting=>`<optgroup label="${setting}">${entries.map((entry,index)=>
+       entry.setting===setting?`<option value="${index}" ${index===selected?'selected':''}>${esc(entry.title)}</option>`:'').join('')}</optgroup>`).join('')}
+     </select>`;
+  }
+  return `<div class="grid challenge-grid">${entries.map((entry,index)=>`<button type="button" class="card challenge-tile"
+    aria-pressed="${index===selected}" onclick="upgradeDecisionSelect('practice',${index})">
+    ${studyMini(entry.icon,'mini-large')}<span>${esc(entry.title)}</span><small>${entry.steps.length} Entscheidungen</small>
+    </button>`).join('')}</div>`;
  }
- window.upgradeChallengeSelect=i=>{ch=i;chStep=0;chFeedback=false;saveChallenge();const active=$('#activeChallenge');active.focus({preventScroll:true});active.scrollIntoView({block:'start'})};
- window.upgradeChallengeChoose=i=>{if(chFeedback)return;state.challengeResults[ch+'-'+chStep]=i===challenges[ch].steps[chStep][2];chFeedback=true;saveChallenge()};
- window.upgradeChallengeNext=()=>{chStep++;if(chStep>=challenges[ch].steps.length){chStep=0;ch=(ch+1)%challenges.length}chFeedback=false;saveChallenge()};
+
+ function decisionOutcome(entry, run, key, mode) {
+  const correct=entry.steps.filter((question,index)=>run.choices[index]===question.a).length;
+  return `<h3 id="decisionQuestion" tabindex="-1">Auswertung</h3>
+    <p>${correct} von ${entry.steps.length} Entscheidungen passend priorisiert.</p>
+    <ol class="decision-summary">${entry.steps.map((question,index)=>`<li>
+      <strong>${esc(question.phase)}</strong>
+      <p>${run.choices[index]===question.a?'Passend priorisiert.':'Deine Wahl: '+esc(question.opts[run.choices[index]] || 'Keine Antwort.')}</p>
+      <p><strong>Priorität:</strong> ${esc(question.opts[question.a])}</p><p>${esc(question.why)}</p></li>`).join('')}</ol>
+    <button type="button" class="btn primary" onclick="upgradeDecisionSelect('${key}',${run.caseIndex})">${mode.restart}</button>`;
+ }
+
+ function decisionStep(entry, run, key, mode) {
+  const step=entry.steps[run.step], choice=run.choices[run.step];
+  const checked=Number.isInteger(choice) && Boolean(step.opts[choice]), correct=choice===step.a;
+  return `<div class="decision-stage">
+    <span class="tag">${mode.progress} ${run.step+1} von ${entry.steps.length}</span>
+    <span class="decision-phase">${esc(step.phase)}</span>
+    <p class="decision-scene">${esc(step.scene)}</p>
+    <h3 id="decisionQuestion" tabindex="-1">${esc(step.q)}</h3>
+    <div class="decision-options">${step.opts.map((option,index)=>`<button type="button"
+      class="option${checked&&index===choice?' selected':''}" ${checked?'disabled':''}
+      onclick="upgradeDecisionChoose('${key}',${index})">${esc(option)}</button>`).join('')}</div>
+    ${checked?`<div class="learn-box decision-feedback" id="decisionFeedback" tabindex="-1" role="status">
+      <strong>${correct?'Passende Priorität gewählt':'Deine Wahl im Fall'}</strong><p>${esc(step.responses[choice])}</p>
+      ${correct?'':`<p><strong>Priorität:</strong> ${esc(step.opts[step.a])}</p><p>${esc(step.why)}</p>`}
+      <details><summary>Alle Optionen vergleichen</summary><ul>${step.opts.map((option,index)=>`<li>
+        <strong>${esc(option)}</strong><p>${esc(step.responses[index])}</p></li>`).join('')}</ul></details>
+      <button type="button" class="btn primary" onclick="upgradeDecisionNext('${key}')">
+      ${run.step+1<entry.steps.length?(key==='practice'?'Nächster Schritt':'Nächste Entscheidung'):'Auswertung ansehen'}</button>
+    </div>`:''}
+    </div>`;
+ }
+
+ function renderDecisions(c,key){
+  const mode=decisionModes[key], run=decisionRun(key), entry=mode.entries[run.caseIndex];
+  const titleId=key==='practice'?'activeChallenge':'activeEmergency';
+  c.innerHTML=`<div class="panel"><h2>${mode.title}</h2><p>${mode.intro}</p>${decisionPicker(key,run.caseIndex)}
+    <article class="card challenge-active decision-active" id="${titleId}" aria-labelledby="decisionTitle">
+    ${entry.setting?`<span class="tag">${esc(entry.setting)} · Fiktiver Fall</span>`:''}
+    <h3 id="decisionTitle" class="section-title">${entry.setting?studyMini(studyAreaIcon(entry.title)):''}<span>${esc(entry.title)}</span></h3>
+    ${entry.story?`<p>${esc(entry.story)}</p>`:''}
+    ${run.step===entry.steps.length?decisionOutcome(entry,run,key,mode):decisionStep(entry,run,key,mode)}
+    <p class="muted"><a href="${esc(entry.source[1])}" target="_blank" rel="noopener noreferrer">${esc(entry.source[0])}</a></p>
+    </article></div>`;
+ }
+
+ function saveDecisions(key,run,focus) {
+  state[decisionModes[key].stateKey]=run;
+  safeSave();
+  renderDecisions($('#content'),key);
+  const target=$(focus);
+  target?.focus({preventScroll:true});
+  target?.scrollIntoView({block:'start'});
+ }
+
+ window.upgradeDecisionSelect=(key,index)=>{
+  if(!decisionModes[key]?.entries[index]) return;
+  saveDecisions(key,{version:2,caseIndex:index,step:0,choices:[]},'#decisionQuestion');
+ };
+ window.upgradeDecisionChoose=(key,index)=>{
+  const run=decisionRun(key), step=decisionModes[key].entries[run.caseIndex].steps[run.step];
+  if(!step?.opts[index] || Number.isInteger(run.choices[run.step])) return;
+  const choices=[...run.choices];
+  choices[run.step]=index;
+  saveDecisions(key,{...run,choices},'#decisionFeedback');
+ };
+ window.upgradeDecisionNext=key=>{
+  const run=decisionRun(key), total=decisionModes[key].entries[run.caseIndex].steps.length;
+  if(run.step>=total || !Number.isInteger(run.choices[run.step])) return;
+  saveDecisions(key,{...run,step:run.step+1},'#decisionQuestion');
+ };
 
  // Prüfungsformate: schriftlich ausführliche Fälle und Operatoren; mündlich komplexe Fälle.
  // Praktisches Training wird vom gemeinsamen Prüfungsmodul gerendert.

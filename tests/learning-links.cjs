@@ -38,10 +38,30 @@ const missingAnatomy = Array.from(run('Object.values(anatomyDepth).flatMap(modul
 assert.deepEqual(missingAnatomy, []);
 vm.runInContext(library.slice(library.indexOf("function relatedTopics("), library.indexOf("function openLibraryTopic(")), context);
 assert.ok(run('topics.every((_, i) => relatedTopics(i).length && relatedTopics(i).every(n => n !== i && topics[n]))'));
+for(const file of ['practice-decisions.js','emergency-decisions.js','advanced-training.js']) run(read(file));
+assert.equal(context.practiceDecisions.length,8);
+assert.equal(context.emergencyDecisions.length,11);
+const decisions=[...context.practiceDecisions,...context.emergencyDecisions];
+const questionText = new Set();
+for(const entry of decisions) {
+ assert.ok(entry.source[0] && new URL(entry.source[1]).protocol === 'https:');
+ assert.equal(entry.steps.length,5,entry.title);
+ assert.equal(new Set(entry.steps.map(step=>step.a)).size,3,entry.title);
+ for(const step of entry.steps) {
+  assert.ok(step.scene && step.phase && step.q && !questionText.has(step.q+' '+step.scene),entry.title);
+  questionText.add(step.q+' '+step.scene);
+  assert.equal(step.opts.length,3,step.q);
+  assert.equal(new Set(step.opts).size,3,step.q);
+  assert.equal(step.responses.length,3,step.q);
+  assert.ok(step.opts[step.a] && step.responses.every(Boolean) && step.why === step.responses[step.a],step.q);
+ }
+}
+assert.equal(questionText.size,95);
+assert.equal(context.advancedQuizQuestions.filter(entry=>entry.id.startsWith('advanced-emergency-')).length,9);
 const assets=read('sw.js').match(/const ASSETS\s*=\s*(\[[^;]+\])/)[1];
 const cached=vm.runInNewContext(assets);
 for(const [,source,file] of html.matchAll(/(?:src|href)="((\.\/[^"?]+)(?:\?[^"]*)?)"/g)){
  assert.ok(fs.existsSync(path.join(root,file)),file);
  if(/\.(js|css)$/.test(file))assert.ok(cached.includes(source),`Missing from offline cache: ${source}`);
 }
-console.log(`PASS: ${cardCount} card links, ${topicCount} topics, quiz answers, source links, glossary matching and offline script assets`);
+console.log(`PASS: ${cardCount} card links, ${topicCount} topics, 95 situated practice decisions, source links, glossary matching and offline script assets`);

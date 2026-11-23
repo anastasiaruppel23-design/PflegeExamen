@@ -403,8 +403,25 @@ async function checkTrainingRefresh(page) {
 
   await page.evaluate(() => go('praxischallenges'));
   assert.equal(await page.locator('.challenge-tile svg').count(), 8);
-  await page.getByRole('button', {name: 'Transfer vom Bett in den Rollstuhl', exact: true}).click();
-  assert.match(await page.locator('#activeChallenge').innerText(), /Transfer vom Bett in den Rollstuhl/);
+  await page.getByRole('button', {name: /Transfer vom Bett in den Rollstuhl/}).click();
+  const challenge = page.locator('#activeChallenge');
+  assert.match(await challenge.innerText(), /Transfer vom Bett in den Rollstuhl/);
+  await page.getByRole('button', {name: /Mundpflege bei eingeschränkter Schluckfähigkeit/}).click();
+  await challenge.getByText('Schritt 1 von 5').waitFor();
+  await challenge.getByRole('button', {name: /Den vorhandenen Mundpflegeplan übernehmen/}).click();
+  await challenge.getByText(/Die veränderte Wachheit kann die Sicherheit/).waitFor();
+  await challenge.getByText('Alle Optionen vergleichen', {exact:true}).click();
+  assert.equal(await challenge.locator('#decisionFeedback li').count(),3);
+  await challenge.getByRole('button', {name:'Nächster Schritt'}).click();
+  await page.reload();
+  await challenge.getByText('Schritt 2 von 5').waitFor();
+  for (let step = 2; step <= 5; step++) {
+    await challenge.getByText(`Schritt ${step} von 5`).waitFor();
+    await challenge.locator('.decision-options button').first().click();
+    await challenge.getByRole('button', {name:step === 5 ? 'Auswertung ansehen' : 'Nächster Schritt'}).click();
+  }
+  await challenge.getByRole('heading', {name:'Auswertung'}).waitFor();
+  assert.equal(await challenge.locator('.decision-summary li').count(),5);
 
   await page.evaluate(() => go('schriftlich'));
   await page.locator('[data-case]').first().click();
@@ -437,8 +454,18 @@ async function checkTrainingRefresh(page) {
 
   await page.evaluate(() => go('notfallsimulator'));
   await page.locator('#emergencyCase').selectOption({label: 'Plötzliche Sprachstörung beim Frühstück'});
+  const emergency = page.locator('#activeEmergency');
+  await emergency.getByText('Entscheidung 1 von 5').waitFor();
   await page.getByRole('button', {name: /Erst den Blutzucker messen/}).click();
-  assert.match(await page.locator('.learn-box').innerText(), /verzögert sich/);
+  assert.match(await emergency.locator('#decisionFeedback').innerText(), /verzögert sich/);
+  for (let step = 2; step <= 5; step++) {
+    await emergency.getByRole('button', {name:'Nächste Entscheidung'}).click();
+    await emergency.getByText(`Entscheidung ${step} von 5`).waitFor();
+    await emergency.locator('.decision-options button').first().click();
+  }
+  await emergency.getByRole('button', {name:'Auswertung ansehen'}).click();
+  await emergency.getByRole('heading', {name:'Auswertung'}).waitFor();
+  assert.equal(await emergency.locator('.decision-summary li').count(),5);
 
   await page.evaluate(() => go('themenquiz'));
   await page.getByRole('button', {name: 'Prüfungstraining', exact: true}).click();
