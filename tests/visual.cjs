@@ -409,7 +409,7 @@ async function checkTrainingRefresh(page) {
   await page.getByRole('button', {name: /Mundpflege bei eingeschränkter Schluckfähigkeit/}).click();
   await challenge.getByText('Schritt 1 von 5').waitFor();
   await challenge.getByRole('button', {name: /Den vorhandenen Mundpflegeplan übernehmen/}).click();
-  await challenge.getByText(/Die veränderte Wachheit kann die Sicherheit/).waitFor();
+  await challenge.locator('#decisionFeedback > p').filter({hasText: /Die veränderte Wachheit kann die Sicherheit/}).waitFor();
   await challenge.getByText('Alle Optionen vergleichen', {exact:true}).click();
   assert.equal(await challenge.locator('#decisionFeedback li').count(),3);
   await challenge.getByRole('button', {name:'Nächster Schritt'}).click();
