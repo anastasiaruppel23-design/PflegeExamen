@@ -7,6 +7,42 @@ function mockSupabase() {
   const session = {user: {id: 'browser-test', email: 'learner@example.test'}};
   const key = 'pflegefokus-browser-test-session';
   let onAuthChange;
+  const forum = {
+    forum_moderators: [],
+    forum_profiles: [],
+    forum_topics: [{
+      id: 'peer-topic', author_id: 'another-learner', author_nickname: 'PflegePeer',
+      title: 'Frage aus der Lerngruppe', body: 'Wie lernt ihr für die Prüfung?',
+      category: 'pruefungen', hidden: false, created_at: '2026-11-22T15:00:00Z'
+    }],
+    forum_replies: [],
+    forum_reports: []
+  };
+  function mockForumTable(table) {
+    const rows = forum[table], filters = [];
+    let result = rows;
+    function createEntry(values) {
+      const entry = {
+        id: table + rows.length, author_id: session.user.id,
+        author_nickname: forum.forum_profiles[0]?.nickname, hidden: false,
+        created_at: new Date().toISOString(), ...values
+      };
+      rows.push(entry);
+      return entry;
+    }
+    const query = {
+      select() { return query; },
+      eq(key, value) { filters.push(row => row[key] === value); return query; },
+      order() { return query; },
+      range() { return query; },
+      async maybeSingle() { return {data: result.find(row => filters.every(match => match(row))) || null}; },
+      single() { return query.maybeSingle(); },
+      then(resolve) { return resolve({data: result.filter(row => filters.every(match => match(row)))}); },
+      insert(values) { result = [createEntry(values)]; return query; },
+      async upsert(values) { rows.splice(0, rows.length, values); return {}; }
+    };
+    return query;
+  }
   const client = {
     auth: {
       onAuthStateChange(callback) {
@@ -26,7 +62,8 @@ function mockSupabase() {
       }
     },
     async rpc() { return {data: [{visits: 1, registrations: 1}]}; },
-    from() {
+    from(table) {
+      if (table in forum) return mockForumTable(table);
       return {
         select: () => ({eq: () => ({maybeSingle: async () => ({data: null})})}),
         upsert: async row => { window.lastSavedStudyProgress = row.data; return {}; }
@@ -201,6 +238,47 @@ async function checkProfilePicture(page) {
   assert.equal(await acute.getAttribute('aria-pressed'), 'false');
 }
 
+async function checkForum(page) {
+  await page.locator('#menuToggle').click();
+  const entry = page.locator('#menu-austausch');
+  assert.equal(await entry.evaluate(node => node.nextElementSibling.id), 'menu-organisation');
+  await entry.getByRole('button', {name: 'Austausch'}).click();
+  const forum = page.locator('.forum-page');
+  for (const title of ['Prüfung & Lernfragen', 'Praxis & Fallbesprechung', 'Lernpartner finden', 'Erfahrungen & Gefühle']) {
+    await forum.getByRole('button', {name: new RegExp(title)}).waitFor();
+  }
+  await forum.getByRole('button', {name: 'Nickname im Profil eintragen'}).click();
+  const profile = page.locator('#forumIdentity');
+  await profile.getByLabel('Nickname', {exact: true}).fill('Lernfüchsin');
+  await profile.getByLabel('PLZ (freiwillig)', {exact: true}).fill('01234');
+  await profile.getByRole('button', {name: 'Speichern', exact: true}).click();
+  await profile.getByText('Dein Profil für den Austausch wurde gespeichert.').waitFor();
+
+  await page.evaluate(() => go('austausch'));
+  await forum.getByRole('button', {name: /Praxis & Fallbesprechung/}).click();
+  await forum.getByText('Beitrag schreiben', {exact: true}).click();
+  await forum.getByLabel('Titel', {exact: true}).fill('Übungsfall zur Übergabe');
+  await forum.getByLabel('Einsatzbereich des Falls').selectOption('akut');
+  await forum.getByLabel('Dein Beitrag', {exact: true}).fill('Fiktive Übergabe <b>im Frühdienst</b>.');
+  await forum.getByRole('button', {name: 'Beitrag veröffentlichen'}).click();
+  await forum.getByRole('heading', {name: 'Übungsfall zur Übergabe'}).waitFor();
+  assert.equal(await forum.locator('.forum-detail .forum-text').innerText(), 'Fiktive Übergabe <b>im Frühdienst</b>.');
+  assert.equal(await forum.getByText('01234').count(), 0);
+  await forum.getByText('Lernfüchsin', {exact: true}).waitFor();
+  await forum.getByLabel('Deine Antwort').fill('Ich würde mit der aktuellen Situation beginnen.');
+  await forum.getByRole('button', {name: 'Antwort veröffentlichen'}).click();
+  await forum.getByText('Ich würde mit der aktuellen Situation beginnen.').waitFor();
+
+  await forum.getByRole('button', {name: /Prüfung & Lernfragen/}).click();
+  await forum.getByRole('button', {name: 'Frage aus der Lerngruppe'}).click();
+  await forum.getByText('Melden', {exact: true}).click();
+  await forum.getByLabel('Grund').selectOption('sonstiges');
+  await forum.getByRole('button', {name: 'Meldung senden'}).click();
+  await forum.getByText('Danke. Deine Meldung wurde an die Moderation gesendet.').waitFor();
+  assert.equal(await forum.getByText('Moderation und PLZ-Übersicht').count(), 0);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+}
+
 async function checkModelCardLayout(page) {
   await page.evaluate(() => go('modelle'));
   const top = page.locator('.models-view .learning-hero');
@@ -277,7 +355,7 @@ async function checkTrainingRefresh(page) {
   assert.ok(await page.locator('.quiz-explanations li').count() >= 3);
 }
 
-async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream'],...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkNavigationTargets(page);if(width===390)await checkProfilePicture(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);if(width===390){await checkModelCardLayout(page);await checkTrainingRefresh(page);}await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
+async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream'],...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkNavigationTargets(page);if(width===390)await checkProfilePicture(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);if(width===390){await checkModelCardLayout(page);await checkTrainingRefresh(page);await checkForum(page);}await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
 // Cards with a knowledge target must link to it. Standalone cards must render and flip.
 const cardCount=await page.evaluate(()=>cards.length);
 for(let card=0;card<cardCount;card++){
