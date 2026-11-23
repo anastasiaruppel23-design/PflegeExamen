@@ -370,7 +370,7 @@ function refreshProfileDisplay() {
   const profile = hasLearningAccess() ? state.profileAppearance : null;
   const mark = profileMark(profile);
   const toggle = document.querySelector('.account-toggle');
-  if (toggle && tab === 'konto') toggle.setAttribute('aria-current', 'page');
+  if (toggle && (tab === 'konto' || tab === 'postfach')) toggle.setAttribute('aria-current', 'page');
   else toggle?.removeAttribute('aria-current');
   for (const target of document.querySelectorAll('#headerProfile, #profilePreview')) {
     if (target.innerHTML !== mark) target.innerHTML = mark;
