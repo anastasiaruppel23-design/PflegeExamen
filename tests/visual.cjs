@@ -145,6 +145,24 @@ async function checkProfilePicture(page) {
   const profileButton = page.getByRole('button', {name: 'Profil und Konto'});
   await profileButton.click();
   await page.getByRole('heading', {name: 'Dein Profil'}).waitFor();
+  const ambulant = page.getByRole('button', {name: 'Ambulante Pflege', exact: true});
+  const acute = page.getByRole('button', {name: 'Akutversorgung im Krankenhaus', exact: true});
+  assert.equal(await page.locator('[data-profile-setting]').count(), 7);
+  await ambulant.click();
+  assert.equal(await ambulant.getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('#headerProfile [data-setting-avatar="ambulant"]').count(), 1);
+  assert.equal(await page.locator('#headerProfile .setting-avatar-art').evaluate(node =>
+    getComputedStyle(node).backgroundImage.includes('setting-avatare.webp')), true);
+  const rehab = page.getByRole('button', {name: 'Rehabilitation', exact: true});
+  await rehab.click();
+  assert.equal(await page.locator('#headerProfile [data-setting-avatar="reha"]').evaluate(node =>
+    getComputedStyle(node).backgroundImage.includes('setting-avatare-ergaenzung.webp')), true);
+  assert.equal(await page.evaluate(async () => {
+    const assets = ['./assets/setting-avatare.webp', './assets/setting-avatare-ergaenzung.webp'];
+    const responses = await Promise.all(assets.map(asset => fetch(asset)));
+    return responses.every(response => response.ok && response.headers.get('Content-Type') === 'image/webp');
+  }), true);
+  await page.getByText('Weitere Avatare', {exact: true}).click();
   const heart = page.getByRole('button', {name: 'Herz', exact: true});
   await heart.click();
   assert.equal(await heart.getAttribute('aria-pressed'), 'true');
@@ -161,14 +179,26 @@ async function checkProfilePicture(page) {
     const photo = document.querySelector('#headerProfile img');
     return photo?.naturalWidth === 288 && photo.naturalHeight === 288;
   });
-  await page.waitForFunction(() => window.lastSavedStudyProgress?.profileAppearance?.src?.startsWith('data:image/jpeg;base64,'));
+  await acute.click();
+  assert.equal(await acute.getAttribute('aria-pressed'), 'true');
+  assert.equal(await page.locator('#headerProfile img').count(), 1);
+  await page.waitForFunction(() => {
+    const profile = window.lastSavedStudyProgress?.profileAppearance;
+    return profile?.setting === 'akut' && profile.src?.startsWith('data:image/jpeg;base64,');
+  });
   await page.reload();
   await page.waitForFunction(() => hasLearningAccess());
   assert.equal(await page.locator('#headerProfile img').count(), 1);
   await profileButton.click();
+  assert.equal(await acute.getAttribute('aria-pressed'), 'true');
+  await page.getByRole('button', {name: 'Passenden Avatar verwenden'}).click();
+  assert.equal(await page.locator('#headerProfile [data-setting-avatar="akut"]').count(), 1);
   await page.getByRole('button', {name: 'Profilbild entfernen'}).click();
-  assert.equal(await page.locator('#headerProfile img').count(), 0);
-  await page.waitForFunction(() => window.lastSavedStudyProgress?.profileAppearance?.kind === 'default');
+  assert.equal(await page.locator('#headerProfile [data-setting-avatar]').count(), 0);
+  assert.equal(await acute.getAttribute('aria-pressed'), 'true');
+  await page.getByRole('button', {name: 'Einsatzbereich entfernen'}).click();
+  await page.waitForFunction(() => window.lastSavedStudyProgress?.profileAppearance?.setting === null);
+  assert.equal(await acute.getAttribute('aria-pressed'), 'false');
 }
 
 async function checkModelCardLayout(page) {

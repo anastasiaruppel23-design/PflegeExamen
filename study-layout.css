@@ -370,3 +370,58 @@ body { background: #fbf5ec; }
   .app-bar .menu-toggle .pf-icon { width: 22px; height: 22px; }
   .app-bar .account-toggle .profile-mark { width: 25px; height: 25px; }
 }
+
+.profile-setting-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.profile-setting {
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  padding: 12px 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--pf-cream);
+  color: var(--pf-turquoise-deep);
+  font-size: .94rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.profile-setting[aria-pressed="true"] {
+  background: var(--pf-mint);
+  box-shadow: inset 0 0 0 2px var(--pf-turquoise);
+}
+.setting-avatar-art {
+  display: inline-block;
+  width: clamp(54px, 19vw, 82px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--pf-cream);
+  background-image: url("./assets/setting-avatare.webp");
+  background-repeat: no-repeat;
+  background-size: 368% 460%;
+  background-position: 6.2% var(--avatar-row);
+}
+.profile-mark .setting-avatar-art { width: 100%; height: 100%; }
+[data-setting-avatar="ambulant"] { --avatar-row: 33.1%; }
+[data-setting-avatar="akut"] { --avatar-row: 67.6%; }
+[data-setting-avatar="paediatrie"] { --avatar-row: 100%; }
+.setting-avatar-art:is([data-setting-avatar="langzeit"], [data-setting-avatar="tagespflege"],
+  [data-setting-avatar="psychiatrie"], [data-setting-avatar="reha"]) {
+  background-image: url("./assets/setting-avatare-ergaenzung.webp");
+  background-size: 229% 229%;
+  background-position: var(--avatar-position);
+}
+[data-setting-avatar="langzeit"] { --avatar-position: 5.6% 6.2%; }
+[data-setting-avatar="tagespflege"] { --avatar-position: 94.4% 6.2%; }
+[data-setting-avatar="psychiatrie"] { --avatar-position: 5.6% 95%; }
+[data-setting-avatar="reha"] { --avatar-position: 94.4% 95%; }
+.profile-setting-actions { margin-block-start: 12px; }
+.profile-setting-actions:not(:has(button:not([hidden]))) { display: none; }
+details.profile-avatar-options .profile-avatar-grid { margin-block-start: 10px; }

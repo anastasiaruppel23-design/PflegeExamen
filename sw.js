@@ -1,15 +1,15 @@
-const CACHE = 'pflegefokus-v59-global-design-profile';
+const CACHE = 'pflegefokus-v61-setting-line-icons';
 const SUPABASE_SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
-  './cloud-config.js', './account.js?v=4', './design.css?v=12',
+  './cloud-config.js', './account.js?v=5', './design.css?v=12',
   './assets/pflegefokus-willkommen.webp?v=2', './library.css?v=9',
   './disease-library.js?v=3', './library.js?v=14', './assets/atmung-schema.svg',
   './assets/haut-schema.svg', './glossary.js?v=12', './exam-practice.html',
   './practical-training.css?v=1', './practical-training.js?v=3', './model-application.js?v=2', './oral-guided.js?v=1', './exam-practice.js?v=18', './written-settings.js?v=1', './learning-upgrade.js?v=11', './anatomy-depth.js?v=1', './learning-expansion.js?v=9', './curriculum.js?v=1',
   './visual-library.js?v=25', './visual-library.css?v=13',
-  './study-layout.css?v=4', './study-icons.js', './advanced-training.js', './exam-answers.js', './voice-answers.js?v=2',
-  './assets/anastasia-pflege-illustration.svg', './assets/heart-study.webp',
+  './study-layout.css?v=6', './study-icons.js', './advanced-training.js', './exam-answers.js', './voice-answers.js?v=2',
+  './assets/setting-avatare.webp', './assets/setting-avatare-ergaenzung.webp', './assets/anastasia-pflege-illustration.svg', './assets/heart-study.webp',
   './assets/lung-study.webp', './assets/glucose-study.webp'
 ];
 
