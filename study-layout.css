@@ -1,9 +1,18 @@
 :root {
-  --pf-turquoise: #14756d;
+  --pf-turquoise: #124f4c;
+  --pf-turquoise-deep: #0b403e;
   --pf-rose: #91445f;
-  --pf-mint: #e3f4ef;
-  --pf-pink: #f5e4e9;
-  --pf-cream: #fff5e4;
+  --pf-rose-edge: #a36a7a;
+  --pf-mint: #e3f1ed;
+  --pf-pink: #f3e2e7;
+  --pf-cream: #fff9ef;
+  --ink: #263334;
+  --teal: var(--pf-turquoise);
+  --mint: var(--pf-mint);
+  --rose: var(--pf-rose);
+  --paper: var(--pf-cream);
+  --line: #dacbc6;
+  --pf-section-gap: clamp(24px, 3vw, 34px);
 }
 #content { overflow-wrap: anywhere; }
 .study-mini {
@@ -16,7 +25,7 @@
 .study-mini .dark { stroke: var(--pf-turquoise); }
 .study-mini.mini-small { width: 28px; height: 28px; }
 .study-mini.mini-large { width: 58px; height: 58px; }
-#content > .panel + .panel, .learning-hero + .grid { margin-block-start: 26px; }
+#content > .panel + .panel, .learning-hero + .grid { margin-block-start: var(--pf-section-gap); }
 .learning-hero h2 { color: #fff; }
 .study-section-grid, .challenge-grid { gap: 22px; }
 #content :is(.study-section, .challenge-tile, .practice-tile, .practice-accordion, .exam-task) {
@@ -99,12 +108,12 @@ textarea[data-answer] { scroll-margin-block: 96px; }
 .answer-tools .answer-note p { margin: 6px 0 0; }
 
 .models-view {
-  --model-teal: #124f4c;
-  --model-teal-deep: #0b403e;
-  --model-rose: #a36a7a;
-  --model-rose-soft: #f3e2e7;
-  --model-cream: #fff9ef;
-  --model-light-border: #dacac7;
+  --model-teal: var(--pf-turquoise);
+  --model-teal-deep: var(--pf-turquoise-deep);
+  --model-rose: var(--pf-rose-edge);
+  --model-rose-soft: var(--pf-pink);
+  --model-cream: var(--pf-cream);
+  --model-light-border: var(--line);
 }
 .models-view .learning-hero {
   background: var(--model-teal-deep);
@@ -140,7 +149,7 @@ textarea[data-answer] { scroll-margin-block: 96px; }
 }
 .models-view .model-grid {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
-  gap: clamp(24px, 3vw, 34px);
+  gap: var(--pf-section-gap);
   align-items: start;
 }
 .models-view .model-grid > .model-card {
@@ -200,4 +209,164 @@ textarea[data-answer] { scroll-margin-block: 96px; }
 .models-view :is(.model-card, .model-guide) button:hover {
   background: var(--model-teal-deep);
   color: var(--model-cream);
+}
+
+/* Shared palette and section rhythm across learning, practice and account views. */
+body { background: #fbf5ec; }
+#content .learning-poster { border-color: var(--line); }
+#content > .panel,
+#content > .learning-hero,
+#content .hero.hero-welcome,
+#content .founder { margin-block-end: var(--pf-section-gap); }
+#content > .grid,
+#content .topic-gallery,
+#content .poster-columns { gap: var(--pf-section-gap); }
+#content :is(.hero-welcome .hero-copy, .learning-hero, .visual-library .poster-header) {
+  background: var(--pf-turquoise-deep);
+  color: #fff;
+}
+#content .hero-welcome .hero-copy :is(h1, p),
+#content .learning-hero :is(h2, p),
+#content .visual-library .poster-header :is(h1, .study-eyebrow, .poster-subtitle, .poster-doodle) {
+  color: #fff;
+}
+#content .hero-welcome .hero-copy h1 em { color: #f4ceda; }
+#content .hero-welcome .hero-actions .btn {
+  background: var(--pf-cream);
+  border: 1px solid var(--pf-cream);
+  color: var(--pf-turquoise-deep);
+}
+#content .hero-welcome .hero-actions .btn.outline {
+  background: transparent;
+  color: #fff;
+}
+#content .hero-welcome .hero-actions .btn:focus-visible { outline-color: #fff; }
+#content .founder { background: linear-gradient(145deg, var(--pf-cream), var(--pf-pink)); }
+#content .founder h2,
+#content .section-title { color: var(--pf-turquoise-deep); }
+#content .founder-motivation {
+  background: var(--pf-pink);
+  color: #6c354a;
+  border-inline-start-color: var(--pf-rose-edge);
+}
+#content .home-link { background: var(--pf-pink); color: var(--pf-turquoise-deep); }
+#content .home-link + .home-link { background: var(--pf-mint); }
+#content .btn.primary { background: var(--pf-turquoise); color: #fff; }
+#content .hero-welcome .hero-actions .btn.primary { background: var(--pf-cream); color: var(--pf-turquoise-deep); }
+#content .btn.primary:hover { background: var(--pf-turquoise-deep); }
+#content .hero-welcome .hero-actions .btn.primary:hover { background: var(--pf-pink); }
+#content .progress > div,
+#content .flash-progress span { background: var(--pf-turquoise); }
+#content :is(.option.selected, .option:hover) { border-color: var(--pf-turquoise); background: var(--pf-mint); }
+#content .grid > .card:not(.study-section, .challenge-tile, .practice-tile, .model-card):nth-child(4n+2) { background: var(--pf-pink); }
+#content .grid > .card:not(.study-section, .challenge-tile, .practice-tile, .model-card):nth-child(4n+3) { background: #fcf0e1; }
+#content .grid > .card:not(.study-section, .challenge-tile, .practice-tile, .model-card):nth-child(4n+4) { background: var(--pf-mint); }
+#content .visual-library { --night: var(--ink); --accent: var(--pf-rose); --wash: var(--pf-pink); }
+#content :is(.tone-disease, .tone-memory) { --accent: var(--pf-turquoise); --wash: var(--pf-mint); }
+#content :is(.tone-definition, .tone-model) { --accent: var(--pf-rose); --wash: var(--pf-pink); }
+#content .tone-care { --accent: #755229; --wash: #fcf0e1; }
+#content .tone-warning { --accent: #a12635; --wash: #ffeaeb; }
+#content .visual-library .poster-category { background: var(--pf-pink); color: #632c43; }
+#content .standard-flow { background: var(--pf-mint); border-inline-start-color: var(--pf-turquoise); }
+#content .learn-box:not(.tone-warning, .tone-disease, .tone-care, .tone-memory, .tone-model, .tone-definition) {
+  --accent: var(--pf-rose);
+  --wash: var(--pf-pink);
+}
+
+/* Keep both navigation actions easy to recognize and reach at phone widths. */
+.app-header { background: var(--pf-cream); border-bottom-color: var(--line); }
+.app-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 8px;
+}
+.app-bar .menu-toggle,
+.app-bar .account-toggle {
+  width: fit-content;
+  min-height: 54px;
+  padding: 8px 12px;
+  gap: 7px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 750;
+  white-space: nowrap;
+}
+.app-bar .menu-toggle {
+  grid-column: 1;
+  justify-self: start;
+  background: var(--pf-turquoise);
+  color: #fff;
+}
+.app-bar .brand { grid-column: 2; }
+.app-bar .account-toggle {
+  grid-column: 3;
+  justify-self: end;
+  background: var(--pf-pink);
+  color: var(--pf-turquoise-deep);
+  border: 1px solid #d0a5b0;
+}
+.app-bar .account-toggle[aria-current="page"] { border-color: var(--pf-turquoise); }
+.app-bar .menu-toggle .pf-icon { width: 25px; height: 25px; }
+.app-bar .account-toggle .profile-mark { width: 32px; height: 32px; }
+.profile-mark {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--pf-cream);
+  color: var(--pf-turquoise-deep);
+}
+.profile-mark :is(img, .study-mini) { width: 100%; height: 100%; }
+.profile-mark .study-mini { padding: 4px; }
+.profile-mark img { object-fit: cover; }
+.account-heading { display: flex; gap: 16px; align-items: center; margin-block-end: 24px; }
+.account-heading .profile-mark { width: 72px; height: 72px; background: var(--pf-pink); }
+.account-heading .pf-icon { width: 34px; height: 34px; }
+.account-heading h1 { margin: 0; color: var(--pf-turquoise-deep); }
+.account-heading p { margin: 3px 0 0; }
+.profile-editor {
+  background: #fffcf6;
+  border: 1px solid var(--line);
+  border-inline-start: 4px solid var(--pf-rose-edge);
+  border-radius: 15px;
+  padding: clamp(14px, 5vw, 22px);
+  margin-block-end: var(--pf-section-gap);
+}
+.profile-editor h2, .account-progress-heading { color: var(--pf-turquoise-deep); }
+.profile-editor #profileImageHelp { margin-block-start: 0; }
+.profile-editor fieldset { margin-block-start: 20px; }
+.profile-editor legend { color: var(--pf-turquoise-deep); font-weight: 700; margin-block-end: 8px; }
+.profile-avatar-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.profile-avatar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  border: 1px solid #d6b8c2;
+  border-radius: 10px;
+  padding: 5px 8px;
+  background: var(--pf-pink);
+  color: var(--pf-turquoise-deep);
+  font-weight: 650;
+}
+.profile-avatar[aria-pressed="true"] {
+  background: var(--pf-mint);
+  border-color: var(--pf-turquoise);
+  box-shadow: inset 0 0 0 1px var(--pf-turquoise);
+}
+#profileNotice:empty { display: none; }
+
+@media (max-width: 440px) {
+  .app-bar .menu-toggle,
+  .app-bar .account-toggle { font-size: 15px; gap: 5px; padding-inline: 8px; }
+  .app-bar .account-toggle .profile-mark { width: 28px; height: 28px; }
+}
+@media (max-width: 360px) {
+  .app-header { padding-inline: 8px; }
+  .app-bar { gap: 4px; }
+  .app-bar .brand { padding-inline: 2px; }
+  .app-bar .brand-name { font-size: 22px; }
+  .app-bar .menu-toggle .pf-icon { width: 22px; height: 22px; }
+  .app-bar .account-toggle .profile-mark { width: 25px; height: 25px; }
 }

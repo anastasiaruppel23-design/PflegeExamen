@@ -323,6 +323,121 @@ async function logoutAccount(button) {
   }
 }
 
+const profileAvatars = {
+  pulse: 'Herz',
+  book: 'Lernbuch',
+  wound: 'Pflaster',
+  shield: 'Schild',
+  speech: 'Sprechblase',
+  hands: 'Hände'
+};
+const defaultProfileIcon = '<svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2Z"/></svg>';
+let profileRevision = 0;
+
+function validProfilePhoto(src) {
+  return typeof src === 'string' && src.length <= 120000 &&
+    /^data:image\/jpeg;base64,[A-Za-z0-9+/]+={0,2}$/.test(src);
+}
+
+function profileMark(profile) {
+  if (profile?.kind === 'photo' && validProfilePhoto(profile.src)) {
+    return `<img src="${profile.src}" alt="" decoding="async">`;
+  }
+  if (profile?.kind === 'avatar' && Object.hasOwn(profileAvatars, profile.avatar)) {
+    return studyMini(profile.avatar);
+  }
+  return defaultProfileIcon;
+}
+
+function refreshProfileDisplay() {
+  const profile = hasLearningAccess() ? state.profileAppearance : null;
+  const mark = profileMark(profile);
+  const toggle = document.querySelector('.account-toggle');
+  if (toggle && tab === 'konto') toggle.setAttribute('aria-current', 'page');
+  else toggle?.removeAttribute('aria-current');
+  for (const target of document.querySelectorAll('#headerProfile, #profilePreview')) {
+    if (target.innerHTML !== mark) target.innerHTML = mark;
+  }
+  document.querySelectorAll('[data-profile-avatar]').forEach(button => {
+    button.setAttribute('aria-pressed', String(profile?.kind === 'avatar' && profile.avatar === button.dataset.profileAvatar));
+  });
+  const clearButton = document.querySelector('#clearProfileImage');
+  if (clearButton) clearButton.hidden = !['avatar','photo'].includes(profile?.kind);
+}
+
+function saveProfileAppearance(appearance) {
+  if (!hasLearningAccess()) return;
+  profileRevision++;
+  state.profileAppearance = {...appearance, updated: Date.now()};
+  save();
+  refreshProfileDisplay();
+}
+
+async function resizeProfilePhoto(file) {
+  if (file.size > 12 * 1024 * 1024) throw new Error('Das Bild ist zu groß. Wähle ein Bild bis 12 MB.');
+  if (!['image/jpeg','image/png','image/webp'].includes(file.type)) {
+    throw new Error('Wähle ein Foto im JPG-, PNG- oder WebP-Format.');
+  }
+  const url = URL.createObjectURL(file);
+  try {
+    const image = new Image();
+    image.src = url;
+    await image.decode();
+    const side = Math.min(image.naturalWidth, image.naturalHeight);
+    if (!side) throw new Error('Das Bild ist leer.');
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = Math.min(288, side);
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Die Bildbearbeitung ist in diesem Browser gerade nicht verfügbar.');
+    ctx.fillStyle = '#fff9ef';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, (image.naturalWidth - side) / 2, (image.naturalHeight - side) / 2,
+      side, side, 0, 0, canvas.width, canvas.height);
+    const compressed = canvas.toDataURL('image/jpeg', 0.83);
+    if (!validProfilePhoto(compressed)) throw new Error('Das Bild konnte nicht verkleinert werden.');
+    return compressed;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+function bindProfileEditor() {
+  const editor = document.querySelector('#profileEditor');
+  const uploader = editor.querySelector('#profilePhoto');
+  const status = editor.querySelector('#profileNotice');
+  editor.querySelectorAll('[data-profile-avatar]').forEach(button => {
+    button.addEventListener('click', () => {
+      saveProfileAppearance({kind:'avatar', avatar:button.dataset.profileAvatar});
+      status.textContent = 'Avatar übernommen.';
+    });
+  });
+  editor.querySelector('#clearProfileImage').addEventListener('click', () => {
+    saveProfileAppearance({kind:'default'});
+    editor.querySelector('#chooseProfilePhoto').focus();
+    status.textContent = 'Profilbild entfernt.';
+  });
+  editor.querySelector('#chooseProfilePhoto').addEventListener('click', () => uploader.click());
+  uploader.addEventListener('change', async () => {
+    const file = uploader.files[0];
+    if (!file) return;
+    uploader.value = '';
+    const owner = cloudUser?.id;
+    const revision = ++profileRevision;
+    status.textContent = 'Foto wird vorbereitet …';
+    try {
+      const src = await resizeProfilePhoto(file);
+      if (owner !== cloudUser?.id || revision !== profileRevision || !hasLearningAccess()) return;
+      saveProfileAppearance({kind:'photo', src});
+      status.textContent = 'Profilfoto übernommen.';
+    } catch (error) {
+      if (owner === cloudUser?.id && revision === profileRevision) {
+        status.textContent = error instanceof DOMException ? 'Das Foto konnte nicht geöffnet werden. Wähle eine andere Datei.' : error.message;
+      }
+    }
+  });
+  refreshProfileDisplay();
+}
+
 function renderAccount() {
   const content = $('#content');
   const notice = `<p id="accountNotice" class="${accountError ? 'bad' : ''}" role="status">${esc(accountNotice)}</p>`;
@@ -346,8 +461,27 @@ function renderAccount() {
     return;
   }
   if (cloudUser) {
-    content.innerHTML = `<div class="panel account-panel"><h1>Mein Konto</h1>
-      <p>Angemeldet als <strong>${esc(cloudUser.email || 'Benutzerkonto')}</strong></p>
+    content.innerHTML = `<div class="panel account-panel">
+      <div class="account-heading">
+        <span class="profile-mark" id="profilePreview" aria-hidden="true"></span>
+        <div><h1>Dein Profil</h1><p>${esc(cloudUser.email || 'Benutzerkonto')}</p></div>
+      </div>
+      <section id="profileEditor" class="profile-editor" aria-labelledby="profileEditorTitle">
+        <h2 id="profileEditorTitle">Profilbild</h2>
+        <p class="muted" id="profileImageHelp">Dein Profilbild ist nur in deinem Konto sichtbar.</p>
+        <div class="flex">
+          <button type="button" class="btn primary" id="chooseProfilePhoto" aria-describedby="profileImageHelp">Eigenes Foto auswählen</button>
+          <input type="file" id="profilePhoto" aria-label="Profilfoto auswählen" accept="image/jpeg,image/png,image/webp" hidden>
+          <button type="button" class="btn" id="clearProfileImage" hidden>Profilbild entfernen</button>
+        </div>
+        <fieldset class="profile-avatar-options">
+          <legend>Oder wähle einen Avatar</legend>
+          <div class="profile-avatar-grid">${Object.entries(profileAvatars).map(([icon,label]) =>
+            `<button type="button" class="profile-avatar" data-profile-avatar="${icon}" aria-pressed="false">${studyMini(icon,'mini-small')}<span>${label}</span></button>`).join('')}</div>
+        </fieldset>
+        <p id="profileNotice" class="muted" role="status"></p>
+      </section>
+      <h2 class="account-progress-heading">Dein Lernstand</h2>
       <p id="cloudStatus" class="muted" role="status">${esc(cloudStatus || 'Dein Lernstand wird automatisch gespeichert und mit deinem Konto synchronisiert.')}</p>
       <div class="flex">
         <button class="btn primary" onclick="syncCloudProgress()">Jetzt sichern</button>
@@ -355,6 +489,7 @@ function renderAccount() {
         <button class="btn" onclick="logoutAccount(this)">Abmelden</button>
       </div>${notice}
       <p class="muted">Auf gemeinsam genutzten Geräten kann der lokale Lernstand nach der Abmeldung im Browser verbleiben.</p></div>`;
+    bindProfileEditor();
     return;
   }
 
@@ -469,18 +604,23 @@ async function loadCloudProgress(ask = true) {
         const changedHere = progressDirty || version !== progressVersion;
         const remote = data.data;
         const drafts = mergeAnswerDrafts(state.answerDrafts, remote.answerDrafts);
+        const localProfile = state.profileAppearance;
+        const remoteProfile = remote.profileAppearance;
+        const localProfileNewer = (localProfile?.updated ?? 0) > (remoteProfile?.updated ?? 0);
+        const profileAppearance = localProfileNewer ? localProfile : remoteProfile;
         const wasDirty = progressDirty;
         state = changedHere
-          ? studyProgressDefaults({...remote, ...state, answerDrafts: drafts})
-          : studyProgressDefaults({...state, ...remote, lastStudyTab: state.lastStudyTab || remote.lastStudyTab, answerDrafts: drafts});
+          ? studyProgressDefaults({...remote, ...state, answerDrafts: drafts, profileAppearance})
+          : studyProgressDefaults({...state, ...remote, lastStudyTab: state.lastStudyTab || remote.lastStudyTab, answerDrafts: drafts, profileAppearance});
         const draftChanges = Object.entries(drafts).some(([key, draft]) => !remote.answerDrafts?.[key] || draft.updated > remote.answerDrafts[key].updated);
-        progressDirty = wasDirty || draftChanges;
+        progressDirty = wasDirty || draftChanges || localProfileNewer;
         if (progressDirty) progressVersion++;
         writeLocalProgress();
       } finally {
         cloudBusy = false;
       }
-      if (tab === 'start' || tab === 'konto') render();
+      if (tab === 'start') render();
+      refreshProfileDisplay();
       window.voiceAnswers?.refreshDrafts();
     } else if (ask && confirm('Deinen lokalen Lernstand in dieses Konto hochladen?')) {
       persistStudyProgress();
