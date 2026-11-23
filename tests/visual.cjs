@@ -181,7 +181,7 @@ async function checkNavigationTargets(page) {
 async function checkProfilePicture(page) {
   const profileButton = page.getByRole('button', {name: 'Profil und Konto'});
   await profileButton.click();
-  await page.getByRole('heading', {name: 'Dein Profil'}).waitFor();
+  await page.getByRole('heading', {name: 'Dein Profil', exact: true}).waitFor();
   const ambulant = page.getByRole('button', {name: 'Ambulante Pflege', exact: true});
   const acute = page.getByRole('button', {name: 'Akutversorgung im Krankenhaus', exact: true});
   assert.equal(await page.locator('[data-profile-setting]').count(), 7);
