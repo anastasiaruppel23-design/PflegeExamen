@@ -368,9 +368,11 @@ function renderModels(c) {
   <button class="btn primary" onclick="go('muendlich')">Fallanalyse für die mündliche Prüfung üben</button>
  </section>
  <div class="model-search"><label for="modelSearch">Modell, Begriff oder Fallthema suchen</label>
-  <input class="exp-search" type="search" id="modelSearch" placeholder="Zum Beispiel: Orem, Sturz oder Angehörige" oninput="filterExpansionModels(this.value)">
+  <input class="exp-search" type="search" id="modelSearch" placeholder="Zum Beispiel: Orem, Sturz oder Angehörige">
  </div>
  <div id="modelResults"></div></div>`;
+ const search = c.querySelector('#modelSearch');
+ search.addEventListener('input', () => filterExpansionModels(search.value));
  filterExpansionModels('');
 }
 

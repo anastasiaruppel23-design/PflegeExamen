@@ -140,6 +140,7 @@ async function checkModelCardLayout(page) {
   assert.ok(second.y - first.y - first.height >= 24, 'clear vertical gap between mobile model cards');
   const search = page.getByRole('searchbox', {name: 'Modell, Begriff oder Fallthema suchen'});
   await search.fill('Roper–Logan–Tierney');
+  assert.ok(await cards.count() < 29, 'search filters the model cards');
   const roper = cards.filter({has: page.getByRole('heading', {name: 'Roper–Logan–Tierney', exact: true})});
   assert.deepEqual(await roper.locator('dt').allTextContents(), ['Grundgedanke','Schlüsselbegriffe','Prüfungsbezug']);
   await roper.locator('.model-application > summary').click();
