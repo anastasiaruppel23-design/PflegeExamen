@@ -425,3 +425,22 @@ body { background: #fbf5ec; }
 .profile-setting-actions { margin-block-start: 12px; }
 .profile-setting-actions:not(:has(button:not([hidden]))) { display: none; }
 details.profile-avatar-options .profile-avatar-grid { margin-block-start: 10px; }
+
+.decision-active { margin-top: 18px; }
+.decision-stage, .decision-options { display: grid; gap: 12px; }
+.decision-stage > .tag { justify-self: start; }
+.decision-stage :is(h3, p), .decision-options .option { margin: 0; }
+.decision-phase { color: var(--pf-turquoise-deep); font-weight: 750; }
+.decision-scene {
+  padding: 12px 14px;
+  border-inline-start: 4px solid var(--pf-turquoise);
+  border-radius: 0 10px 10px 0;
+  background: var(--pf-mint);
+}
+.decision-options .option { text-align: left; line-height: 1.4; }
+.decision-options .option:disabled { color: var(--ink); opacity: 1; }
+.decision-options .option.selected:disabled { border-color: var(--pf-turquoise); background: var(--pf-mint); }
+.decision-feedback > p, .decision-feedback details { margin-block: 9px; }
+.decision-feedback li + li, .decision-summary li + li { margin-top: 14px; }
+.decision-feedback :is(li p), .decision-summary li p { margin: 5px 0 0; }
+#decisionQuestion, #decisionFeedback { scroll-margin-top: 98px; }
