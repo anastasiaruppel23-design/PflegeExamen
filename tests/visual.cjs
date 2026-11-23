@@ -7,39 +7,95 @@ function mockSupabase() {
   const session = {user: {id: 'browser-test', email: 'learner@example.test'}};
   const key = 'pflegefokus-browser-test-session';
   let onAuthChange;
+  const owner = session.user.id;
+  const peer = '209a987f-59a0-4084-a023-8d53dbfd1887';
   const forum = {
     forum_moderators: [],
     forum_profiles: [],
+    forum_members: [{user_id: peer, nickname: 'PflegePeer'}],
     forum_topics: [{
-      id: 'peer-topic', author_id: 'another-learner', author_nickname: 'PflegePeer',
+      id: 'peer-topic', author_id: peer, author_nickname: 'PflegePeer',
       title: 'Frage aus der Lerngruppe', body: 'Wie lernt ihr für die Prüfung?',
       category: 'pruefungen', hidden: false, created_at: '2026-11-22T15:00:00Z'
     }],
     forum_replies: [],
-    forum_reports: []
+    forum_topic_reads: [],
+    forum_reports: [],
+    forum_messages: []
   };
+  window.seedForumInbox = () => forum.forum_messages.push({
+    id: 'mock-mail', author_id: peer, recipient_id: owner, body: 'Hast du Lust, gemeinsam zu üben?',
+    read_at: null, created_at: '2026-11-22T15:00:00Z'
+  });
+  function overview() {
+    return forum.forum_topics.map(topic => {
+      const replies = forum.forum_replies.filter(row => row.topic_id === topic.id);
+      const activity = [topic, ...replies];
+      const seen = forum.forum_topic_reads.find(row => row.topic_id === topic.id)?.seen_at || '';
+      return {...topic, latest_at: activity.map(row => row.created_at).sort().at(-1),
+        reply_count: replies.length, unread: activity.some(row => row.author_id !== owner && row.created_at > seen)};
+    });
+  }
   function mockForumTable(table) {
-    const rows = forum[table], filters = [];
+    let rows = forum[table];
+    if (table === 'forum_topic_overview') rows = overview();
+    if (table === 'forum_unread_counts') {
+      const unread = overview().filter(row => row.unread);
+      rows = [...new Set(unread.map(row => row.category))].map(category => ({
+        category, unread_count: unread.filter(row => row.category === category).length
+      }));
+    }
+    if (table === 'forum_conversations') {
+      const messages = forum.forum_messages;
+      const latest = messages.at(-1);
+      rows = latest ? [{partner_id: peer, nickname: 'PflegePeer', latest_at: latest.created_at,
+        preview: latest.body, sent: latest.author_id === owner,
+        unread_count: messages.filter(row => row.recipient_id === owner && !row.read_at).length}] : [];
+    }
+    const filters = [];
     let result = rows;
+    const filtered = () => result.filter(row => filters.every(match => match(row)));
+    let updateValues;
+    let head = false;
     function createEntry(values) {
       const entry = {
-        id: table + rows.length, author_id: session.user.id,
-        author_nickname: forum.forum_profiles[0]?.nickname, hidden: false,
+        id: table + rows.length, author_id: owner,
+        author_nickname: forum.forum_profiles[0]?.nickname, hidden: false, read_at: null,
         created_at: new Date().toISOString(), ...values
       };
       rows.push(entry);
       return entry;
     }
     const query = {
-      select() { return query; },
+      select(_, options) { head = Boolean(options?.head); return query; },
       eq(key, value) { filters.push(row => row[key] === value); return query; },
+      neq(key, value) { filters.push(row => row[key] !== value); return query; },
+      in(key, values) { filters.push(row => values.includes(row[key])); return query; },
+      is(key, value) { return query.eq(key, value); },
+      ilike(key, value) {
+        filters.push(row => row[key].toLowerCase().startsWith(value.slice(0,-1).toLowerCase()));
+        return query;
+      },
       order() { return query; },
       range() { return query; },
-      async maybeSingle() { return {data: result.find(row => filters.every(match => match(row))) || null}; },
+      limit() { return query; },
+      or() { return query; },
+      async maybeSingle() { return {data: filtered()[0] || null}; },
       single() { return query.maybeSingle(); },
-      then(resolve) { return resolve({data: result.filter(row => filters.every(match => match(row)))}); },
+      then(resolve) {
+        const data = filtered();
+        if (updateValues) for (const row of data) Object.assign(row,updateValues);
+        return resolve({data: head ? null : data,count: head ? data.length : null});
+      },
       insert(values) { result = [createEntry(values)]; return query; },
-      async upsert(values) { rows.splice(0, rows.length, values); return {}; }
+      update(values) { updateValues = values; return query; },
+      async upsert(values) {
+        const key = table === 'forum_topic_reads' ? 'topic_id' : 'user_id';
+        const found = rows.find(row => row[key] === values[key]);
+        if (found) Object.assign(found,values);
+        else rows.push(values);
+        return {};
+      }
     };
     return query;
   }
@@ -63,7 +119,7 @@ function mockSupabase() {
     },
     async rpc() { return {data: [{visits: 1, registrations: 1}]}; },
     from(table) {
-      if (table in forum) return mockForumTable(table);
+      if (table.startsWith('forum_')) return mockForumTable(table);
       return {
         select: () => ({eq: () => ({maybeSingle: async () => ({data: null})})}),
         upsert: async row => { window.lastSavedStudyProgress = row.data; return {}; }
@@ -244,7 +300,7 @@ async function checkForum(page) {
   assert.equal(await entry.evaluate(node => node.nextElementSibling.id), 'menu-organisation');
   await entry.getByRole('button', {name: 'Austausch'}).click();
   const forum = page.locator('.forum-page');
-  for (const title of ['Prüfung & Lernfragen', 'Praxis & Fallbesprechung', 'Lernpartner finden', 'Erfahrungen & Gefühle']) {
+  for (const title of ['Prüfung & Lernfragen', 'Praxis & Fallbesprechung', 'Lernpartner finden', 'Erfahrungen & Gefühle', 'Feedback & Wunschthemen']) {
     await forum.getByRole('button', {name: new RegExp(title)}).waitFor();
   }
   await forum.getByRole('button', {name: 'Nickname im Profil eintragen'}).click();
@@ -267,16 +323,53 @@ async function checkForum(page) {
   await forum.getByText('Lernfüchsin', {exact: true}).waitFor();
   await forum.getByLabel('Deine Antwort').fill('Ich würde mit der aktuellen Situation beginnen.');
   await forum.getByRole('button', {name: 'Antwort veröffentlichen'}).click();
-  await forum.getByText('Ich würde mit der aktuellen Situation beginnen.').waitFor();
+  const response = forum.locator('article').filter({hasText: 'Ich würde mit der aktuellen Situation beginnen.'});
+  await response.getByText('Direkt antworten', {exact: true}).click();
+  await response.getByLabel('Antwort an Lernfüchsin', {exact: true}).fill('Darauf kann ich direkt antworten.');
+  await response.getByRole('button', {name: 'Antwort veröffentlichen'}).click();
+  await forum.getByText('Darauf kann ich direkt antworten.', {exact: true}).waitFor();
+  assert.equal(await forum.locator('.forum-reply-reference').innerText(), 'Antwort an Lernfüchsin');
+
+  await forum.getByRole('button', {name: /Feedback & Wunschthemen/}).click();
+  await forum.getByText('Beitrag schreiben', {exact: true}).click();
+  await forum.getByLabel('Titel', {exact: true}).fill('Wunschthema für das Examen');
+  await forum.getByLabel('Dein Beitrag', {exact: true}).fill('Ich wünsche mir weitere Übungsfälle zur Übergabe.');
+  await forum.getByRole('button', {name: 'Beitrag veröffentlichen'}).click();
+  await forum.getByRole('heading', {name: 'Wunschthema für das Examen'}).waitFor();
 
   await forum.getByRole('button', {name: /Prüfung & Lernfragen/}).click();
-  await forum.getByRole('button', {name: 'Frage aus der Lerngruppe'}).click();
+  const peerPost = forum.locator('article').filter({hasText: 'Frage aus der Lerngruppe'});
+  await peerPost.getByText('Neu', {exact: true}).waitFor();
+  await forum.screenshot({path:path.join(out, 'forum-390.png')});
+  await peerPost.getByRole('button', {name: 'Frage aus der Lerngruppe'}).click();
   await forum.getByText('Melden', {exact: true}).click();
   await forum.getByLabel('Grund').selectOption('sonstiges');
   await forum.getByRole('button', {name: 'Meldung senden'}).click();
   await forum.getByText('Danke. Deine Meldung wurde an die Moderation gesendet.').waitFor();
   assert.equal(await forum.getByText('Moderation und PLZ-Übersicht').count(), 0);
+  await forum.getByRole('button', {name: 'Zur Übersicht'}).click();
+  await forum.getByLabel('Nur ungelesene Themen').check();
+  await forum.getByText('Hier sind alle Themen gelesen.').waitFor();
+  await forum.getByLabel('Nur ungelesene Themen').uncheck();
+  await forum.getByRole('button', {name: 'Frage aus der Lerngruppe'}).click();
+
+  await page.evaluate(async () => { window.seedForumInbox(); await window.refreshForumIndicators(true); });
+  await page.locator('.account-toggle [data-forum-counter="mail"]').waitFor();
+  await forum.getByRole('button', {name: 'Privat schreiben'}).click();
+  const inbox = page.locator('.forum-inbox');
+  await inbox.getByRole('heading', {name: 'PflegePeer', exact: true}).waitFor();
+  await inbox.locator('.inbox-messages').getByText('Hast du Lust, gemeinsam zu üben?').waitFor();
+  await page.locator('.account-toggle [data-forum-counter="mail"]').waitFor({state: 'hidden'});
+  await inbox.getByLabel('Deine Nachricht').fill('Ja, lass uns nächste Woche zusammen lernen.');
+  await inbox.getByRole('button', {name: 'Nachricht senden'}).click();
+  await inbox.locator('.inbox-messages').getByText('Ja, lass uns nächste Woche zusammen lernen.').waitFor();
+  await inbox.screenshot({path:path.join(out, 'postfach-390.png')});
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+  await inbox.getByRole('button', {name: 'Zum Profil'}).click();
+  await profile.getByRole('button', {name: 'Mein Postfach'}).click();
+  await inbox.getByLabel('Nickname suchen').fill('Pflege');
+  await inbox.getByRole('button', {name: 'Suchen', exact: true}).click();
+  await inbox.getByRole('button', {name: 'An PflegePeer schreiben'}).waitFor();
 }
 
 async function checkModelCardLayout(page) {
