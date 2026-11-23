@@ -331,6 +331,20 @@ const profileAvatars = {
   speech: 'Sprechblase',
   hands: 'Hände'
 };
+const profileSettings = {
+  ambulant: 'Ambulante Pflege',
+  akut: 'Akutversorgung im Krankenhaus',
+  langzeit: 'Stationäre Langzeitpflege',
+  paediatrie: 'Pädiatrie',
+  tagespflege: 'Tagespflege',
+  psychiatrie: 'Psychiatrie',
+  reha: 'Rehabilitation'
+};
+
+function settingAvatar(setting) {
+  return `<span class="setting-avatar-art" data-setting-avatar="${setting}" aria-hidden="true"></span>`;
+}
+
 const defaultProfileIcon = '<svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2Z"/></svg>';
 let profileRevision = 0;
 
@@ -340,6 +354,9 @@ function validProfilePhoto(src) {
 }
 
 function profileMark(profile) {
+  if (profile?.kind === 'setting' && Object.hasOwn(profileSettings, profile.setting)) {
+    return settingAvatar(profile.setting);
+  }
   if (profile?.kind === 'photo' && validProfilePhoto(profile.src)) {
     return `<img src="${profile.src}" alt="" decoding="async">`;
   }
@@ -361,14 +378,24 @@ function refreshProfileDisplay() {
   document.querySelectorAll('[data-profile-avatar]').forEach(button => {
     button.setAttribute('aria-pressed', String(profile?.kind === 'avatar' && profile.avatar === button.dataset.profileAvatar));
   });
+  document.querySelectorAll('[data-profile-setting]').forEach(button => {
+    button.setAttribute('aria-pressed', String(profile?.setting === button.dataset.profileSetting));
+  });
   const clearButton = document.querySelector('#clearProfileImage');
-  if (clearButton) clearButton.hidden = !['avatar','photo'].includes(profile?.kind);
+  if (clearButton) clearButton.hidden = !['avatar','photo','setting'].includes(profile?.kind);
+  const useSetting = document.querySelector('#useProfileSettingAvatar');
+  const clearSetting = document.querySelector('#clearProfileSetting');
+  if (useSetting && clearSetting) {
+    const hasSetting = Object.hasOwn(profileSettings, profile?.setting);
+    useSetting.hidden = !hasSetting || profile.kind === 'setting';
+    clearSetting.hidden = !hasSetting;
+  }
 }
 
 function saveProfileAppearance(appearance) {
   if (!hasLearningAccess()) return;
   profileRevision++;
-  state.profileAppearance = {...appearance, updated: Date.now()};
+  state.profileAppearance = {setting:state.profileAppearance?.setting, ...appearance, updated:Date.now()};
   save();
   refreshProfileDisplay();
 }
@@ -410,6 +437,31 @@ function bindProfileEditor() {
       saveProfileAppearance({kind:'avatar', avatar:button.dataset.profileAvatar});
       status.textContent = 'Avatar übernommen.';
     });
+  });
+  const useSettingAvatar = editor.querySelector('#useProfileSettingAvatar');
+  const clearSetting = editor.querySelector('#clearProfileSetting');
+  editor.querySelectorAll('[data-profile-setting]').forEach(button => {
+    button.addEventListener('click', () => {
+      const setting = button.dataset.profileSetting;
+      const profile = state.profileAppearance;
+      const keepPhoto = profile?.kind === 'photo';
+      saveProfileAppearance(keepPhoto ? {kind:'photo', src:profile.src, setting} : {kind:'setting', setting});
+      status.textContent = keepPhoto ? 'Einsatzbereich gespeichert.' : 'Einsatzbereich und passender Avatar übernommen.';
+    });
+  });
+  useSettingAvatar.addEventListener('click', () => {
+    const setting = state.profileAppearance?.setting;
+    if (!Object.hasOwn(profileSettings, setting)) return;
+    saveProfileAppearance({kind:'setting', setting});
+    editor.querySelector(`[data-profile-setting="${setting}"]`).focus();
+    status.textContent = 'Passender Avatar übernommen.';
+  });
+  clearSetting.addEventListener('click', () => {
+    const profile = state.profileAppearance;
+    const appearance = profile.kind === 'setting' ? {kind:'default'} : profile;
+    saveProfileAppearance({...appearance, setting:null});
+    editor.querySelector('[data-profile-setting]').focus();
+    status.textContent = 'Einsatzbereich entfernt.';
   });
   editor.querySelector('#clearProfileImage').addEventListener('click', () => {
     saveProfileAppearance({kind:'default'});
@@ -475,10 +527,19 @@ function renderAccount() {
           <button type="button" class="btn" id="clearProfileImage" hidden>Profilbild entfernen</button>
         </div>
         <fieldset class="profile-avatar-options">
-          <legend>Oder wähle einen Avatar</legend>
+          <legend>Dein Einsatzbereich</legend>
+          <div class="profile-setting-grid">${Object.entries(profileSettings).map(([setting,label]) =>
+            `<button type="button" class="profile-setting" data-profile-setting="${setting}" aria-pressed="false">${settingAvatar(setting)}<span>${label}</span></button>`).join('')}</div>
+          <div class="flex profile-setting-actions">
+            <button type="button" class="btn" id="useProfileSettingAvatar" hidden>Passenden Avatar verwenden</button>
+            <button type="button" class="btn" id="clearProfileSetting" hidden>Einsatzbereich entfernen</button>
+          </div>
+        </fieldset>
+        <details class="profile-avatar-options">
+          <summary>Weitere Avatare</summary>
           <div class="profile-avatar-grid">${Object.entries(profileAvatars).map(([icon,label]) =>
             `<button type="button" class="profile-avatar" data-profile-avatar="${icon}" aria-pressed="false">${studyMini(icon,'mini-small')}<span>${label}</span></button>`).join('')}</div>
-        </fieldset>
+        </details>
         <p id="profileNotice" class="muted" role="status"></p>
       </section>
       <h2 class="account-progress-heading">Dein Lernstand</h2>
