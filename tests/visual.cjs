@@ -151,9 +151,16 @@ async function checkProfilePicture(page) {
   await ambulant.click();
   assert.equal(await ambulant.getAttribute('aria-pressed'), 'true');
   assert.equal(await page.locator('#headerProfile [data-setting-avatar="ambulant"]').count(), 1);
+  assert.equal(await page.locator('#headerProfile .setting-avatar-art').evaluate(node =>
+    getComputedStyle(node).backgroundImage.includes('setting-avatare.webp')), true);
+  const rehab = page.getByRole('button', {name: 'Rehabilitation', exact: true});
+  await rehab.click();
+  assert.equal(await page.locator('#headerProfile [data-setting-avatar="reha"]').evaluate(node =>
+    getComputedStyle(node).backgroundImage.includes('setting-avatare-ergaenzung.webp')), true);
   assert.equal(await page.evaluate(async () => {
-    const response = await fetch('./assets/setting-avatare.webp');
-    return response.ok && response.headers.get('Content-Type') === 'image/webp';
+    const assets = ['./assets/setting-avatare.webp', './assets/setting-avatare-ergaenzung.webp'];
+    const responses = await Promise.all(assets.map(asset => fetch(asset)));
+    return responses.every(response => response.ok && response.headers.get('Content-Type') === 'image/webp');
   }), true);
   await page.getByText('Weitere Avatare', {exact: true}).click();
   const heart = page.getByRole('button', {name: 'Herz', exact: true});

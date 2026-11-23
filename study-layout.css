@@ -402,18 +402,26 @@ body { background: #fbf5ec; }
   width: clamp(54px, 19vw, 82px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--pf-mint) url("./assets/setting-avatare.webp") no-repeat;
-  background-size: var(--avatar-scale, 365% 550%);
-  background-position: var(--avatar-position);
+  background-color: var(--pf-cream);
+  background-image: url("./assets/setting-avatare.webp");
+  background-repeat: no-repeat;
+  background-size: 368% 460%;
+  background-position: 6.2% var(--avatar-row);
 }
 .profile-mark .setting-avatar-art { width: 100%; height: 100%; }
-[data-setting-avatar="ambulant"] { --avatar-position: 17% 14.3%; }
-[data-setting-avatar="akut"] { --avatar-position: 81% 14.2%; }
-[data-setting-avatar="langzeit"] { --avatar-position: 17% 43.2%; }
-[data-setting-avatar="paediatrie"] { --avatar-position: 80.4% 43.1%; }
-[data-setting-avatar="tagespflege"] { --avatar-position: 17% 71.5%; }
-[data-setting-avatar="psychiatrie"] { --avatar-position: 80.4% 71.6%; }
-[data-setting-avatar="reha"] { --avatar-scale: 435% 652%; --avatar-position: 48% 96.3%; }
+[data-setting-avatar="ambulant"] { --avatar-row: 33.1%; }
+[data-setting-avatar="akut"] { --avatar-row: 67.6%; }
+[data-setting-avatar="paediatrie"] { --avatar-row: 100%; }
+.setting-avatar-art:is([data-setting-avatar="langzeit"], [data-setting-avatar="tagespflege"],
+  [data-setting-avatar="psychiatrie"], [data-setting-avatar="reha"]) {
+  background-image: url("./assets/setting-avatare-ergaenzung.webp");
+  background-size: 229% 229%;
+  background-position: var(--avatar-position);
+}
+[data-setting-avatar="langzeit"] { --avatar-position: 5.6% 6.2%; }
+[data-setting-avatar="tagespflege"] { --avatar-position: 94.4% 6.2%; }
+[data-setting-avatar="psychiatrie"] { --avatar-position: 5.6% 95%; }
+[data-setting-avatar="reha"] { --avatar-position: 94.4% 95%; }
 .profile-setting-actions { margin-block-start: 12px; }
 .profile-setting-actions:not(:has(button:not([hidden]))) { display: none; }
 details.profile-avatar-options .profile-avatar-grid { margin-block-start: 10px; }
