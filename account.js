@@ -395,9 +395,13 @@ function refreshProfileDisplay() {
 function saveProfileAppearance(appearance) {
   if (!hasLearningAccess()) return;
   profileRevision++;
-  state.profileAppearance = {setting:state.profileAppearance?.setting, ...appearance, updated:Date.now()};
+  const previousSetting = state.profileAppearance?.setting;
+  state.profileAppearance = {setting:previousSetting, ...appearance, updated:Date.now()};
   save();
   refreshProfileDisplay();
+  if (previousSetting !== state.profileAppearance.setting) {
+    window.syncForumAvatarSetting?.(state.profileAppearance.setting);
+  }
 }
 
 async function resizeProfilePhoto(file) {
@@ -542,6 +546,7 @@ function renderAccount() {
         </details>
         <p id="profileNotice" class="muted" role="status"></p>
       </section>
+      <section id="forumIdentity" class="profile-editor forum-identity" aria-labelledby="forumIdentityTitle"></section>
       <h2 class="account-progress-heading">Dein Lernstand</h2>
       <p id="cloudStatus" class="muted" role="status">${esc(cloudStatus || 'Dein Lernstand wird automatisch gespeichert und mit deinem Konto synchronisiert.')}</p>
       <div class="flex">
@@ -551,6 +556,7 @@ function renderAccount() {
       </div>${notice}
       <p class="muted">Auf gemeinsam genutzten Geräten kann der lokale Lernstand nach der Abmeldung im Browser verbleiben.</p></div>`;
     bindProfileEditor();
+    window.mountForumProfile?.(document.querySelector('#forumIdentity'));
     return;
   }
 
