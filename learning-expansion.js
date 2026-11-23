@@ -30,9 +30,9 @@ const systems=[
 const models=[
  ['Virginia Henderson','Bedürfnismodell','Pflege unterstützt Menschen bei 14 grundlegenden Aktivitäten, wenn Wissen, Kraft oder Wille fehlen.','Selbstständigkeit bei Atmung, Essen, Ausscheidung, Bewegung, Ruhe, Kleidung, Temperatur, Hygiene, Sicherheit, Kommunikation, Glauben, Arbeit, Erholung und Lernen einschätzen.','Eine Pflegeplanung beschreibt, was die Person selbst kann und wo gezielte Unterstützung nötig ist.'],
  ['Roper–Logan–Tierney','Lebensaktivitäten','Pflege richtet sich an Lebensaktivitäten und daran, wie selbstständig oder abhängig eine Person sie ausführen kann.','12 Lebensaktivitäten, Lebensspanne, Abhängigkeits-Kontinuum sowie biologische, psychologische, soziokulturelle, umgebungsbezogene und politisch-ökonomische Faktoren.','Bei Körperpflege nicht nur Defizit, sondern Einflussfaktoren, Wünsche und Fähigkeiten erfassen.'],
- ['Hildegard Peplau','Beziehungstheorie','Pflege ist ein therapeutischer zwischenmenschlicher Prozess.','Orientierung, Identifikation, Nutzung und Ablösung; Beziehung und Rollen der Pflegefachperson bewusst gestalten.','Eine klare Orientierung bei Aufnahme kann Angst reduzieren und Zusammenarbeit ermöglichen.'],
+ ['Hildegard Peplau','Beziehungstheorie','Pflege ist ein therapeutischer zwischenmenschlicher Prozess.','Orientierung, Identifikation, Nutzung und Ablösung. Mögliche Rollen: Fremde, Informationsquelle, Lehrende, Leitende, Stellvertreterin und Beraterin.','Eine klare Orientierung bei Aufnahme kann Angst reduzieren und Zusammenarbeit ermöglichen.'],
  ['Dorothea Orem','Selbstpflege','Pflege wird notwendig, wenn Selbstpflegebedarf und Selbstpflegefähigkeit auseinandergehen.','Selbstpflegebedarf, Selbstpflegedefizit und vollständig kompensatorisches, teilweise kompensatorisches oder unterstützend-erziehendes Pflegesystem.','Nur so viel übernehmen wie nötig, Selbstpflege fördern und gezielt anleiten.'],
- ['Monika Krohwinkel','Fördernde Prozesspflege / ABEDL','Pflege fördert Unabhängigkeit und Wohlbefinden unter Einbezug von Fähigkeiten, Beziehungen und existenziellen Erfahrungen.','13 ABEDL; fördernde Prozesspflege; Pflegeprozess und Bezugspflege; Fähigkeiten und Probleme im Zusammenhang sehen.','Bei Selbstpflegeproblemen passende Ressourcen und Ziele in mehreren ABEDL erfassen.'],
+ ['Monika Krohwinkel','Fördernde Prozesspflege / ABEDL','Pflege fördert Unabhängigkeit und Wohlbefinden unter Einbezug von Fähigkeiten, Beziehungen und existenziellen Erfahrungen.','13 ABEDL: kommunizieren, sich bewegen, vitale Funktionen aufrechterhalten, sich pflegen, essen und trinken, ausscheiden, sich kleiden, ruhen und schlafen, sich beschäftigen und entwickeln, die eigene Sexualität leben, für eine sichere Umgebung sorgen, soziale Beziehungen und Bereiche sichern und mit existenziellen Erfahrungen umgehen.','Bei Selbstpflegeproblemen passende Ressourcen und Ziele in mehreren ABEDL erfassen.'],
  ['Callista Roy','Adaptationsmodell','Menschen reagieren als adaptive Systeme auf innere und äußere Reize.','Vier Anpassungsbereiche: physiologische Funktion, Selbstkonzept, Rollenfunktion und Interdependenz; Reize als fokal, kontextuell oder residual betrachten.','Bei einer neuen chronischen Erkrankung Anpassung in Körperbild, Rolle und Beziehungen mitberücksichtigen.'],
  ['Betty Neuman','Systemmodell','Pflege unterstützt die Stabilität eines offenen Systems gegenüber Stressoren.','Intrapersonelle, interpersonelle und extrapersonelle Stressoren; flexible und normale Widerstandslinien; Primär-, Sekundär- und Tertiärprävention.','Stressoren und Ressourcen erfassen und Prävention auf Zeitpunkt und Belastung abstimmen.'],
  ['Madeleine Leininger','Transkulturelle Pflege','Kulturelle Werte und Lebensweisen sollen in eine respektvolle, individuelle Pflege einbezogen werden.','Pflege bewahren, anpassen oder neu aushandeln; individuelle Person fragen und keine kulturellen Stereotype unterstellen.','Nach gewünschten Speisen, Ritualen oder Dolmetschbedarf fragen statt Annahmen zu treffen.'],
@@ -53,7 +53,10 @@ const models=[
  ['Schulz von Thun','Kommunikationsquadrat','Eine Nachricht kann Sachinhalt, Selbstkundgabe, Beziehung und Appell enthalten.','Vier Seiten und vier mögliche Hörweisen; Missverständnisse entstehen, wenn Sender und Empfänger unterschiedliche Seiten betonen.','Aussage und Beziehungsebene prüfen und gezielt nachfragen.'],
  ['Paul Watzlawick','Kommunikationsaxiome','Kommunikation umfasst verbale und nonverbale Signale und beeinflusst Beziehungen.','Man kann nicht nicht kommunizieren; Inhalts- und Beziehungsaspekt; Interpunktion; digital/analog; symmetrisch/komplementär.','Auch Schweigen und Körpersprache wahrnehmen, ohne sie vorschnell zu interpretieren.'],
  ['Carl Rogers','Personzentrierte Grundhaltung','Eine wertschätzende Beziehung ermöglicht Offenheit und Selbstklärung.','Empathie, Kongruenz und bedingungsfreie positive Beachtung; keine Gesprächstechnik zum Überreden.','Gefühle spiegeln, zuhören und die Sicht der Person gelten lassen.'],
- ['Donabedian','Qualitätsmodell','Versorgungsqualität lässt sich über Bedingungen, Abläufe und Ergebnisse betrachten.','Strukturqualität, Prozessqualität und Ergebnisqualität beeinflussen einander.','Bei einem Sturzpräventionsprojekt Personalqualifikation, Umsetzung und Sturzfolgen betrachten.']
+ ['Donabedian','Qualitätsmodell','Versorgungsqualität lässt sich über Bedingungen, Abläufe und Ergebnisse betrachten.','Strukturqualität, Prozessqualität und Ergebnisqualität beeinflussen einander.','Bei einem Sturzpräventionsprojekt Personalqualifikation, Umsetzung und Sturzfolgen betrachten.'],
+ ['ICF','Klassifikation von Funktionsfähigkeit','Die ICF beschreibt Funktionsfähigkeit und Behinderung in Wechselwirkung mit dem Kontext.','Körperfunktionen und -strukturen, Aktivitäten, Teilhabe, Umweltfaktoren und personenbezogene Faktoren. Personenbezogene Faktoren werden im ICF-System nicht klassifiziert.','Ein Befund erklärt nicht allein, welche Alltagshandlungen und Teilhabe für die Person möglich sind.'],
+ ['Biopsychosoziales Modell','Gesundheitsmodell','Körperliche, psychische und soziale Faktoren können sich gegenseitig beeinflussen.','Körperliche Beschwerden, Erleben und Bewältigung sowie Lebensumfeld und Unterstützung getrennt erheben und ihre Wechselwirkung prüfen.','Eine pflegerische Begründung kann Beschwerden, Bewältigung und soziale Ressourcen miteinander verknüpfen.'],
+ ['SBAR','Instrument zur strukturierten Übergabe','SBAR ordnet die Kommunikation bei einer Übergabe oder Rückfrage.','Situation, Background (Hintergrund), Assessment (Einschätzung), Recommendation (Empfehlung oder konkrete Bitte).','Eine Dringlichkeit, wesentliche Befunde und die erwartete Rückmeldung im Team verständlich übermitteln.']
 ];
 const standards=[
  ['Dekubitusprophylaxe in der Pflege','Schäden durch Druck und Scherkräfte vermeiden, Haut und Gewebe schützen.','Individuelles Risiko erkennen, Druck entlasten, Bewegung fördern und Wirksamkeit wiederholt prüfen.','Hautbeobachtung, Mobilität, Positionierung, Hilfsmittel und Evaluation verbinden.','DNQP, 2. Aktualisierung 2017; Aktualisierungsprozess begonnen, Veröffentlichung nach DNQP-Informationen geplant.'],
@@ -200,11 +203,11 @@ function topicIds(prefixes) {
  return [...new Set(prefixes.map(prefix => topics.findIndex(([name]) => name.startsWith(prefix))))].filter(index => index >= 0);
 }
 
-function expansionTopicLinks(prefixes) {
+function expansionTopicLinks(prefixes, organKey) {
  const ids = topicIds(prefixes);
  if (!ids.length) return '';
  return `<div class="flex expansion-links" aria-label="Passender Lernstoff">${ids.map(index =>
-  `<button type="button" class="btn" onclick="openLibraryTopic(${index})">${esc(topics[index][0])}</button>`
+  `<button type="button" class="btn" onclick="${organKey ? `openTopicFromAnatomy('${organKey}', ${index})` : `openLibraryTopic(${index})`}">${esc(topics[index][0])}</button>`
  ).join('')}</div>`;
 }
 
@@ -232,12 +235,25 @@ function renderAnatomy(c) {
     <p><strong>Dazu gehören</strong> ${esc(system.organs)}</p><p>${esc(system.function)}</p>
     ${anatomyDetail(system, data)}
     <h4>Passender Lernstoff und Krankheitsbilder</h4>
-    ${expansionTopicLinks(data.topics)}
+    ${expansionTopicLinks(data.topics, system.key)}
     ${system.key === 'reproductive' ? '<button class="btn" onclick="go(&quot;ausbildung&quot;);openCurriculumField(event, &quot;4&quot;)">Neugeborene und Eltern im Ausbildungsrahmen</button>' : ''}
    </article>`;
   }).join('')}
   <p class="content-note">Die Lernbilder sind vereinfachte Schemata. Fachliche Grundlage: <a href="https://openstax.org/books/anatomy-and-physiology-2e/pages/1-introduction" target="_blank" rel="noopener noreferrer">OpenStax Anatomy and Physiology 2e</a>.</p>`;
 }
+
+window.openTopicFromAnatomy = function(key, index) {
+ const scroll = window.scrollY;
+ const details = [...document.querySelectorAll('.anatomy-module details')].map(element => element.open);
+ const system = systems.find(item => item.key === key);
+ openLibraryTopic(index, {label: 'Zurück zu ' + system.name, restore() {
+  tab = 'anatomie';
+  render();
+  document.querySelectorAll('.anatomy-module details').forEach((element, i) => { element.open = details[i]; });
+  document.querySelector('#organ-' + key + ' h3').focus({preventScroll: true});
+  window.scrollTo({top: scroll, behavior: 'instant'});
+ }});
+};
 
 window.openAnatomyModule = function(key) {
  if (tab !== 'anatomie') go('anatomie');
@@ -285,17 +301,9 @@ const modelTopicAliases = {
  'Richard Lazarus': 'Lazarus –', 'Abraham Maslow': 'Maslow –',
  'Erik Erikson': 'Erikson –', 'Donabedian': 'Qualitätsmanagement',
  'Roper–Logan–Tierney': 'ATL, AEDL, ABEDL', 'Virginia Henderson': 'ATL, AEDL, ABEDL',
- 'Madeleine Leininger': 'Pflegeethik', 'Patricia Benner': 'Assessmentinstrumente'
+ 'Madeleine Leininger': 'Pflegeethik', 'Patricia Benner': 'Assessmentinstrumente',
+ 'ICF': 'ICF –', 'Biopsychosoziales Modell': 'Biopsychosoziales Modell', 'SBAR': 'SBAR –'
 };
-const modelTransfer = {
- 'Pflegetheorien und Pflegekonzepte': 'Beschreibe eine Pflegesituation. Was erfährst du aus Sicht dieses Modells über Bedarf und Ressourcen? Formuliere daraus eine Handlung und ein überprüfbares Ziel.',
- 'Kommunikationsmodelle': 'Formuliere eine typische Aussage aus einem Pflegegespräch. Erkläre damit ein mögliches Missverständnis und begründe, wie du nachfragen würdest.',
- 'Gesundheit und Bewältigung': 'Wähle einen Fall mit chronischer Erkrankung. Beschreibe die individuelle Belastung, eine vorhandene Ressource und eine passende Unterstützung.',
- 'Entwicklung, Sterben und Verlust': 'Wähle eine konkrete Lebenssituation. Erkläre, welche Beobachtung das Modell einordnet und welche Wünsche du bei der Person erfragen würdest.',
- 'Familienmodelle': 'Beschreibe eine Veränderung im Familienalltag. Benenne, wer betroffen ist und wie die Familie bei der Suche nach Unterstützung beteiligt werden kann.',
- 'Qualitätsmodell': 'Wähle eine Sicherheitsfrage aus der Pflegepraxis. Benenne je ein Beispiel für Struktur, Prozess und Ergebnis und erkläre, wie du es beurteilst.'
-};
-
 const standardTopics = [
  ['DNQP – Dekubitusprophylaxe', 'Dekubitus – Haut'],
  ['Pflegeberatung', 'SBAR –'],
@@ -339,20 +347,87 @@ function glossaryTopics(term) {
  return matching.slice(0, 3).map(([title]) => title);
 }
 
-function renderModels(c){
- c.innerHTML='<div class="learning-hero"><span class="tag">Modelle und Theorien</span><h2>Pflege fachlich begründen</h2><p>Die Übersicht unterscheidet Pflegetheorien und Pflegekonzepte von Kommunikations-, Gesundheits-, Entwicklungs-, Familien- und Qualitätsmodellen. Jede Karte erklärt Kerngedanke, zentrale Begriffe und Prüfungsbezug. Modelle geben Orientierung; sie ersetzen keine individuelle Einschätzung.</p></div><input class="exp-search" type="search" id="modelSearch" placeholder="Modell oder Theorie suchen" oninput="filterExpansionModels(this.value)"><div id="modelResults"></div><p class="content-note">Übersicht für Lernen und Prüfung. Für vollständige Modellbegriffe, Ausnahmen und Anwendungsgrenzen die im Unterricht verwendeten Originalquellen nutzen.</p>';
+window.openCaseModel = function(name) {
+ const index = models.findIndex(model => model[0] === name);
+ if (index < 0) return;
+ openExpansionEntry('modelle', 'learning-model-' + index);
+ const example = document.querySelector('#learning-model-' + index + ' .model-application');
+ if (example) example.open = true;
+};
+
+function renderModels(c) {
+ c.innerHTML = `<div class="models-view"><section class="learning-hero"><h2>Modelle und Theorien</h2>
+  <p>Belege zuerst ein Problem oder eine Ressource mit einer Textstelle. Wähle dann das Modell, das dir hilft, diese Stelle zu erklären und eine Pflegeentscheidung zu begründen.</p>
+ </section>
+ <section class="panel model-guide"><h3>Welches Modell passt zur Frage?</h3>
+  <ul><li><strong>Was schafft die Person selbst?</strong> Orem, Henderson oder Krohwinkel.</li>
+   <li><strong>Wie gestalte ich die Beziehung?</strong> Peplau für den Beziehungsverlauf, Carl Rogers für meine Haltung im Gespräch.</li>
+   <li><strong>Was belastet, was hilft bei der Bewältigung?</strong> Lazarus für Bewertung und Coping, Antonovsky für Verstehbarkeit, Handhabbarkeit und Bedeutsamkeit.</li>
+   <li><strong>Wie wirken Familienrollen, Krankheit und Alltag zusammen?</strong> Friedemann oder Corbin &amp; Strauss.</li>
+   <li><strong>Woran erkenne ich gute Pflegequalität?</strong> Donabedian für Struktur, Prozess und Ergebnis.</li></ul>
+  <button class="btn primary" onclick="go('muendlich')">Fallanalyse für die mündliche Prüfung üben</button>
+ </section>
+ <div class="model-search"><label for="modelSearch">Modell, Begriff oder Fallthema suchen</label>
+  <input class="exp-search" type="search" id="modelSearch" placeholder="Zum Beispiel: Orem, Sturz oder Angehörige">
+ </div>
+ <div id="modelResults"></div></div>`;
+ const search = c.querySelector('#modelSearch');
+ search.addEventListener('input', () => filterExpansionModels(search.value));
  filterExpansionModels('');
 }
-function filterExpansionModels(query){
- const q=String(query||'').toLocaleLowerCase('de');
- const nursing=['Virginia Henderson','Roper–Logan–Tierney','Hildegard Peplau','Dorothea Orem','Monika Krohwinkel','Callista Roy','Betty Neuman','Madeleine Leininger','Jean Watson','Ida Jean Orlando','Patricia Benner','Rosemarie Rizzo Parse','Martha Rogers','Joyce Travelbee','Kari Martinsen'];
- const group=m=>nursing.includes(m[0])?'Pflegetheorien und Pflegekonzepte':m[0]==='Friedemann'?'Familienmodelle':['Corbin & Strauss','Aaron Antonovsky','Richard Lazarus','Abraham Maslow'].includes(m[0])?'Gesundheit und Bewältigung':['Erik Erikson','Kübler-Ross'].includes(m[0])?'Entwicklung, Sterben und Verlust':['Schulz von Thun','Paul Watzlawick','Carl Rogers'].includes(m[0])?'Kommunikationsmodelle':m[0]==='Donabedian'?'Qualitätsmodell':'Weitere Modelle';
- const groups=['Pflegetheorien und Pflegekonzepte','Kommunikationsmodelle','Gesundheit und Bewältigung','Entwicklung, Sterben und Verlust','Familienmodelle','Qualitätsmodell','Weitere Modelle'];
- const selected=models.filter(m=>!q||m.slice(0,5).join(' ').toLocaleLowerCase('de').includes(q));
- document.getElementById('modelResults').innerHTML=groups.map(g=>{const items=selected.filter(m=>group(m)===g);return items.length?'<section class="model-group"><h3>'+esc(g)+' <span class="muted">('+items.length+')</span></h3><div class="grid">'+items.map(m=>'<article class="card expansion-entry" id="learning-model-'+models.indexOf(m)+'"><span class="tag">'+esc(m[1])+'</span><h3 tabindex="-1">'+esc(m[0])+'</h3><div class="theory-graphic">'+['Person verstehen','Bedarf erkennen','Pflege begründen','Wirkung reflektieren'].map((t,j)=>(j?'<span class="arrow">→</span>':'')+esc(t)).join('')+'</div><p><strong>Grundgedanke:</strong> '+esc(m[2])+'</p><p><strong>Wichtig:</strong> '+esc(m[3])+'</p><p><strong>Prüfungsbezug:</strong> '+esc(m[4])+'</p><details><summary>Modell am Fall anwenden</summary><p>'+esc(modelTransfer[g] || 'Übertrage die Grundidee auf einen Lernfall und begründe deine Entscheidung.')+'</p><button class="btn" onclick="go(&quot;falltraining&quot;)">Kurzfälle öffnen</button></details>'+expansionTopicLinks([modelTopicAliases[m[0]] || m[0]])+'</article>').join('')+'</div></section>':''}).join('')+'<p role="status">'+selected.length+' von '+models.length+' Einträgen</p>';
+
+function modelApplicationCard(model) {
+ const [name, type, idea, terms, exam] = model;
+ const [scenario, application, limit] = modelApplications[name];
+ const oralKey = Object.keys(oralCases).find(key => caseApplications[key]?.models.includes(name));
+ const sections = [
+  ['Grundgedanke', idea],
+  ['Schlüsselbegriffe', terms],
+  ['Prüfungsbezug', exam]
+ ];
+ return `<article class="card expansion-entry model-card" id="learning-model-${models.indexOf(model)}">
+  <div class="model-heading">
+   <span class="tag">${esc(type)}</span>
+   <h3 tabindex="-1">${esc(name)}</h3>
+  </div>
+  <div class="model-body">
+   <dl class="model-facts">${sections.map(([label, text]) => `<div class="model-fact"><dt>${label}</dt><dd>${esc(text)}</dd></div>`).join('')}</dl>
+   <details class="model-application"><summary>Modell am Fall anwenden</summary>
+    <p><strong>Mini-Fall</strong> ${esc(scenario)}</p>
+    <p>Welcher Begriff passt zu welcher Textstelle? Was würdest du tun und woran würdest du die Wirkung erkennen?</p>
+    <details><summary>Beispielantwort öffnen</summary><p>${esc(application)}</p><p><strong>Worauf du achten solltest</strong> ${esc(limit)}</p></details>
+    ${oralKey ? `<button class="btn" onclick="openOralPractice('${oralKey}')">Passenden mündlichen Fall öffnen</button>` : ''}
+   </details>
+   ${expansionTopicLinks([modelTopicAliases[name] || name])}
+  </div>
+ </article>`;
+}
+
+function filterExpansionModels(query) {
+ const q = String(query || '').trim().toLocaleLowerCase('de');
+ const groups = {
+  'Kommunikationsmodelle': ['Schulz von Thun', 'Paul Watzlawick', 'Carl Rogers', 'SBAR'],
+  'Gesundheit und Bewältigung': ['Corbin & Strauss', 'Aaron Antonovsky', 'Richard Lazarus', 'Abraham Maslow', 'Biopsychosoziales Modell'],
+  'Entwicklung, Sterben und Verlust': ['Erik Erikson', 'Kübler-Ross'],
+  'Familienmodelle': ['Friedemann'],
+  'Qualitätsmodell': ['Donabedian'],
+  'Funktionsfähigkeit und Teilhabe': ['ICF']
+ };
+ const groupedNames = Object.values(groups).flat();
+ const sections = [
+  ['Pflegetheorien und Pflegekonzepte', models.filter(([name]) => !groupedNames.includes(name))],
+  ...Object.entries(groups).map(([group, names]) => [group, models.filter(([name]) => names.includes(name))])
+ ];
+ const matches = model => [...model, ...modelApplications[model[0]]].join(' ').toLocaleLowerCase('de').includes(q);
+ const selected = models.filter(matches);
+ document.getElementById('modelResults').innerHTML = sections.map(([group, entries]) => {
+  const items = entries.filter(matches);
+  if (!items.length) return '';
+  return `<section class="model-group"><h3 class="model-group-title">${esc(group)}</h3><div class="grid model-grid">${items.map(modelApplicationCard).join('')}</div></section>`;
+ }).join('') + `<p role="status">${selected.length} von ${models.length} Einträgen</p>`;
 }
 function renderStandards(c){
- c.innerHTML='<div class="learning-hero"><span class="tag">Qualität in der Pflege</span><h2>Expertenstandards verständlich lernen</h2><p>Jede Übersicht zeigt Ziel, Pflegeprozess und Praxisbeispiele. Expertenstandards geben fachliche Qualitätsorientierung; sie ersetzen weder individuellen Pflegeprozess noch lokale Verfahrensanweisungen.</p></div><div class="grid">'+standards.map((s,i)=>'<article class="card expansion-entry" id="learning-standard-'+i+'"><span class="tag">DNQP / Qualitätsausschuss Pflege</span><h3 tabindex="-1">'+esc(s[0])+'</h3><div class="standard-flow"><strong>Erkennen</strong> → <strong>individuell planen</strong> → <strong>umsetzen</strong> → <strong>Wirkung prüfen</strong></div><p><strong>Ziel:</strong> '+esc(s[1])+'</p><p><strong>Kern im Pflegeprozess:</strong> '+esc(s[2])+'</p><p><strong>Anschaulich:</strong> '+esc(s[3])+'</p><p class="muted">'+esc(s[4])+'</p><details><summary>Prüfungsfrage zum Standard</summary><p>'+esc(standardPractice[i])+'</p><p>Nutze Ziel, Einschätzung, Maßnahme und Evaluation zur Begründung. Beziehe Wünsche und Ressourcen der Person ein.</p><button class="btn" onclick="go(&quot;praktisch&quot;)">Pflegeplanung in der praktischen Prüfung</button></details>'+expansionTopicLinks(standardTopics[i])+'</article>').join('')+'</div><div class="panel"><h3>Prüfungsmerker</h3><p>Immer von der konkreten Person ausgehen: Informationen erheben, Risiko und Ressourcen individuell einschätzen, Ziel vereinbaren, Maßnahme begründen, durchführen, Wirkung evaluieren und dokumentieren.</p><a href="https://www.dnqp.de/expertenstandards-und-auditinstrumente/" target="_blank" rel="noopener noreferrer">DNQP: aktuelle Expertenstandards und Auditinstrumente ↗</a><p><a href="https://www.ausschuss-pflege.de/" target="_blank" rel="noopener noreferrer">Qualitätsausschuss Pflege: Expertenstandard Mobilität ↗</a></p></div><p class="content-note">Versionsangaben nach den Veröffentlichungs- und Informationsseiten des DNQP, recherchiert am 7. November 2026. Bei Aktualisierungsverfahren wird der Stand ausdrücklich genannt.</p>';
+ c.innerHTML='<div class="learning-hero"><span class="tag">Qualität in der Pflege</span><h2>Expertenstandards verständlich lernen</h2><p>Jede Übersicht zeigt Ziel, Pflegeprozess und Praxisbeispiele. Expertenstandards geben fachliche Qualitätsorientierung; sie ersetzen weder individuellen Pflegeprozess noch lokale Verfahrensanweisungen.</p></div><div class="grid study-section-grid standards-grid">'+standards.map((s,i)=>'<article class="card expansion-entry study-section" id="learning-standard-'+i+'"><span class="tag">DNQP / Qualitätsausschuss Pflege</span><h3 class="section-title" tabindex="-1">'+studyMini(studyAreaIcon(s[0]))+'<span>'+esc(s[0])+'</span></h3><div class="standard-flow"><strong>Erkennen</strong> → <strong>individuell planen</strong> → <strong>umsetzen</strong> → <strong>Wirkung prüfen</strong></div><p><strong>Ziel:</strong> '+esc(s[1])+'</p><p><strong>Kern im Pflegeprozess:</strong> '+esc(s[2])+'</p><p><strong>Anschaulich:</strong> '+esc(s[3])+'</p><p class="muted">'+esc(s[4])+'</p><details><summary>Prüfungsfrage zum Standard</summary><p>'+esc(standardPractice[i])+'</p><p>Nutze Ziel, Einschätzung, Maßnahme und Evaluation zur Begründung. Beziehe Wünsche und Ressourcen der Person ein.</p><button class="btn" onclick="go(&quot;praktisch&quot;)">Pflegeplanung in der praktischen Prüfung</button></details>'+expansionTopicLinks(standardTopics[i])+'</article>').join('')+'</div><div class="panel"><h3>Prüfungsmerker</h3><p>Immer von der konkreten Person ausgehen: Informationen erheben, Risiko und Ressourcen individuell einschätzen, Ziel vereinbaren, Maßnahme begründen, durchführen, Wirkung evaluieren und dokumentieren.</p><a href="https://www.dnqp.de/expertenstandards-und-auditinstrumente/" target="_blank" rel="noopener noreferrer">DNQP: aktuelle Expertenstandards und Auditinstrumente ↗</a><p><a href="https://www.ausschuss-pflege.de/" target="_blank" rel="noopener noreferrer">Qualitätsausschuss Pflege: Expertenstandard Mobilität ↗</a></p></div><p class="content-note">Versionsangaben nach den Veröffentlichungs- und Informationsseiten des DNQP, recherchiert am 7. November 2026. Bei Aktualisierungsverfahren wird der Stand ausdrücklich genannt.</p>';
 }
 function renderGlossary(c){
  c.innerHTML='<div class="learning-hero"><span class="tag">Glossar · '+glossary.length+' Begriffe</span><h2>Pflegefachbegriffe klar erklärt</h2><p>Kurze Definitionen mit Beispielen aus dem Pflegealltag. Fachbegriffe sind Lernhilfen; für Handlungsentscheidungen gelten aktuelle Fachquellen und lokale Standards.</p></div><input class="exp-search" type="search" id="glossarySearchMain" placeholder="Begriff suchen …" oninput="filterExpansionGlossary(this.value)"><p id="glossaryCount" role="status"></p><div id="glossaryResultsMain"></div>';

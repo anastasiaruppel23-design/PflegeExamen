@@ -3,6 +3,79 @@ let cloudUser = null;
 let cloudReady = false;
 let cloudTimer = null;
 let cloudBusy = false;
+let cloudLocalSaved = true;
+let progressOwner = null;
+let progressDirty = false;
+let progressVersion = 0;
+let progressTask = null;
+let progressLoading = null;
+let cloudStatus = '';
+
+function studyProgressDefaults(value = {}) {
+  return {
+    done: {}, best: 0, caseScores: {}, weakTopics: {}, reviewItems: {},
+    kbMistakes: {}, kbMastered: {}, kbAttempts: 0,
+    upgradeStats: {}, simResults: {}, challengeResults: {}, ...value
+  };
+}
+
+const progressKey = user => 'pflegefokus-progress:'+user;
+
+function switchProgressOwner(user) {
+  if (progressOwner === user) return;
+  clearTimeout(cloudTimer);
+  let snapshot;
+  try {
+    if (user) {
+      snapshot = JSON.parse(localStorage.getItem(progressKey(user)) || 'null');
+      if (!snapshot && !localStorage.getItem('pflegefokus-legacy-owner')) {
+        const previous = JSON.parse(localStorage.getItem('pflegekompass-v1') || '{}');
+        const care = JSON.parse(localStorage.getItem('pflegefokus-care-practice') || '{}');
+        snapshot = {data: {...previous, carePractice: care}, pending: false};
+        localStorage.setItem('pflegefokus-legacy-owner', user);
+      }
+    }
+  } catch {}
+  progressOwner = user;
+  progressVersion++;
+  progressDirty = Boolean(snapshot?.pending);
+  state = studyProgressDefaults(snapshot?.data);
+  cloudStatus = progressDirty ? 'Auf diesem Gerät gespeichert. Synchronisierung ausstehend.' : '';
+  if (user && snapshot) writeLocalProgress();
+}
+
+function writeLocalProgress() {
+  if (!progressOwner) return;
+  try {
+    localStorage.setItem(progressKey(progressOwner), JSON.stringify({data:state,pending:progressDirty}));
+    cloudLocalSaved = true;
+  } catch {
+    cloudLocalSaved = false;
+    setCloudStatus('Lokales Speichern fehlgeschlagen. Lass die App offen und prüfe den Gerätespeicher.');
+  }
+}
+
+function persistStudyProgress() {
+  if (!hasLearningAccess() || !progressOwner) return;
+  progressDirty = true;
+  progressVersion++;
+  writeLocalProgress();
+  if (cloudLocalSaved) setCloudStatus('Auf diesem Gerät gespeichert. Synchronisierung ausstehend.');
+}
+
+function setCloudStatus(text) {
+  cloudStatus = text;
+  const status = document.querySelector('#cloudStatus');
+  if (status) status.textContent = text;
+}
+
+function mergeAnswerDrafts(local = {}, remote = {}) {
+  const merged = {...remote};
+  for (const [key, draft] of Object.entries(local)) {
+    if (!merged[key] || draft.updated >= merged[key].updated) merged[key] = draft;
+  }
+  return merged;
+}
 let publicMetrics = null;
 let loadingPublicMetrics = false;
 
@@ -53,6 +126,10 @@ function initCloud() {
 function updateCloudSession(event, session) {
   const previousUser = cloudUser?.id;
   cloudUser = session?.user ?? null;
+  if (previousUser !== cloudUser?.id || event === 'INITIAL_SESSION') {
+    switchProgressOwner(cloudUser?.id ?? null);
+    window.voiceAnswers?.setOwner(cloudUser?.id ?? null);
+  }
 
   if (event === 'PASSWORD_RECOVERY' && cloudUser) {
     passwordRecovery = true;
@@ -84,7 +161,9 @@ function updateCloudSession(event, session) {
 }
 
 function enterLearning(askAboutProgress) {
-  const next = requestedTab || 'start';
+  const savedTab = state.lastStudyTab;
+  const knownRoute = menuGroups.some(([, , items]) => items.some(([id]) => id === savedTab));
+  const next = requestedTab || (knownRoute ? savedTab : 'start');
   requestedTab = null;
   accountNotice = '';
   accountError = false;
@@ -96,9 +175,25 @@ function enterLearning(askAboutProgress) {
   }
 
   if (tab === next) render();
-  else go(next);
+  else {
+    // Restoring the route should not mark a new or offline session as a change.
+    tab = next;
+    render();
+  }
 
-  loadCloudProgress(askAboutProgress);
+  refreshCloudProgress(askAboutProgress);
+  if (savedTab === next) {
+    if (next === 'falltraining' && Number.isInteger(state.activeShortCase)) showExamCase(state.activeShortCase);
+    if (next === 'faelle' && Number.isInteger(state.activeFullCase)) showCase(state.activeFullCase);
+    if (next === 'faelle' && Number.isInteger(state.activeLinkedCase)) openStudyCase(state.activeLinkedCase);
+    if (state.lastAnswer?.tab === tab) requestAnimationFrame(() => {
+      const field = [...document.querySelectorAll('textarea[data-answer]')].find(item => item.dataset.answer === state.lastAnswer?.key);
+      if (field) {
+        if (field.closest('details')) field.closest('details').open = true;
+        field.scrollIntoView({block:'center'});
+      }
+    });
+  }
 }
 
 function openAccount(mode) {
@@ -168,8 +263,8 @@ async function submitAccount(event) {
     if (result.error) throw result.error;
 
     if (result.data?.session) {
-      cloudUser = result.data.session.user;
-      enterLearning(Boolean(localStorage.getItem('pflegekompass-v1')));
+      updateCloudSession('SIGNED_IN', result.data.session);
+      enterLearning(false);
     } else if (mode === 'register' || mode === 'resend') {
       accountMode = 'login';
       accountNotice = 'Schau in deinem Postfach und im Spam-Ordner nach dem Bestätigungslink. Mit einer bereits bestätigten Adresse kannst du dich direkt anmelden.';
@@ -215,6 +310,7 @@ async function updateAccountPassword(event) {
 async function logoutAccount(button) {
   button.disabled = true;
   try {
+    if (progressDirty && navigator.onLine) await syncCloudProgress();
     const {error} = await cloudClient.auth.signOut({scope: 'local'});
     if (error) throw error;
     accountEmail = '';
@@ -225,6 +321,121 @@ async function logoutAccount(button) {
     setAccountNotice(authErrorMessage(error), true);
     button.disabled = false;
   }
+}
+
+const profileAvatars = {
+  pulse: 'Herz',
+  book: 'Lernbuch',
+  wound: 'Pflaster',
+  shield: 'Schild',
+  speech: 'Sprechblase',
+  hands: 'Hände'
+};
+const defaultProfileIcon = '<svg class="pf-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a8 8 0 0 1 16 0v2Z"/></svg>';
+let profileRevision = 0;
+
+function validProfilePhoto(src) {
+  return typeof src === 'string' && src.length <= 120000 &&
+    /^data:image\/jpeg;base64,[A-Za-z0-9+/]+={0,2}$/.test(src);
+}
+
+function profileMark(profile) {
+  if (profile?.kind === 'photo' && validProfilePhoto(profile.src)) {
+    return `<img src="${profile.src}" alt="" decoding="async">`;
+  }
+  if (profile?.kind === 'avatar' && Object.hasOwn(profileAvatars, profile.avatar)) {
+    return studyMini(profile.avatar);
+  }
+  return defaultProfileIcon;
+}
+
+function refreshProfileDisplay() {
+  const profile = hasLearningAccess() ? state.profileAppearance : null;
+  const mark = profileMark(profile);
+  const toggle = document.querySelector('.account-toggle');
+  if (toggle && tab === 'konto') toggle.setAttribute('aria-current', 'page');
+  else toggle?.removeAttribute('aria-current');
+  for (const target of document.querySelectorAll('#headerProfile, #profilePreview')) {
+    if (target.innerHTML !== mark) target.innerHTML = mark;
+  }
+  document.querySelectorAll('[data-profile-avatar]').forEach(button => {
+    button.setAttribute('aria-pressed', String(profile?.kind === 'avatar' && profile.avatar === button.dataset.profileAvatar));
+  });
+  const clearButton = document.querySelector('#clearProfileImage');
+  if (clearButton) clearButton.hidden = !['avatar','photo'].includes(profile?.kind);
+}
+
+function saveProfileAppearance(appearance) {
+  if (!hasLearningAccess()) return;
+  profileRevision++;
+  state.profileAppearance = {...appearance, updated: Date.now()};
+  save();
+  refreshProfileDisplay();
+}
+
+async function resizeProfilePhoto(file) {
+  if (file.size > 12 * 1024 * 1024) throw new Error('Das Bild ist zu groß. Wähle ein Bild bis 12 MB.');
+  if (!['image/jpeg','image/png','image/webp'].includes(file.type)) {
+    throw new Error('Wähle ein Foto im JPG-, PNG- oder WebP-Format.');
+  }
+  const url = URL.createObjectURL(file);
+  try {
+    const image = new Image();
+    image.src = url;
+    await image.decode();
+    const side = Math.min(image.naturalWidth, image.naturalHeight);
+    if (!side) throw new Error('Das Bild ist leer.');
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = Math.min(288, side);
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Die Bildbearbeitung ist in diesem Browser gerade nicht verfügbar.');
+    ctx.fillStyle = '#fff9ef';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(image, (image.naturalWidth - side) / 2, (image.naturalHeight - side) / 2,
+      side, side, 0, 0, canvas.width, canvas.height);
+    const compressed = canvas.toDataURL('image/jpeg', 0.83);
+    if (!validProfilePhoto(compressed)) throw new Error('Das Bild konnte nicht verkleinert werden.');
+    return compressed;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+function bindProfileEditor() {
+  const editor = document.querySelector('#profileEditor');
+  const uploader = editor.querySelector('#profilePhoto');
+  const status = editor.querySelector('#profileNotice');
+  editor.querySelectorAll('[data-profile-avatar]').forEach(button => {
+    button.addEventListener('click', () => {
+      saveProfileAppearance({kind:'avatar', avatar:button.dataset.profileAvatar});
+      status.textContent = 'Avatar übernommen.';
+    });
+  });
+  editor.querySelector('#clearProfileImage').addEventListener('click', () => {
+    saveProfileAppearance({kind:'default'});
+    editor.querySelector('#chooseProfilePhoto').focus();
+    status.textContent = 'Profilbild entfernt.';
+  });
+  editor.querySelector('#chooseProfilePhoto').addEventListener('click', () => uploader.click());
+  uploader.addEventListener('change', async () => {
+    const file = uploader.files[0];
+    if (!file) return;
+    uploader.value = '';
+    const owner = cloudUser?.id;
+    const revision = ++profileRevision;
+    status.textContent = 'Foto wird vorbereitet …';
+    try {
+      const src = await resizeProfilePhoto(file);
+      if (owner !== cloudUser?.id || revision !== profileRevision || !hasLearningAccess()) return;
+      saveProfileAppearance({kind:'photo', src});
+      status.textContent = 'Profilfoto übernommen.';
+    } catch (error) {
+      if (owner === cloudUser?.id && revision === profileRevision) {
+        status.textContent = error instanceof DOMException ? 'Das Foto konnte nicht geöffnet werden. Wähle eine andere Datei.' : error.message;
+      }
+    }
+  });
+  refreshProfileDisplay();
 }
 
 function renderAccount() {
@@ -250,15 +461,35 @@ function renderAccount() {
     return;
   }
   if (cloudUser) {
-    content.innerHTML = `<div class="panel account-panel"><h1>Mein Konto</h1>
-      <p>Angemeldet als <strong>${esc(cloudUser.email || 'Benutzerkonto')}</strong></p>
-      <p id="cloudStatus" class="muted">Dein Lernstand wird bei Änderungen in der Cloud gespeichert.</p>
+    content.innerHTML = `<div class="panel account-panel">
+      <div class="account-heading">
+        <span class="profile-mark" id="profilePreview" aria-hidden="true"></span>
+        <div><h1>Dein Profil</h1><p>${esc(cloudUser.email || 'Benutzerkonto')}</p></div>
+      </div>
+      <section id="profileEditor" class="profile-editor" aria-labelledby="profileEditorTitle">
+        <h2 id="profileEditorTitle">Profilbild</h2>
+        <p class="muted" id="profileImageHelp">Dein Profilbild ist nur in deinem Konto sichtbar.</p>
+        <div class="flex">
+          <button type="button" class="btn primary" id="chooseProfilePhoto" aria-describedby="profileImageHelp">Eigenes Foto auswählen</button>
+          <input type="file" id="profilePhoto" aria-label="Profilfoto auswählen" accept="image/jpeg,image/png,image/webp" hidden>
+          <button type="button" class="btn" id="clearProfileImage" hidden>Profilbild entfernen</button>
+        </div>
+        <fieldset class="profile-avatar-options">
+          <legend>Oder wähle einen Avatar</legend>
+          <div class="profile-avatar-grid">${Object.entries(profileAvatars).map(([icon,label]) =>
+            `<button type="button" class="profile-avatar" data-profile-avatar="${icon}" aria-pressed="false">${studyMini(icon,'mini-small')}<span>${label}</span></button>`).join('')}</div>
+        </fieldset>
+        <p id="profileNotice" class="muted" role="status"></p>
+      </section>
+      <h2 class="account-progress-heading">Dein Lernstand</h2>
+      <p id="cloudStatus" class="muted" role="status">${esc(cloudStatus || 'Dein Lernstand wird automatisch gespeichert und mit deinem Konto synchronisiert.')}</p>
       <div class="flex">
         <button class="btn primary" onclick="syncCloudProgress()">Jetzt sichern</button>
-        <button class="btn" onclick="loadCloudProgress(true)">Cloud-Lernstand laden</button>
+        <button class="btn" onclick="refreshCloudProgress(true)">Cloud-Lernstand laden</button>
         <button class="btn" onclick="logoutAccount(this)">Abmelden</button>
       </div>${notice}
       <p class="muted">Auf gemeinsam genutzten Geräten kann der lokale Lernstand nach der Abmeldung im Browser verbleiben.</p></div>`;
+    bindProfileEditor();
     return;
   }
 
@@ -317,33 +548,49 @@ async function refreshPublicMetrics() {
 }
 
 function scheduleCloudSave() {
-  if (!hasLearningAccess() || !cloudClient || cloudBusy) return;
+  if (!progressDirty || !hasLearningAccess() || !cloudClient || cloudBusy || !navigator.onLine) return;
   clearTimeout(cloudTimer);
-  cloudTimer = setTimeout(syncCloudProgress, 1400);
+  cloudTimer = setTimeout(syncCloudProgress, 650);
 }
 
 async function syncCloudProgress() {
-  if (!hasLearningAccess() || !cloudClient) return;
-  const userId = cloudUser.id;
-  try {
-    const {error} = await cloudClient.from('learning_progress').upsert({
-      user_id: userId, data: state, updated_at: new Date().toISOString()
-    }, {onConflict: 'user_id'});
-    if (error) throw error;
-    if (cloudUser?.id === userId && $('#cloudStatus')) {
-      $('#cloudStatus').textContent = 'Lernstand in der Cloud gespeichert.';
-    }
-  } catch (error) {
-    if (cloudUser?.id === userId && $('#cloudStatus')) {
-      $('#cloudStatus').textContent = 'Synchronisierung fehlgeschlagen. Der Lernstand ist lokal gespeichert.';
-    }
+  if (!hasLearningAccess() || !cloudClient || !navigator.onLine) return;
+  if (progressLoading) await progressLoading;
+  if (!hasLearningAccess()) return;
+  if (progressTask) {
+    await progressTask;
+    if (progressDirty) scheduleCloudSave();
+    return;
   }
+  const userId = cloudUser.id;
+  const version = progressVersion;
+  clearTimeout(cloudTimer);
+  const data = JSON.parse(JSON.stringify(state));
+  progressTask = (async () => {
+    try {
+      const {error} = await cloudClient.from('learning_progress').upsert({
+        user_id: userId, data, updated_at: new Date().toISOString()
+      }, {onConflict: 'user_id'});
+      if (error) throw error;
+      if (progressOwner !== userId) return;
+      if (version === progressVersion) {
+        progressDirty = false;
+        setCloudStatus('Lernstand mit deinem Konto synchronisiert.');
+        writeLocalProgress();
+      } else scheduleCloudSave();
+    } catch {
+      if (progressOwner === userId) {
+        setCloudStatus(cloudLocalSaved ? 'Der Lernstand ist auf diesem Gerät gespeichert. Die Synchronisierung steht noch aus.' : 'Der Lernstand konnte gerade nicht gespeichert werden.');
+      }
+    }
+  })();
+  try {await progressTask;} finally {progressTask = null;}
 }
 
 async function loadCloudProgress(ask = true) {
   if (!hasLearningAccess() || !cloudClient) return;
   const userId = cloudUser.id;
-  const localProgress = localStorage.getItem('pflegekompass-v1');
+  const version = progressVersion;
   try {
     const {data, error} = await cloudClient.from('learning_progress')
       .select('data').eq('user_id', userId).maybeSingle();
@@ -351,22 +598,52 @@ async function loadCloudProgress(ask = true) {
     if (cloudUser?.id !== userId) return;
 
     if (data?.data) {
-      if (ask && !confirm('Gespeicherten Cloud-Lernstand auf diesem Gerät laden? Der lokale Lernstand wird ersetzt.')) return;
-      if (!ask && localStorage.getItem('pflegekompass-v1') !== localProgress) return;
+      if (ask && !confirm('Gespeicherten Cloud-Lernstand auf diesem Gerät laden?')) return;
       cloudBusy = true;
       try {
-        state = {...state, ...data.data};
-        localStorage.setItem('pflegekompass-v1', JSON.stringify(state));
+        const changedHere = progressDirty || version !== progressVersion;
+        const remote = data.data;
+        const drafts = mergeAnswerDrafts(state.answerDrafts, remote.answerDrafts);
+        const localProfile = state.profileAppearance;
+        const remoteProfile = remote.profileAppearance;
+        const localProfileNewer = (localProfile?.updated ?? 0) > (remoteProfile?.updated ?? 0);
+        const profileAppearance = localProfileNewer ? localProfile : remoteProfile;
+        const wasDirty = progressDirty;
+        state = changedHere
+          ? studyProgressDefaults({...remote, ...state, answerDrafts: drafts, profileAppearance})
+          : studyProgressDefaults({...state, ...remote, lastStudyTab: state.lastStudyTab || remote.lastStudyTab, answerDrafts: drafts, profileAppearance});
+        const draftChanges = Object.entries(drafts).some(([key, draft]) => !remote.answerDrafts?.[key] || draft.updated > remote.answerDrafts[key].updated);
+        progressDirty = wasDirty || draftChanges || localProfileNewer;
+        if (progressDirty) progressVersion++;
+        writeLocalProgress();
       } finally {
         cloudBusy = false;
       }
-      if (tab === 'start' || tab === 'konto') render();
-    } else if (ask && localProgress && confirm('Deinen lokalen Lernstand in dieses Konto hochladen?')) {
-      await syncCloudProgress();
+      if (tab === 'start') render();
+      refreshProfileDisplay();
+      window.voiceAnswers?.refreshDrafts();
+    } else if (ask && confirm('Deinen lokalen Lernstand in dieses Konto hochladen?')) {
+      persistStudyProgress();
     }
-  } catch (error) {
-    if (cloudUser?.id === userId && $('#cloudStatus')) {
-      $('#cloudStatus').textContent = 'Cloud-Lernstand konnte gerade nicht geladen werden.';
-    }
+  } catch {
+    if (cloudUser?.id === userId) setCloudStatus('Cloud-Lernstand konnte gerade nicht geladen werden.');
   }
 }
+
+function refreshCloudProgress(ask = false) {
+  const task = loadCloudProgress(ask);
+  progressLoading = task;
+  return task.finally(() => {
+    if (progressLoading === task) progressLoading = null;
+    if (progressDirty) scheduleCloudSave();
+  });
+}
+
+function flushStudyProgress() {
+  if (progressDirty) syncCloudProgress();
+}
+window.addEventListener('online', () => {
+  if (progressDirty) refreshCloudProgress().finally(flushStudyProgress);
+});
+window.addEventListener('pagehide', flushStudyProgress);
+document.addEventListener('visibilitychange', flushStudyProgress);

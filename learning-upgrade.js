@@ -2,7 +2,6 @@
 (function(){
  const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const safeSave=()=>{try{if(typeof save==='function')save();else localStorage.setItem('pflegekompass-v1',JSON.stringify(state))}catch(e){}};
- delete state.plan;safeSave();
  const dateKey=()=>new Date().toISOString().slice(0,10);
  state.reviewItems??={};state.upgradeStats??={};state.simResults??={};state.challengeResults??={};
 
@@ -104,12 +103,20 @@
   const due=dueCount(),done=Object.keys(state.done||{}).filter(k=>state.done[k]).length,areas=byArea(),weak=Object.keys(state.reviewItems).filter(k=>state.reviewItems[k].rating!=='gewusst');
   const next=due?'<button class="btn primary" onclick="go(&#39;themenquiz&#39;)">Unsichere Fragen wiederholen ('+due+')</button>':
    '<button class="btn primary" onclick="go(&#39;themenquiz&#39;)">Mit einem kurzen Themenquiz starten</button>';
-  c.innerHTML='<div class="panel"><span class="tag">Dein Lernweg · individuell aus deinem Lernstand</span><h2>Heute weiterlernen</h2><p>Dieser Lernweg richtet sich nach deinen eigenen Antworten und deinem Fortschritt. Er enthält keinen persönlichen Prüfungsmonat oder vorgegebenen Kalender.</p><div class="grid"><div class="card"><strong>'+due+'</strong><p>heute fällige Wiederholungen</p></div><div class="card"><strong>'+done+'</strong><p>als gelernt markierte Themen</p></div><div class="card"><strong>'+weak.length+'</strong><p>unsichere oder falsche Themen</p></div></div>'+next+'</div><div class="panel"><h3>Deine Themenstrecken</h3><p>Wähle ein Organsystem oder einen Pflegebereich. Eine Einheit besteht aus Wissen, einer Frage und einer kurzen Wiederholung.</p><div class="grid">'+Object.entries(areas).map(([k,v])=>'<article class="card"><h3>'+esc(k)+'</h3><p>'+v.length+' Lernprofile · '+v.filter(y=>state.reviewItems['disease-'+y.i]?.rating==='gewusst').length+' sicher markiert</p><button class="btn" onclick="upgradeQuizArea(&#39;'+esc(k).replace(/'/g,'&#39;')+'&#39;)">Einheit beginnen</button><button class="btn" onclick="upgradeCacheModule()">Modul offline speichern</button><span id="offlineStatus" class="muted"></span></article>').join('')+'</div></div><div class="panel"><h3>Dein nächster sinnvoller Schritt</h3><ol><li>Fällige Karten und Fragen beantworten.</li><li>Ein Krankheitsbild aus einem noch unsicheren Bereich bearbeiten.</li><li>Eine Prüfungs- oder Praxisübung auswählen und danach die Begründungen vergleichen.</li></ol></div>';
+  c.innerHTML='<div class="panel"><span class="tag">Dein Lernweg · individuell aus deinem Lernstand</span><h2>Heute weiterlernen</h2><p>Dieser Lernweg richtet sich nach deinen eigenen Antworten und deinem Fortschritt. Er enthält keinen persönlichen Prüfungsmonat oder vorgegebenen Kalender.</p><div class="grid"><div class="card"><strong>'+due+'</strong><p>heute fällige Wiederholungen</p></div><div class="card"><strong>'+done+'</strong><p>als gelernt markierte Themen</p></div><div class="card"><strong>'+weak.length+'</strong><p>unsichere oder falsche Themen</p></div></div>'+next+'</div><div class="panel"><h3>Deine Themenstrecken</h3><p>Wähle ein Organsystem oder einen Pflegebereich. Eine Einheit besteht aus Wissen, einer Frage und einer kurzen Wiederholung.</p><div class="grid study-section-grid">'+Object.entries(areas).map(([k,v])=>'<article class="card study-section"><h3 class="section-title">'+studyMini(studyAreaIcon(k))+'<span>'+esc(k)+'</span></h3><p>'+v.length+' Lernprofile · '+v.filter(y=>state.reviewItems['disease-'+y.i]?.rating==='gewusst').length+' sicher markiert</p><div class="flex"><button class="btn primary" onclick="upgradeQuizArea(&#39;'+esc(k).replace(/'/g,'&#39;')+'&#39;)">Einheit beginnen</button><button class="btn" onclick="upgradeCacheModule(this)">Modul offline speichern</button></div><p class="offlineStatus muted" role="status"></p></article>').join('')+'</div></div><div class="panel"><h3>Dein nächster sinnvoller Schritt</h3><ol><li>Fällige Karten und Fragen beantworten.</li><li>Ein Krankheitsbild aus einem noch unsicheren Bereich bearbeiten.</li><li>Eine Prüfungs- oder Praxisübung auswählen und danach die Begründungen vergleichen.</li></ol></div>';
  }
- window.upgradeCacheModule=async function(){const label=document.querySelector('.offlineStatus');try{if(!('caches' in window)){if(label)label.textContent='Offline-Speichern wird von diesem Browser nicht unterstützt.';return}if(label)label.textContent='Lerneinheit wird gespeichert …';const cache=await caches.open('pflegefokus-module-offline-v1');await cache.addAll(['./index.html','./disease-library.js?v=3','./library.js?v=12','./learning-upgrade.js?v=7','./learning-expansion.js?v=2','./visual-library.js?v=21','./assets/heart-study.webp','./assets/lung-study.webp','./assets/glucose-study.webp','./assets/atmung-schema.svg','./assets/haut-schema.svg']);if(label)label.textContent='Texte, Quiz und lokale Abbildungen sind offline verfügbar. Externe Bilder benötigen Internet.'}catch(e){if(label)label.textContent='Speichern nicht möglich – prüfe die Internetverbindung und versuche es erneut.'}};
- window.upgradeQuizArea=function(area){state.upgradeArea=area;safeSave();go('themenquiz')};
+ window.upgradeCacheModule=async function(button){
+  const label=button.closest('article').querySelector('.offlineStatus');
+  label.textContent='Offline-Verfügbarkeit wird geprüft …';
+  try{
+   const registration=await navigator.serviceWorker?.getRegistration();
+   if(!registration?.active || !await caches.match('./learning-upgrade.js?v=11'))throw new Error('App-Cache noch nicht bereit');
+   label.textContent='Die Lerneinheiten sind auf diesem Gerät offline verfügbar.';
+  }catch{label.textContent='Offline-Lernen ist noch nicht bereit. Öffne PflegeFokus erneut mit Internetverbindung.';}
+ };
+ window.upgradeQuizArea=function(area){state.upgradeArea=area;state.upgradeLevel='basis';qrun=[];qpos=0;safeSave();go('themenquiz')};
  let qrun=[],qpos=0,qselected=null,qchecked=false;
- function quizPool(){
+ function baseQuizPool(){
   const ds=window.pfDiseaseEntries||[];
   let a=ds.map((d,i)=>{const z=d.quiz;return z?{id:'disease-'+i,area:d.group||d.system||'Krankheitsbilder',q:z[0],options:z[1],answer:z[2],explain:z[3],title:d.title}:null}).filter(Boolean);
   if(typeof questions!=='undefined')a=a.concat(questions.map((q,i)=>({id:'general-'+i,area:'Pflegewissen und Modelle',q:q[0],options:q[1],answer:q[2],explain:q[3]})));
@@ -118,6 +125,10 @@
   a=a.concat(lib.filter(x=>x.quiz).map((x,i)=>({id:'lib-'+i,area:x.category||'Pflegewissen',q:x.quiz[0],options:x.quiz[1],answer:x.quiz[2],explain:x.quiz[3],title:x.title})));
   return a;
  }
+ function quizPool(){return baseQuizPool().concat(window.advancedQuizQuestions)}
+ function selectedQuizPool(){return state.upgradeLevel==='advanced'?window.advancedQuizQuestions:baseQuizPool()}
+ function quizLevels(){return '<div class="flex quiz-levels" role="group" aria-label="Schwierigkeitsstufe">'+[['basis','Basiswissen'],['advanced','Prüfungstraining']].map(([id,label])=>'<button class="btn" aria-pressed="'+((state.upgradeLevel||'basis')===id)+'" onclick="upgradeQuizLevel(&quot;'+id+'&quot;)">'+label+'</button>').join('')+'</div>'}
+ window.upgradeQuizLevel=level=>{state.upgradeLevel=level;state.upgradeArea='Alle';delete state.activeTopicQuiz;safeSave();qrun=[];qpos=0;renderQuiz($('#content'))};
  function rateQuestion(q,rating){
   const prev=state.reviewItems[q.id]||{interval:0,streak:0};
   const days=rating==='gewusst'?Math.min(30,Math.max(1,prev.interval?prev.interval*2:2)):rating==='unsicher'?1:0;
@@ -125,28 +136,42 @@
   const area=q.area||'Andere';state.upgradeStats[area]??={attempts:0,correct:0};state.upgradeStats[area].attempts++;if(rating==='gewusst')state.upgradeStats[area].correct++;
   safeSave();
  }
+ function saveQuiz(){
+  state.activeTopicQuiz=qpos<qrun.length?{ids:qrun.map(item=>item.id),position:qpos,selected:qselected,checked:qchecked}:null;
+  safeSave();
+  renderQuiz($('#content'));
+ }
  function renderQuiz(c){
-  const pool=quizPool(),areas=[...new Set(pool.map(x=>x.area))],filter=state.upgradeArea||'Alle',list=pool.filter(x=>filter==='Alle'||x.area===filter),due=list.filter(x=>state.reviewItems[x.id]&&state.reviewItems[x.id].due<=dateKey());
+  const running=state.activeTopicQuiz;
+  if(running){
+   const byId=new Map(quizPool().map(item=>[item.id,item]));
+   qrun=running.ids.map(id=>byId.get(id));
+   if(qrun.every(Boolean)){qpos=running.position;qselected=running.selected;qchecked=running.checked}
+   else {qrun=[];qpos=0;delete state.activeTopicQuiz}
+  }else {qrun=[];qpos=0}
+  const pool=selectedQuizPool(),areas=[...new Set(pool.map(x=>x.area))],filter=state.upgradeArea||'Alle',list=pool.filter(x=>filter==='Alle'||x.area===filter),due=list.filter(x=>state.reviewItems[x.id]&&state.reviewItems[x.id].due<=dateKey());
   if(!qrun.length||qpos>=qrun.length){
-   c.innerHTML='<div class="panel"><span class="tag">Themenquiz · Krankheitsbilder und Lerninhalte</span><h2>Gezielt üben</h2><p>Die Fragen kommen aus den thematischen Profilen. Nach jeder Antwort bewertest du deine Sicherheit; Fehler werden automatisch früher wiederholt.</p><label for="upgradeArea">Themenbereich</label><select id="upgradeArea" onchange="state.upgradeArea=this.value"><option>Alle</option>'+areas.map(x=>'<option '+(filter===x?'selected':'')+'>'+esc(x)+'</option>').join('')+'</select><div class="flex"><button class="btn primary" onclick="upgradeQuizStart(false)">Quiz starten ('+list.length+' Fragen)</button><button class="btn" onclick="upgradeQuizStart(true)" '+(due.length?'':'disabled')+'>Fällige Wiederholungen ('+due.length+')</button></div></div>';
+   c.innerHTML='<div class="panel"><span class="tag">Themenquiz · Krankheitsbilder und Lerninhalte</span><h2>Gezielt üben</h2>'+quizLevels()+'<p>'+(state.upgradeLevel==='advanced'?'Bearbeite Fallfragen mit ähnlichen Antwortoptionen und begründe deine Priorität.':'Wiederhole die Grundlagen und schätze nach jeder Antwort ein, wie sicher du bist.')+'</p><label for="upgradeArea">Themenbereich</label><select id="upgradeArea" onchange="state.upgradeArea=this.value;save();render()"><option>Alle</option>'+areas.map(x=>'<option '+(filter===x?'selected':'')+'>'+esc(x)+'</option>').join('')+'</select><div class="flex"><button class="btn primary" onclick="upgradeQuizStart(false)">Quiz starten ('+list.length+' Fragen)</button><button class="btn" onclick="upgradeQuizStart(true)" '+(due.length?'':'disabled')+'>Fällige Wiederholungen ('+due.length+')</button></div></div>';
    return;
   }
   const q=qrun[qpos],ans=qselected!==null&&qselected===q.answer;
   let feedback='';
   if(qchecked){
-   feedback='<p class="'+(ans?'good':'bad')+'"><strong>'+(ans?'Richtig':'Noch nicht richtig')+'</strong> '+esc(q.explain)+'</p><p>Wie sicher warst du?</p><div class="flex"><button class="btn" onclick="upgradeRate(0)">Nicht gewusst</button><button class="btn" onclick="upgradeRate(1)">Unsicher</button>';
+   feedback='<p class="'+(ans?'good':'bad')+'"><strong>'+(ans?'Richtig':'Noch nicht richtig')+'</strong> '+(q.feedback?'':esc(q.explain))+'</p>';
+   if(q.feedback)feedback+='<details open><summary>Alle Antwortmöglichkeiten erklärt</summary><ol class="quiz-explanations">'+q.feedback.map((reason,i)=>'<li><strong>'+String.fromCharCode(65+i)+' · '+esc(q.options[i])+'</strong><p>'+esc(reason)+'</p></li>').join('')+'</ol>'+sourceLink(q.source)+'</details>';
+   feedback+='<p>Wie sicher warst du?</p><div class="flex"><button class="btn" onclick="upgradeRate(0)">Nicht gewusst</button><button class="btn" onclick="upgradeRate(1)">Unsicher</button>';
    if(ans)feedback+='<button class="btn primary" onclick="upgradeRate(2)">Gewusst</button>';
    else feedback+='<p class="muted">Die falsche Antwort wird als Wiederholung vorgemerkt.</p>';
    feedback+='</div>';
   }else{
    feedback='<button class="btn primary" '+(qselected===null?'disabled':'')+' onclick="upgradeQuizCheck()">Antwort prüfen</button>';
   }
-  c.innerHTML='<div class="panel"><span class="tag">'+esc(q.area)+' · '+(qpos+1)+' / '+qrun.length+'</span><h2>'+esc(q.q)+'</h2>'+q.options.map((x,i)=>'<button class="option '+(qselected===i?'selected':'')+'" '+(qchecked?'disabled':'')+' onclick="upgradeQuizAnswer('+i+')">'+String.fromCharCode(65+i)+' · '+esc(x)+'</button>').join('')+feedback+'</div>';
+  c.innerHTML='<div class="panel"><span class="tag">'+esc(q.area)+' · '+(qpos+1)+' / '+qrun.length+'</span>'+quizLevels()+'<h2>'+esc(q.q)+'</h2>'+q.options.map((x,i)=>'<button class="option '+(qselected===i?'selected':'')+'" '+(qchecked?'disabled':'')+' onclick="upgradeQuizAnswer('+i+')">'+String.fromCharCode(65+i)+' · '+esc(x)+'</button>').join('')+feedback+'</div>';
  }
- window.upgradeQuizStart=function(onlyDue){const area=state.upgradeArea||'Alle';qrun=quizPool().filter(q=>(area==='Alle'||q.area===area)&&(!onlyDue||(state.reviewItems[q.id]&&state.reviewItems[q.id].due<=dateKey()))).sort(()=>Math.random()-.5);qpos=0;qselected=null;qchecked=false;renderQuiz($('#content'))};
- window.upgradeQuizAnswer=n=>{if(!qchecked){qselected=n;renderQuiz($('#content'))}};
- window.upgradeQuizCheck=()=>{if(qselected!==null){qchecked=true;renderQuiz($('#content'))}};
- window.upgradeRate=r=>{const rating=['nicht gewusst','unsicher','gewusst'][r]||r;rateQuestion(qrun[qpos],rating);qpos++;qselected=null;qchecked=false;renderQuiz($('#content'))};
+ window.upgradeQuizStart=function(onlyDue){const reviewing=tab==='wiederholen';const area=reviewing?'Alle':(state.upgradeArea||'Alle');qrun=(reviewing?quizPool():selectedQuizPool()).filter(q=>(area==='Alle'||q.area===area)&&(!onlyDue||(state.reviewItems[q.id]&&state.reviewItems[q.id].due<=dateKey()))).sort(()=>Math.random()-.5);qpos=0;qselected=null;qchecked=false;saveQuiz()};
+ window.upgradeQuizAnswer=n=>{if(!qchecked){qselected=n;saveQuiz()}};
+ window.upgradeQuizCheck=()=>{if(qselected!==null){qchecked=true;saveQuiz()}};
+ window.upgradeRate=r=>{const rating=['nicht gewusst','unsicher','gewusst'][r]||r;rateQuestion(qrun[qpos],rating);qpos++;qselected=null;qchecked=false;saveQuiz()};
 
  function addFlashcardRatings(){if(typeof cards==='undefined')return;const c=$('#content');if(!c||document.getElementById('flashcardRating'))return;const row=document.createElement('div');row.id='flashcardRating';row.className='panel';const key='flashcard-'+ci,known=state.reviewItems[key];const disabled=flipped?'':'disabled';row.innerHTML='<span class="tag">Wiederholung</span><h3>Wie sicher konntest du diese Karte beantworten?</h3><p class="muted">Die Antwort erst aufdecken, dann deine Sicherheit einschätzen.</p><div class="flex"><button class="btn" '+disabled+' onclick="upgradeCardRate(0)">Nicht gewusst</button><button class="btn" '+disabled+' onclick="upgradeCardRate(1)">Unsicher</button><button class="btn primary" '+disabled+' onclick="upgradeCardRate(2)">Gewusst</button></div>'+(known?'<p class="muted">Nächste Wiederholung: '+esc(known.due)+'</p>':'');c.appendChild(row)}
  window.upgradeCardRate=r=>{const rating=['nicht gewusst','unsicher','gewusst'][r];rateQuestion({id:'flashcard-'+ci,area:'Lernkarten'},rating);if(typeof window.renderCards==='function')window.renderCards()};
@@ -154,7 +179,7 @@
 
  function renderDashboard(c){
   const stats=state.upgradeStats||{},due=dueCount(),areas=Object.entries(stats),all=areas.reduce((a,[,s])=>({attempts:a.attempts+s.attempts,correct:a.correct+s.correct}),{attempts:0,correct:0});
-  c.innerHTML='<div class="panel"><span class="tag">Wissensstand</span><h2>Was sitzt schon – was braucht Wiederholung?</h2><div class="grid"><div class="card"><strong>'+all.attempts+'</strong><p>beantwortete Fragen</p></div><div class="card"><strong>'+(all.attempts?Math.round(all.correct/all.attempts*100):0)+'%</strong><p>selbst als gewusst bewertet</p></div><div class="card"><strong>'+due+'</strong><p>heute fällige Wiederholungen</p></div></div><p>„Gewusst“ ist deine Selbsteinschätzung, kein offizielles Prüfungsergebnis. Unsichere Inhalte bleiben sichtbar und kommen zeitnah wieder.</p></div><div class="panel"><h3>Nach Themenbereich</h3>'+(areas.length?'<div class="grid">'+areas.map(([k,s])=>'<article class="card"><strong>'+esc(k)+'</strong><p>'+s.correct+' von '+s.attempts+' als gewusst markiert</p><div class="progress"><div style="width:'+(s.attempts?Math.round(s.correct/s.attempts*100):0)+'%"></div></div></article>').join('')+'</div>':'<p>Nach deinen ersten Quizantworten wird hier dein persönlicher Stand angezeigt.</p>')+'<button class="btn primary" onclick="go(&#39;themenquiz&#39;)">Jetzt gezielt üben</button></div>';
+  c.innerHTML='<div class="panel"><span class="tag">Wissensstand</span><h2>Was sitzt schon – was braucht Wiederholung?</h2><div class="grid study-section-grid"><div class="card study-section">'+studyMini('plan')+'<strong class="stat">'+all.attempts+'</strong><p>beantwortete Fragen</p></div><div class="card study-section">'+studyMini('chart')+'<strong class="stat">'+(all.attempts?Math.round(all.correct/all.attempts*100):0)+'%</strong><p>selbst als gewusst bewertet</p></div><div class="card study-section">'+studyMini('repeat')+'<strong class="stat">'+due+'</strong><p>heute fällige Wiederholungen</p></div></div><p>„Gewusst“ ist deine Selbsteinschätzung, kein offizielles Prüfungsergebnis. Unsichere Inhalte bleiben sichtbar und kommen zeitnah wieder.</p></div><div class="panel"><h3>Nach Themenbereich</h3>'+(areas.length?'<div class="grid study-section-grid">'+areas.map(([k,s])=>'<article class="card"><strong>'+esc(k)+'</strong><p>'+s.correct+' von '+s.attempts+' als gewusst markiert</p><div class="progress"><div style="width:'+(s.attempts?Math.round(s.correct/s.attempts*100):0)+'%"></div></div></article>').join('')+'</div>':'<p>Nach deinen ersten Quizantworten wird hier dein persönlicher Stand angezeigt.</p>')+'<button class="btn primary" onclick="go(&#39;themenquiz&#39;)">Jetzt gezielt üben</button></div>';
  }
  const scenarios=[
   {title:'Plötzliche Atemnot im Pflegeheim',setting:'Langzeitpflege',story:'Beim Rundgang sitzt Frau B. 81 Jahre plötzlich nach vorn gebeugt auf der Bettkante. Sie ringt nach Luft, kann nur einzelne Worte sprechen und wirkt ängstlich. Die Haut ist blass. Ein Inhalator liegt auf dem Nachttisch; ob er verordnet und korrekt anzuwenden ist, muss geprüft werden. Eine Pflegehilfskraft möchte sie flach hinlegen. Die aktuelle Atemfrequenz, Sauerstoffsättigung und der übliche Zustand sind noch nicht bekannt.',steps:[
@@ -168,18 +193,49 @@
    {q:'Welche Übergabe hilft dem Team?',opts:['Zeitpunkt des Beginns, Abweichung vom Ausgangszustand, Beobachtungen, Vitalwerte, Medikamente und Maßnahmen strukturiert mitteilen','Nur „war komisch“ sagen','Ausschließlich die Diagnose vermuten','Die Dokumentation erst am Folgetag ergänzen'],a:0,why:'Eine präzise strukturierte Übergabe unterstützt rasche Beurteilung und Kontinuität. Vermutungen als solche kennzeichnen.'}
   ]}
  ];
+ scenarios.push(...window.extraEmergencyCases);
  let sim=0,simStep=0,simFeedback=false,simOutcome=false;
+ function sourceLink(source){return source?'<p class="muted"><a href="'+esc(source[1])+'" target="_blank" rel="noopener noreferrer">'+esc(source[0])+'</a></p>':''}
  function renderSimulator(c){
-  const s=scenarios[sim];
-  if(simOutcome){const choices=s.steps.map((x,i)=>{const v=state.simChoices&&state.simChoices[sim+'-'+i];return typeof v==='boolean'?(v?x.a:-1):v});const missed=choices.map((choice,i)=>choice!==s.steps[i].a?'<li><strong>Schritt '+(i+1)+':</strong> Du hast nicht die priorisierte Handlung gewählt. Sicherer Schwerpunkt: '+esc(s.steps[i].opts[s.steps[i].a])+'</li>':'').filter(Boolean).join('');const ending=missed?'<p>Gehe die Schritte mit Lernpunkten noch einmal durch. Die Angaben zeigen, welche Priorität im Übungsfall wichtig war; sie sagen keinen tatsächlichen Krankheitsverlauf voraus.</p><ul>'+missed+'</ul>':'<p>Du hast in allen drei Schritten die priorisierte Handlung gewählt. In einer realen Situation gehören laufende Neubewertung, klare Teamkommunikation und der örtliche Notfallstandard weiterhin dazu.</p>';c.innerHTML='<div class="panel"><span class="tag">Szenario-Auswertung · '+esc(s.setting)+'</span><h2>'+esc(s.title)+'</h2>'+ending+'<p>Fiktive Lernfolge zur Reflexion – keine Vorhersage eines echten klinischen Verlaufs.</p><button class="btn primary" onclick="upgradeSimRestart()">Szenario erneut üben</button><button class="btn" onclick="upgradeSimSelect('+((sim+1)%scenarios.length)+')">Anderes Szenario</button></div>';return}
-  const step=s.steps[simStep];
-  const chosenRaw=state.simChoices&&state.simChoices[sim+'-'+simStep],chosen=typeof chosenRaw==='boolean'?(chosenRaw?step.a:0):chosenRaw;
-  c.innerHTML='<div class="panel"><span class="tag">Verzweigtes Notfalltraining · fiktiver Übungsfall</span><h2>Entscheidungen mit Folgen üben</h2><p>Wähle zuerst eine Handlung. Danach erhältst du eine fallbezogene Rückmeldung und kannst die Priorität mit deiner Entscheidung vergleichen. Das ersetzt keinen lokalen Notfallstandard.</p><div class="flex">'+scenarios.map((x,i)=>'<button class="btn '+(i===sim?'primary':'')+'" onclick="upgradeSimSelect('+i+')">'+esc(x.setting)+'</button>').join('')+'</div><div class="card"><h3>'+esc(s.title)+'</h3><p>'+esc(s.story)+'</p><span class="tag">Schritt '+(simStep+1)+' von '+s.steps.length+'</span><h3>'+esc(step.q)+'</h3>'+step.opts.map((o,i)=>'<button class="option" '+(simFeedback?'disabled':'')+' onclick="upgradeSimChoose('+i+')">'+esc(o)+'</button>').join('')+(simFeedback?'<div class="learn-box"><strong>'+(chosen===step.a?'Passende Priorität gewählt.':'Lernpunkt: vergleiche deine Wahl mit der sicheren Priorität.')+'</strong><p><strong>Deine Wahl:</strong> '+esc(step.opts[chosen])+'</p>'+(chosen!==step.a?'<p><strong>Priorität im Fall:</strong> '+esc(step.opts[step.a])+'</p>':'')+'<p>'+esc(step.why)+'</p><button class="btn primary" onclick="upgradeSimNext()">'+(simStep+1<s.steps.length?'Nächste Entscheidung':'Szenario abschließen')+'</button></div>':'')+'</div>';
+  const stored=state.activeEmergency;
+  if(stored&&scenarios[stored.caseIndex]?.steps[stored.step]){
+   sim=stored.caseIndex;simStep=stored.step;simFeedback=stored.feedback;simOutcome=stored.outcome;
+  }
+  const s=scenarios[sim], step=s.steps[simStep], chosen=state.simChoices?.[sim+'-'+simStep];
+  const picker='<label for="emergencyCase">Notfallübung auswählen</label><select id="emergencyCase" onchange="upgradeSimSelect(Number(this.value))">'+['Langzeitpflege','Krankenhaus'].map(setting=>'<optgroup label="'+setting+'">'+scenarios.map((x,i)=>x.setting===setting?'<option value="'+i+'" '+(i===sim?'selected':'')+'>'+esc(x.title)+'</option>':'').join('')+'</optgroup>').join('')+'</select>';
+  let body;
+  if(simOutcome){
+   const correct=s.steps.filter((x,i)=>state.simChoices?.[sim+'-'+i]===x.a).length;
+   body='<h3>Auswertung</h3><p>'+correct+' von '+s.steps.length+' priorisierten Entscheidungen gewählt.</p><ol>'+s.steps.map((x,i)=>'<li><strong>'+esc(x.q)+'</strong><p>'+esc(x.opts[x.a])+' · '+esc(x.why)+'</p></li>').join('')+'</ol><button class="btn primary" onclick="upgradeSimSelect('+sim+')">Szenario erneut üben</button>';
+  }else{
+   body='<span class="tag">Entscheidung '+(simStep+1)+' von '+s.steps.length+'</span><h3>'+esc(step.q)+'</h3>'+step.opts.map((o,i)=>'<button class="option '+(simFeedback&&i===chosen?'selected':'')+'" '+(simFeedback?'disabled':'')+' onclick="upgradeSimChoose('+i+')">'+esc(o)+'</button>').join('');
+   if(simFeedback)body+='<div class="learn-box" role="status"><strong>'+(chosen===step.a?'Passende Priorität gewählt':'Deine Entscheidung und ihre mögliche Folge')+'</strong><p>'+esc(step.responses?.[chosen]||step.why)+'</p>'+(chosen!==step.a?'<p><strong>Priorität im Fall:</strong> '+esc(step.opts[step.a])+'</p>':'')+'<button class="btn primary" onclick="upgradeSimNext()">'+(simStep+1<s.steps.length?'Nächste Entscheidung':'Auswertung ansehen')+'</button></div>';
+  }
+  c.innerHTML='<div class="panel"><h2>Entscheidungen mit Folgen üben</h2><p>Wähle deine Handlung und vergleiche ihre mögliche Folge mit der Priorität im Fall. Für reale Notfälle gelten die örtlichen Alarmwege und Standards.</p>'+picker+'<article class="card study-section"><span class="tag">'+esc(s.setting)+' · Fiktiver Fall</span><h3 class="section-title">'+studyMini(studyAreaIcon(s.title))+'<span>'+esc(s.title)+'</span></h3><p>'+esc(s.story)+'</p>'+body+sourceLink(s.source)+'</article></div>';
  }
- window.upgradeSimSelect=i=>{sim=i;simStep=0;simFeedback=false;simOutcome=false;state.simChoices??={};Object.keys(state.simChoices).filter(k=>k.startsWith(i+'-')).forEach(k=>delete state.simChoices[k]);renderSimulator($('#content'))};
- window.upgradeSimRestart=()=>window.upgradeSimSelect(sim);
- window.upgradeSimChoose=i=>{if(simFeedback)return;state.simChoices??={};state.simChoices[sim+'-'+simStep]=i;safeSave();simFeedback=true;renderSimulator($('#content'))};
- window.upgradeSimNext=()=>{if(simStep+1>=scenarios[sim].steps.length){simFeedback=false;simOutcome=true}else{simStep++;simFeedback=false}renderSimulator($('#content'))};
+ function saveSimulator(){
+  state.activeEmergency={caseIndex:sim,step:simStep,feedback:simFeedback,outcome:simOutcome};
+  safeSave();
+  renderSimulator($('#content'));
+ }
+ window.upgradeSimSelect=i=>{
+  sim=i;simStep=0;simFeedback=false;simOutcome=false;
+  state.simChoices??={};
+  scenarios[i].steps.forEach((_,n)=>delete state.simChoices[i+'-'+n]);
+  saveSimulator();
+ };
+ window.upgradeSimChoose=i=>{
+  if(simFeedback)return;
+  (state.simChoices??={})[sim+'-'+simStep]=i;
+  simFeedback=true;
+  saveSimulator();
+ };
+ window.upgradeSimNext=()=>{
+  simFeedback=false;
+  if(simStep+1>=scenarios[sim].steps.length)simOutcome=true;
+  else simStep++;
+  saveSimulator();
+ };
 
  const challenges=[
   {title:'Händehygiene im Pflegealltag',steps:[['Wann ist die hygienische Händedesinfektion erforderlich?',['Vor aseptischen Tätigkeiten und nach relevanten Kontaminationssituationen','Nur am Dienstbeginn','Nur bei sichtbarem Schmutz','Nur nach dem Essen'],0,'Die Indikationen richten sich nach den fünf Momenten und dem lokalen Hygieneplan. Sichtbarer Schmutz erfordert zusätzlich Waschen.'],['Was ist bei der Durchführung entscheidend?',['Ausreichende Menge, vollständige Benetzung und Einwirkzeit nach Produktangabe','Sofort abwischen','Nur die Handflächen benetzen','Handschuhe ersetzen die Desinfektion'],0,'Alle Handbereiche müssen für die vorgeschriebene Zeit benetzt sein. Handschuhe ersetzen Händedesinfektion nicht.']]},
@@ -192,13 +248,21 @@
   {title:'Medikamentengabe und Rückfrage',steps:[['Die Verordnung ist unklar. Wie handelst du?', ['Gabe zurückstellen, Rückfrage bei zuständiger Stelle und Klärung dokumentieren','Dosis selbst schätzen','Kolleginnen nach Vermutung fragen und geben','Medikament austauschen'],0,'Unklare Anordnungen werden vor der Gabe geklärt; keine eigenmächtige Dosisänderung.']]}
  ];
  let ch=0,chStep=0,chFeedback=false;
- function renderChallenges(c){
-  const x=challenges[ch],s=x.steps[chStep];
-  c.innerHTML='<div class="panel"><span class="tag">Praxis-Challenges · Schritt für Schritt</span><h2>Fachgerecht handeln und den Grund verstehen</h2><p>Jede Challenge erklärt nach deiner Wahl den fachlichen Grund und mögliche Risiken. Praktische Handgriffe müssen zusätzlich in der Ausbildungseinrichtung angeleitet und geübt werden.</p><div class="grid">'+challenges.map((z,i)=>'<button class="card" onclick="upgradeChallengeSelect('+i+')">'+(i===ch?'✓ ':'')+esc(z.title)+'</button>').join('')+'</div><div class="card"><h3>'+esc(x.title)+'</h3><p>Schritt '+(chStep+1)+' von '+x.steps.length+'</p><h3>'+esc(s[0])+'</h3>'+s[1].map((o,i)=>'<button class="option" '+(chFeedback?'disabled':'')+' onclick="upgradeChallengeChoose('+i+')">'+esc(o)+'</button>').join('')+(chFeedback?'<p class="'+(state.challengeResults[ch+'-'+chStep]?'good':'bad')+'">'+esc(s[3])+'</p><button class="btn primary" onclick="upgradeChallengeNext()">Nächster Schritt</button>':'')+'</div>';
+ function saveChallenge(){
+  state.activePracticeChallenge={index:ch,step:chStep,feedback:chFeedback};
+  safeSave();renderChallenges($('#content'));
  }
- window.upgradeChallengeSelect=i=>{ch=i;chStep=0;chFeedback=false;renderChallenges($('#content'))};
- window.upgradeChallengeChoose=i=>{if(chFeedback)return;state.challengeResults[ch+'-'+chStep]=i===challenges[ch].steps[chStep][2];safeSave();chFeedback=true;renderChallenges($('#content'))};
- window.upgradeChallengeNext=()=>{chStep++;if(chStep>=challenges[ch].steps.length){chStep=0;ch=(ch+1)%challenges.length}chFeedback=false;renderChallenges($('#content'))};
+ function renderChallenges(c){
+  const active=state.activePracticeChallenge;
+  if(active&&challenges[active.index]?.steps[active.step]){
+   ch=active.index;chStep=active.step;chFeedback=active.feedback;
+  }else {ch=0;chStep=0;chFeedback=false;}
+  const x=challenges[ch],s=x.steps[chStep];
+  c.innerHTML='<div class="panel"><span class="tag">Praxis-Challenges · Schritt für Schritt</span><h2>Fachgerecht handeln und den Grund verstehen</h2><p>Jede Challenge erklärt nach deiner Wahl den fachlichen Grund und mögliche Risiken. Praktische Handgriffe müssen zusätzlich in der Ausbildungseinrichtung angeleitet und geübt werden.</p><div class="grid challenge-grid">'+challenges.map((z,i)=>'<button class="card challenge-tile" aria-pressed="'+(i===ch)+'" onclick="upgradeChallengeSelect('+i+')">'+studyMini(['hands','shot','chair','wound','pulse','mouth','shield','med'][i],'mini-large')+'<span>'+esc(z.title)+'</span>'+(i===ch?'<small>Ausgewählt</small>':'')+'</button>').join('')+'</div><div class="card challenge-active" id="activeChallenge" tabindex="-1"><h3>'+esc(x.title)+'</h3><p>Schritt '+(chStep+1)+' von '+x.steps.length+'</p><h3>'+esc(s[0])+'</h3>'+s[1].map((o,i)=>'<button class="option" '+(chFeedback?'disabled':'')+' onclick="upgradeChallengeChoose('+i+')">'+esc(o)+'</button>').join('')+(chFeedback?'<p class="'+(state.challengeResults[ch+'-'+chStep]?'good':'bad')+'">'+esc(s[3])+'</p><button class="btn primary" onclick="upgradeChallengeNext()">Nächster Schritt</button>':'')+'</div>';
+ }
+ window.upgradeChallengeSelect=i=>{ch=i;chStep=0;chFeedback=false;saveChallenge();const active=$('#activeChallenge');active.focus({preventScroll:true});active.scrollIntoView({block:'start'})};
+ window.upgradeChallengeChoose=i=>{if(chFeedback)return;state.challengeResults[ch+'-'+chStep]=i===challenges[ch].steps[chStep][2];chFeedback=true;saveChallenge()};
+ window.upgradeChallengeNext=()=>{chStep++;if(chStep>=challenges[ch].steps.length){chStep=0;ch=(ch+1)%challenges.length}chFeedback=false;saveChallenge()};
 
  // Prüfungsformate: schriftlich ausführliche Fälle und Operatoren; mündlich komplexe Fälle.
  // Praktisches Training wird vom gemeinsamen Prüfungsmodul gerendert.
@@ -324,6 +388,132 @@
   'Wie sichern Sie bei XX Qualität, Sicherheit und Versorgungskontinuität? Nennen Sie überprüfbare Ziele, passende Dokumentation und Kriterien für die Evaluation.',
   'Reflektieren Sie Ihre Berufsrolle im Fall von XX. Wie gehen Sie mit unterschiedlichen Sichtweisen im Team beziehungsweise mit Angehörigen um und wie prüfen Sie Ihre eigene Haltung?'
  ];
+ const writtenPoints=[
+  [6,4,6,4,4,4,6,4,4,4,3,4,4,4,4,4,4,4],
+  [6,4,4,4,4,4,6,4,4,3,4,4,4,4,4,4,4,4],
+  [6,5,4,6,4,4,4,4,5,3,5,4,4,4,4,4,4,4]
+ ];
+ function writtenTaskCards(index){
+  const tasks=writtenTasks[index];
+  const groups=index===2?{6:{last:7,title:'Den ärztlichen Dienst strukturiert informieren'}}:
+   {5:{last:6,title:index===0?'Pflegeplanung erstellen':'Beratung planen'}};
+  return tasks.flatMap(([title,prompt],i)=>{
+   if(Object.values(groups).some(group=>group.last===i))return [];
+   const group=groups[i], points=writtenPoints[index];
+   if(index===0&&i===5)return [{
+    title:group.title,
+    prompt:'Erstelle eine Pflegeplanung für das Sturzrisiko von Herrn M. Formuliere das Problem mit zwei fallbezogenen Risikofaktoren (3 Punkte), ein überprüfbares Pflegeziel mit Zeitbezug (3 Punkte) und zwei konkrete Maßnahmen mit Zuständigkeit und Zeitpunkt (je 2 Punkte).',
+    points:10,
+    guide:['Problem (3 Punkte): Sturzrisiko benennen (1) und zwei Hinweise aus dem Fall nutzen (je 1), etwa die Unsicherheit beim Drehen und den nicht vollständig festgestellten Bremshebel.',
+      'Ziel (3 Punkte): einen beobachtbaren Transfer benennen (1), das vereinbarte Maß der Unterstützung festlegen (1) und eine Frist angeben (1). Beispiel: Bis Freitag gelingt Herrn M. der Transfer zum Frühstücksstuhl mit Rollator und verbaler Anleitung durch eine Pflegeperson.',
+      'Maßnahmen (je 2 Punkte): passende konkrete Handlung (1) sowie Zuständigkeit und Zeitpunkt (1). Beispiel: Die zuständige Pflegeperson prüft vor jedem Transfer Rollator und Umgebung. Sie leitet Herrn M. beim morgendlichen Transfer in kurzen, gut verständlichen Schritten an.']
+   }];
+   if(group)return [{title:group.title,prompt:[i,i+1].map(n=>tasks[n][1]+' ('+points[n]+' Punkte)').join(' '),points:points[i]+points[i+1],guide:writtenAnswers[index].slice(i,i+2).map((text,n)=>points[i+n]+' Punkte · '+text)}];
+   return [{title,prompt,points:points[i],guide:[writtenAnswers[index][i]]}];
+  });
+ }
+
+ const originalWrittenMetadata = [
+  {id: 'reha-schlaganfall', setting: 'reha', ageGroup: 'adult', age: '58 Jahre', course: 'chronic'},
+  {id: 'paed-appendizitis', setting: 'paediatrie', ageGroup: 'child', age: '9 Jahre', course: 'acute'},
+  {id: 'langzeit-zustandsveraenderung', setting: 'langzeit', ageGroup: 'older', age: '79 Jahre', course: 'mixed'}
+ ];
+ function additionalTaskCards(cs){
+  const planIndex=cs.tasks.findIndex(([,prompt])=>prompt.startsWith('Formulieren Sie ein Pflegeproblem'));
+  const pointsByOperator={Analysieren:6,Beurteilen:5,Planen:5,Begründen:5};
+  return cs.tasks.flatMap(([title,prompt],i)=>{
+   if(i===planIndex+1||i===planIndex+2)return [];
+   if(i===planIndex){
+    const points=[3,3,4];
+    return [{title:'Pflegeplanung erstellen',points:10,
+     prompt:'Erstellen Sie eine Pflegeplanung zu einem im Fall beschriebenen Pflegeproblem. '+cs.tasks.slice(i,i+3).map(([,text],n)=>text+' ('+points[n]+' Punkte)').join(' '),
+     guide:cs.answers.slice(i,i+3).map((answer,n)=>points[n]+' Punkte · '+answer)}];
+   }
+   return [{title,prompt,points:pointsByOperator[title]||4,guide:[cs.answers[i]]}];
+  });
+ }
+ const writtenExercises = [
+  ...writtenCases.map((cs, index) => ({
+   ...cs, ...originalWrittenMetadata[index], tasks: writtenTasks[index], answers: writtenAnswers[index]
+  })),
+  ...additionalWrittenCases.map(cs => ({...cs, ...buildAdditionalWrittenExercise(cs)}))
+ ];
+ const writtenFilters = {setting: '', ageGroup: '', course: ''};
+
+
+ function matchingWrittenExercises() {
+  return writtenExercises.filter(cs => Object.entries(writtenFilters)
+   .every(([field, value]) => !value || cs[field] === value || (field === 'course' && cs.course === 'mixed')));
+ }
+
+ function writtenFilterOptions(values, selected, allLabel) {
+  return '<option value="">' + allLabel + '</option>' + Object.entries(values).map(([id, label]) =>
+   `<option value="${id}"${id === selected ? ' selected' : ''}>${esc(label)}</option>`
+  ).join('');
+ }
+
+ function renderWritten(c, header) {
+  const matches = matchingWrittenExercises();
+  const selectedWrittenId = state.writtenExerciseId;
+  const cs = matches.find(item => item.id === selectedWrittenId);
+  c.innerHTML = header + `<section class="panel" aria-labelledby="writtenSettingsTitle">
+   <h2 id="writtenSettingsTitle">Schriftliche Prüfung nach Setting</h2>
+   <div class="grid" aria-label="Versorgungssettings">
+    <button type="button" class="btn ${writtenFilters.setting ? '' : 'primary'}" aria-pressed="${!writtenFilters.setting}" data-setting="" onclick="setWrittenFilter('setting', this.dataset.setting)">Alle Settings</button>
+    ${Object.entries(writtenSettings).map(([id, label]) => `<button type="button" class="btn ${id === writtenFilters.setting ? 'primary' : ''}" aria-pressed="${id === writtenFilters.setting}" data-setting="${id}" onclick="setWrittenFilter('setting', this.dataset.setting)">${esc(label)}</button>`).join('')}
+   </div>
+   <div class="flex">
+    <label for="writtenAgeFilter">Altersgruppe <select id="writtenAgeFilter" onchange="setWrittenFilter('ageGroup', this.value)">${writtenFilterOptions(writtenAgeGroups, writtenFilters.ageGroup, 'Alle Altersgruppen')}</select></label>
+    <label for="writtenCourseFilter">Verlauf <select id="writtenCourseFilter" onchange="setWrittenFilter('course', this.value)">${writtenFilterOptions(writtenCourses, writtenFilters.course, 'Alle Verläufe')}</select></label>
+   </div>
+   <p role="status">${matches.length} ${matches.length === 1 ? 'passender Fall' : 'passende Fälle'}</p>
+   <div class="grid study-section-grid">${matches.map(item => `<article class="card study-section">
+    <h3 class="section-title">${studyMini(studyAreaIcon(item.focus))}<span>${esc(item.title)}</span></h3>
+    <p>${esc(writtenSettings[item.setting])} · ${esc(item.age)} · ${esc(writtenCourses[item.course])}</p>
+    <p>${esc(item.focus)}</p>
+    <button type="button" class="btn ${item.id === selectedWrittenId ? 'primary' : ''}" aria-label="Fall öffnen: ${esc(item.title)}" data-case="${item.id}" onclick="openWrittenExercise(this.dataset.case)">Fall öffnen</button>
+   </article>`).join('')}</div>
+   ${matches.length ? '' : '<p>Für diese Kombination gibt es noch keinen Fall. Ändere das Setting, die Altersgruppe oder den Verlauf.</p>'}
+  </section>`;
+  if (!cs) return;
+  const originalIndex = originalWrittenMetadata.findIndex(item=>item.id===cs.id);
+  const key = 'writing-'+cs.id;
+  const tasks = originalIndex>=0 ? writtenTaskCards(originalIndex) : additionalTaskCards(cs);
+  c.insertAdjacentHTML('beforeend', `<section class="panel" aria-labelledby="writtenCaseTitle">
+   <h2 id="writtenCaseTitle" tabindex="-1">${esc(cs.title)}</h2>
+   <p>${esc(cs.focus)} · ${tasks.length} Aufgaben</p>
+   <p>Übungszeit <span id="examClock">${examFormatTime(examFormatSeconds)}</span>
+    <button type="button" class="btn" onclick="examStartTimer(7200)">120-Minuten-Übung starten</button>
+    <button type="button" class="btn" onclick="examStartTimer(0)">Timer stoppen</button>
+   </p>
+   <h3>Fallsituation</h3>${cs.story.split('\n\n').map(text => '<p>' + esc(text) + '</p>').join('')}
+   <h3>Aufgaben zum Fall</h3>
+   ${examTaskList(key,tasks)}
+   ${examPointReview(key,tasks)}
+   <details><summary>Operatoren kurz erklärt</summary><ul>${operators.map(([operator, description]) => `<li><strong>${esc(operator)}</strong> · ${esc(description)}</li>`).join('')}</ul></details>
+  </section>`);
+ }
+
+ window.setWrittenFilter = (field, value) => {
+  writtenFilters[field] = value;
+  if (!matchingWrittenExercises().some(cs => cs.id === state.writtenExerciseId)) {
+   delete state.writtenExerciseId;safeSave();
+   examStartTimer(0);
+  }
+  renderExam();
+  const control = field === 'setting' ? `[data-setting="${value}"]` : field === 'ageGroup' ? '#writtenAgeFilter' : '#writtenCourseFilter';
+  $(control)?.focus({preventScroll: true});
+ };
+ window.openWrittenExercise = id => {
+  if (!matchingWrittenExercises().some(cs => cs.id === id)) return;
+  if (state.writtenExerciseId !== id) examStartTimer(0);
+  state.writtenExerciseId = id;safeSave();
+  renderExam();
+  const title = $('#writtenCaseTitle');
+  title?.focus({preventScroll: true});
+  title?.scrollIntoView({block: 'start'});
+ };
+
  function renderExam(){
   const c=$('#content');if(!c)return;const mode=examMode||'schriftlich';
   const header='<div class="panel"><span class="tag">Prüfungstraining · prüfungsnahe Übungen</span><h2>Prüfungsformate üben</h2><p>'+(mode==='praktisch'?'Die praktische Prüfung übst du mit deiner tatsächlichen Versorgungssituation in deiner Ausbildungseinrichtung.':'Bearbeite schriftliche und mündliche Fälle erst selbst und vergleiche deine Antworten danach mit den Lösungshinweisen. Das sind Übungsfälle, keine offiziellen Prüfungsaufgaben.')+'</p><div class="flex">'+[['schriftlich','Schriftlich'],['praktisch','Praktisch'],['muendlich','Mündlich']].map(x=>'<button class="btn '+(mode===x[0]?'primary':'')+'" onclick="examSetMode(&#39;'+x[0]+'&#39;)">'+x[1]+'</button>').join('')+'</div></div>';
@@ -332,15 +522,14 @@
    return;
   }
   if(mode==='schriftlich'){
-   const idx=window.upgradeWrittenIndex||0,cs=writtenCases[idx],tasks=writtenTasks[idx];
-   c.innerHTML=header+'<div class="panel"><div class="flex">'+writtenCases.map((x,i)=>'<button class="btn '+(idx===i?'primary':'')+'" onclick="upgradeWritten('+i+')">Übung '+(i+1)+'</button>').join('')+'</div><p class="muted">Langform · drei unterschiedliche Prüfungsbereiche · 18 fallbezogene Aufgaben · Operatorentraining</p><h2>'+esc(cs.title)+'</h2><p><strong>Schwerpunkt:</strong> '+esc(cs.focus)+'</p><p class="muted">Fallsituation: '+cs.story.length+' Zeichen inklusive Leerzeichen · Hamburger Handreichung: höchstens 5.500 Zeichen. Übungszeit: <span id="examClock">00:00</span> <button class="btn" onclick="examStartTimer(7200)">120-Minuten-Übung starten</button> <button class="btn" onclick="examStartTimer(0)">Timer stoppen</button></p><h3>Ausführliche Fallsituation</h3>'+cs.story.split('\n\n').map(x=>'<p>'+esc(x)+'</p>').join('')+'<h3>Aufgaben zum Fall</h3><ol>'+tasks.map(x=>'<li><strong>'+esc(x[0])+':</strong> '+esc(x[1])+'</li>').join('')+'</ol><details><summary>Operatoren kurz erklärt</summary><ul>'+operators.map(x=>'<li><strong>'+x[0]+':</strong> '+x[1]+'</li>').join('')+'</ul></details><label for="writtenAnswer">Deine Antworten – nummeriere sie passend zu den Aufgaben</label><textarea id="writtenAnswer" placeholder="Bearbeite die Aufgaben am Fall. Begründe deine Entscheidungen mit den Informationen aus der Fallsituation."></textarea><details><summary>Erwartungshorizont und Lösungshinweise anzeigen</summary><p>Nutze die Hinweise als Orientierung; fachlich begründete, fallbezogene Alternativen können ebenfalls passend sein.</p><ol>'+tasks.map((x,i)=>'<li><strong>'+esc(x[0])+':</strong> '+esc(writtenAnswers[idx][i])+'</li>').join('')+'</ol></details><p class="muted">Die Fälle sind ausführliche Übungsgrundlagen. Umfang und Bearbeitungszeit können in den Einstellungen an den Prüfungsrahmen angepasst werden.</p></div>';
-   return
+   renderWritten(c, header);
+   return;
   }
-  const oi=window.upgradeOralIndex||0,oc=oralCases[oi];
-  c.innerHTML=header+'<div class="panel"><div class="flex">'+oralCases.map((x,i)=>'<button class="btn '+(oi===i?'primary':'')+'" onclick="upgradeOral('+i+')">Mündlicher Fall '+(i+1)+'</button>').join('')+'</div><span class="tag">Kompetenzbereiche III, IV und V</span><p class="muted">Hamburger Empfehlung für den Falltext: 1.500–2.000 Zeichen ohne Leerzeichen. Wähle die Altersstufe und den Versorgungskontext, die von deiner praktischen Prüfung abweichen. Vorbereitungszeit: <span id="examClock">00:00</span> <button class="btn" onclick="examStartTimer(1800)">30-Minuten-Vorbereitung starten</button> <button class="btn" onclick="examStartTimer(0)">Timer stoppen</button></p><h2>'+esc(oc.title)+'</h2><h3>Prüfungsfall</h3>'+oc.story.split('\n\n').map(x=>'<p>'+esc(x)+'</p>').join('')+'<h3>Fragen für das Prüfungsgespräch</h3><ol>'+oralTasks.map(x=>'<li>'+esc(x.replaceAll('XX',oi===0?'Samira':'Frau R.'))+'</li>').join('')+'</ol><label for="oralAnswer">Stichpunkte für dein Prüfungsgespräch</label><textarea id="oralAnswer" placeholder="Fallbezug · Zusammenarbeit · Recht/Ethik · Qualität/Evidenz · Berufsrolle"></textarea><details><summary>Erwartungshorizont und Selbstcheck</summary><ul>'+oralTasks.map((x,i)=>'<li><strong>'+esc(x.replaceAll('XX',oi===0?'Samira':'Frau R.'))+'</strong><br>'+esc(oralGuides[oi][i])+'</li>').join('')+'</ul></details></div>';
+  const oi=state.oralFormIndex||0,oc=oralCases[oi],key='oral-form-'+oi;
+  const tasks=oralTasks.map((prompt,i)=>({prompt:prompt.replaceAll('XX',oi===0?'Samira':'Frau R.'),points:i===0?4:5,guide:[oralGuides[oi][i]]}));
+  c.innerHTML=header+'<div class="panel"><div class="flex">'+oralCases.map((x,i)=>'<button class="btn '+(oi===i?'primary':'')+'" onclick="upgradeOral('+i+')">Mündlicher Fall '+(i+1)+'</button>').join('')+'</div><span class="tag">Kompetenzbereiche III, IV und V</span><p class="muted">Hamburger Empfehlung für den Falltext: 1.500–2.000 Zeichen ohne Leerzeichen. Wähle die Altersstufe und den Versorgungskontext, die von deiner praktischen Prüfung abweichen. Vorbereitungszeit: <span id="examClock">00:00</span> <button class="btn" onclick="examStartTimer(1800)">30-Minuten-Vorbereitung starten</button> <button class="btn" onclick="examStartTimer(0)">Timer stoppen</button></p><h2>'+esc(oc.title)+'</h2><h3>Prüfungsfall</h3>'+oc.story.split('\n\n').map(x=>'<p>'+esc(x)+'</p>').join('')+'<h3>Fragen für das Prüfungsgespräch</h3>'+examTaskList(key,tasks)+examPointReview(key,tasks)+'</div>';
  }
- window.upgradeWritten=i=>{window.upgradeWrittenIndex=i;renderExam()};
- window.upgradeOral=i=>{window.upgradeOralIndex=i;renderExam()};
+ window.upgradeOral=i=>{state.oralFormIndex=i;safeSave();renderExam()};
  if(typeof window.examSetMode!=='function')window.examSetMode=m=>{examMode=m;renderExam()};
  const originalExamRender=window.examRender;
  window.examRender=function(){renderExam()};

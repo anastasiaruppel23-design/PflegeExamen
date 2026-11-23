@@ -32,7 +32,7 @@ function examRender(){
  if(examMode==='schriftlich'){
   const q=f.cases[examCaseIndex];
   html+='<div class="card"><h3>So gehst du schriftliche Aufgaben an</h3><ol><li>Aufgaben und Operatoren zuerst lesen: nennen, erklären, begründen oder beurteilen erfordern unterschiedlich ausführliche Antworten.</li><li>Im Fall Ressourcen, Pflegeprobleme, Risiken und fehlende Informationen markieren.</li><li>Antworten nach Aufgabennummern gliedern und jede Begründung mit konkreten Fallangaben verbinden.</li><li>Ziele und Maßnahmen unterscheiden; bei Planung PESR, SMART und W-Fragen nutzen, wenn die Aufgabe es verlangt.</li><li>Zeit nach Umfang/Punkten verteilen und am Ende Vollständigkeit und Plausibilität kontrollieren.</li></ol><p>Übe zuerst selbst und öffne danach den Selbstcheck. Die drei Übungsarbeiten findest du unterhalb des Falls.</p><button class="btn" onclick="examStartTimer(7200)">120-Minuten-Übung starten</button> <button class="btn" onclick="examStartTimer(0)">Timer stoppen</button> <strong id="examClock">00:00</strong></div>';
-  html+='<div class="card"><span class="tag">'+examEsc(q.title)+'</span><h3>Schwerpunkt</h3><p>'+examEsc(q.focus)+'</p><h3>Fallsituation</h3><p>'+examEsc(q.story)+'</p><h3>Aufgaben</h3><ol>'+q.tasks.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ol><label for="examAnswer">Deine Antwort – begründe deine Entscheidungen am Fall</label><textarea id="examAnswer" placeholder="Schreibe zunächst ohne Musterlösung. Benenne Fallbezug, Priorität, Handlung und Begründung."></textarea><details><summary>Selbstcheck: wichtige Antwortmerkmale</summary><ul>'+q.guide.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ul><p class="muted">Vergleiche deine Begründungen mit diesen Merkmalen. Das ist keine amtliche Bewertung und ersetzt keinen Erwartungshorizont.</p></details><div class="flex">'+f.cases.map((x,i)=>'<button class="btn '+(i===examCaseIndex?'primary':'')+'" onclick="examCaseIndex='+i+';examRender()">Aufsichtsarbeit '+(i+1)+'</button>').join('')+'</div></div>';
+  html+='<div class="card"><span class="tag">'+examEsc(q.title)+'</span><h3>Schwerpunkt</h3><p>'+examEsc(q.focus)+'</p><h3>Fallsituation</h3><p>'+examEsc(q.story)+'</p><h3>Aufgaben</h3>'+examTaskList('short-written-'+examCaseIndex,q.tasks.map(prompt=>({prompt,points:4})))+'<p><strong>Maximal erreichbar: '+(q.tasks.length*4)+' Punkte</strong></p><details><summary>Selbstcheck: wichtige Antwortmerkmale</summary><ul>'+q.guide.map(x=>'<li>'+examEsc(x)+'</li>').join('')+'</ul><p class="muted">Vergleiche deine Begründungen mit diesen Merkmalen. Das ist keine amtliche Bewertung und ersetzt keinen Erwartungshorizont.</p></details><div class="flex">'+f.cases.map((x,i)=>'<button class="btn '+(i===examCaseIndex?'primary':'')+'" onclick="examCaseIndex='+i+';examRender()">Aufsichtsarbeit '+(i+1)+'</button>').join('')+'</div></div>';
  } else if(examMode==='praktisch'){
   html+=practicalTrainingHtml();
  } else {
@@ -100,8 +100,12 @@ const oralCases = {
 };
 let oralCaseKey = 'brandt';
 
-function openOralPractice() {
- examSetMode('muendlich');
+function openOralPractice(key) {
+ if (Object.hasOwn(oralCases, key)) {
+  oralCaseKey = key;
+  if (hasLearningAccess()) {state.activeOralKey = key;save();}
+ }
+ examStartTimer(0);
  go('muendlich');
 }
 
@@ -109,11 +113,15 @@ function selectOralCase(key) {
  if (!Object.hasOwn(oralCases, key)) return;
  examStartTimer(0);
  oralCaseKey = key;
+ state.activeOralKey=key;save();
  renderOral();
 }
 
 function renderOral() {
+ if(Object.hasOwn(oralCases,state.activeOralKey))oralCaseKey=state.activeOralKey;
  const current = oralCases[oralCaseKey];
+ const key = 'oral-'+oralCaseKey;
+ const tasks = current.tasks.map((prompt,i)=>({prompt, points: i===0?4:5, guide:[current.guide[i]||'Begründe deine Antwort anhand der Fallsituation.']}));
  const list = items => items.map(item => '<li>'+examEsc(item)+'</li>').join('');
  const sources = current.sources?.map(([label, url, summary]) =>
   '<li><a href="'+examEsc(url)+'" target="_blank" rel="noopener noreferrer">'+examEsc(label)+'</a><p>'+examEsc(summary)+'</p></li>'
@@ -127,12 +135,16 @@ function renderOral() {
   '<article class="card"><h3>'+examEsc(current.title)+'</h3><p>'+examEsc(current.scenario)+'</p>'+
   '<div class="flex"><button class="btn" onclick="examStartTimer(1800)">30 Minuten Vorbereitung starten</button>'+
   '<button class="btn" onclick="examStartTimer(0)">Timer stoppen</button><strong id="examClock">'+examFormatTime(examFormatSeconds)+'</strong></div>'+
-  '<h3>Leitfragen</h3><ol>'+list(current.tasks)+'</ol>'+
+  '<h3>Leitfragen</h3>'+examTaskList(key,tasks)+
   (sources ? '<h3>Material für die EBN-Aufgabe</h3><p>Die Aussagen sind in eigenen Worten zusammengefasst.</p><ul>'+sources+'</ul>' : '')+
-  '<label for="oralNotes">Stichpunkte für deine mündliche Antwort</label><textarea id="oralNotes"></textarea>'+
+  guidedOralHtml(oralCaseKey)+
+  (typeof caseApplicationHtml === 'function' ? caseApplicationHtml(oralCaseKey) : '')+
+  '<details><summary>Stichpunkte zum gesamten Prüfungsgespräch</summary><label for="oralNotes">Stichpunkte für deine mündliche Antwort</label><textarea id="oralNotes" data-answer="oral-notes-'+oralCaseKey+'"></textarea></details>'+
   '<details><summary>Nachfragen für das Prüfungsgespräch</summary><ol>'+list(current.followups)+'</ol></details>'+
-  '<details><summary>Erwartungshorizont öffnen</summary><ol>'+list(current.guide)+'</ol><p>'+examEsc(current.followupGuide)+'</p></details></article>'+
+  examPointReview(key,tasks)+
+  '<details><summary>Lösungshinweise zu den Nachfragen</summary><p>'+examEsc(current.followupGuide)+'</p></details></article>'+
   '<p><a href="https://www.gesetze-im-internet.de/pflaprv/__15.html" target="_blank" rel="noopener noreferrer">§ 15 PflAPrV</a> · <a href="https://www.hamburg.de/resource/blob/1159722/dd9679bbdc4e389fe7d05f78ff813317/handreichung-muendliche-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung</a></p></section>';
+ bindGuidedOral(oralCaseKey, document.getElementById('guidedOral'));
  const picker = document.getElementById('oralCase');
  picker.value = oralCaseKey;
  picker.addEventListener('change', () => {
