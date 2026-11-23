@@ -125,6 +125,9 @@
   a=a.concat(lib.filter(x=>x.quiz).map((x,i)=>({id:'lib-'+i,area:x.category||'Pflegewissen',q:x.quiz[0],options:x.quiz[1],answer:x.quiz[2],explain:x.quiz[3],title:x.title})));
   return a;
  }
+ function sourceLink(source) {
+  return source?`<p class="muted"><a href="${esc(source[1])}" target="_blank" rel="noopener noreferrer">${esc(source[0])}</a></p>`:'';
+ }
  function quizPool(){return baseQuizPool().concat(window.advancedQuizQuestions)}
  function selectedQuizPool(){return state.upgradeLevel==='advanced'?window.advancedQuizQuestions:baseQuizPool()}
  function quizLevels(){return '<div class="flex quiz-levels" role="group" aria-label="Schwierigkeitsstufe">'+[['basis','Basiswissen'],['advanced','Prüfungstraining']].map(([id,label])=>'<button class="btn" aria-pressed="'+((state.upgradeLevel||'basis')===id)+'" onclick="upgradeQuizLevel(&quot;'+id+'&quot;)">'+label+'</button>').join('')+'</div>'}
@@ -260,7 +263,7 @@
     <h3 id="decisionTitle" class="section-title">${entry.setting?studyMini(studyAreaIcon(entry.title)):''}<span>${esc(entry.title)}</span></h3>
     ${entry.story?`<p>${esc(entry.story)}</p>`:''}
     ${run.step===entry.steps.length?decisionOutcome(entry,run,key,mode):decisionStep(entry,run,key,mode)}
-    <p class="muted"><a href="${esc(entry.source[1])}" target="_blank" rel="noopener noreferrer">${esc(entry.source[0])}</a></p>
+    ${sourceLink(entry.source)}
     </article></div>`;
  }
 
