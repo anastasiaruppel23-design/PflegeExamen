@@ -356,10 +356,10 @@ window.openCaseModel = function(name) {
 };
 
 function renderModels(c) {
- c.innerHTML = `<section class="learning-hero"><h2>Modelle und Theorien</h2>
+ c.innerHTML = `<div class="models-view"><section class="learning-hero"><h2>Modelle und Theorien</h2>
   <p>Belege zuerst ein Problem oder eine Ressource mit einer Textstelle. Wähle dann das Modell, das dir hilft, diese Stelle zu erklären und eine Pflegeentscheidung zu begründen.</p>
  </section>
- <section class="panel"><h3>Welches Modell passt zur Frage?</h3>
+ <section class="panel model-guide"><h3>Welches Modell passt zur Frage?</h3>
   <ul><li><strong>Was schafft die Person selbst?</strong> Orem, Henderson oder Krohwinkel.</li>
    <li><strong>Wie gestalte ich die Beziehung?</strong> Peplau für den Beziehungsverlauf, Carl Rogers für meine Haltung im Gespräch.</li>
    <li><strong>Was belastet, was hilft bei der Bewältigung?</strong> Lazarus für Bewertung und Coping, Antonovsky für Verstehbarkeit, Handhabbarkeit und Bedeutsamkeit.</li>
@@ -367,9 +367,10 @@ function renderModels(c) {
    <li><strong>Woran erkenne ich gute Pflegequalität?</strong> Donabedian für Struktur, Prozess und Ergebnis.</li></ul>
   <button class="btn primary" onclick="go('muendlich')">Fallanalyse für die mündliche Prüfung üben</button>
  </section>
- <label for="modelSearch">Modell, Begriff oder Fallthema suchen</label>
- <input class="exp-search" type="search" id="modelSearch" placeholder="Zum Beispiel: Orem, Sturz oder Angehörige" oninput="filterExpansionModels(this.value)">
- <div id="modelResults"></div>`;
+ <div class="model-search"><label for="modelSearch">Modell, Begriff oder Fallthema suchen</label>
+  <input class="exp-search" type="search" id="modelSearch" placeholder="Zum Beispiel: Orem, Sturz oder Angehörige" oninput="filterExpansionModels(this.value)">
+ </div>
+ <div id="modelResults"></div></div>`;
  filterExpansionModels('');
 }
 
@@ -377,18 +378,26 @@ function modelApplicationCard(model) {
  const [name, type, idea, terms, exam] = model;
  const [scenario, application, limit] = modelApplications[name];
  const oralKey = Object.keys(oralCases).find(key => caseApplications[key]?.models.includes(name));
- return `<article class="card expansion-entry" id="learning-model-${models.indexOf(model)}">
-  <span class="tag">${esc(type)}</span><h3 tabindex="-1">${esc(name)}</h3>
-  <p><strong>Grundgedanke</strong> ${esc(idea)}</p>
-  <p><strong>Schlüsselbegriffe</strong> ${esc(terms)}</p>
-  <p><strong>Prüfungsbezug</strong> ${esc(exam)}</p>
-  <details class="model-application"><summary>Modell am Fall anwenden</summary>
-   <p><strong>Mini-Fall</strong> ${esc(scenario)}</p>
-   <p>Welcher Begriff passt zu welcher Textstelle? Was würdest du tun und woran würdest du die Wirkung erkennen?</p>
-   <details><summary>Beispielantwort öffnen</summary><p>${esc(application)}</p><p><strong>Worauf du achten solltest</strong> ${esc(limit)}</p></details>
-   ${oralKey ? `<button class="btn" onclick="openOralPractice('${oralKey}')">Passenden mündlichen Fall öffnen</button>` : ''}
-  </details>
-  ${expansionTopicLinks([modelTopicAliases[name] || name])}
+ const sections = [
+  ['Grundgedanke', idea],
+  ['Schlüsselbegriffe', terms],
+  ['Prüfungsbezug', exam]
+ ];
+ return `<article class="card expansion-entry model-card" id="learning-model-${models.indexOf(model)}">
+  <div class="model-heading">
+   <span class="tag">${esc(type)}</span>
+   <h3 tabindex="-1">${esc(name)}</h3>
+  </div>
+  <div class="model-body">
+   <dl class="model-facts">${sections.map(([label, text]) => `<div class="model-fact"><dt>${label}</dt><dd>${esc(text)}</dd></div>`).join('')}</dl>
+   <details class="model-application"><summary>Modell am Fall anwenden</summary>
+    <p><strong>Mini-Fall</strong> ${esc(scenario)}</p>
+    <p>Welcher Begriff passt zu welcher Textstelle? Was würdest du tun und woran würdest du die Wirkung erkennen?</p>
+    <details><summary>Beispielantwort öffnen</summary><p>${esc(application)}</p><p><strong>Worauf du achten solltest</strong> ${esc(limit)}</p></details>
+    ${oralKey ? `<button class="btn" onclick="openOralPractice('${oralKey}')">Passenden mündlichen Fall öffnen</button>` : ''}
+   </details>
+   ${expansionTopicLinks([modelTopicAliases[name] || name])}
+  </div>
  </article>`;
 }
 
@@ -412,7 +421,7 @@ function filterExpansionModels(query) {
  document.getElementById('modelResults').innerHTML = sections.map(([group, entries]) => {
   const items = entries.filter(matches);
   if (!items.length) return '';
-  return `<section class="model-group"><h3>${esc(group)}</h3><div class="grid">${items.map(modelApplicationCard).join('')}</div></section>`;
+  return `<section class="model-group"><h3 class="model-group-title">${esc(group)}</h3><div class="grid model-grid">${items.map(modelApplicationCard).join('')}</div></section>`;
  }).join('') + `<p role="status">${selected.length} von ${models.length} Einträgen</p>`;
 }
 function renderStandards(c){
