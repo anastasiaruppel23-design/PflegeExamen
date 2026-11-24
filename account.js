@@ -189,7 +189,9 @@ function enterLearning(askAboutProgress) {
     if (state.lastAnswer?.tab === tab) requestAnimationFrame(() => {
       const field = [...document.querySelectorAll('textarea[data-answer]')].find(item => item.dataset.answer === state.lastAnswer?.key);
       if (field) {
-        if (field.closest('details')) field.closest('details').open = true;
+        for (let detail = field.closest('details'); detail; detail = detail.parentElement.closest('details')) {
+          detail.open = true;
+        }
         field.scrollIntoView({block:'center'});
       }
     });

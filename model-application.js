@@ -123,18 +123,19 @@ const libraryApplicationKeys = ['parkinson', 'leukaemie', 'hno', 'depression', '
 function caseApplicationHtml(key) {
  const exercise = caseApplications[key];
  if (!exercise) return '';
+ const answerKey = `model-application-${key}`;
+ const tasks = [
+  {title: 'Probleme, Risiken und Ressourcen', prompt: 'Benenne und belege jeweils ein Beispiel. Welche Angabe fehlt dir?'},
+  {title: 'Modell oder Theorie', prompt: 'Wähle einen passenden Begriff und erkläre, wie er deine Einschätzung verändert.'},
+  {title: 'Recht und Berufsrolle · KB IV', prompt: 'Benenne eine einschlägige Grundlage. Was bedeutet sie für deine konkrete Entscheidung?'},
+  {title: 'Zusammenarbeit · KB III', prompt: 'Was übernimmst du selbst, wen beziehst du ein und was gibst du weiter?'},
+  {title: 'Expertenstandard oder andere Fachquelle · KB IV/V', prompt: 'Begründe die Auswahl und leite eine Maßnahme ab. Woran erkennst du ihre Wirkung und was bleibt unsicher?'}
+ ];
  return `<section class="panel" aria-labelledby="caseApplicationTitle">
   <h3 id="caseApplicationTitle">Fallanalyse und Transfer</h3>
   <p>Markiere zuerst Hinweise im Falltext. Begründe danach, was du daraus ableitest. Vermutungen und offene Fragen gehören ausdrücklich in deine Antwort.</p>
-  <label for="caseApplicationNotes">Deine Fallanalyse</label>
-  <textarea id="caseApplicationNotes" data-answer="model-application-${key}" placeholder="Textstelle → Problem oder Risiko → Ressource → Begründung → Maßnahme → Wirkung prüfen"></textarea>
-  <ol>
-   <li><strong>Probleme, Risiken und Ressourcen:</strong> Benenne und belege jeweils ein Beispiel. Welche Angabe fehlt dir?</li>
-   <li><strong>Modell oder Theorie:</strong> Wähle einen passenden Begriff und erkläre, wie er deine Einschätzung verändert.</li>
-   <li><strong>Recht und Berufsrolle · KB IV:</strong> Benenne eine einschlägige Grundlage. Was bedeutet sie für deine konkrete Entscheidung?</li>
-   <li><strong>Zusammenarbeit · KB III:</strong> Was übernimmst du selbst, wen beziehst du ein und was gibst du weiter?</li>
-   <li><strong>Expertenstandard oder andere Fachquelle · KB IV/V:</strong> Begründe die Auswahl und leite eine Maßnahme ab. Woran erkennst du ihre Wirkung und was bleibt unsicher?</li>
-  </ol>
+  ${examTaskList(answerKey, tasks)}
+  ${previousAnswer(answerKey)}
   <details><summary>Mögliche Fallanalyse und Musterbegründung öffnen</summary>
    <dl>
     <dt><strong>Probleme und Risiken</strong></dt><dd>${esc(exercise.problems)}</dd>

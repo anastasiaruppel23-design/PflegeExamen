@@ -122,7 +122,6 @@ function renderOral() {
  const current = oralCases[oralCaseKey];
  const key = 'oral-'+oralCaseKey;
  const tasks = current.tasks.map((prompt,i)=>({prompt, points: i===0?4:5, guide:[current.guide[i]||'Begründe deine Antwort anhand der Fallsituation.']}));
- const list = items => items.map(item => '<li>'+examEsc(item)+'</li>').join('');
  const sources = current.sources?.map(([label, url, summary]) =>
   '<li><a href="'+examEsc(url)+'" target="_blank" rel="noopener noreferrer">'+examEsc(label)+'</a><p>'+examEsc(summary)+'</p></li>'
  ).join('');
@@ -140,7 +139,7 @@ function renderOral() {
   guidedOralHtml(oralCaseKey)+
   (typeof caseApplicationHtml === 'function' ? caseApplicationHtml(oralCaseKey) : '')+
   '<details><summary>Stichpunkte zum gesamten Prüfungsgespräch</summary><label for="oralNotes">Stichpunkte für deine mündliche Antwort</label><textarea id="oralNotes" data-answer="oral-notes-'+oralCaseKey+'"></textarea></details>'+
-  '<details><summary>Nachfragen für das Prüfungsgespräch</summary><ol>'+list(current.followups)+'</ol></details>'+
+  '<details><summary>Nachfragen für das Prüfungsgespräch</summary>'+openTaskList(key+'-followup',current.followups)+'</details>'+
   examPointReview(key,tasks)+
   '<details><summary>Lösungshinweise zu den Nachfragen</summary><p>'+examEsc(current.followupGuide)+'</p></details></article>'+
   '<p><a href="https://www.gesetze-im-internet.de/pflaprv/__15.html" target="_blank" rel="noopener noreferrer">§ 15 PflAPrV</a> · <a href="https://www.hamburg.de/resource/blob/1159722/dd9679bbdc4e389fe7d05f78ff813317/handreichung-muendliche-abschlusspruefung-gemaess-pflbg-data.pdf" target="_blank" rel="noopener noreferrer">Hamburger Handreichung</a></p></section>';

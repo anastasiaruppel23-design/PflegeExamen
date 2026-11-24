@@ -7,11 +7,13 @@ let now = 0;
 let nextId = 0;
 const pending = new Map();
 const context = vm.createContext({
+ document: {addEventListener() {}},
  esc: value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;'),
  Date: {now: () => now},
  setTimeout(callback) { const id = ++nextId; pending.set(id, callback); return id; },
  clearTimeout: id => pending.delete(id)
 });
+vm.runInContext(read('exam-answers.js'), context);
 vm.runInContext(read('oral-guided.js'), context);
 function tickAt(time) {
  now = time;

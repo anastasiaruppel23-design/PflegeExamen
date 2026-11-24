@@ -7,10 +7,11 @@ const nodes = new Map();
 const storage = new Map();
 const content = {innerHTML: ''};
 const context = vm.createContext({
- document: {querySelector: s => s === '#content' ? content : null, getElementById: id => nodes.get(id) || null},
+ document: {querySelector: s => s === '#content' ? content : null, getElementById: id => nodes.get(id) || null, addEventListener() {}},
  localStorage: {getItem: k => storage.get(k) || null, setItem: (k,v) => storage.set(k,v)},
 });
 vm.runInContext(`const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const examEsc=esc;let tab='praktisch',examMode='praktisch';const state={};const save=()=>{};const $=s=>document.querySelector(s);const examFormats={praktisch:{rule:'Praktische Prüfung'}};`, context);
+vm.runInContext(read('exam-answers.js'), context);
 vm.runInContext(read('practical-training.js'), context);
 const exam = read('exam-practice.js');
 vm.runInContext(exam.slice(exam.indexOf('function examRender(){'), exam.indexOf('function examStartTimer(')), context);

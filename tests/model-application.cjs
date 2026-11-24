@@ -5,11 +5,12 @@ const vm = require('node:vm');
 const read = name => fs.readFileSync(path.join(__dirname, '..', name), 'utf8');
 const result = {innerHTML: ''};
 const context = vm.createContext({
- document: {getElementById: () => result},
+ document: {getElementById: () => result, addEventListener() {}},
  esc: value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;'),
  expansionTopicLinks: () => ''
 });
 const run = code => vm.runInContext(code, context);
+run(read('exam-answers.js'));
 run(read('model-application.js'));
 const expansion = read('learning-expansion.js');
 run(expansion.slice(expansion.indexOf('const models='), expansion.indexOf('const standards=')));

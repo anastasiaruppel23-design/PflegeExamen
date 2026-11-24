@@ -424,6 +424,39 @@ async function checkModelCardLayout(page) {
 }
 
 async function checkTrainingRefresh(page) {
+  await page.evaluate(() => {
+    (state.answerDrafts ??= {})['full-case-0'] = {text: 'Meine bisherige Sammelantwort.', updated: Date.now()};
+    go('faelle');
+    showCase(0);
+  });
+  const caseTasks = page.locator('#caseDetail .case-full > .exam-task-list > li');
+  assert.equal(await caseTasks.count(), 5);
+  const firstAnswer = caseTasks.nth(0).locator('textarea[data-answer]');
+  const thirdTask = caseTasks.nth(2);
+  const thirdAnswer = thirdTask.locator('textarea[data-answer]');
+  assert.equal(await thirdAnswer.getAttribute('data-answer'), 'full-case-0-3');
+  assert.match(await thirdTask.innerText(), /sicheren Toilettengang/);
+  assert.equal(await caseTasks.locator('textarea[data-answer] + .answer-tools').count(), 5);
+  assert.equal(await page.locator('#caseDetail section .exam-task textarea[data-answer]').count(), 5);
+  const previous = page.getByText('Deine bisherige Sammelantwort', {exact: true});
+  assert.equal(await previous.filter({visible: true}).count(), 1);
+  await previous.filter({visible: true}).click();
+  assert.equal(await page.locator('[data-answer="full-case-0"]').inputValue(), 'Meine bisherige Sammelantwort.');
+  await firstAnswer.fill('Antwort zur ersten Aufgabe.');
+  await dictateIntoPreview(thirdTask);
+  await thirdTask.getByRole('button', {name: 'Übernehmen', exact: true}).click();
+  assert.equal(await thirdAnswer.inputValue(), 'Ich prüfe die Ressourcen.');
+  assert.equal(await firstAnswer.inputValue(), 'Antwort zur ersten Aufgabe.');
+  await page.reload();
+  await page.waitForFunction(() => hasLearningAccess());
+  assert.equal(await firstAnswer.inputValue(), 'Antwort zur ersten Aufgabe.');
+  assert.equal(await thirdAnswer.inputValue(), 'Ich prüfe die Ressourcen.');
+
+  const linkedCount = await page.evaluate(() => {openStudyCase(originalTopicCount); return linkedCases[0][2].length;});
+  assert.equal(await page.locator('#caseDetail .exam-task textarea[data-answer] + .answer-tools').count(), linkedCount);
+  const shortCount = await page.evaluate(() => {go('falltraining'); showExamCase(0); return examCases[0][3].length;});
+  assert.equal(await page.locator('#caseDetail .exam-task textarea[data-answer] + .answer-tools').count(), shortCount);
+
   await page.evaluate(() => go('praktisch'));
   const medication = page.locator('.practice-tile').filter({hasText: 'Medikamentensicherheit'});
   assert.equal(await medication.locator('.study-mini').count(), 1);

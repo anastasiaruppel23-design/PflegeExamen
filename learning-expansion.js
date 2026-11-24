@@ -217,7 +217,8 @@ function anatomyDetail(system, data) {
   <summary>Aufbau, Funktion und Pflegebezug</summary>
   ${sections.map(([title, notes]) => `<h4>${title}</h4><ul>${notes.map(note => `<li>${esc(note)}</li>`).join('')}</ul>`).join('')}
   <div class="standard-flow"><strong>Pflegebezug</strong><p>${esc(system.care)}</p></div>
-  <h4>Prüfungsfrage</h4><p>${esc(data.question)}</p>
+  <h4>Prüfungsfrage</h4><p id="anatomy-practice-${system.key}-prompt">${esc(data.question)}</p>
+  ${answerField(`anatomy-practice-${system.key}`, `anatomy-practice-${system.key}-prompt`)}
   <details><summary>Musterantwort öffnen</summary><p>${esc(data.answer)}</p></details>
  </details>`;
 }
@@ -379,13 +380,14 @@ function renderModels(c) {
 function modelApplicationCard(model) {
  const [name, type, idea, terms, exam] = model;
  const [scenario, application, limit] = modelApplications[name];
+ const index = models.indexOf(model);
  const oralKey = Object.keys(oralCases).find(key => caseApplications[key]?.models.includes(name));
  const sections = [
   ['Grundgedanke', idea],
   ['Schlüsselbegriffe', terms],
   ['Prüfungsbezug', exam]
  ];
- return `<article class="card expansion-entry model-card" id="learning-model-${models.indexOf(model)}">
+ return `<article class="card expansion-entry model-card" id="learning-model-${index}">
   <div class="model-heading">
    <span class="tag">${esc(type)}</span>
    <h3 tabindex="-1">${esc(name)}</h3>
@@ -394,7 +396,8 @@ function modelApplicationCard(model) {
    <dl class="model-facts">${sections.map(([label, text]) => `<div class="model-fact"><dt>${label}</dt><dd>${esc(text)}</dd></div>`).join('')}</dl>
    <details class="model-application"><summary>Modell am Fall anwenden</summary>
     <p><strong>Mini-Fall</strong> ${esc(scenario)}</p>
-    <p>Welcher Begriff passt zu welcher Textstelle? Was würdest du tun und woran würdest du die Wirkung erkennen?</p>
+    <p id="model-practice-${index}-prompt">Welcher Begriff passt zu welcher Textstelle? Was würdest du tun und woran würdest du die Wirkung erkennen?</p>
+    ${answerField(`model-practice-${index}`, `model-practice-${index}-prompt`)}
     <details><summary>Beispielantwort öffnen</summary><p>${esc(application)}</p><p><strong>Worauf du achten solltest</strong> ${esc(limit)}</p></details>
     ${oralKey ? `<button class="btn" onclick="openOralPractice('${oralKey}')">Passenden mündlichen Fall öffnen</button>` : ''}
    </details>
@@ -427,7 +430,7 @@ function filterExpansionModels(query) {
  }).join('') + `<p role="status">${selected.length} von ${models.length} Einträgen</p>`;
 }
 function renderStandards(c){
- c.innerHTML='<div class="learning-hero"><span class="tag">Qualität in der Pflege</span><h2>Expertenstandards verständlich lernen</h2><p>Jede Übersicht zeigt Ziel, Pflegeprozess und Praxisbeispiele. Expertenstandards geben fachliche Qualitätsorientierung; sie ersetzen weder individuellen Pflegeprozess noch lokale Verfahrensanweisungen.</p></div><div class="grid study-section-grid standards-grid">'+standards.map((s,i)=>'<article class="card expansion-entry study-section" id="learning-standard-'+i+'"><span class="tag">DNQP / Qualitätsausschuss Pflege</span><h3 class="section-title" tabindex="-1">'+studyMini(studyAreaIcon(s[0]))+'<span>'+esc(s[0])+'</span></h3><div class="standard-flow"><strong>Erkennen</strong> → <strong>individuell planen</strong> → <strong>umsetzen</strong> → <strong>Wirkung prüfen</strong></div><p><strong>Ziel:</strong> '+esc(s[1])+'</p><p><strong>Kern im Pflegeprozess:</strong> '+esc(s[2])+'</p><p><strong>Anschaulich:</strong> '+esc(s[3])+'</p><p class="muted">'+esc(s[4])+'</p><details><summary>Prüfungsfrage zum Standard</summary><p>'+esc(standardPractice[i])+'</p><p>Nutze Ziel, Einschätzung, Maßnahme und Evaluation zur Begründung. Beziehe Wünsche und Ressourcen der Person ein.</p><button class="btn" onclick="go(&quot;praktisch&quot;)">Pflegeplanung in der praktischen Prüfung</button></details>'+expansionTopicLinks(standardTopics[i])+'</article>').join('')+'</div><div class="panel"><h3>Prüfungsmerker</h3><p>Immer von der konkreten Person ausgehen: Informationen erheben, Risiko und Ressourcen individuell einschätzen, Ziel vereinbaren, Maßnahme begründen, durchführen, Wirkung evaluieren und dokumentieren.</p><a href="https://www.dnqp.de/expertenstandards-und-auditinstrumente/" target="_blank" rel="noopener noreferrer">DNQP: aktuelle Expertenstandards und Auditinstrumente ↗</a><p><a href="https://www.ausschuss-pflege.de/" target="_blank" rel="noopener noreferrer">Qualitätsausschuss Pflege: Expertenstandard Mobilität ↗</a></p></div><p class="content-note">Versionsangaben nach den Veröffentlichungs- und Informationsseiten des DNQP, recherchiert am 7. November 2026. Bei Aktualisierungsverfahren wird der Stand ausdrücklich genannt.</p>';
+ c.innerHTML='<div class="learning-hero"><span class="tag">Qualität in der Pflege</span><h2>Expertenstandards verständlich lernen</h2><p>Jede Übersicht zeigt Ziel, Pflegeprozess und Praxisbeispiele. Expertenstandards geben fachliche Qualitätsorientierung; sie ersetzen weder individuellen Pflegeprozess noch lokale Verfahrensanweisungen.</p></div><div class="grid study-section-grid standards-grid">'+standards.map((s,i)=>'<article class="card expansion-entry study-section" id="learning-standard-'+i+'"><span class="tag">DNQP / Qualitätsausschuss Pflege</span><h3 class="section-title" tabindex="-1">'+studyMini(studyAreaIcon(s[0]))+'<span>'+esc(s[0])+'</span></h3><div class="standard-flow"><strong>Erkennen</strong> → <strong>individuell planen</strong> → <strong>umsetzen</strong> → <strong>Wirkung prüfen</strong></div><p><strong>Ziel:</strong> '+esc(s[1])+'</p><p><strong>Kern im Pflegeprozess:</strong> '+esc(s[2])+'</p><p><strong>Anschaulich:</strong> '+esc(s[3])+'</p><p class="muted">'+esc(s[4])+'</p><details><summary>Prüfungsfrage zum Standard</summary><p id="standard-practice-'+i+'-prompt">'+esc(standardPractice[i])+'</p>'+answerField(`standard-practice-${i}`, `standard-practice-${i}-prompt`)+'<p>Nutze Ziel, Einschätzung, Maßnahme und Evaluation zur Begründung. Beziehe Wünsche und Ressourcen der Person ein.</p><button class="btn" onclick="go(&quot;praktisch&quot;)">Pflegeplanung in der praktischen Prüfung</button></details>'+expansionTopicLinks(standardTopics[i])+'</article>').join('')+'</div><div class="panel"><h3>Prüfungsmerker</h3><p>Immer von der konkreten Person ausgehen: Informationen erheben, Risiko und Ressourcen individuell einschätzen, Ziel vereinbaren, Maßnahme begründen, durchführen, Wirkung evaluieren und dokumentieren.</p><a href="https://www.dnqp.de/expertenstandards-und-auditinstrumente/" target="_blank" rel="noopener noreferrer">DNQP: aktuelle Expertenstandards und Auditinstrumente ↗</a><p><a href="https://www.ausschuss-pflege.de/" target="_blank" rel="noopener noreferrer">Qualitätsausschuss Pflege: Expertenstandard Mobilität ↗</a></p></div><p class="content-note">Versionsangaben nach den Veröffentlichungs- und Informationsseiten des DNQP, recherchiert am 7. November 2026. Bei Aktualisierungsverfahren wird der Stand ausdrücklich genannt.</p>';
 }
 function renderGlossary(c){
  c.innerHTML='<div class="learning-hero"><span class="tag">Glossar · '+glossary.length+' Begriffe</span><h2>Pflegefachbegriffe klar erklärt</h2><p>Kurze Definitionen mit Beispielen aus dem Pflegealltag. Fachbegriffe sind Lernhilfen; für Handlungsentscheidungen gelten aktuelle Fachquellen und lokale Standards.</p></div><input class="exp-search" type="search" id="glossarySearchMain" placeholder="Begriff suchen …" oninput="filterExpansionGlossary(this.value)"><p id="glossaryCount" role="status"></p><div id="glossaryResultsMain"></div>';
