@@ -94,7 +94,7 @@
 }
 .answer-tools .btn:disabled { opacity: .55; cursor: default; }
 .answer-tools .btn[data-running="true"] { background: var(--pf-turquoise-deep); color: #fff; }
-.answer-tools .answer-remove { grid-column: 1; background: transparent; color: var(--pf-rose); }
+.answer-tools .answer-remove { background: transparent; color: var(--pf-rose); }
 .answer-icon { flex: 0 0 15px; width: 15px; height: 15px; }
 .answer-icon .answer-stop, [data-running="true"] .answer-icon > :not(.answer-stop) { display: none; }
 [data-running="true"] .answer-icon .answer-stop { display: block; }

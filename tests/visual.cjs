@@ -386,7 +386,8 @@ async function checkForum(page) {
   await inbox.getByRole('heading', {name: 'PflegePeer', exact: true}).waitFor();
   await inbox.locator('.inbox-messages').getByText('Hast du Lust, gemeinsam zu üben?').waitFor();
   await page.locator('.account-toggle [data-forum-counter="mail"]').waitFor({state: 'hidden'});
-  assert.equal(await inbox.locator('#inboxMessage + .answer-tools .answer-actions button').count(), 5);
+  assert.equal(await inbox.locator('#inboxMessage + .answer-tools .answer-actions button').count(), 4);
+  assert.equal(await inbox.locator('#inboxMessage + .answer-tools audio + .answer-remove').count(), 1);
   await inbox.getByLabel('Deine Nachricht').fill('Ja, lass uns nächste Woche zusammen lernen.');
   await inbox.getByRole('button', {name: 'Nachricht senden'}).click();
   await inbox.locator('.inbox-messages').getByText('Ja, lass uns nächste Woche zusammen lernen.').waitFor();
@@ -458,16 +459,14 @@ async function checkTrainingRefresh(page) {
   assert.match(await page.locator('.exam-task').first().innerText(), /Punkte/);
   const firstTask = page.locator('.exam-task').first();
   const actions = firstTask.locator('.answer-actions');
-  assert.deepEqual(await actions.locator('button').allTextContents(), ['Aufnehmen','Diktieren','Anhören','Übernehmen','Löschen']);
-  const [recordBox, dictateBox, playBox, acceptBox, deleteBox] = await Promise.all(
+  assert.deepEqual(await actions.locator('button').allTextContents(), ['Aufnehmen','Diktieren','Anhören','Übernehmen']);
+  const [recordBox, dictateBox, playBox, acceptBox] = await Promise.all(
     (await actions.locator('button').all()).map(button => button.boundingBox())
   );
   assert.equal(recordBox.x, playBox.x);
-  assert.equal(playBox.x, deleteBox.x);
   assert.equal(dictateBox.x, acceptBox.x);
   assert.equal(recordBox.y, dictateBox.y);
   assert.equal(playBox.y, acceptBox.y);
-  assert.ok(deleteBox.y > playBox.y);
   const playback = firstTask.getByRole('button', {name: 'Anhören', exact: true});
   const accept = firstTask.getByRole('button', {name: 'Übernehmen', exact: true});
   assert.ok(await playback.isDisabled());
@@ -499,9 +498,14 @@ async function checkTrainingRefresh(page) {
   await page.waitForFunction(() => hasLearningAccess());
   assert.equal(await field.inputValue(), answer);
   await playback.click();
-  await firstTask.locator('audio').waitFor();
+  const player = firstTask.locator('audio');
+  await player.waitFor();
+  const remove = firstTask.getByRole('button', {name: 'Löschen', exact: true});
+  const [playerBox, removeBox] = await Promise.all([player.boundingBox(), remove.boundingBox()]);
+  assert.equal(await firstTask.locator('audio + .answer-remove').count(), 1);
+  assert.ok(removeBox.y >= playerBox.y + playerBox.height);
   page.once('dialog', dialog => dialog.accept());
-  await firstTask.getByRole('button', {name: 'Löschen', exact: true}).click();
+  await remove.click();
   await firstTask.locator('audio').waitFor({state: 'hidden'});
   assert.ok(await playback.isDisabled());
   assert.equal(await field.inputValue(), answer);
