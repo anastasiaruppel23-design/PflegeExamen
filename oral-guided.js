@@ -93,7 +93,7 @@ function guidedOralHtml(key) {
    <p role="status"></p>
   </div>`).join('')}
   <h4>2. Zwei Modelle vergleichen</h4>
-  <p id="guided-oral-${key}-model-prompt">${esc(exercise.modelQuestion)}</p>
+  <p id="guided-oral-${key}-model-prompt">${esc(exercise.modelQuestion)} Begründe deine Wahl.</p>
   ${answerField(`guided-oral-${key}-model`, `guided-oral-${key}-model-prompt`)}
   <p>Wähle das Modell für diese Prüfungsfrage.</p>
   <div class="flex">${exercise.models.map(([label], index) => `<button class="btn" type="button" data-model-choice="${index}" aria-pressed="false">${esc(label)}</button>`).join('')}</div>

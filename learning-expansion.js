@@ -245,12 +245,13 @@ function renderAnatomy(c) {
 
 window.openTopicFromAnatomy = function(key, index) {
  const scroll = window.scrollY;
- const details = [...document.querySelectorAll('.anatomy-module details')].map(element => element.open);
+ const detailsSelector = '.anatomy-detail, .anatomy-detail > details';
+ const details = [...document.querySelectorAll(detailsSelector)].map(element => element.open);
  const system = systems.find(item => item.key === key);
  openLibraryTopic(index, {label: 'Zurück zu ' + system.name, restore() {
   tab = 'anatomie';
   render();
-  document.querySelectorAll('.anatomy-module details').forEach((element, i) => { element.open = details[i]; });
+  document.querySelectorAll(detailsSelector).forEach((element, i) => { element.open = details[i]; });
   document.querySelector('#organ-' + key + ' h3').focus({preventScroll: true});
   window.scrollTo({top: scroll, behavior: 'instant'});
  }});
