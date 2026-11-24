@@ -488,9 +488,9 @@
     const dictate = voiceButton('dictate', 'Diktieren');
     tools.innerHTML = '<p class="answer-status muted" role="status"></p>'+
       (search ? dictate : '<div class="answer-actions">'+voiceButton('record', 'Aufnehmen')+dictate+
-        voiceButton('play', 'Anhören')+voiceButton('accept', 'Übernehmen')+
-        voiceButton('remove', 'Löschen', 'answer-remove')+'</div>'+
+        voiceButton('play', 'Anhören')+voiceButton('accept', 'Übernehmen')+'</div>'+
         '<audio controls preload="none" hidden aria-label="Deine Sprachaufnahme"></audio>'+
+        voiceButton('remove', 'Löschen', 'answer-remove')+
         '<label class="answer-transcript" hidden>Diktatvorschau<textarea rows="3"></textarea></label>'+
         '<details class="answer-note"><summary>Hinweise zu Mikrofon und Audio</summary><p>Aufnahmen sind bis zu zehn Minuten lang. Sie werden nach dem Beenden automatisch gespeichert. Mit „Diktieren“ wandelst du Gesprochenes in Text um. Mit „Übernehmen“ fügst du den Text ins Antwortfeld ein. Je nach Browser kann die Spracherkennung einen externen Dienst verwenden. Nutze fiktive Angaben.</p>'+
         (field.dataset.voiceReply ? '<p>Die Sprachaufnahme bleibt bei dir. Gesendet wird der Text aus dem Antwortfeld.</p>' : '')+'</details>');
