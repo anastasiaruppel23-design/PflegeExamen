@@ -260,6 +260,7 @@ body { background: #fbf5ec; }
   background: transparent;
   color: #fff;
 }
+#content .hero-welcome .hero-actions a.btn { text-decoration: none; }
 #content .hero-welcome .hero-actions .btn:focus-visible { outline-color: #fff; }
 #content .founder { background: linear-gradient(145deg, var(--pf-cream), var(--pf-pink)); }
 #content .founder h2,
