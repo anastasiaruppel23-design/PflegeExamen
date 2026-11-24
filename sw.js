@@ -1,14 +1,14 @@
-const CACHE = 'pflegefokus-v66-audioplayer';
+const CACHE = 'pflegefokus-v67-aufgabenantworten';
 const SUPABASE_SDK = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
-  './cloud-config.js', './account.js?v=7', './design.css?v=12',
+  './cloud-config.js', './account.js?v=8', './design.css?v=12',
   './assets/pflegefokus-willkommen.webp?v=3', './library.css?v=9',
-  './disease-library.js?v=3', './library.js?v=14', './assets/atmung-schema.svg',
+  './disease-library.js?v=3', './library.js?v=15', './assets/atmung-schema.svg',
   './assets/haut-schema.svg', './glossary.js?v=12', './exam-practice.html',
-  './practical-training.css?v=1', './practical-training.js?v=3', './model-application.js?v=2', './oral-guided.js?v=1', './exam-practice.js?v=18', './written-settings.js?v=1', './learning-upgrade.js?v=12', './anatomy-depth.js?v=1', './learning-expansion.js?v=9', './curriculum.js?v=1',
-  './visual-library.js?v=25', './visual-library.css?v=13',
-  './study-layout.css?v=9', './forum.css?v=2', './forum.js?v=3', './study-icons.js', './practice-decisions.js', './emergency-decisions.js', './advanced-training.js?v=2', './exam-answers.js', './voice-answers.js?v=4',
+  './practical-training.css?v=1', './practical-training.js?v=4', './model-application.js?v=3', './oral-guided.js?v=2', './exam-practice.js?v=19', './written-settings.js?v=1', './learning-upgrade.js?v=12', './anatomy-depth.js?v=1', './learning-expansion.js?v=10', './curriculum.js?v=2',
+  './visual-library.js?v=26', './visual-library.css?v=13',
+  './study-layout.css?v=9', './forum.css?v=2', './forum.js?v=3', './study-icons.js', './practice-decisions.js', './emergency-decisions.js', './advanced-training.js?v=2', './exam-answers.js?v=2', './voice-answers.js?v=5',
   './assets/setting-avatare.webp', './assets/setting-avatare-ergaenzung.webp', './assets/anastasia-pflege-illustration.svg', './assets/heart-study.webp',
   './assets/lung-study.webp', './assets/glucose-study.webp'
 ];

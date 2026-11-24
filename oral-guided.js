@@ -93,19 +93,24 @@ function guidedOralHtml(key) {
    <p role="status"></p>
   </div>`).join('')}
   <h4>2. Zwei Modelle vergleichen</h4>
-  <p>${esc(exercise.modelQuestion)}</p>
-  <p>Begründe deine Wahl zunächst laut. Wähle dann das Modell für diese Prüfungsfrage.</p>
+  <p id="guided-oral-${key}-model-prompt">${esc(exercise.modelQuestion)} Begründe deine Wahl.</p>
+  ${answerField(`guided-oral-${key}-model`, `guided-oral-${key}-model-prompt`)}
+  <p>Wähle das Modell für diese Prüfungsfrage.</p>
   <div class="flex">${exercise.models.map(([label], index) => `<button class="btn" type="button" data-model-choice="${index}" aria-pressed="false">${esc(label)}</button>`).join('')}</div>
   <p role="status" data-model-feedback></p>
   <h4>3. In 90 Sekunden laut antworten</h4>
-  <p>${esc(exercise.speaking)}</p>
+  <p id="guided-oral-${key}-speaking-prompt">${esc(exercise.speaking)}</p>
   <div class="flex">
    <button class="btn primary" type="button" data-speaking-start>90 Sekunden starten</button>
    <button class="btn" type="button" data-speaking-stop disabled>Beenden</button>
    <strong role="timer" aria-label="Verbleibende Sprechzeit" data-speaking-clock>1:30</strong>
   </div>
   <p role="status" data-speaking-status></p>
-  <details><summary>Nachfrage der Prüferin öffnen</summary><p>${esc(exercise.followup)}</p></details>
+  ${answerField(`guided-oral-${key}-speaking`, `guided-oral-${key}-speaking-prompt`)}
+  <details><summary>Nachfrage der Prüferin öffnen</summary>
+   <p id="guided-oral-${key}-followup-prompt">${esc(exercise.followup)}</p>
+   ${answerField(`guided-oral-${key}-followup`, `guided-oral-${key}-followup-prompt`)}
+  </details>
   <details><summary>Selbstcheck · 5 Kriterien</summary>
    <ul>${exercise.review.map(item => `<li><label><input type="checkbox"> ${esc(item)}</label></li>`).join('')}</ul>
   </details>

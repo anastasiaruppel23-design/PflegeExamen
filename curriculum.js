@@ -71,7 +71,8 @@ function renderCurriculum(content) {
           <summary>${id} · ${esc(title)}</summary>
           <p>${esc(lesson)}</p>
           <p class="muted">Passende Einheiten im Rahmenlehrplan: ${units.map(unit => 'CE ' + String(unit).padStart(2, '0')).join(', ')}</p>
-          <p><strong>Übung</strong> ${esc(exercise)}</p>
+          <p id="curriculum-practice-${id}-prompt"><strong>Übung</strong> ${esc(exercise)}</p>
+          ${answerField(`curriculum-practice-${id}`, `curriculum-practice-${id}-prompt`)}
           <details><summary>Lösungsimpuls</summary><p>${esc(answer)}</p></details>
           ${topicIndex < 0 ? '' : `<button class="btn" onclick="openLibraryTopic(${topicIndex})">Vertiefen: ${esc(topics[topicIndex][0])}</button>`}
         </details>`;

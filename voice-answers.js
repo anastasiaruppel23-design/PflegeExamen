@@ -44,6 +44,13 @@
     const hasAudio = local?.pending ? Boolean(local.blob) : remoteAudio.has(ui.key) || Boolean(local?.blob);
     ui.hasAudio = hasAudio;
     refreshButtons(ui);
+    refreshPreviousAnswer(ui);
+  }
+
+  function refreshPreviousAnswer(ui) {
+    if (ui.previousAnswer) {
+      ui.previousAnswer.hidden = !ui.hasAudio && !ui.field.value.trim();
+    }
   }
 
   function detachPlayback(ui) {
@@ -483,7 +490,7 @@
     const key = field.dataset.answer || field.dataset.voiceReply;
     if (field.dataset.answerReady) return;
     const tools = document.createElement('div');
-    const ui = {key, field, tools, search, audioBusy: false};
+    const ui = {key, field, tools, search, audioBusy: false, previousAnswer: field.closest('[data-previous-answer]')};
     tools.className = 'answer-tools';
     const dictate = voiceButton('dictate', 'Diktieren');
     tools.innerHTML = '<p class="answer-status muted" role="status"></p>'+
@@ -554,6 +561,7 @@
       if (!ui.field.dataset.answer) continue;
       const draft = state.answerDrafts?.[ui.key];
       if (draft && document.activeElement !== ui.field) ui.field.value = draft.text;
+      refreshPreviousAnswer(ui);
     }
   }
 

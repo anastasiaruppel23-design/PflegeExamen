@@ -1,10 +1,23 @@
-/* Shared task layout for the written and oral practice routes. */
+/* Shared fields for open learning and exam tasks. */
+function answerField(key, promptId) {
+  return `<textarea id="${key}" data-answer="${key}" aria-labelledby="${promptId}" rows="4" placeholder="Deine Antwort …"></textarea>`;
+}
+
+function previousAnswer(key) {
+  const title = `${key}-title`;
+  return `<details data-previous-answer hidden><summary id="${title}">Deine bisherige Sammelantwort</summary>${answerField(key, title)}</details>`;
+}
+
+function openTaskList(key, prompts) {
+  return examTaskList(key, prompts.map(prompt => ({prompt})));
+}
+
 function examTaskList(key, tasks) {
   return '<ol class="exam-task-list">'+tasks.map((task, i) => {
     const id = key+'-'+(i+1);
     const points = task.points ? '<span class="tag">'+task.points+' Punkte</span>' : '';
     return '<li class="exam-task"><div class="exam-task-heading"><h4 id="'+id+'-title">Aufgabe '+(i+1)+(task.title?' · '+esc(task.title):'')+'</h4>'+points+'</div>'+
-      '<p>'+esc(task.prompt)+'</p><textarea id="'+id+'" data-answer="'+id+'" aria-labelledby="'+id+'-title" rows="4" placeholder="Deine Antwort …"></textarea></li>';
+      '<p id="'+id+'-prompt">'+esc(task.prompt)+'</p>'+answerField(id, id+'-title '+id+'-prompt')+'</li>';
   }).join('')+'</ol>';
 }
 
