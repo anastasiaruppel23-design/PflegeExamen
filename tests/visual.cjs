@@ -132,6 +132,28 @@ function mockSupabase() {
   });
 }
 
+function mockSpeechRecognition() {
+  window.SpeechRecognition = class {
+    start() { queueMicrotask(() => this.onstart()); }
+    stop() {
+      queueMicrotask(() => {
+        const transcript = window.testDictationText || 'Ich prüfe die Ressourcen.';
+        this.onresult({resultIndex: 0, results: [{0: {transcript}, isFinal: true}]});
+        this.onend();
+      });
+    }
+  };
+}
+
+async function dictateIntoPreview(scope) {
+  await scope.getByRole('button', {name: 'Diktieren', exact: true}).click();
+  await scope.getByText('Diktat läuft. Sprich jetzt.', {exact: true}).waitFor();
+  await scope.getByRole('button', {name: 'Beenden', exact: true}).click();
+  const preview = scope.getByLabel('Diktatvorschau');
+  await preview.waitFor();
+  return preview;
+}
+
 async function checkLearningAccess(page) {
   const base = 'http://127.0.0.1:8137';
   await page.goto(base);
@@ -321,8 +343,12 @@ async function checkForum(page) {
   assert.equal(await forum.locator('.forum-detail .forum-text').innerText(), 'Fiktive Übergabe <b>im Frühdienst</b>.');
   assert.equal(await forum.getByText('01234').count(), 0);
   await forum.getByText('Lernfüchsin', {exact: true}).waitFor();
-  await forum.getByLabel('Deine Antwort').fill('Ich würde mit der aktuellen Situation beginnen.');
-  await forum.getByRole('button', {name: 'Antwort veröffentlichen'}).click();
+  const reply = forum.locator('form.forum-reply');
+  await page.evaluate(() => { window.testDictationText = 'Ich würde mit der aktuellen Situation beginnen.'; });
+  await dictateIntoPreview(reply);
+  assert.equal(await reply.getByLabel('Deine Antwort').inputValue(), '');
+  await reply.getByRole('button', {name: 'Übernehmen', exact: true}).click();
+  await reply.getByRole('button', {name: 'Antwort veröffentlichen'}).click();
   const response = forum.locator('article').filter({hasText: 'Ich würde mit der aktuellen Situation beginnen.'});
   await response.getByText('Direkt antworten', {exact: true}).click();
   await response.getByLabel('Antwort an Lernfüchsin', {exact: true}).fill('Darauf kann ich direkt antworten.');
@@ -360,6 +386,7 @@ async function checkForum(page) {
   await inbox.getByRole('heading', {name: 'PflegePeer', exact: true}).waitFor();
   await inbox.locator('.inbox-messages').getByText('Hast du Lust, gemeinsam zu üben?').waitFor();
   await page.locator('.account-toggle [data-forum-counter="mail"]').waitFor({state: 'hidden'});
+  assert.equal(await inbox.locator('#inboxMessage + .answer-tools .answer-actions button').count(), 5);
   await inbox.getByLabel('Deine Nachricht').fill('Ja, lass uns nächste Woche zusammen lernen.');
   await inbox.getByRole('button', {name: 'Nachricht senden'}).click();
   await inbox.locator('.inbox-messages').getByText('Ja, lass uns nächste Woche zusammen lernen.').waitFor();
@@ -430,9 +457,32 @@ async function checkTrainingRefresh(page) {
   await field.fill(draft);
   assert.match(await page.locator('.exam-task').first().innerText(), /Punkte/);
   const firstTask = page.locator('.exam-task').first();
-  assert.equal(await firstTask.getByRole('button', {name: 'Aufnehmen & diktieren'}).isVisible(), true);
+  const actions = firstTask.locator('.answer-actions');
+  assert.deepEqual(await actions.locator('button').allTextContents(), ['Aufnehmen','Diktieren','Anhören','Übernehmen','Löschen']);
+  const [recordBox, dictateBox, playBox, acceptBox, deleteBox] = await Promise.all(
+    (await actions.locator('button').all()).map(button => button.boundingBox())
+  );
+  assert.equal(recordBox.x, playBox.x);
+  assert.equal(playBox.x, deleteBox.x);
+  assert.equal(dictateBox.x, acceptBox.x);
+  assert.equal(recordBox.y, dictateBox.y);
+  assert.equal(playBox.y, acceptBox.y);
+  assert.ok(deleteBox.y > playBox.y);
+  const playback = firstTask.getByRole('button', {name: 'Anhören', exact: true});
+  const accept = firstTask.getByRole('button', {name: 'Übernehmen', exact: true});
+  assert.ok(await playback.isDisabled());
+  assert.ok(await accept.isDisabled());
+  const preview = await dictateIntoPreview(firstTask);
+  assert.equal(await field.inputValue(), draft);
+  assert.equal(await preview.inputValue(), 'Ich prüfe die Ressourcen.');
+  await preview.fill('Ich prüfe die vorhandenen Ressourcen.');
+  await accept.click();
+  const answer = draft+' Ich prüfe die vorhandenen Ressourcen.';
+  assert.equal(await field.inputValue(), answer);
+  assert.ok(await preview.isHidden());
+
   await page.context().grantPermissions(['microphone']);
-  await firstTask.getByRole('button', {name: 'Nur aufnehmen', exact: true}).click();
+  await firstTask.getByRole('button', {name: 'Aufnehmen', exact: true}).click();
   try {
     await firstTask.getByText('Aufnahme läuft. Sprich jetzt.', {exact: true}).waitFor({timeout:10000});
   } catch (error) {
@@ -440,8 +490,6 @@ async function checkTrainingRefresh(page) {
     throw new Error('Mikrofonstatus im Browsertest: '+status, {cause:error});
   }
   await firstTask.getByRole('button', {name: 'Beenden', exact: true}).click();
-  const playback = firstTask.getByRole('button', {name: 'Meine Antwort anhören', exact: true});
-  await playback.waitFor();
   await playback.click();
   assert.ok(await firstTask.locator('audio').evaluate(async audio => {
     const response = await fetch(audio.src);
@@ -449,8 +497,19 @@ async function checkTrainingRefresh(page) {
   }));
   await page.reload();
   await page.waitForFunction(() => hasLearningAccess());
-  assert.equal(await field.inputValue(), draft);
-  await playback.waitFor();
+  assert.equal(await field.inputValue(), answer);
+  await playback.click();
+  await firstTask.locator('audio').waitFor();
+  page.once('dialog', dialog => dialog.accept());
+  await firstTask.getByRole('button', {name: 'Löschen', exact: true}).click();
+  await firstTask.locator('audio').waitFor({state: 'hidden'});
+  assert.ok(await playback.isDisabled());
+  assert.equal(await field.inputValue(), answer);
+  await page.reload();
+  await page.waitForFunction(() => hasLearningAccess());
+  assert.ok(await playback.isDisabled());
+  assert.equal(await field.inputValue(), answer);
+  await firstTask.screenshot({path:path.join(out, 'answer-controls-390.png')});
 
   await page.evaluate(() => go('notfallsimulator'));
   await page.locator('#emergencyCase').selectOption({label: 'Plötzliche Sprachstörung beim Frühstück'});
@@ -475,7 +534,7 @@ async function checkTrainingRefresh(page) {
   assert.ok(await page.locator('.quiz-explanations li').count() >= 3);
 }
 
-async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream'],...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkNavigationTargets(page);if(width===390)await checkProfilePicture(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);if(width===390){await checkModelCardLayout(page);await checkTrainingRefresh(page);await checkForum(page);}await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
+async function run(){await new Promise(r=>server.listen(8137,'127.0.0.1',r));const browser=await chromium.launch({headless:true,args:['--use-fake-device-for-media-stream','--use-fake-ui-for-media-stream'],...(process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:process.platform==='win32'?{channel:'msedge'}:{})});try{for(const width of [320,390,1280]){const context=await browser.newContext({viewport:{width,height:950}}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await context.addInitScript(mockSupabase);await context.addInitScript(mockSpeechRecognition);await page.route('https://**/*',r=>r.abort());await checkLearningAccess(page);await checkNavigationTargets(page);if(width===390)await checkProfilePicture(page);await checkCurriculumMenu(page);await checkConnectedLearning(page);if(width===390){await checkModelCardLayout(page);await checkTrainingRefresh(page);await checkForum(page);}await page.evaluate(()=>go('themen'));await page.locator('.library-cover img').evaluate(img=>img.decode());await page.screenshot({path:path.join(out,`gallery-${width}.png`),fullPage:false});const topicCount=await page.evaluate(()=>topics.length);assert.equal(await page.locator('.topic-tile').count(),topicCount);await page.locator('#libraryCategory').selectOption('Medikamente');assert.equal(await page.locator('#topics .topic-tile').count(),await page.evaluate(()=>topics.filter(topic=>studyCategoryMatches(topic,'Medikamente')).length));await page.locator('#search').fill('zzzzz');assert.equal(await page.locator('.empty').count(),1);await page.evaluate(()=>go('themen'));
 // Cards with a knowledge target must link to it. Standalone cards must render and flip.
 const cardCount=await page.evaluate(()=>cards.length);
 for(let card=0;card<cardCount;card++){

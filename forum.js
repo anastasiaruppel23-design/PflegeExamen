@@ -246,7 +246,7 @@
       const field = reply ? `forumReply-${esc(reply.id)}` : 'forumReply';
       return `<form class="forum-reply" data-action="new-reply" data-parent="${reply ? esc(reply.id) : ''}">
         <label for="${field}">${reply ? `Antwort an ${esc(reply.author_nickname)}` : 'Deine Antwort'}</label>
-        <textarea id="${field}" name="body" minlength="2" maxlength="2000" required></textarea>
+        <textarea id="${field}" name="body" data-voice-reply="forum-${esc(topic.id)}-${reply ? esc(reply.id) : 'topic'}" minlength="2" maxlength="2000" required></textarea>
         <button type="submit" class="btn primary">Antwort veröffentlichen</button>
       </form>`;
     };
@@ -647,7 +647,7 @@
         <div class="inbox-messages"></div>
         <form class="inbox-compose">
           <label for="inboxMessage">Deine Nachricht</label>
-          <textarea id="inboxMessage" name="body" required maxlength="2000" rows="3"></textarea>
+          <textarea id="inboxMessage" name="body" data-voice-reply="inbox-${esc(partner.id)}" required maxlength="2000" rows="3"></textarea>
           <button type="submit" class="btn primary">Nachricht senden</button>
         </form>`;
         const title = thread.querySelector('h3');
