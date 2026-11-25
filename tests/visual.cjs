@@ -457,6 +457,14 @@ async function checkTrainingRefresh(page) {
   await page.addInitScript(mockAudioTranscription);
   await page.addInitScript(() => {
     Object.defineProperty(navigator, 'userAgent', {value:navigator.userAgent+' Android'});
+    window.MediaRecorder = class extends window.MediaRecorder {
+      constructor(...args) {
+        super(...args);
+        this.addEventListener('dataavailable', ({data}) => {
+          if (data.size) window.testRecordingHasAudio = true;
+        });
+      }
+    };
   });
   await page.evaluate(() => {
     (state.answerDrafts ??= {})['full-case-0'] = {text: 'Meine bisherige Sammelantwort.', updated: Date.now()};
@@ -567,6 +575,7 @@ async function checkTrainingRefresh(page) {
     const status = await firstTask.locator('.answer-status').innerText();
     throw new Error('Mikrofonstatus im Browsertest: '+status, {cause:error});
   }
+  await page.waitForFunction(() => window.testRecordingHasAudio);
   await firstTask.getByRole('button', {name: 'Beenden', exact: true}).click();
   await playback.click();
   assert.ok(await firstTask.locator('audio').evaluate(async audio => {
