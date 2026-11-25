@@ -95,6 +95,7 @@
 .answer-tools .btn:disabled { opacity: .55; cursor: default; }
 .answer-tools .btn[data-running="true"] { background: var(--pf-turquoise-deep); color: #fff; }
 .answer-tools .answer-remove { background: transparent; color: var(--pf-rose); }
+.answer-tools .answer-convert { background: var(--pf-turquoise); color: #fff; padding-inline: 14px; }
 .answer-icon { flex: 0 0 15px; width: 15px; height: 15px; }
 .answer-icon .answer-stop, [data-running="true"] .answer-icon > :not(.answer-stop) { display: none; }
 [data-running="true"] .answer-icon .answer-stop { display: block; }
@@ -103,6 +104,9 @@
 .answer-tools .answer-status { margin: 0; }
 .answer-transcript { width: min(100%, 360px); }
 .answer-transcript textarea { display: block; width: 100%; margin: 4px 0 0; }
+textarea.answer-expanded {
+  min-height: 11rem; max-height: 26rem; field-sizing: content; resize: vertical; line-height: 1.55;
+}
 .answer-tools .answer-note { font-size: .88rem; }
 @media (max-width: 360px) {
   .answer-actions .btn { flex-direction: column; gap: 2px; font-size: .8rem; }

@@ -134,7 +134,17 @@ function mockSupabase() {
 
 function mockSpeechRecognition() {
   window.SpeechRecognition = class {
-    start() { queueMicrotask(() => this.onstart()); }
+    start() {
+      queueMicrotask(() => {
+        this.onstart();
+        if (!window.testSpeechSessions?.length) return;
+        if (this.continuous) throw new Error('Expected Android single-utterance recognition');
+        const segment = window.testSpeechSessions.shift();
+        if (!segment) this.onerror({error:'no-speech'});
+        else this.onresult({resultIndex:0, results:[{0:{transcript:segment}, isFinal:true}]});
+        this.onend();
+      });
+    }
     stop() {
       queueMicrotask(() => {
         const transcript = window.testDictationText || 'Ich prüfe die Ressourcen.';
@@ -152,6 +162,26 @@ async function dictateIntoPreview(scope) {
   const preview = scope.getByLabel('Diktatvorschau');
   await preview.waitFor();
   return preview;
+}
+
+function mockAudioTranscription() {
+  const BrowserWorker = window.Worker;
+  window.Worker = class extends BrowserWorker {
+    constructor(url, options) {
+      if (url !== './transcription-worker.js?v=1') {
+        super(url, options);
+        return;
+      }
+      return {
+        postMessage(samples) {
+          window.testAudioSamples = samples;
+          this.onmessage({data:{status:'running'}});
+          window.finishTestTranscription = data => this.onmessage({data});
+        },
+        terminate() {}
+      };
+    }
+  };
 }
 
 async function checkLearningAccess(page) {
@@ -424,6 +454,18 @@ async function checkModelCardLayout(page) {
 }
 
 async function checkTrainingRefresh(page) {
+  await page.addInitScript(mockAudioTranscription);
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, 'userAgent', {value:navigator.userAgent+' Android'});
+    window.MediaRecorder = class extends window.MediaRecorder {
+      constructor(...args) {
+        super(...args);
+        this.addEventListener('dataavailable', ({data}) => {
+          if (data.size) window.testRecordingHasAudio = true;
+        });
+      }
+    };
+  });
   await page.evaluate(() => {
     (state.answerDrafts ??= {})['full-case-0'] = {text: 'Meine bisherige Sammelantwort.', updated: Date.now()};
     go('faelle');
@@ -509,9 +551,21 @@ async function checkTrainingRefresh(page) {
   assert.equal(await preview.inputValue(), 'Ich prüfe die Ressourcen.');
   await preview.fill('Ich prüfe die vorhandenen Ressourcen.');
   await accept.click();
-  const answer = draft+' Ich prüfe die vorhandenen Ressourcen.';
+  let answer = draft+' Ich prüfe die vorhandenen Ressourcen.';
   assert.equal(await field.inputValue(), answer);
   assert.ok(await preview.isHidden());
+
+  await page.evaluate(() => {
+    window.testSpeechSessions = ['Erster Abschnitt.', '', 'Zweiter Abschnitt.'];
+    window.testDictationText = 'Letzter Abschnitt.';
+  });
+  await firstTask.getByRole('button', {name:'Diktieren', exact:true}).click();
+  await page.waitForFunction(() => window.testSpeechSessions.length === 0);
+  await firstTask.getByText('Diktat läuft. Sprich jetzt.', {exact:true}).waitFor();
+  await firstTask.getByRole('button', {name:'Beenden', exact:true}).click();
+  await preview.waitFor();
+  assert.equal(await preview.inputValue(), 'Erster Abschnitt. Zweiter Abschnitt. Letzter Abschnitt.');
+  assert.equal(await field.inputValue(), answer);
 
   await page.context().grantPermissions(['microphone']);
   await firstTask.getByRole('button', {name: 'Aufnehmen', exact: true}).click();
@@ -521,6 +575,7 @@ async function checkTrainingRefresh(page) {
     const status = await firstTask.locator('.answer-status').innerText();
     throw new Error('Mikrofonstatus im Browsertest: '+status, {cause:error});
   }
+  await page.waitForFunction(() => window.testRecordingHasAudio);
   await firstTask.getByRole('button', {name: 'Beenden', exact: true}).click();
   await playback.click();
   assert.ok(await firstTask.locator('audio').evaluate(async audio => {
@@ -532,6 +587,28 @@ async function checkTrainingRefresh(page) {
   assert.equal(await field.inputValue(), answer);
   await playback.click();
   const player = firstTask.locator('audio');
+  await player.waitFor();
+  const convert = firstTask.getByRole('button', {name:'In Text', exact:true});
+  await convert.click();
+  await firstTask.getByText('Leere das Antwortfeld', {exact:false}).waitFor();
+  assert.equal(await field.inputValue(), answer);
+  await field.fill('');
+  await convert.click();
+  await firstTask.getByText('Die gesamte Aufnahme wird in Text umgewandelt …', {exact:true}).waitFor();
+  const transcript = 'Erster Satz der Aufnahme. Ein weiterer Satz. Das Ende der Aufnahme.';
+  await page.evaluate(text => {
+    if (!(window.testAudioSamples instanceof Float32Array) || !window.testAudioSamples.length) throw new Error('Decoded audio is missing');
+    window.finishTestTranscription({status:'done', text});
+  }, transcript);
+  await firstTask.getByText('Aufnahme als Text eingefügt.', {exact:false}).waitFor();
+  assert.equal(await field.inputValue(), transcript);
+  assert.ok(await field.evaluate(element => element === document.activeElement));
+  answer = transcript+' Meine Ergänzung.';
+  await field.fill(answer);
+  await page.reload();
+  await page.waitForFunction(() => hasLearningAccess());
+  assert.equal(await field.inputValue(), answer);
+  await playback.click();
   await player.waitFor();
   const remove = firstTask.getByRole('button', {name: 'Löschen', exact: true});
   const [playerBox, removeBox] = await Promise.all([player.boundingBox(), remove.boundingBox()]);

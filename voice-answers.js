@@ -5,6 +5,8 @@
   const content = document.querySelector('#content');
   const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
   const canRecord = Boolean(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+  const OfflineAudio = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+  const canTranscribe = Boolean(OfflineAudio && window.Worker && window.WebAssembly);
   const android = /Android/i.test(navigator.userAgent);
   const micPolicy = document.permissionsPolicy || document.featurePolicy;
   const fields = new Map();
@@ -12,6 +14,7 @@
   const localAudio = new Map();
   const remoteAudio = new Set();
   let database, active, audioSync, syncAgain, owner, generation = 0, syncTimer, listed = false;
+  let transcription, transcriptionWorker;
 
   function openAudioDatabase() {
     if (!database) database = new Promise((resolve, reject) => {
@@ -60,6 +63,7 @@
     ui.player.hidden = true;
     if (ui.url) URL.revokeObjectURL(ui.url);
     ui.url = null;
+    ui.playbackBlob = null;
   }
 
   async function updateLocalAudio(record) {
@@ -96,6 +100,8 @@
     if (owner === user) return;
     if (active) active.discard = true;
     stopCapture();
+    cancelTranscription();
+    closeTranscriptionWorker();
     generation++;
     const session = generation;
     owner = user;
@@ -150,13 +156,13 @@
         if (record.blob) remoteAudio.add(record.key);
         else remoteAudio.delete(record.key);
         const ui = fields.get(record.key);
-        if (ui && active?.ui !== ui && ui.transcript.hidden) {
+        if (ui && !ui.audioBusy && active?.ui !== ui && ui.transcript.hidden) {
           note(ui, record.blob ? 'Aufnahme mit deinem Konto synchronisiert.' : 'Aufnahme auch im Konto gelöscht.');
         }
       }
     } catch {
       if (session === generation) fields.forEach(ui => {
-        if (localAudio.get(ui.key)?.pending && active?.ui !== ui && ui.transcript.hidden) {
+        if (!ui.audioBusy && localAudio.get(ui.key)?.pending && active?.ui !== ui && ui.transcript.hidden) {
           note(ui, 'Änderung ist auf diesem Gerät gespeichert. Die Cloud-Synchronisierung steht noch aus.');
         }
       });
@@ -186,7 +192,9 @@
           if (generation !== session || localAudio.get(ui.key) !== local) return;
           remoteAudio.delete(ui.key);
           localAudio.delete(ui.key);
-          await audioTransaction('readwrite', store => store.delete([owner, ui.key]));
+          const user = owner;
+          await audioTransaction('readwrite', store => store.delete([user, ui.key]));
+          if (session !== generation) return;
           refreshAudio(ui);
           note(ui, 'Diese Aufnahme wurde im Konto gelöscht.');
           return;
@@ -200,8 +208,10 @@
     }
     if (ui.url) URL.revokeObjectURL(ui.url);
     ui.url = URL.createObjectURL(blob);
+    ui.playbackBlob = blob;
     ui.player.src = ui.url;
     ui.player.hidden = false;
+    refreshButtons(ui);
     note(ui, '');
     ui.player.play().catch(() => note(ui, 'Tippe im Audioplayer auf Wiedergabe.'));
   }
@@ -253,6 +263,9 @@
     ui.record.disabled = !canRecord || ui.audioBusy || Boolean(capture && !recording);
     ui.play.disabled = !ui.hasAudio || ui.audioBusy || Boolean(capture);
     ui.remove.disabled = ui.play.disabled;
+    ui.convert.hidden = !ui.playbackBlob;
+    ui.convert.disabled = ui.play.disabled || !canTranscribe;
+    ui.convert.lastElementChild.textContent = transcription?.ui === ui ? 'Wird umgewandelt …' : 'In Text';
     ui.accept.disabled = !ui.preview.value.trim() || Boolean(capture);
   }
 
@@ -266,29 +279,130 @@
     return [first.trimEnd(), second.trim()].filter(Boolean).join(' ');
   }
 
+  function exceedsAnswerLimit(field, text) {
+    return field.maxLength >= 0 && text.length > field.maxLength;
+  }
+
+  function insertAnswer(ui, text, message) {
+    ui.field.value = text;
+    ui.field.classList.add('answer-expanded');
+    ui.field.dispatchEvent(new Event('input', {bubbles:true}));
+    if (!ui.field.dataset.answer || cloudLocalSaved) note(ui, message);
+    ui.field.focus({preventScroll:true});
+    ui.field.scrollIntoView({block:'nearest'});
+  }
+
   function takeTranscript(ui) {
     const text = ui.preview.value.trim();
     if (!text || active?.ui === ui) return;
     const value = joinText(ui.field.value, text);
-    if (value.length > ui.field.maxLength) {
-      note(ui, 'Die Antwort wäre zu lang. Kürze den Text in der Diktatvorschau.');
+    if (exceedsAnswerLimit(ui.field, value)) {
+      note(ui, 'Die Antwort wäre zu lang. Kürze den Text in der Vorschau.');
       ui.preview.focus();
       return;
     }
     setTranscript(ui, '');
-    ui.field.value = value;
-    ui.field.dispatchEvent(new Event('input', {bubbles:true}));
-    if (!ui.field.dataset.answer || cloudLocalSaved) note(ui, 'Diktat in die Antwort übernommen.');
-    ui.field.focus({preventScroll:true});
+    insertAnswer(ui, value, 'Text in die Antwort übernommen.');
+  }
+
+  function closeTranscriptionWorker() {
+    transcriptionWorker?.terminate();
+    transcriptionWorker = null;
+  }
+
+  function finishTranscription(job) {
+    if (transcription !== job) return false;
+    transcription = null;
+    job.ui.audioBusy = false;
+    refreshButtons(job.ui);
+    return job.ui.field.isConnected;
+  }
+
+  function cancelTranscription() {
+    if (!transcription) return;
+    finishTranscription(transcription);
+    closeTranscriptionWorker();
+  }
+
+  function transcriptionFailed(job, message) {
+    if (transcription !== job) return;
+    closeTranscriptionWorker();
+    if (finishTranscription(job)) note(job.ui, message);
+  }
+
+  function receiveTranscription(job, data) {
+    if (transcription !== job) return;
+    const {ui} = job;
+    if (data.status === 'running') {
+      note(ui, 'Die gesamte Aufnahme wird in Text umgewandelt …');
+      return;
+    }
+    if (data.status === 'error') {
+      const message = data.phase === 'loading'
+        ? 'Die Sprachdateien konnten nicht geladen werden. Prüfe die Internetverbindung und versuche es erneut.'
+        : 'Die Aufnahme konnte nicht in Text umgewandelt werden. Du kannst sie weiterhin anhören.';
+      transcriptionFailed(job, message);
+      return;
+    }
+    if (data.status !== 'done' || !finishTranscription(job)) return;
+    const text = data.text.trim();
+    if (!text) {
+      note(ui, 'In dieser Aufnahme wurde keine Sprache erkannt.');
+    } else if (ui.field.value.trim() || exceedsAnswerLimit(ui.field, text)) {
+      setTranscript(ui, joinText(ui.preview.value, text));
+      note(ui, 'Der Text steht in der Vorschau. Du kannst ihn bearbeiten und mit „Übernehmen“ zur Antwort hinzufügen.');
+      ui.preview.scrollIntoView({block:'nearest'});
+    } else {
+      insertAnswer(ui, text, 'Aufnahme als Text eingefügt. Du kannst die Antwort jetzt bearbeiten.');
+    }
+  }
+
+  async function transcribeAudio(ui) {
+    if (!owner || !ui.playbackBlob || ui.audioBusy || active || !canTranscribe) return;
+    if (ui.field.value.trim()) {
+      note(ui, 'Leere das Antwortfeld, um die Aufnahme als Text einzufügen.');
+      ui.field.focus({preventScroll:true});
+      ui.field.scrollIntoView({block:'nearest'});
+      return;
+    }
+    if (transcription) {
+      note(ui, 'Eine andere Aufnahme wird gerade in Text umgewandelt.');
+      return;
+    }
+    const job = {ui};
+    transcription = job;
+    ui.audioBusy = true;
+    ui.player.pause();
+    refreshButtons(ui);
+    note(ui, 'Aufnahme wird vorbereitet. Beim ersten Mal werden Sprachdateien geladen …');
+    try {
+      const decoder = new OfflineAudio(1, 1, 16000);
+      const audio = await decoder.decodeAudioData(await ui.playbackBlob.arrayBuffer());
+      if (transcription !== job || !ui.field.isConnected) return;
+      const samples = audio.getChannelData(0).slice();
+      for (let channel = 1; channel < audio.numberOfChannels; channel++) {
+        const input = audio.getChannelData(channel);
+        for (let i = 0; i < samples.length; i++) samples[i] += input[i];
+      }
+      if (audio.numberOfChannels > 1) {
+        for (let i = 0; i < samples.length; i++) samples[i] /= audio.numberOfChannels;
+      }
+      if (!transcriptionWorker) transcriptionWorker = new Worker('./transcription-worker.js?v=1', {type:'module'});
+      transcriptionWorker.onmessage = event => receiveTranscription(job, event.data);
+      transcriptionWorker.onerror = () => transcriptionFailed(job, 'Die Spracherkennung konnte nicht gestartet werden. Prüfe die Internetverbindung und versuche es erneut.');
+      transcriptionWorker.postMessage(samples, [samples.buffer]);
+    } catch {
+      transcriptionFailed(job, 'Die Aufnahme konnte nicht für die Spracherkennung geöffnet werden. Du kannst sie weiterhin anhören.');
+    }
   }
 
   function finishDictation(capture) {
     const {ui} = capture;
+    const text = joinText(capture.text, recognitionText(capture));
     releaseCapture(capture);
     if (capture.discard || capture.session !== generation || !ui.field.isConnected) return;
-    const text = joinText(capture.text, capture.speechFailed ? '' : capture.interim);
     if (!text) {
-      if (!capture.speechFailed) note(ui, 'Es wurde kein Text erkannt. Tippe auf „Diktieren“, um es erneut zu versuchen.');
+      note(ui, capture.speechError ? microphoneError(capture.speechError) : 'Es wurde kein Text erkannt. Tippe auf „Diktieren“, um es erneut zu versuchen.');
       return;
     }
     if (ui.search) {
@@ -298,44 +412,72 @@
       return;
     }
     setTranscript(ui, joinText(ui.preview.value, text));
-    note(ui, 'Tippe auf „Übernehmen“, um den diktierten Text zur Antwort hinzuzufügen.');
+    note(ui, capture.speechError && capture.speechError !== 'no-speech'
+      ? 'Das Diktat wurde unterbrochen. Der bisher erkannte Text steht in der Vorschau.'
+      : 'Tippe auf „Übernehmen“, um den diktierten Text zur Antwort hinzuzufügen.');
+  }
+
+  function recognitionText(capture) {
+    return joinText(capture.segment, capture.interim);
+  }
+
+  function recognitionEnded(capture) {
+    clearTimeout(capture.startNotice);
+    const segment = recognitionText(capture);
+    const retryable = !capture.speechError || capture.speechError === 'no-speech';
+    capture.emptyAttempts = segment ? 0 : capture.emptyAttempts + 1;
+    if (capture.ending || capture.discard || capture.ui.search || !retryable || capture.emptyAttempts >= 3) {
+      finishDictation(capture);
+      return;
+    }
+    capture.text = joinText(capture.text, segment);
+    capture.segment = '';
+    capture.interim = '';
+    capture.speechError = null;
+    capture.recognition = null;
+    note(capture.ui, 'Diktat wird fortgesetzt …');
+    capture.restartTimer = setTimeout(() => startRecognition(capture), 180);
   }
 
   function startRecognition(capture) {
+    if (active !== capture || capture.ending || capture.discard) return;
     try {
       const recognizer = new Speech();
       capture.recognition = recognizer;
       recognizer.lang = 'de-DE';
+      // Mobile sessions can end during a pause. Restarting them preserves earlier segments.
       recognizer.continuous = !android;
       recognizer.interimResults = true;
+      const isCurrent = () => active === capture && capture.recognition === recognizer;
       recognizer.onstart = () => {
+        if (!isCurrent()) return;
         clearTimeout(capture.startNotice);
-        if (active === capture && !capture.ending) note(capture.ui, 'Diktat läuft. Sprich jetzt.');
+        if (!capture.ending) note(capture.ui, 'Diktat läuft. Sprich jetzt.');
       };
       recognizer.onresult = event => {
-        if (active !== capture || capture.discard) return;
+        if (!isCurrent() || capture.discard) return;
         const final = [], interim = [];
-        for (let i = event.resultIndex; i < event.results.length; i++) {
-          const result = event.results[i];
+        // Results contain the full session, including earlier unchanged results.
+        for (const result of Array.from(event.results)) {
           (result.isFinal ? final : interim).push(result[0].transcript);
         }
-        capture.text = joinText(capture.text, final.join(' '));
+        capture.segment = final.join(' ').trim();
         capture.interim = interim.join(' ').trim();
       };
       recognizer.onerror = event => {
-        capture.speechFailed = true;
-        clearTimeout(capture.startNotice);
-        if (active === capture && !capture.discard && event.error !== 'aborted') {
+        if (!isCurrent() || capture.discard) return;
+        capture.speechError = event.error;
+        if (event.error !== 'no-speech' && event.error !== 'aborted') {
           note(capture.ui, microphoneError(event.error));
         }
       };
       recognizer.onend = () => {
-        if (active === capture) finishDictation(capture);
+        if (isCurrent()) recognitionEnded(capture);
       };
       recognizer.start();
     } catch (error) {
-      releaseCapture(capture);
-      note(capture.ui, microphoneError(error.name));
+      capture.speechError = error.name;
+      finishDictation(capture);
     }
   }
 
@@ -344,6 +486,7 @@
     clearTimeout(capture.timer);
     clearTimeout(capture.startNotice);
     clearTimeout(capture.stopNotice);
+    clearTimeout(capture.restartTimer);
     refreshButtons(capture.ui);
   }
 
@@ -355,7 +498,11 @@
     clearTimeout(capture.startNotice);
     refreshButtons(capture.ui);
     if (capture.mode === 'dictate') {
-      if (!capture.speechFailed) note(capture.ui, 'Diktat wird abgeschlossen …');
+      if (!capture.recognition) {
+        finishDictation(capture);
+        return;
+      }
+      if (!capture.speechError) note(capture.ui, 'Diktat wird abgeschlossen …');
       try {
         capture.stopNotice = setTimeout(() => {
           if (active !== capture) return;
@@ -458,7 +605,7 @@
     const record = mode === 'record';
     if (record && ui.hasAudio && !confirm('Die gespeicherte Aufnahme ersetzen?')) return;
     fields.forEach(other => other.player.pause());
-    const capture = {ui, mode, user: owner, session: generation, text: '', interim: ''};
+    const capture = {ui, mode, user: owner, session: generation, text: '', segment: '', interim: '', emptyAttempts: 0};
     active = capture;
     refreshButtons(ui);
     note(ui, record ? 'Mikrofonzugriff wird angefragt …' : 'Spracherkennung wird gestartet …');
@@ -475,6 +622,7 @@
     dictate: '<rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11v1a7 7 0 0 0 14 0v-1m-7 8v3m-3 0h6"/>',
     play: '<path d="m8 5 12 7-12 7z" fill="currentColor" stroke="none"/>',
     accept: '<path d="m5 12 4 4L19 6"/>',
+    convert: '<path d="M5 4h14M12 4v16m-4 0h8"/>',
     remove: '<path d="M4 7h16M9 7V4h6v3m3 0-1 13H7L6 7m4 4v5m4-5v5"/>'
   };
 
@@ -498,8 +646,11 @@
         voiceButton('play', 'Anhören')+voiceButton('accept', 'Übernehmen')+'</div>'+
         '<audio controls preload="none" hidden aria-label="Deine Sprachaufnahme"></audio>'+
         voiceButton('remove', 'Löschen', 'answer-remove')+
+        voiceButton('convert', 'In Text', 'answer-convert')+
         '<label class="answer-transcript" hidden>Diktatvorschau<textarea rows="3"></textarea></label>'+
-        '<details class="answer-note"><summary>Hinweise zu Mikrofon und Audio</summary><p>Aufnahmen sind bis zu zehn Minuten lang. Sie werden nach dem Beenden automatisch gespeichert. Mit „Diktieren“ wandelst du Gesprochenes in Text um. Mit „Übernehmen“ fügst du den Text ins Antwortfeld ein. Je nach Browser kann die Spracherkennung einen externen Dienst verwenden. Nutze fiktive Angaben.</p>'+
+        '<details class="answer-note"><summary>Hinweise zu Mikrofon und Audio</summary><p>Aufnahmen sind bis zu zehn Minuten lang und werden nach dem Beenden automatisch gespeichert. Öffne eine Aufnahme mit „Anhören“. „In Text“ wandelt sie auf diesem Gerät um und füllt ein leeres Antwortfeld. Beim ersten Mal lädt der Browser dafür Sprachdateien (rund 66 MB).</p>'+
+        '<p>„Diktieren“ erkennt Sprache live. Mit „Übernehmen“ fügst du die Vorschau ins Antwortfeld ein. Je nach Browser kann das Live-Diktat einen externen Dienst verwenden. Nutze fiktive Angaben.</p>'+
+        (!canTranscribe ? '<p>„In Text“ ist in diesem Browser nicht verfügbar.</p>' : '')+
         (field.dataset.voiceReply ? '<p>Die Sprachaufnahme bleibt bei dir. Gesendet wird der Text aus dem Antwortfeld.</p>' : '')+'</details>');
     for (const button of tools.querySelectorAll('[data-voice]')) ui[button.dataset.voice] = button;
     ui.status = tools.querySelector('[role="status"]');
@@ -524,6 +675,7 @@
     ui.record.onclick = () => startCapture(ui, 'record');
     ui.play.onclick = () => playAudio(ui);
     ui.accept.onclick = () => takeTranscript(ui);
+    ui.convert.onclick = () => transcribeAudio(ui);
     ui.remove.onclick = async () => {
       if (!owner || active?.ui === ui || !confirm('Diese Sprachaufnahme löschen?')) return;
       ui.audioBusy = true;
@@ -552,6 +704,7 @@
       }
     }
     if (active && !active.ui.field.isConnected) stopCapture();
+    if (transcription && !transcription.ui.field.isConnected) cancelTranscription();
     if (!owner) return;
     content.querySelectorAll(answerSelector+', input[type="search"]').forEach(configure);
   }
@@ -570,7 +723,11 @@
     if (records.some(record => record.addedNodes.length || record.removedNodes.length)) scan();
   }).observe(content, {childList:true, subtree:true});
   window.addEventListener('online', syncAudio);
-  window.addEventListener('pagehide', stopCapture);
+  window.addEventListener('pagehide', () => {
+    stopCapture();
+    cancelTranscription();
+    closeTranscriptionWorker();
+  });
   // Android can briefly hide the page while the system microphone prompt is open.
   // A document exit still stops capture via the pagehide handler above.
   document.addEventListener('visibilitychange', () => {if(!document.hidden)syncAudio();});
